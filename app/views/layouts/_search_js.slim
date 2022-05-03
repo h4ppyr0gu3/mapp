@@ -1,0 +1,36 @@
+javascript:
+
+  download = document.getElementsByClassName("download")
+  for( i = 0; i < download.length; i++) {
+    download[i].addEventListener("click", (e) => {
+      fetch(("http://localhost:3000/download?video_id=" + 
+      encodeURIComponent(e.target.dataset.video) + 
+      "&user_id=" +  encodeURIComponent(e.target.dataset.user) +
+      "&channel_name=" + encodeURIComponent(e.target.dataset.channel) +
+      "&title=" + encodeURIComponent(e.target.dataset.title) ))
+      e.target.classList.add("is-success");
+    })
+  }
+
+  play = document.getElementsByClassName("play");
+  video_field = document.getElementsByClassName("video");
+  for ( i = 0; i < play.length; i++ ) {
+    play[i].addEventListener("click", (e) => {
+    toggle_video(e.target.dataset.id)}
+    , false);
+  };
+
+  function toggle_video(id) {
+    for ( i = 0; i < video_field.length; i++) {
+      if (video_field[i].dataset.id == id) {
+        if (video_field[i].innerHTML == "") {
+          video_field[i].innerHTML = "<iframe width='560' height='315' src='"
+          + video_field[i].dataset.url
+          + "' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; encrypted-media;' allowfullscreen</iframe>"
+        } else {
+          video_field[i].innerHTML = "";
+        }
+      }
+    }
+  };
+

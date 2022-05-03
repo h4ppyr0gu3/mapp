@@ -1,0 +1,7 @@
+.div#finder
+	- flash.each do |k,v|
+		= content_tag :div, class: "notification is-#{k}", style: "position: relative;"
+			= v
+			button.delete#buttonid
+
+= javascript_pack_tag "js_helpers/button"

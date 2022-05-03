@@ -1,0 +1,32 @@
+.container.is-centered-middle
+  .box.is-flex-column
+    .is-size-2 Sign up
+    .columns.mt-3
+      .column.is-centered-middle
+        p.is-size-5 Sign up with:
+
+        / = link_to(image_tag("google")), , do
+        / = link_to image_tag("google.svg"), user_google_oauth2_omniauth_authorize_path, method: :post, class: "icon mx-5 google"
+        / = link_to image_tag("facebook.svg"), user_facebook_omniauth_authorize_path, method: :post, class: "icon mx-5 facebook"
+    .is-divider data-content="OR"
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .field
+        = f.label :email, class: "label"
+        .control
+          = f.text_field :email, autofocus: true, autocomplete: "email", class: "input", placeholder: "example@email.com"
+      .field
+        - if @minimum_password_length
+          = f.label :"Password (#{@minimum_password_length} characters minimum)", class: "label"
+        - else
+          = f.label :"Password", class: "label"
+        .control
+          = f.password_field :password, autocomplete: "new-password", class: "input", placeholder: "password"
+      .field
+        = f.label :"password confirmation", class: "label"
+        .control
+          = f.password_field :password_confirmation, autocomplete: "current-password", class: "input is-medium", placeholder: "password confirmation"
+      .actions
+        = f.submit "Sign up", class: "button"
+    p Already have an account? 
+    = link_to "Log in", new_user_session_path

@@ -1,0 +1,22 @@
+.container
+	= render "layouts/error_messages"
+	.columns.is-centered-middle
+		.column.is-half
+
+			.is-size-3.p-5.m-5 Contact us
+			= form_with url: contact_emails_path, method: :post do |form|
+				.field
+					.label Name or email
+					.control
+						= form.text_field :email, class: "input"
+				.field
+					.label Subject
+					.control
+						= form.text_field :subject, class: "input"
+				.field
+					.label Message
+					.control
+						= form.text_area :message, class: "textarea"
+				.field
+					.control
+						= form.submit :submit, class: "button"

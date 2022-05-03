@@ -1,0 +1,36 @@
+.container
+  .is-size-1 Search
+
+  = form_with(url: search_path) do |f| 
+    .field.is-grouped
+      .control.is-expanded
+        = f.text_field :query, class: "input", value: "#{@value}"
+      .control
+        .select
+          = select_tag(:date, options_for_select([['date', nil], ["hour"], ["today"], ["week"], ["month"], ["year"]], selected: :option ))
+        .select
+          = select_tag(:sort_by, options_for_select([["relevance"], ["rating"], ["date"], ["views"]], selected: :option ))
+      .control
+        = f.submit "Search", class: "button"
+
+  .is-centered-middle
+    = form_with(url: search_path) do |f| 
+      = f.hidden_field :prev_url, value: "#{@prev_url}"
+      = f.hidden_field :page, value: "#{@page}"
+      = f.hidden_field :query, value: "#{@value}"
+      .field.is-grouped.is-grouped-center
+        - if @page.to_i > 1
+          .control
+            = f.submit "Prev", class: "button"
+        .control
+          = f.submit "Next", class: "button"
+
+  - @response.each_with_index do |response, idx|
+    .card.p-2.m-2 style="border-radius: 10px"
+      = response["title"]
+      .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{response["videoId"]}"
+      .card-footer
+        .button.play data-id="#{idx}" Watch Video
+        .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" Download
+
+= render 'layouts/search_js'

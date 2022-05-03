@@ -1,0 +1,20 @@
+.container
+  .is-size-2.has-text-centered.p-5.m-5 Welcome to the musicApp!
+  .is-centered-middle
+    = link_to "Sign Up", new_user_registration_path, class: "button"
+    = link_to "Log In", new_user_session_path, class: "button"
+
+  .columns.my-3
+    .column.is-6.is-offset-3
+      .has-text-centered.is-size-4.p-5
+        | Available Features:
+      .is-centered-middle
+        ol.p-2
+        li download the latest songs
+        li add metadata to the mp3 files
+        li download all songs with a single click
+        li search database
+
+      .is-centered-middle
+        ul
+          li.py-5 please contact us for features you would like to be added

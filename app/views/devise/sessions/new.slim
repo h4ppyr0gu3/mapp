@@ -1,0 +1,32 @@
+.container.is-centered-middle
+  .box.is-flex-column
+    .is-size-2 Log in
+    .columns.mt-3
+      .column.is-centered-middle
+        p.is-size-5 Log in with:
+
+        / = link_to(image_tag("google")), , do
+        / = link_to image_tag("google.svg"), user_google_oauth2_omniauth_authorize_path, method: :post, class: "icon mx-5 google"
+        / = link_to image_tag("facebook.svg"), user_facebook_omniauth_authorize_path, method: :post, class: "icon mx-5 facebook"
+    .is-divider data-content="OR"
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| 
+      .field
+        = f.label :email, class: "label"
+        .control
+          = f.text_field :email, autofocus: true, autocomplete: "email", class: "input is-medium", placeholder: "example@email.com"
+      .field
+        = f.label :password, class: "label"
+        .control
+          = f.password_field :password, autocomplete: "current-password", class: "input is-medium", placeholder: "password"
+
+      - if devise_mapping.rememberable?
+        .field
+          .control
+            label.checkbox
+              = f.check_box :remember_me
+              |  Remember me
+
+      .actions
+          = f.submit "Log in", class: "button"
+    p Don't have an account? 
+    = link_to "Log in", new_user_registration_path

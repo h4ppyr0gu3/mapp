@@ -1,0 +1,24 @@
+.container
+  .is-size-1 Search
+
+  = form_with(url: search_path) do |f| 
+    .field.is-grouped
+      .control.is-expanded
+        = f.text_field :query, class: "input", placeholder: "enter phrase or url"
+      .control
+        .select
+          = select_tag(:date, options_for_select([['date', nil], ["hour"], ["today"], ["week"], ["month"], ["year"]], selected: :option ))
+        .select
+          = select_tag(:sort_by, options_for_select([["relevance"], ["rating"], ["date"], ["views"]], selected: :option ))
+      .control
+        = f.submit "Search", class: "button"
+
+  - @trending.each_with_index do |trending, idx|
+    .card.p-2.m-2 style="border-radius: 10px"
+      = trending["title"]
+      .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{trending["videoId"]}"
+      .card-footer
+        .button.play data-id="#{idx}" Watch Video
+        .button.download data-id="#{idx}" data-title="#{trending["title"]}" data-channel="#{trending["author"]}" data-video="#{trending["videoId"]}" data-user="#{current_user.id}" Download
+
+= render "layouts/search_js"

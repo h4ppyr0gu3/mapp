@@ -1,0 +1,54 @@
+nav.navbar role="navigation" aria-label="main navigation"
+  - if !user_signed_in?
+    .navbar-brand
+      = link_to "musicApp", root_path, class: "has-text-black is-size-4 p-2"
+
+      a.navbar-burger role="button" aria-label="menu" aria-expanded="false" data-target="navMenu"
+        span aria-hidden="true"
+        span aria-hidden="true"
+        span aria-hidden="true"
+
+    .navbar-menu#navMenu
+      .navbar-start
+        .navbar-item
+          / = link_to "Youtube Search", search_results_path, class: "navbar-item has-text-black"
+          / = link_to "All songs", songs_path, class: "navbar-item has-text-black"
+      .navbar-end
+        .navbar-item
+          = link_to "Sign up", new_user_registration_path, class: "button", name: "Sign up"
+        .navbar-item
+          = link_to "Log in", new_user_session_path, class: "button is-light", name: "Log in"
+  -else
+    .navbar-brand
+      = link_to "musicApp", root_path, class: "has-text-black is-size-4 p-2"
+
+      .navbar-burger role="button" aria-label="menu"
+        .navbar-item
+          .dropdown.is-right
+            .dropdown-trigger.cursor
+              i.fa.fa-user
+            .dropdown-menu
+              .dropdown-content
+                / = link_to "Youtube Search", search_results_path, class: "dropdown-item"
+                / = link_to "All songs", songs_path, class: "dropdown-item"
+                / = link_to "Your Tracks", playlists_tracks_path, class: "dropdown-item", name: "Your Tracks"
+                / = link_to "Profile", profile_index_path, class: "dropdown-item"
+                .dropdown-divider
+                = link_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete, name: "Log Out"
+    .navbar-menu
+      .navbar-end
+        .navbar-item
+          .dropdown.is-right
+            .dropdown-trigger.cursor
+              i.fa.fa-user
+            .dropdown-menu
+              .dropdown-content
+                / = link_to "Youtube Search", search_results_path, class: "dropdown-item"
+                / = link_to "All songs", songs_path, class: "dropdown-item"
+                / = link_to "Your Tracks", playlists_tracks_path, class: "dropdown-item", name: "Your Tracks"
+                / = link_to "Profile", profile_index_path, class: "dropdown-item"
+                .dropdown-divider
+                = link_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete, name: "Log Out"
+
+/ = javascript_pack_tag 'js_helpers/burger'
+/ = javascript_pack_tag 'js_helpers/dropdown'
