@@ -5,6 +5,10 @@ class SongsController < ApplicationController
     @songs = Song.all
   end
 
+  def user_index
+    @songs = current_user.songs
+  end
+
   # GET /songs/1 or /songs/1.json
   def show
   end

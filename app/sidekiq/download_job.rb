@@ -1,4 +1,4 @@
-require "open-uri"
+require "down"
 
 class DownloadJob
   include Sidekiq::Job
@@ -7,19 +7,21 @@ class DownloadJob
     dir = Rails.root.join("tmp", "downloads")
     system("#{Rails.root.join("lib", "scripts", "download.sh")} #{dir} #{video_id}")
     song = Song.create(title: title, artist: channel)
-    if song.save?
-      attach_image(song, image_url)
+    if song.save
+      attach_image(song, image_url, video_id)
       attach_mp3(song, video_id)
-      UserSongs.create(user_id: user_id, song_id: song.id)
+      ::UserSong.create(user_id: user_id, song_id: song.id)
     end
   end
 
-  def attach_image(song, image_url)
-    image = open(image_url)
+  def attach_image(song, image_url, video_id)
+    image = Rails.root.join("tmp", "downloads", "#{video_id}.jpg")
+    ::Down.download(image_url, destination: image)
     song.image.attach(
-      io: image,
+      io: File.open(image),
       filename: "#{image_url}.jpg"
     )
+    system("rm #{image}") if song.image.attached?
   end
 
   def attach_mp3(song, video_id)
@@ -30,5 +32,6 @@ class DownloadJob
         filename: "#{video_id}.mp3"
       )
     end
+    system("rm #{file_path}") if song.mp3.attached?
   end
 end

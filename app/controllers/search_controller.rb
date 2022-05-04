@@ -22,16 +22,16 @@ class SearchController < ApplicationController
         @value
         api = Invidious.api
         q = CGI.escape(@value)
-        url = "#{api}/api/v1/search?q=#{q}"
+        url = "#{api}/api/v1/search?type=video&q=#{q}"
         url += "&sort=#{CGI.escape(params[:sort_by])}"
         url += "&date=#{CGI.escape(params[:date])}" unless params[:date] == ""
         @prev_url = url
         search(url)
       end
-      else
-        handle_pagination
-      end
-      # search db
+    else
+      handle_pagination
+    end
+    # search db
   end
 
   def search(url)

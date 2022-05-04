@@ -98,6 +98,8 @@ GEM
       responders
       warden (~> 1.2.3)
     digest (3.1.0)
+    down (5.3.1)
+      addressable (~> 2.8)
     erubi (1.10.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -119,6 +121,7 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     mini_mime (1.1.2)
     minitest (5.15.0)
     msgpack (1.5.1)
@@ -241,8 +244,10 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  down
   jbuilder
   jsbundling-rails
+  mini_magick
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.4)

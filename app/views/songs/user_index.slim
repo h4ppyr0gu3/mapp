@@ -1,0 +1,12 @@
+- @songs.each do |song|
+  .card.p-2.m-2
+    .columns
+      .column.is-1
+        - if song.image.attached?
+          = image_tag(song.image)
+      .column
+        = song.title
+        = song.artist
+      .column
+        .button download
+        = link_to 'Edit', edit_song_path(song.id), class: "button"

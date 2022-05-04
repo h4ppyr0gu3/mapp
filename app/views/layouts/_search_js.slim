@@ -7,7 +7,9 @@ javascript:
       encodeURIComponent(e.target.dataset.video) + 
       "&user_id=" +  encodeURIComponent(e.target.dataset.user) +
       "&channel_name=" + encodeURIComponent(e.target.dataset.channel) +
-      "&title=" + encodeURIComponent(e.target.dataset.title) ))
+      "&title=" + encodeURIComponent(e.target.dataset.title) +
+      "&image_url=" + encodeURIComponent(e.target.dataset.image)))
+
       e.target.classList.add("is-success");
     })
   }
