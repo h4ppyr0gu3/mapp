@@ -6,7 +6,7 @@ class DownloadJob
   def perform(video_id, image_url, title, channel, user_id)
     dir = Rails.root.join("tmp", "downloads")
     system("#{Rails.root.join("lib", "scripts", "download.sh")} #{dir} #{video_id}")
-    song = Song.create(title: title, artist: channel)
+    song = Song.create(title: title, artist: channel, video_id: video_id)
     if song.save
       attach_image(song, image_url, video_id)
       attach_mp3(song, video_id)

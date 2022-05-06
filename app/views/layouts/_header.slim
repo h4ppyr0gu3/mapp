@@ -1,54 +1,39 @@
-nav.navbar role="navigation" aria-label="main navigation"
-  - if !user_signed_in?
-    .navbar-brand
-      = link_to "musicApp", root_path, class: "has-text-black is-size-4 p-2"
+nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation" 
+  .navbar-brand
+    = link_to "Mapp", search_path, class: "navbar-brand has-text-dark is-size-3"
+    a.navbar-burger aria-expanded="false" aria-label="menu" data-target="burger" role="button" 
+      span aria-hidden="true" 
+      span aria-hidden="true" 
+      span aria-hidden="true" 
+  .navbar-menu#burger
+    .navbar-start
+      
+      = link_to "All Songs", songs_path, class: "navbar-item has-text-dark"
+      = link_to "Search", search_path, class: "navbar-item has-text-dark"
+      - if user_signed_in?
+        = link_to "My Songs", user_songs_path, class: "navbar-item has-text-dark"
+    .navbar-end
+      .navbar-item
+        .buttons
+          - if user_signed_in?
+            = button_to "Log Out", destroy_user_session_path, method: :delete, class: "button"
+          - else
+            = link_to "Sign Up", new_user_registration_path, class: "button is-primary"
+            = link_to "Sign In", new_user_session_path, class: "button"
 
-      a.navbar-burger role="button" aria-label="menu" aria-expanded="false" data-target="navMenu"
-        span aria-hidden="true"
-        span aria-hidden="true"
-        span aria-hidden="true"
+javascript:
+  document.addEventListener('DOMContentLoaded', () => {
 
-    .navbar-menu#navMenu
-      .navbar-start
-        .navbar-item
-          / = link_to "Youtube Search", search_results_path, class: "navbar-item has-text-black"
-          / = link_to "All songs", songs_path, class: "navbar-item has-text-black"
-      .navbar-end
-        .navbar-item
-          = link_to "Sign up", new_user_registration_path, class: "button", name: "Sign up"
-        .navbar-item
-          = link_to "Log in", new_user_session_path, class: "button is-light", name: "Log in"
-  -else
-    .navbar-brand
-      = link_to "musicApp", root_path, class: "has-text-black is-size-4 p-2"
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-      .navbar-burger role="button" aria-label="menu"
-        .navbar-item
-          .dropdown.is-right
-            .dropdown-trigger.cursor
-              i.fa.fa-user
-            .dropdown-menu
-              .dropdown-content
-                / = link_to "Youtube Search", search_results_path, class: "dropdown-item"
-                / = link_to "All songs", songs_path, class: "dropdown-item"
-                / = link_to "Your Tracks", playlists_tracks_path, class: "dropdown-item", name: "Your Tracks"
-                / = link_to "Profile", profile_index_path, class: "dropdown-item"
-                .dropdown-divider
-                = link_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete, name: "Log Out"
-    .navbar-menu
-      .navbar-end
-        .navbar-item
-          .dropdown.is-right
-            .dropdown-trigger.cursor
-              i.fa.fa-user
-            .dropdown-menu
-              .dropdown-content
-                / = link_to "Youtube Search", search_results_path, class: "dropdown-item"
-                / = link_to "All songs", songs_path, class: "dropdown-item"
-                / = link_to "Your Tracks", playlists_tracks_path, class: "dropdown-item", name: "Your Tracks"
-                / = link_to "Profile", profile_index_path, class: "dropdown-item"
-                .dropdown-divider
-                = link_to "Log Out", destroy_user_session_path, class: "dropdown-item", method: :delete, name: "Log Out"
-
-/ = javascript_pack_tag 'js_helpers/burger'
-/ = javascript_pack_tag 'js_helpers/dropdown'
+    if ($navbarBurgers.length > 0) {
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });

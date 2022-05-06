@@ -1,0 +1,20 @@
+.columns
+  .column
+    = form_with(model: song) do |form| 
+      - if song.errors.any? 
+        .danger style="color: red" #{pluralize(song.errors.count, "error") } prohibited this song from being saved:
+          ul
+            - song.errors.each do |error| 
+              li
+                = error.full_message
+
+      = form.text_field :title, class: "input", placeholder: "Title"
+      = form.text_field :artist, class: "input", placeholder: "Artist"
+      = form.text_field :album, class: "input", placeholder: "Album"
+      = form.text_field :year, class: "input", placeholder: "Year"
+      = form.text_field :genre, class: "input", placeholder: "Genre"
+
+      = form.submit :Update, class: "button" 
+  .column.is-4
+    - if song.image.attached?
+      = image_tag(song.image)

@@ -1,6 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
 .container
+  .is-size-1 Songs
+
   - @songs.each do |song|
     - if song.updated == 1
       = render "songs/view", song: song
-    - else
+    - else 
       = render "songs/form", song: song

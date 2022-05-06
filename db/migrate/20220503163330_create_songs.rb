@@ -7,6 +7,7 @@ class CreateSongs < ActiveRecord::Migration[7.0]
       t.string :album
       t.string :genre
       t.string :video_id
+      t.integer :updated, default: 0
       t.index :video_id
 
       t.timestamps

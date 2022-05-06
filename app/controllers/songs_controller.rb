@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
   before_action :set_song, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: %i[user_index show new edit create update delete]
 
   def index
     @songs = Song.all
@@ -39,14 +40,14 @@ class SongsController < ApplicationController
 
   # PATCH/PUT /songs/1 or /songs/1.json
   def update
-    respond_to do |format|
-      if @song.update(song_params)
-        format.html { redirect_to song_url(@song), notice: "Song was successfully updated." }
-        format.json { render :show, status: :ok, location: @song }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
+    parsed_params = song_params.to_h
+    # parsed_params = params.dup.to_h
+    parsed_params.merge!({updated: 1}).except!(:id, :authenticity_token, :commit)
+    pp parsed_params
+    if @song.update(parsed_params)
+       redirect_back fallback_location: songs_path, notice: "Song was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -68,6 +69,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.fetch(:song, {})
+      params.require(:song).permit(:genre, :year, :title, :album, :artist)
     end
 end

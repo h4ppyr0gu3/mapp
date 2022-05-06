@@ -1,16 +1,20 @@
 class DownloadController < ApplicationController
   def get
     download_params
-    pp params
-    DownloadJob.perform_async(
-      params["video_id"], 
-      params["image_url"], 
-      params["title"], 
-      params["channel"],
-      params["user_id"]
-    )
-    head :no_content
-    return
+    if Song.exists?(video_id: params[:video_id])
+      head :no_content
+      return
+    else
+      DownloadJob.perform_async(
+        params["video_id"], 
+        params["image_url"], 
+        params["title"], 
+        params["channel"],
+        params["user_id"]
+      )
+      head :no_content
+      return
+    end
   end
 
   private

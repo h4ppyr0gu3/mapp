@@ -48,8 +48,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_032810) do
     t.string "year"
     t.string "album"
     t.string "genre"
+    t.string "video_id"
+    t.integer "updated", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_songs_on_video_id"
   end
 
   create_table "user_songs", force: :cascade do |t|

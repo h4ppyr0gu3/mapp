@@ -1,0 +1,25 @@
+.columns
+  .column
+    .card.p-2.m-2
+      .columns
+        .column.is-2
+          - if song.image.attached?
+            = image_tag(song.image)
+        .column
+          .columns
+            .column
+              = song.title
+            .column
+              = song.year
+          .columns
+            .column
+              = song.artist
+            .column
+              = song.genre
+        .column.is-2
+          .buttons
+            - if song.mp3.attached?
+              .button download
+            - else 
+              = button_to 'Delete', song_path(song.id), method: :delete, class: "button"
+            = link_to 'Edit', edit_song_path(song.id), class: "button"
