@@ -1,0 +1,19 @@
+AllCops:
+  NewCops: enable
+  DisplayCopNames: true
+  Exclude:
+    - 'bin/*'
+    - 'lib/tasks/*'
+    - 'script/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+
+
+Style/Documentation:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+

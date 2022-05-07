@@ -5,9 +5,6 @@
       .column.is-centered-middle
         p.is-size-5 Sign up with:
 
-        / = link_to(image_tag("google")), , do
-        / = link_to image_tag("google.svg"), user_google_oauth2_omniauth_authorize_path, method: :post, class: "icon mx-5 google"
-        / = link_to image_tag("facebook.svg"), user_facebook_omniauth_authorize_path, method: :post, class: "icon mx-5 facebook"
     .is-divider data-content="OR"
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = render "devise/shared/error_messages", resource: resource

@@ -1,17 +1,13 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
+  def home; end
 
-	def home
-	end
+  def privacy_policy; end
 
-	def privacy_policy
-	end
+  def terms_of_use; end
 
-	def terms_of_use
-	end
+  def copyright_claims; end
 
-	def copyright_claims
-	end
-
-	def contact
-	end
+  def contact; end
 end

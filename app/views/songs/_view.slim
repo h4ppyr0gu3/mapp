@@ -16,10 +16,19 @@
               = song.artist
             .column
               = song.genre
-        .column.is-2
+        .column.is-3
           .buttons
             - if song.mp3.attached?
-              .button download
+              - if song.updated == 2
+                = link_to "Download", url_for(song.mp3), class: "button"
+              - else
+                = link_to "Download", update_download_path(video_id: song.video_id), class: "button"
             - else 
-              = button_to 'Delete', song_path(song.id), method: :delete, class: "button"
+              - if path == "index"
+                = button_to 'Delete', song_path(song.id), method: :delete, class: "button"
+            - if path == "user"
+              = button_to 'Remove', remove_path(id: song.id), method: :post, class: "button"
+            - elsif path == "index"
+              = button_to 'Add', add_path(id: song.id), method: :post, class: "button"
+
             = link_to 'Edit', edit_song_path(song.id), class: "button"

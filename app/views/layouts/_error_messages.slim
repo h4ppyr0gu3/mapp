@@ -1,7 +1,20 @@
 .div#finder
-	- flash.each do |k,v|
-		= content_tag :div, class: "notification is-#{k}", style: "position: relative;"
-			= v
-			button.delete#buttonid
+  - flash.each do |k, v|
+    - if k == "alert"
+      = content_tag :div, class: "notification is-danger", style: "position:relative;border-radius:0px;"
+        = v
+        button.delete#buttonid
+    - elsif k == "notice"
+      = content_tag :div, class: "notification is-success", style: "position:relative;border-radius:0px;"
+        = v
+        button.delete#buttonid
 
-= javascript_pack_tag "js_helpers/button"
+javascript:
+  
+  var button = document.getElementById("buttonid");
+  var notifications = document.getElementById("finder");
+
+  button.addEventListener("click", () => {
+    notifications.style.display = "none"
+  })
+

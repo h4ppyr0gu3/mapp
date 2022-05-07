@@ -1,6 +1,7 @@
 .container
+  .is-size-1 My Songs
   - @songs.each do |song|
-    - if song.updated == 1
-      = render "songs/view", song: song
+    - if song.updated != 0
+      = render "songs/view", song: song, path: "user"
     - else
       = render "songs/form", song: song

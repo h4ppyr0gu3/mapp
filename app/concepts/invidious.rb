@@ -1,35 +1,35 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'json'
 
-class Invidious 
-  def self.api
-    Rails.cache.fetch("active_api", expires_in: 12.hours) do
-      get_active_api
+class Invidious
+  class << self
+    def api
+      Rails.cache.fetch('active_api', expires_in: 12.hours) do
+        get_active_api
+      end
     end
-  end
 
-  def self.get_active_api
-    available_apis.each do |api|
-      uri = URI("#{api}/api/v1/stats")
+    def get_active_api
+      available_apis.each do |api|
+        uri = URI("#{api}/api/v1/stats")
+        res = Net::HTTP.get(uri)
+        parsed = JSON.parse(res)
+        return api if parsed['openRegistrations']
+      end
+    end
+
+    def available_apis
+      available_apis = []
+
+      uri = URI('https://api.invidious.io/instances.json')
       res = Net::HTTP.get(uri)
       parsed = JSON.parse(res)
-      if parsed["openRegistrations"]
-        return api
+      parsed.each do |_k, v|
+        available_apis << v['uri'] if v['api']
       end
+      available_apis
     end
-  end
-
-  def self.available_apis
-    available_apis = []
-
-    uri = URI("https://api.invidious.io/instances.json")
-    res = Net::HTTP.get(uri)
-    parsed = JSON.parse(res)
-    parsed.each do |k, v|
-      if v["api"]
-        available_apis << v["uri"]
-      end
-    end
-    return available_apis
   end
 end
