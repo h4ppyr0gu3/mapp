@@ -1,0 +1,53 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:     
+      - database
+      - redis
+      - idedit
+      - sidekiq
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./:/root/app/
+    environment: 
+      - REDIS_URL=redis
+      - REDIS_PORT=6379
+    entrypoint: ./entrypoints/app.sh
+
+  redis:
+    image: redis:7.0.0-alpine
+
+  idedit:
+    build: 
+      context: https://github.com/h4ppyr0gu3/idedit.git#master
+
+  database: 
+    environment: 
+      - POSTGRES_PASSWORD=postgres
+    image: postgres:14.2-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      - REDIS_URL=redis
+      - REDIS_PORT=6379
+    depends_on:     
+      - database
+      - redis
+      - app
+    volumes:
+      - ./:/root/app/
+    entrypoint: ./entrypoints/sidekiq.sh
+
+volumes:
+  pgdata:
+  .:
+# ENV PGDATA /var/lib/postgresql/data  -> PG data volume location
+# user postfres

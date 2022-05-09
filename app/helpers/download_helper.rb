@@ -2,8 +2,9 @@
 
 module DownloadHelper
   def update_metadata(song)
-    uri = URI('http://localhost:4000/')
+    uri = URI('http://idedit:2000/edit')
     res = Net::HTTP.post_form(uri, set_params(song))
+    return unless res.class == Net::HTTPOK
     body = res.body.to_s.force_encoding('ASCII-8BIT')
     write_and_update(song, body) unless res.body.nil?
   end
@@ -16,7 +17,7 @@ module DownloadHelper
       io: File.open(path),
       filename: "#{song.title}.mp3"
     )
-    system("rm #{path}") if song.mp3.attached?
+    system("rm '#{path}'") if song.mp3.attached?
     song.update(updated: 2)
   end
 

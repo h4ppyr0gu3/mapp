@@ -4,7 +4,10 @@ require 'net/http'
 require 'json'
 
 class SearchController < ApplicationController
+  before_action :authenticate_user!
+
   include SearchHelper
+
   def get
     api = Invidious.api
     uri = URI("#{api}/api/v1/trending?type=Music")
