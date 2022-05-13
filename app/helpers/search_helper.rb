@@ -14,7 +14,8 @@ module SearchHelper
   end
 
   def download_link(query)
-    video_id = query[-1].gsub('com/watch?v=', '')
+    video = query[-1].gsub('com/watch?v=', '')
+    video_id = video.split("&")[0]
     url = "#{Invidious.api}/api/v1/videos/#{video_id}"
     response = search(url)
     DownloadJob.perform_async(
