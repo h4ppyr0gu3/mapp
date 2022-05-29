@@ -43,4 +43,7 @@ docker:
   <<: *default
   database: mapp_docker
   host: database
+  port: 5432
+  username: postgres
+  password: postgres
 

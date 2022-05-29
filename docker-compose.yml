@@ -13,8 +13,10 @@ services:
     volumes:
       - ./:/root/app/
     environment: 
+      - RAILS_ENV=docker
       - REDIS_URL=redis
       - REDIS_PORT=6379
+      - POSTGRES_PASSWORD
     entrypoint: ./entrypoints/app.sh
 
   redis:
