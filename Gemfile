@@ -18,6 +18,7 @@ gem 'sidekiq'
 gem 'slim'
 gem 'sprockets-rails'
 gem 'tzinfo-data'
+gem 'zipline'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-rails db:create RAILS_ENV=docker
-rails db:migrate RAILS_ENV=docker
+bundle exec rails db:create RAILS_ENV=docker
+bundle exec rails db:migrate RAILS_ENV=docker
 
-export SECRET_KEY_BASE=$(rake secret)
+echo "2f28c42b30b5613178b01aee71776139" >> /root/app/config/master.key
 
 kill -9 $(cat /root/app/tmp/pids/server.pid)
 

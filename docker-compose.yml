@@ -12,11 +12,13 @@ services:
       - 3000:3000
     volumes:
       - ./:/root/app/
+      - gemdata:/bundle
     environment: 
       - RAILS_ENV=docker
       - REDIS_URL=redis
       - REDIS_PORT=6379
       - POSTGRES_PASSWORD
+      - RAILS_MASTER_KEY=2f28c42b30b5613178b01aee71776139
     entrypoint: ./entrypoints/app.sh
 
   redis:
@@ -24,7 +26,7 @@ services:
 
   idedit:
     build: 
-      context: https://github.com/h4ppyr0gu3/idedit.git#master
+      context: https://github.com/h4ppyr0gu3/idedit.git
 
   database: 
     environment: 
@@ -39,17 +41,19 @@ services:
       dockerfile: Dockerfile
     environment: 
       - REDIS_URL=redis
+      - POSTGRES_PASSWORD
       - REDIS_PORT=6379
+      - RAILS_MASTER_KEY=2f28c42b30b5613178b01aee71776139
     depends_on:     
       - database
       - redis
       - app
     volumes:
       - ./:/root/app/
+      - gemdata:/bundle
     entrypoint: ./entrypoints/sidekiq.sh
 
 volumes:
   pgdata:
   .:
-# ENV PGDATA /var/lib/postgresql/data  -> PG data volume location
-# user postfres
+  gemdata:

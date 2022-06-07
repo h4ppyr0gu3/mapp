@@ -23,6 +23,7 @@ class DownloadController < ApplicationController
   end
 
   def update_download
+    binding.pry
     song = Song.find_by(video_id: params[:video_id])
     update_metadata(song) if song.updated != 2
 
