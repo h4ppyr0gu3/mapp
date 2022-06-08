@@ -2,13 +2,37 @@
   .is-size-1 Profile
   .columns
     .column
-      .is-size-3 Devices
+      .is-size-3 Device Settings
+      .help.is-info.pb-3 
+        | This helps with the download all only downloading outstanding songs
+      .is-size-5 Known Devices
       - current_user.devices.each do |device|
-        .control
-          = device.user_agent
-          = button_to "Wipe Device", wipe_device_path(id: device.id), method: :delete, class: "button is-warning"
-          = link_to "Merge Devices", merge_devices_path, class: "button is-warning"
-          = button_to "Delete Device", delete_device_path(id: device.id), method: :delete, class: "button is-danger"
+        .card.m-3.p-3
+          .control
+            = device.user_agent
+          .field.is-grouped
+            .control
+              = button_to "Wipe Device", wipe_device_path(id: device.id), method: :delete, class: "button is-warning"
+            .control
+              = button_to "Delete Device", delete_device_path(id: device.id), method: :delete, class: "button is-danger"
+      .is-size-5 Merge device libraries
+      = form_with url: merge_devices_path do |f|
+        .card.p-3.m-3
+          .field
+            .label Merge
+            .control
+              .select.is-fullwidth
+                = f.select :parent, current_user.devices.all.pluck(:user_agent)
+          .field
+            .label Into
+            .control
+              .select.is-fullwidth
+                = f.select :child, current_user.devices.all.pluck(:user_agent)
+            .help.is-info
+              | Merges all the songs in the child device into 
+              | the parent if you have moved music manually
+            .control.mt-2
+              = f.submit "Merge Devices", class: "button is-info"
 
     .column 
       .is-size-3 Settings

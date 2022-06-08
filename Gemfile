@@ -19,6 +19,8 @@ gem 'slim'
 gem 'sprockets-rails'
 gem 'tzinfo-data'
 gem 'zipline'
+gem 'kaminari'
+gem 'ransack'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]

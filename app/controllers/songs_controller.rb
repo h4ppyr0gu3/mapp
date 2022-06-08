@@ -5,16 +5,13 @@ class SongsController < ApplicationController
   before_action :authenticate_user!, only: %i[user_index show new edit create update delete]
 
   def index
-    @songs = Song.all
+    @q = Song.all.ransack(params[:q])
+    @songs = @q.result.page(params[:page])
   end
 
   def user_index
-    songs = []
-    user_songs = current_user.songs.order(created_at: :desc).group_by(&:updated)
-    (0..2).each do |i|
-      songs << user_songs[i]
-    end
-    @songs = songs.flatten.compact
+    @q = current_user.songs.ransack(params[:q])
+    @songs = @q.result.page(params[:page])
   end
 
   # GET /songs/1 or /songs/1.json

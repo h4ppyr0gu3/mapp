@@ -1,8 +1,19 @@
 .container
-  .is-size-1 All Songs
+  .columns
+    .column
+      .is-size-1 All Songs
+    .column.is-4.is-flex style="align-items:center;"
+      = search_form_for @q, url: songs_path do |f|
+        .field.has-addons
+          .control
+            = f.search_field :title_or_genre_or_album_or_artist_cont, class: "input", placeholder: "Search"
+          .control
+            = f.submit "Search", class: "button is-info"
 
   - @songs.each do |song|
     - if song.updated != 0
       = render "songs/view", song: song, path: "index"
     - else 
       = render "songs/form", song: song
+
+  = paginate @songs

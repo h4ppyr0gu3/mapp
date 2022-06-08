@@ -1,10 +1,13 @@
 class DevicesController < ApplicationController
   def merge
-    parent = current_user.devices.find(params[:parent])
-    child = current_user.devices.find(params[:child])
-    parent.songs << child.songs
-    child.delete
-    render notice: "Merged devices" 
+    parent = current_user.devices.find_by(user_agent: params[:parent])
+    child = current_user.devices.find_by(user_agent: params[:child])
+    if parent.id != child.id
+      parent.songs >> child.songs
+      redirect_to profile_path,notice: "Merged devices" 
+    else
+      redirect_to profile_path, alert: "The devices are not unique"
+    end
   end
 
   def wipe_device

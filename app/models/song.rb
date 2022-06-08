@@ -7,4 +7,5 @@ class Song < ApplicationRecord
   has_many :users, through: :user_songs
   has_many :device_songs
   has_many :devices, through: :device_songs
+  validates :title, presence: true
 end
