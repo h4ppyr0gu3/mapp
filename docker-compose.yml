@@ -15,6 +15,7 @@ services:
       - gemdata:/bundle
     environment: 
       - RAILS_ENV=docker
+      - IDEDIT_URL="http://idedit:2000"
       - REDIS_URL=redis
       - REDIS_PORT=6379
       - POSTGRES_PASSWORD
@@ -42,12 +43,12 @@ services:
     environment: 
       - REDIS_URL=redis
       - POSTGRES_PASSWORD
+      - IDEDIT_URL="http://idedit:2000"
       - REDIS_PORT=6379
       - RAILS_MASTER_KEY=2f28c42b30b5613178b01aee71776139
     depends_on:     
       - database
       - redis
-      - app
     volumes:
       - ./:/root/app/
       - gemdata:/bundle

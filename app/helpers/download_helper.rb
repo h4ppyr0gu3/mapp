@@ -2,7 +2,7 @@
 
 module DownloadHelper
   def update_metadata(song)
-    uri = URI('http://idedit:2000/edit')
+    uri = URI("#{ENV['IDEDIT_URL']}/edit")
     res = Net::HTTP.post_form(uri, set_params(song))
     return unless res.class == Net::HTTPOK
     body = res.body.to_s.force_encoding('ASCII-8BIT')
@@ -32,6 +32,7 @@ module DownloadHelper
 
   def set_params(song)
     add_song_params(song)
+    return nil unless song.mp3.attached?
     mp3 = song.mp3.download
     image = song.image.download
     { image:,

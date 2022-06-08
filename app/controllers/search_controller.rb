@@ -9,7 +9,6 @@ class SearchController < ApplicationController
   include SearchHelper
 
   def get
-    binding.pry
     api = Invidious.api
     uri = URI("#{api}/api/v1/trending?type=Music")
     res = Net::HTTP.get(uri)

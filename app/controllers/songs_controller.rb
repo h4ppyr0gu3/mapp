@@ -9,7 +9,12 @@ class SongsController < ApplicationController
   end
 
   def user_index
-    @songs = current_user.songs
+    songs = []
+    user_songs = current_user.songs.order(created_at: :desc).group_by(&:updated)
+    (0..2).each do |i|
+      songs << user_songs[i]
+    end
+    @songs = songs.flatten.compact
   end
 
   # GET /songs/1 or /songs/1.json

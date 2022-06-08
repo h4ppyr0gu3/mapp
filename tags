@@ -1,0 +1,142 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/david/mapp/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+.container	app/assets/stylesheets/application.scss	/^.container {$/;"	c
+APP_PATH	bin/rails	/^APP_PATH = File.expand_path('..\/config\/application', __dir__)$/;"	C
+APP_ROOT	bin/setup	/^APP_ROOT = File.expand_path('..', __dir__)$/;"	C
+ActiveSupport	test/test_helper.rb	/^module ActiveSupport$/;"	m
+AnonymousClass84762e030101	app/javascript/controllers/hello_controller.js	/^export default class extends Controller {$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	module:Mapp
+ApplicationCable	app/channels/application_cable/channel.rb	/^module ApplicationCable$/;"	m
+ApplicationCable	app/channels/application_cable/connection.rb	/^module ApplicationCable$/;"	m
+ApplicationCable	test/channels/application_cable/connection_test.rb	/^module ApplicationCable$/;"	m
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+ApplicationJob	app/jobs/application_job.rb	/^class ApplicationJob < ActiveJob::Base$/;"	c
+ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
+ApplicationRecord	app/models/application_record.rb	/^class ApplicationRecord < ActiveRecord::Base$/;"	c
+ApplicationSystemTestCase	test/application_system_test_case.rb	/^class ApplicationSystemTestCase < ActionDispatch::SystemTestCase$/;"	c
+Channel	app/channels/application_cable/channel.rb	/^  class Channel < ActionCable::Channel::Base$/;"	c	module:ApplicationCable
+Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	module:ApplicationCable
+ConnectionTest	test/channels/application_cable/connection_test.rb	/^  class ConnectionTest < ActionCable::Connection::TestCase$/;"	c	module:ApplicationCable
+CreateActiveStorageTables	db/migrate/20220504032810_create_active_storage_tables.active_storage.rb	/^class CreateActiveStorageTables < ActiveRecord::Migration[5.2]$/;"	c
+CreateDeviceSongs	db/migrate/20220607142825_create_device_songs.rb	/^class CreateDeviceSongs < ActiveRecord::Migration[7.0]$/;"	c
+CreateDevices	db/migrate/20220607134809_create_devices.rb	/^class CreateDevices < ActiveRecord::Migration[7.0]$/;"	c
+CreateSongs	db/migrate/20220503163330_create_songs.rb	/^class CreateSongs < ActiveRecord::Migration[7.0]$/;"	c
+CreateUserSongs	db/migrate/20220503170628_create_user_songs.rb	/^class CreateUserSongs < ActiveRecord::Migration[7.0]$/;"	c
+Device	app/models/device.rb	/^class Device < ApplicationRecord$/;"	c
+DeviceSong	app/models/device_song.rb	/^class DeviceSong < ApplicationRecord$/;"	c
+DeviceSongTest	test/models/device_song_test.rb	/^class DeviceSongTest < ActiveSupport::TestCase$/;"	c
+DeviceTest	test/models/device_test.rb	/^class DeviceTest < ActiveSupport::TestCase$/;"	c
+DeviseCreateUsers	db/migrate/20220501094118_devise_create_users.rb	/^class DeviseCreateUsers < ActiveRecord::Migration[7.0]$/;"	c
+DownloadController	app/controllers/download_controller.rb	/^class DownloadController < ApplicationController$/;"	c	mixin:include:DownloadHelper
+DownloadHelper	app/helpers/download_helper.rb	/^module DownloadHelper$/;"	m
+DownloadJob	app/sidekiq/download_job.rb	/^class DownloadJob$/;"	c	mixin:include:Sidekiq.Job
+DownloadJobTest	test/sidekiq/download_job_test.rb	/^class DownloadJobTest < Minitest::Test$/;"	c
+Grant	grant.rb	/^class Points::Grant < ApplicationRecord$/;"	c	module:Points	mixin:include:Taggable,include:Notifiable
+Invidious	app/concepts/invidious.rb	/^class Invidious$/;"	c
+Mapp	config/application.rb	/^module Mapp$/;"	m
+MessageTest	test/models/message_test.rb	/^class MessageTest < ActiveSupport::TestCase$/;"	c
+PlaylistController	app/controllers/playlist_controller.rb	/^class PlaylistController < ApplicationController$/;"	c
+README	README.md	/^# README$/;"	c
+SearchController	app/controllers/search_controller.rb	/^class SearchController < ApplicationController$/;"	c	mixin:include:SearchHelper
+SearchHelper	app/helpers/search_helper.rb	/^module SearchHelper$/;"	m
+Song	app/models/song.rb	/^class Song < ApplicationRecord$/;"	c
+SongTest	test/models/song_test.rb	/^class SongTest < ActiveSupport::TestCase$/;"	c
+SongsController	app/controllers/songs_controller.rb	/^class SongsController < ApplicationController$/;"	c
+SongsControllerTest	test/controllers/songs_controller_test.rb	/^class SongsControllerTest < ActionDispatch::IntegrationTest$/;"	c
+SongsTest	test/system/songs_test.rb	/^class SongsTest < ApplicationSystemTestCase$/;"	c
+StaticPagesController	app/controllers/static_pages_controller.rb	/^class StaticPagesController < ApplicationController$/;"	c
+TestCase	test/test_helper.rb	/^  class TestCase$/;"	c	module:ActiveSupport
+The change you wanted was rejected.	public/422.html	/^      <h1>The change you wanted was rejected.<\/h1>$/;"	h
+The page you were looking for doesn't exist.	public/404.html	/^      <h1>The page you were looking for doesn't exist.<\/h1>$/;"	h
+User	app/models/user.rb	/^class User < ApplicationRecord$/;"	c
+UserSong	app/models/user_song.rb	/^class UserSong < ApplicationRecord$/;"	c
+UserSongTest	test/models/user_song_test.rb	/^class UserSongTest < ActiveSupport::TestCase$/;"	c
+UserTest	test/models/user_test.rb	/^class UserTest < ActiveSupport::TestCase$/;"	c
+We're sorry, but something went wrong.	public/500.html	/^      <h1>We're sorry, but something went wrong.<\/h1>$/;"	h
+activate_bundler	bin/bundle	/^  def activate_bundler$/;"	f
+activation_error_handling	bin/bundle	/^  def activation_error_handling$/;"	f
+add	app/controllers/playlist_controller.rb	/^  def add$/;"	f	class:PlaylistController
+add_song_params	app/helpers/download_helper.rb	/^  def add_song_params(song)$/;"	f	module:DownloadHelper
+api	app/concepts/invidious.rb	/^    def api$/;"	S	class:Invidious
+application	app/javascript/controllers/application.js	/^const application = Application.start()$/;"	C
+attach_image	app/sidekiq/download_job.rb	/^  def attach_image(song, image_url, video_id)$/;"	f	class:DownloadJob
+attach_mp3	app/sidekiq/download_job.rb	/^  def attach_mp3(song, video_id)$/;"	f	class:DownloadJob
+available_apis	app/concepts/invidious.rb	/^    def available_apis$/;"	S	class:Invidious
+beneficiary	grant.rb	/^  attr_accessor :points, :beneficiary$/;"	A	class:Grant
+beneficiary=	grant.rb	/^  attr_accessor :points, :beneficiary$/;"	A	class:Grant
+birthday_recognition?	grant.rb	/^  def birthday_recognition?$/;"	f	class:Grant
+bundler_requirement	bin/bundle	/^  def bundler_requirement$/;"	f
+bundler_requirement_for	bin/bundle	/^  def bundler_requirement_for(version)$/;"	f
+call_download_job	app/controllers/download_controller.rb	/^  def call_download_job$/;"	f	class:DownloadController
+change	db/migrate/20220501094118_devise_create_users.rb	/^  def change$/;"	f	class:DeviseCreateUsers
+change	db/migrate/20220503163330_create_songs.rb	/^  def change$/;"	f	class:CreateSongs
+change	db/migrate/20220503170628_create_user_songs.rb	/^  def change$/;"	f	class:CreateUserSongs
+change	db/migrate/20220504032810_create_active_storage_tables.active_storage.rb	/^  def change$/;"	f	class:CreateActiveStorageTables
+change	db/migrate/20220607134809_create_devices.rb	/^  def change$/;"	f	class:CreateDevices
+change	db/migrate/20220607142825_create_device_songs.rb	/^  def change$/;"	f	class:CreateDeviceSongs
+clean_params	app/controllers/playlist_controller.rb	/^  def clean_params; end$/;"	f	class:PlaylistController
+cli_arg_version	bin/bundle	/^  def cli_arg_version$/;"	f
+connect	app/javascript/controllers/hello_controller.js	/^  connect() {$/;"	m	class:AnonymousClass84762e030101
+contact	app/controllers/static_pages_controller.rb	/^  def contact; end$/;"	f	class:StaticPagesController
+copyright_claims	app/controllers/static_pages_controller.rb	/^  def copyright_claims; end$/;"	f	class:StaticPagesController
+create	app/controllers/songs_controller.rb	/^  def create$/;"	f	class:SongsController
+default	config/database.yml	/^default: &default$/;"	a
+destroy	app/controllers/songs_controller.rb	/^  def destroy$/;"	f	class:SongsController
+download_all	app/controllers/download_controller.rb	/^  def download_all$/;"	f	class:DownloadController
+download_link	app/helpers/search_helper.rb	/^  def download_link(query)$/;"	f	module:SearchHelper
+download_params	app/controllers/download_controller.rb	/^  def download_params$/;"	f	class:DownloadController
+edit	app/controllers/songs_controller.rb	/^  def edit; end$/;"	f	class:SongsController
+env_var_version	bin/bundle	/^  def env_var_version$/;"	f
+gemfile	bin/bundle	/^  def gemfile$/;"	f
+generate_url	app/helpers/search_helper.rb	/^  def generate_url$/;"	f	module:SearchHelper
+get	app/controllers/download_controller.rb	/^  def get$/;"	f	class:DownloadController
+get	app/controllers/search_controller.rb	/^  def get$/;"	f	class:SearchController
+get_active_api	app/concepts/invidious.rb	/^    def get_active_api$/;"	S	class:Invidious
+handle_next_page	app/helpers/search_helper.rb	/^  def handle_next_page$/;"	f	module:SearchHelper
+handle_pagination	app/helpers/search_helper.rb	/^  def handle_pagination$/;"	f	module:SearchHelper
+handle_prev_page	app/helpers/search_helper.rb	/^  def handle_prev_page$/;"	f	module:SearchHelper
+handle_search	app/helpers/search_helper.rb	/^  def handle_search$/;"	f	module:SearchHelper
+home	app/controllers/static_pages_controller.rb	/^  def home; end$/;"	f	class:StaticPagesController
+index	app/controllers/songs_controller.rb	/^  def index$/;"	f	class:SongsController
+invoked_as_script?	bin/bundle	/^  def invoked_as_script?$/;"	f
+is_author_hr?	grant.rb	/^  def is_author_hr?$/;"	f	class:Grant
+link?	app/helpers/search_helper.rb	/^  def link?$/;"	f	module:SearchHelper
+load_bundler!	bin/bundle	/^  def load_bundler!$/;"	f
+lockfile	bin/bundle	/^  def lockfile$/;"	f
+lockfile_version	bin/bundle	/^  def lockfile_version$/;"	f
+new	app/controllers/songs_controller.rb	/^  def new$/;"	f	class:SongsController
+notify	grant.rb	/^  def notify(user)$/;"	f	class:Grant
+perform	app/sidekiq/download_job.rb	/^  def perform(video_id, image_url, title, channel, user_id)$/;"	f	class:DownloadJob
+points	grant.rb	/^  attr_accessor :points, :beneficiary$/;"	A	class:Grant
+points=	grant.rb	/^  attr_accessor :points, :beneficiary$/;"	A	class:Grant
+post	app/controllers/search_controller.rb	/^  def post$/;"	f	class:SearchController
+primary_and_foreign_key_types	db/migrate/20220504032810_create_active_storage_tables.active_storage.rb	/^  def primary_and_foreign_key_types$/;"	f	class:CreateActiveStorageTables
+privacy_policy	app/controllers/static_pages_controller.rb	/^  def privacy_policy; end$/;"	f	class:StaticPagesController
+query_params	app/controllers/search_controller.rb	/^  def query_params$/;"	f	class:SearchController
+register_points_change	grant.rb	/^  def register_points_change(user)$/;"	f	class:Grant
+register_points_change_and_notify	grant.rb	/^  def register_points_change_and_notify$/;"	f	class:Grant
+remove	app/controllers/playlist_controller.rb	/^  def remove$/;"	f	class:PlaylistController
+search	app/helpers/search_helper.rb	/^  def search(url)$/;"	f	module:SearchHelper
+set_params	app/helpers/download_helper.rb	/^  def set_params(song)$/;"	f	module:DownloadHelper
+set_song	app/controllers/songs_controller.rb	/^  def set_song$/;"	f	class:SongsController
+show	app/controllers/songs_controller.rb	/^  def show; end$/;"	f	class:SongsController
+song_params	app/controllers/songs_controller.rb	/^  def song_params$/;"	f	class:SongsController
+system!	bin/setup	/^def system!(*args)$/;"	f
+terms_of_use	app/controllers/static_pages_controller.rb	/^  def terms_of_use; end$/;"	f	class:StaticPagesController
+test_example	test/sidekiq/download_job_test.rb	/^  def test_example$/;"	f	class:DownloadJobTest
+title	grant.rb	/^  def title$/;"	f	class:Grant
+update	app/controllers/songs_controller.rb	/^  def update$/;"	f	class:SongsController
+update_download	app/controllers/download_controller.rb	/^  def update_download$/;"	f	class:DownloadController
+update_metadata	app/helpers/download_helper.rb	/^  def update_metadata(song)$/;"	f	module:DownloadHelper
+user_index	app/controllers/songs_controller.rb	/^  def user_index$/;"	f	class:SongsController
+write_and_update	app/helpers/download_helper.rb	/^  def write_and_update(song, body)$/;"	f	module:DownloadHelper

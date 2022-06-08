@@ -1,5 +1,10 @@
 .container
-  .is-size-1 My Songs
+  .columns
+    .column
+      .is-size-1 My Songs
+    .column.is-2.is-flex style="align-items:center;"
+      = link_to "Download All", download_all_path, class: "button is-success"
+
   - @songs.each do |song|
     - if song.updated != 0
       = render "songs/view", song: song, path: "user"

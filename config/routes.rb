@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get 'user_songs', to: 'songs#user_index'
   post 'remove', to: 'playlist#remove'
   post 'add', to: 'playlist#add'
+  get 'download_all', to: 'download#download_all'
+  get 'profile', to: 'profiles#show'
 end
