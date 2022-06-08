@@ -24,4 +24,8 @@ Rails.application.routes.draw do
   post 'add', to: 'playlist#add'
   get 'download_all', to: 'download#download_all'
   get 'profile', to: 'profiles#show'
+  delete 'wipe_device', to: 'devices#wipe_device'
+  delete 'delete_device', to: 'devices#destroy'
+  post 'merge_devices', to: 'devices#merge'
+  get 'retry_download', to: 'download#retry_download'
 end

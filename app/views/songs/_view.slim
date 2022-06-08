@@ -21,8 +21,9 @@
             - if song.mp3.attached?
               = link_to "Download", update_download_path(video_id: song.video_id), class: "button"
             - else 
-              - if path == "index"
+              / - if path == "index"
                 = button_to 'Delete', song_path(song.id), method: :delete, class: "button"
+              = link_to 'Retry', retry_download_path(id: song.id), class: "button"
             - if path == "user"
               = button_to 'Remove', remove_path(id: song.id), method: :post, class: "button"
             - elsif path == "index"

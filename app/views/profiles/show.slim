@@ -1,2 +1,15 @@
 .container
-  .is-size-1 Hello
+  .is-size-1 Profile
+  .columns
+    .column
+      .is-size-3 Devices
+      - current_user.devices.each do |device|
+        .control
+          = device.user_agent
+          = button_to "Wipe Device", wipe_device_path(id: device.id), method: :delete, class: "button is-warning"
+          = link_to "Merge Devices", merge_devices_path, class: "button is-warning"
+          = button_to "Delete Device", delete_device_path(id: device.id), method: :delete, class: "button is-danger"
+
+    .column 
+      .is-size-3 Settings
+

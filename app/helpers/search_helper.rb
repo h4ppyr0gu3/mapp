@@ -18,12 +18,12 @@ module SearchHelper
     video_id = video.split("&")[0]
     url = "#{Invidious.api}/api/v1/videos/#{video_id}"
     response = search(url)
-    DownloadJob.perform_async(
-      video_id,
-      response['videoThumbnails'][4]['url'],
-      response['title'],
-      response['authot'],
-      current_user.id
+    DownloadJob.perform_async({
+      video_id: video_id,
+      image_url: response['videoThumbnails'][4]['url'],
+      title: response['title'],
+      channel: response['author'],
+      user_id: current_user.id}
     )
   end
 

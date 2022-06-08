@@ -14,13 +14,23 @@ class DownloadController < ApplicationController
     nil
   end
 
+  def retry_download
+    song = Song.find(params[:id])
+    download_params = song.attributes.symbolize_keys.except!(:id, :genre, :updated, :created_at ,:updated_at)
+    download_params[:channel] = download_params[:album]
+    download_params.except![:album]
+    song.destroy
+    DownloadJob.perform_async(download_params)
+    redirect_back fallback_location: songs_path, notice: "Retrying Download...."
+  end
+
   def call_download_job
-    DownloadJob.perform_async(
-      params['video_id'],
-      params['image_url'],
-      params['title'],
-      params['channel'],
-      params['user_id']
+    DownloadJob.perform_async({
+      video_id: params['video_id'],
+      image_url: params['image_url'],
+      title: params['title'],
+      channel: params['channel'],
+      user_id: params['user_id']}
     )
   end
 
