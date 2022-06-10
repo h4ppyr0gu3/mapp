@@ -21,21 +21,21 @@ jobs:
         options: --entrypoint redis-server
 
 
-  build: 
-  working_directory: ~/mapp
-  docker:
-    - image: ruby:3.1.2
-      environment:
-        - RAILS_ENV: test
-        - POSTGRES_PASSWORD: postgres
-        - POSTGRES_USERNAME: postgres
-        - POSTGRES_HOST: localhost
-        - POSTGRES_PORT: 5432
-    - image: redis:7.0.0-alpine
-    - image: postgres:14.2-alpine
-      environment:
-        - POSTGRES_PASSWORD: postgres
-        - POSTGRES_USERNAME: postgres
+#   build:
+  # working_directory: ~/mapp
+  # docker:
+  #   - image: ruby:3.1.2
+  #     environment:
+  #       - RAILS_ENV: test
+  #       - POSTGRES_PASSWORD: postgres
+  #       - POSTGRES_USERNAME: postgres
+  #       - POSTGRES_HOST: localhost
+  #       - POSTGRES_PORT: 5432
+  #   - image: redis:7.0.0-alpine
+  #   - image: postgres:14.2-alpine
+  #     environment:
+  #       - POSTGRES_PASSWORD: postgres
+        # - POSTGRES_USERNAME: postgres
   steps:
     - run: apt-get update -qq 
     - run: apt-get install -y build-essential openssl ffmpeg libssl-dev less vim libsasl2-dev git youtube-dl imagemagick
