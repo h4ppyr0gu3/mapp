@@ -16,22 +16,22 @@ class DownloadController < ApplicationController
 
   def retry_download
     song = Song.find(params[:id])
-    download_params = song.attributes.symbolize_keys.except!(:id, :genre, :updated, :created_at ,:updated_at)
+    download_params = song.attributes.symbolize_keys.except!(:id, :genre, :updated, :created_at, :updated_at)
     download_params[:channel] = download_params[:album]
     download_params.except![:album]
     song.destroy
     DownloadJob.perform_async(download_params)
-    redirect_back fallback_location: songs_path, notice: "Retrying Download...."
+    redirect_back fallback_location: songs_path, notice: 'Retrying Download....'
   end
 
   def call_download_job
     DownloadJob.perform_async({
-      video_id: params['video_id'],
-      image_url: params['image_url'],
-      title: params['title'],
-      channel: params['channel'],
-      user_id: params['user_id']}
-    )
+                                video_id: params['video_id'],
+                                image_url: params['image_url'],
+                                title: params['title'],
+                                channel: params['channel'],
+                                user_id: params['user_id']
+                              })
   end
 
   def update_download
@@ -55,7 +55,7 @@ class DownloadController < ApplicationController
     undownloaded_songs = current_user.songs.where.not(id: device.songs.ids)
     available_songs = undownloaded_songs.where(id: available_ids)
     device.songs << available_songs
-    files = available_songs.map{ |song| [song.mp3, song.mp3.filename] }
+    files = available_songs.map { |song| [song.mp3, song.mp3.filename] }
     zipline(files, 'mapp.zip')
   end
 

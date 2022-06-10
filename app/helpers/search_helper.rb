@@ -15,16 +15,16 @@ module SearchHelper
 
   def download_link(query)
     video = query[-1].gsub('com/watch?v=', '')
-    video_id = video.split("&")[0]
+    video_id = video.split('&')[0]
     url = "#{Invidious.api}/api/v1/videos/#{video_id}"
     response = search(url)
     DownloadJob.perform_async({
-      video_id: video_id,
-      image_url: response['videoThumbnails'][4]['url'],
-      title: response['title'],
-      channel: response['author'],
-      user_id: current_user.id}
-    )
+                                video_id:,
+                                image_url: response['videoThumbnails'][4]['url'],
+                                title: response['title'],
+                                channel: response['author'],
+                                user_id: current_user.id
+                              })
   end
 
   def generate_url

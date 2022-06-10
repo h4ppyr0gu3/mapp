@@ -10,22 +10,22 @@ gem 'cssbundling-rails'
 gem 'devise'
 gem 'down'
 gem 'jsbundling-rails'
+gem 'kaminari'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
+gem 'ransack'
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
 gem 'slim'
 gem 'sprockets-rails'
 gem 'tzinfo-data'
 gem 'zipline'
-gem 'kaminari'
-gem 'ransack'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'pry'
   gem 'dotenv-rails'
+  gem 'pry'
 end
 
 group :development do
@@ -38,4 +38,4 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
-gem "sassc-rails"
+gem 'sassc-rails'

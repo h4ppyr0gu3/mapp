@@ -1,31 +1,56 @@
 name: GitHub Actions Demo
 on: [push, pull_request]
 jobs:
+  build:
+    runs_on: ruby:3.1.2
+    services:
+      db:
+        image: postgres:14.2-alpine
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+      redis:
+        image: redis
+        ports: ["6379:6379"]
+        options: --entrypoint redis-server
+
+
   build: 
-    working_directory: ~/mapp
-    docker:
-      - image: ruby:3.1.2
-        environment:
-          - RAILS_ENV: test
-          - POSTGRES_PASSWORD: postgres
-          - POSTGRES_USERNAME: postgres
-          - POSTGRES_HOST: localhost
-          - POSTGRES_PORT: 5432
-      - image: redis:7.0.0-alpine
-      - image: postgres:14.2-alpine
-        environment:
-          - POSTGRES_PASSWORD: postgres
-          - POSTGRES_USERNAME: postgres
+  working_directory: ~/mapp
+  docker:
+    - image: ruby:3.1.2
+      environment:
+        - RAILS_ENV: test
+        - POSTGRES_PASSWORD: postgres
+        - POSTGRES_USERNAME: postgres
+        - POSTGRES_HOST: localhost
+        - POSTGRES_PORT: 5432
+    - image: redis:7.0.0-alpine
+    - image: postgres:14.2-alpine
+      environment:
+        - POSTGRES_PASSWORD: postgres
+        - POSTGRES_USERNAME: postgres
   steps:
-    - checkout
-
-    - run: bundle install --path vendor/bundle
-
-    - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-    - run: bundle exec rails db:setup
-
-    - run: bundle exec rubocop
-
-    - run: bundle exec rspec
+    - run: |
+      apt-get update -qq && apt-get install -y build-essential openssl ffmpeg libssl-dev less vim libsasl2-dev git youtube-dl imagemagick
+      gem install bundler
+      bundle install
+      bundle exec rspec
+    #
+    #
+    # - run: bundle install --path vendor/bundle
+    #
+    # - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+    #
+    # - run: bundle exec rails db:setup
+    #
+    # - run: bundle exec rubocop
+    #
+    # - run: bundle exec rspec
 

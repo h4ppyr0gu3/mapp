@@ -9,7 +9,8 @@ class DownloadJob
     params = params.symbolize_keys
     dir = Rails.root.join('tmp', 'downloads')
     system("#{Rails.root.join('lib', 'scripts', 'download.sh')} #{dir} #{params[:video_id]}")
-    song = Song.create(title: params[:title], artist: params[:channel], video_id: params[:video_id], image_url: params[:image_url])
+    song = Song.create(title: params[:title], artist: params[:channel], video_id: params[:video_id],
+                       image_url: params[:image_url])
     return unless song.save
 
     attach_image(song, params[:image_url], params[:video_id])
