@@ -37,11 +37,11 @@ jobs:
         - POSTGRES_PASSWORD: postgres
         - POSTGRES_USERNAME: postgres
   steps:
-    - run: |
-      apt-get update -qq && apt-get install -y build-essential openssl ffmpeg libssl-dev less vim libsasl2-dev git youtube-dl imagemagick
-      gem install bundler
-      bundle install
-      bundle exec rspec
+    - run: apt-get update -qq 
+    - run: apt-get install -y build-essential openssl ffmpeg libssl-dev less vim libsasl2-dev git youtube-dl imagemagick
+    - run: gem install bundler
+    - run: bundle install
+    - run: bundle exec rspec
     #
     #
     # - run: bundle install --path vendor/bundle
