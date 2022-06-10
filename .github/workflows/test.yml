@@ -1,8 +1,8 @@
 name: GitHub Actions Demo
 on: [push, pull_request]
 jobs:
-  build:
-    runs_on: ruby:3.1.2
+  build-step:
+    runs_on: ubuntu:latest
     steps:
       - uses: actions/checkout@v3
       - run: "apt-get install -y build-essential docker docker-compose"
