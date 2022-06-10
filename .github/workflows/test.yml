@@ -1,15 +1,31 @@
 name: GitHub Actions Demo
 on: [push, pull_request]
 jobs:
-  rubocop:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Bundle
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - name: Rubocop
-        run: bundle exec rubocop
+  build: 
+    working_directory: ~/mapp
+    docker:
+      - image: ruby:3.1.2
+        environment:
+          - RAILS_ENV: test
+          - POSTGRES_PASSWORD: postgres
+          - POSTGRES_USERNAME: postgres
+          - POSTGRES_HOST: localhost
+          - POSTGRES_PORT: 5432
+      - image: redis:7.0.0-alpine
+      - image: postgres:14.2-alpine
+        environment:
+          - POSTGRES_PASSWORD: postgres
+          - POSTGRES_USERNAME: postgres
+  steps:
+    - checkout
+
+    - run: bundle install --path vendor/bundle
+
+    - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+    - run: bundle exec rails db:setup
+
+    - run: bundle exec rubocop
+
+    - run: bundle exec rspec
+
