@@ -20,24 +20,20 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
+  host: <%= ENV["POSTGRES_HOST"] %>
   port: 5432
-  password: postgres
-  username: postgres
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  username: <%= ENV["POSTGRES_USERNAME"] %>
+  database: <%= ENV["POSTGRES_DATABASE"] %>
 
 development:
   <<: *default
-  database: mapp_development
 
 test:
   <<: *default
-  database: mapp_test
 
 production:
   <<: *default
-  database: mapp_production
-  username: postgres
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
 docker: 
   <<: *default
