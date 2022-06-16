@@ -15,10 +15,16 @@
 
   - @trending.each_with_index do |trending, idx|
     .card.p-2.m-2 style="border-radius: 10px"
-      = trending["title"]
+      .columns
+        .column.is-2
+          img src="#{trending["videoThumbnails"][4]["url"]}"
+        .column
+          .columns
+            .column
+              = trending["title"]
+            .column
+              .button.play data-id="#{idx}" Watch Video
+              .button.download data-id="#{idx}" data-title="#{trending["title"]}" data-channel="#{trending["author"]}" data-video="#{trending["videoId"]}" data-user="#{current_user.present? ? current_user.id : nil}" data-image="#{trending["videoThumbnails"][4]["url"]}" Download
       .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{trending["videoId"]}"
-      .card-footer
-        .button.play data-id="#{idx}" Watch Video
-        .button.download data-id="#{idx}" data-title="#{trending["title"]}" data-channel="#{trending["author"]}" data-video="#{trending["videoId"]}" data-user="#{current_user.present? ? current_user.id : nil}" data-image="#{trending["videoThumbnails"][4]["url"]}" Download
 
 = render "layouts/search_js"

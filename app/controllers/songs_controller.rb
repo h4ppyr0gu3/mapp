@@ -14,18 +14,14 @@ class SongsController < ApplicationController
     @songs = @q.result.page(params[:page])
   end
 
-  # GET /songs/1 or /songs/1.json
   def show; end
 
-  # GET /songs/new
   def new
     @song = Song.new
   end
 
-  # GET /songs/1/edit
   def edit; end
 
-  # POST /songs or /songs.json
   def create
     @song = Song.new(song_params)
 
@@ -40,7 +36,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /songs/1 or /songs/1.json
   def update
     parsed_params = song_params.to_h
     # parsed_params = params.dup.to_h
@@ -53,7 +48,6 @@ class SongsController < ApplicationController
     end
   end
 
-  # DELETE /songs/1 or /songs/1.json
   def destroy
     @song.destroy
 

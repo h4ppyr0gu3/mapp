@@ -26,13 +26,11 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
   gem 'rubocop'
   gem 'web-console'
-end
-
-group :test do
-  gem 'rspec-rails'
 end

@@ -3,10 +3,10 @@ javascript:
   download = document.getElementsByClassName("download")
   for( i = 0; i < download.length; i++) {
     download[i].addEventListener("click", (e) => {
-      fetch(("http://localhost:3000/download?video_id=" + 
+      fetch(("http://localhost:3000/external_download?video_id=" + 
       encodeURIComponent(e.target.dataset.video) + 
       "&user_id=" +  encodeURIComponent(e.target.dataset.user) +
-      "&channel_name=" + encodeURIComponent(e.target.dataset.channel) +
+      "&channel=" + encodeURIComponent(e.target.dataset.channel) +
       "&title=" + encodeURIComponent(e.target.dataset.title) +
       "&image_url=" + encodeURIComponent(e.target.dataset.image)))
 

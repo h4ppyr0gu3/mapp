@@ -9,13 +9,36 @@ class DownloadJob
     params = params.symbolize_keys
     dir = Rails.root.join('tmp', 'downloads')
     system("#{Rails.root.join('lib', 'scripts', 'download.sh')} #{dir} #{params[:video_id]}")
-    song = Song.create(title: params[:title], artist: params[:channel], video_id: params[:video_id],
-                       image_url: params[:image_url])
-    return unless song.save
+    song = create_song(params)
+    return if song.nil?
+    attach_items(params, song)
+    attach_user(params, song)
+  end
 
+  private
+
+  def attach_user(params, song)
+    return if params[:user_id].nil?
+    ::UserSong.create(user_id: params[:user_id], song_id: song.id)
+  end
+
+  def create_song(params)
+    song = Song.find_by(video_id: params[:video_id])
+    if song.nil?
+      song = Song.create(
+        title: params[:title], 
+        artist: params[:channel], 
+        video_id: params[:video_id],
+        image_url: params[:image_url]
+      )
+    end
+    return song if Song.exists?(video_id: params[:video_id])
+    return nil
+  end
+
+  def attach_items(params, song)
     attach_image(song, params[:image_url], params[:video_id])
     attach_mp3(song, params[:video_id])
-    ::UserSong.create(user_id: params[:user_id], song_id: song.id)
   end
 
   def attach_image(song, image_url, video_id)

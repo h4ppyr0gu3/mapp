@@ -27,10 +27,17 @@
 
   - @response.each_with_index do |response, idx|
     .card.p-2.m-2 style="border-radius: 10px"
-      = response["title"]
+      .columns
+        .column.is-2
+          img src="#{response["videoThumbnails"][4]["url"]}"
+        .column
+          .columns
+            .column
+              = response["title"]
+            .column
+              .button.play data-id="#{idx}" Watch Video
+              .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" data-image="#{response["videoThumbnails"][4]["url"]}" Download
+
       .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{response["videoId"]}"
-      .card-footer
-        .button.play data-id="#{idx}" Watch Video
-        .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" data-image="#{response["videoThumbnails"][4]["url"]}" Download
 
 = render 'layouts/search_js'

@@ -3,44 +3,48 @@
 include Zipline
 
 class DownloadController < ApplicationController
-  include DownloadHelper
-
   def get
-    download_params
-    return if Song.exists?(video_id: params[:video_id])
-
-    call_download_job
+    song = Downloads::UseCases::Get.new(params: download_params).call.nil?
+    redirect_to url_for(song) unless song.nil?
     head :no_content
     nil
   end
 
-  def retry_download
-    song = Song.find(params[:id])
-    download_params = song.attributes.symbolize_keys.except!(:id, :genre, :updated, :created_at, :updated_at)
-    download_params[:channel] = download_params[:album]
-    download_params.except![:album]
-    song.destroy
-    DownloadJob.perform_async(download_params)
+  def retry
+    Downloads::UseCases::Retry.new(params: params).call
     redirect_back fallback_location: songs_path, notice: 'Retrying Download....'
   end
 
-  def call_download_job
-    DownloadJob.perform_async({
-                                video_id: params['video_id'],
-                                image_url: params['image_url'],
-                                title: params['title'],
-                                channel: params['channel'],
-                                user_id: params['user_id']
-                              })
+  # called from js fetch
+  def external
+    song = Downloads::UseCases::External.new(params: download_params, context: context).call
+    # binding.pry
+    # if song.nil?
+      # redirect_back fallback_location: search_path,
+      # notice: 'We are fetching the song now, it will be available in a few minutes'
+    # else
+    #   redirect_to url_for(song.mp3) unless song.mp3.nil?
+    # end
   end
 
-  def update_download
-    current_device = current_user.devices.find_or_create_by(user_agent: request.user_agent)
-    song = Song.find_by(video_id: params[:video_id])
-    update_metadata(song) if song.updated != 2
-    current_device.songs << song
+  def internal
+    song = Downloads::UseCases::Internal.new(params: params, context: context).call
+    redirect_to url_for(song) unless song.nil?
+  end
 
-    redirect_to url_for(song.mp3)
+  def all
+    files = Downloads::UseCases::All.new(params: request.user_agent, context: context).call
+    zipline(files, 'mapp.zip')
+  end
+
+
+  def update
+    song = Downloads::UseCases::Update.new(params: params, context: context).call
+    if song.mp3.nil?
+      redirect_back fallback_location: songs_path, alert: 'Song is not available at the moment'
+    else
+      redirect_to url_for(song.mp3) unless song.nil?
+    end
   end
 
   def download_all
@@ -67,7 +71,7 @@ class DownloadController < ApplicationController
       :video_id,
       :user_id,
       :title,
-      :channel_name
+      :channel
     )
   end
 end

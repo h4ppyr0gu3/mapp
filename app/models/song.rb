@@ -8,4 +8,9 @@ class Song < ApplicationRecord
   has_many :device_songs
   has_many :devices, through: :device_songs
   validates :title, presence: true
+  validates :video_id, presence: true, uniqueness: true
+
+  def redownload
+    # redownload the file then attach the mp3 file
+  end
 end

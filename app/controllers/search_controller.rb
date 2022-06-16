@@ -9,9 +9,9 @@ class SearchController < ApplicationController
   include SearchHelper
 
   def get
-    api = Invidious.api
-    uri = URI("#{api}/api/v1/trending?type=Music")
-    res = Net::HTTP.get(uri)
+    res = Rails.cache.fetch('trending', expires_in: 12.hours) do
+      trending
+    end
     @trending = JSON.parse(res)
   end
 
@@ -26,6 +26,12 @@ class SearchController < ApplicationController
   end
 
   private
+
+  def trending
+    api = Invidious.api
+    uri = URI("#{api}/api/v1/trending?type=Music")
+    return Net::HTTP.get(uri)
+  end
 
   def query_params
     params.permit(
