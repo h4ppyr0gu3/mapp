@@ -35,6 +35,7 @@ class DownloadController < ApplicationController
   def all
     files = Downloads::UseCases::All.new(params: request.user_agent, context: context).call
     zipline(files, 'mapp.zip')
+    # redirect_backm fallback_location: songs_path notice: "#{files.count} songs downloaded"
   end
 
 
@@ -45,22 +46,6 @@ class DownloadController < ApplicationController
     else
       redirect_to url_for(song.mp3) unless song.nil?
     end
-  end
-
-  def download_all
-    available_ids = []
-    current_user.songs.each do |song|
-      if song.mp3.attached?
-        update_metadata(song) if song.updated != 2
-        available_ids << song.id
-      end
-    end
-    device = current_user.devices.find_or_create_by(user_agent: request.user_agent)
-    undownloaded_songs = current_user.songs.where.not(id: device.songs.ids)
-    available_songs = undownloaded_songs.where(id: available_ids)
-    device.songs << available_songs
-    files = available_songs.map { |song| [song.mp3, song.mp3.filename] }
-    zipline(files, 'mapp.zip')
   end
 
   private

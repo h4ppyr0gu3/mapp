@@ -2,8 +2,6 @@
   .columns
     .column
       .is-size-1 My Songs
-    .column.is-2.is-flex style="align-items:center;"
-      = link_to "Download All", download_all_path, class: "button is-success"
   .columns
     .column
       = search_form_for @q, url: user_songs_path do |f|
@@ -16,11 +14,17 @@
       = link_to "All", user_songs_path, class: "button"
       = link_to "Not Updated", user_not_updated_path, class: "button"
       = link_to "Updated", user_updated_path, class: "button"
-
+  /   .column.is-2.is-flex style="align-items:center;"
+  /     = link_to "Download All", download_all_path, class: "button is-success"
+  / = search_form_for @q, url: user_songs_path do |f|
+  /   .field.has-addons.pb-3
+  /     .control
+  /       = f.search_field :title_or_genre_or_album_or_artist_cont, class: "input", placeholder: "Search"
+  /     .control
+  /       = f.submit "Search", class: "button is-info"
+  /
   - @songs.each do |song|
-    - if song.updated != 0
-      = render "songs/view", song: song, path: "user"
-    - else
-      = render "songs/form", song: song
-
-  = paginate @songs
+    / - if song.updated != 0
+    /   = render "songs/view", song: song, path: "user"
+    / - else
+    = render "songs/form", song: song

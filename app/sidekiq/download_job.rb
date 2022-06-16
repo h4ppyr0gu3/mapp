@@ -6,7 +6,7 @@ class DownloadJob
   include Sidekiq::Job
 
   def perform(params)
-    params = params.symbolize_keys
+    params = JSON.parse(params).symbolize_keys
     dir = Rails.root.join('tmp', 'downloads')
     system("#{Rails.root.join('lib', 'scripts', 'download.sh')} #{dir} #{params[:video_id]}")
     song = create_song(params)

@@ -1,0 +1,45 @@
+.is-size-1 Editing Song
+
+= render "form", song: @song
+
+.test
+  = link_to "Show this song", @song, class: "button"
+  = link_to "Back to songs", songs_path, class: "button"
+
+button.button#auto-fill Auto fill
+
+#forming
+
+javascript: 
+
+  title = document.getElementById("title");
+  artist = document.getElementById("artist");
+  album = document.getElementById("album");
+  year = document.getElementById("year");
+  genre = document.getElementById("genre");
+  auto = document.getElementById("auto-fill");
+  form = document.getElementById("forming");
+
+  auto.addEventListener("click", (e) => {
+  e.preventDefault
+  console.log("clicked");
+  fetch(("http://localhost:3000/auto_fill?artist=" +
+  encodeURIComponent(artist.value))).then(data => data.json()).then(data => console.log(data))
+
+  })
+
+  // async function getArtist(url = '') {
+  //   url_artist = encodeURIComponent(artist.value)
+  //   const response = await fetch(
+  //   "https://musicbrainz.org/ws/2/artist?query=${url_artist}",
+  //   {
+  //   mode: 'no-cors',
+  //   headers: {
+  //     "Application": "mapp/1.0.0 ( rogersdpdr@gmail.com)",
+  //     "Accept": "application/json",
+  //     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0"
+  //   }});
+  //   console.log(response);
+  //   console.log(response.body);
+  //   return response;
+  // }

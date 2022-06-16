@@ -8,11 +8,11 @@
               li
                 = error.full_message
 
-      = form.text_field :title, class: "input", placeholder: "Title"
-      = form.text_field :artist, class: "input", placeholder: "Artist"
-      = form.text_field :album, class: "input", placeholder: "Album"
-      = form.text_field :year, class: "input", placeholder: "Year"
-      = form.text_field :genre, class: "input", placeholder: "Genre"
+      = form.text_field :title, class: "input", placeholder: "Title", id: "title"
+      = form.text_field :artist, class: "input", placeholder: "Artist", id: "artist"
+      = form.text_field :album, class: "input", placeholder: "Album", id: "album"
+      = form.text_field :year, class: "input", placeholder: "Year", id: "year"
+      = form.text_field :genre, class: "input", placeholder: "Genre", id: "genre"
 
       = form.submit :Update, class: "button" 
   .column.is-4

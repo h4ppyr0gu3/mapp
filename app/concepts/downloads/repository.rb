@@ -3,7 +3,7 @@
 module Downloads
   class Repository
     class << self
-      def update_metadata(song, params)
+      def update_metadata(song)
         uri = URI("#{ENV.fetch('IDEDIT_URL', nil)}/edit")
         res = Net::HTTP.post_form(uri, set_params(song))
         return unless res.instance_of?(Net::HTTPOK)
@@ -26,10 +26,10 @@ module Downloads
 
       def add_song_params(song)
         song.update(
-          artist: (song.artist.empty? ? 'artist' : song.artist),
-          year: (song.year.empty? ? 'year' : song.year),
-          genre: (song.genre.empty? ? 'genre' : song.genre),
-          album: (song.album.empty? ? 'album' : song.album)
+          artist: (song.artist.nil? ? 'artist' : song.artist),
+          year: (song.year.nil? ? 'year' : song.year),
+          genre: (song.genre.nil? ? 'genre' : song.genre),
+          album: (song.album.nil? ? 'album' : song.album)
         )
       end
 
@@ -40,8 +40,13 @@ module Downloads
         add_song_params(song)
         return nil unless song.mp3.attached?
 
-        mp3 = song.mp3.download
-        image = song.image.download
+        begin
+          mp3 = song.mp3.download
+          image = song.image.download
+        rescue ActiveStorage::FileNotFound
+          song.delete
+          return nil
+        end
         { image:,
           file: mp3,
           title: song.title,
@@ -52,13 +57,18 @@ module Downloads
       end
 
       def call_download_job(params)
-        DownloadJob.perform_async({
+        job_params = strict_params(params).to_json
+        DownloadJob.perform_async(job_params)
+      end
+
+      def strict_params(params)
+        {
           video_id: params['video_id'],
           image_url: params['image_url'],
           title: params['title'],
           channel: params['channel'],
           user_id: params['user_id']
-        })
+        }
       end
     end
   end

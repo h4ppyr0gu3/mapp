@@ -18,9 +18,12 @@ Rails.application.routes.draw do
   # Search
   get 'search', to: 'search#get'
   post 'search', to: 'search#post'
-  get 'user_songs', to: 'songs#user_index'
 
   # Playlist
+  get 'user_songs', to: 'songs#user_index'
+  get 'user_updated', to: 'songs#user_updated'
+  get 'user_not_updated', to: 'songs#user_not_updated'
+  get 'auto_fill', to: 'songs#auto_fill'
   post 'remove', to: 'playlist#remove'
   post 'add', to: 'playlist#add'
   get 'profile', to: 'profiles#show'

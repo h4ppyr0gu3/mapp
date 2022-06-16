@@ -18,9 +18,6 @@
       = link_to "Updated", user_updated_path, class: "button"
 
   - @songs.each do |song|
-    - if song.updated != 0
-      = render "songs/view", song: song, path: "user"
-    - else
-      = render "songs/form", song: song
+     = render "songs/view", song: song, path: "user"
 
   = paginate @songs

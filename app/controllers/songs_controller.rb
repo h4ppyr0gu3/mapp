@@ -14,6 +14,22 @@ class SongsController < ApplicationController
     @songs = @q.result.page(params[:page])
   end
 
+  def user_updated
+    @q = current_user.songs.where("updated >= 1").ransack(params[:q])
+    @songs = @q.result.page(params[:page])
+  end
+
+  def user_not_updated
+    @q = current_user.songs.where(updated: 0).ransack(params[:q])
+    @songs = @q.result.page(params[:page])
+  end
+
+  def auto_fill
+    response = ::Songs::UseCases::AutoFill.call(params)
+     # Net::HTTP.get("https://musicbrainz.org/ws/2/artist?query=post+malone&limit=1&offset=0")
+     render json: response.to_json
+  end
+
   def show; end
 
   def new

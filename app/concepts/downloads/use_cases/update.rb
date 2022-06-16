@@ -9,7 +9,7 @@ module Downloads
         # end
       
         current_device = current_user.devices.find_or_create_by(user_agent: user_agent)
-        repository.update_metadata(song, params) if song.updated != 2
+        repository.update_metadata(song) if song.updated != 2
         DeviceSong.find_or_create_by(device_id: current_device.id, song_id: song.id)
         return song
       end
