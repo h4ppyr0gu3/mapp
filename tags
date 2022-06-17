@@ -15,6 +15,7 @@ APP_ROOT	bin/setup	/^APP_ROOT = File.expand_path('..', __dir__)$/;"	C
 ActiveSupport	test/test_helper.rb	/^module ActiveSupport$/;"	m
 AddImageUrlToSong	db/migrate/20220608194908_add_image_url_to_song.rb	/^class AddImageUrlToSong < ActiveRecord::Migration[7.0]$/;"	c
 AddIndexes	db/migrate/20220608211609_add_indexes.rb	/^class AddIndexes < ActiveRecord::Migration[7.0]$/;"	c
+All	app/concepts/downloads/use_cases/all.rb	/^    class All < UseCase::Base$/;"	c	module:Downloads.UseCases
 AnonymousClass84762e030101	app/javascript/controllers/hello_controller.js	/^export default class extends Controller {$/;"	c
 Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	module:Mapp
 ApplicationCable	app/channels/application_cable/channel.rb	/^module ApplicationCable$/;"	m
@@ -26,7 +27,8 @@ ApplicationJob	app/jobs/application_job.rb	/^class ApplicationJob < ActiveJob::B
 ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
 ApplicationRecord	app/models/application_record.rb	/^class ApplicationRecord < ActiveRecord::Base$/;"	c
 ApplicationSystemTestCase	test/application_system_test_case.rb	/^class ApplicationSystemTestCase < ActionDispatch::SystemTestCase$/;"	c
-Base	lib/use_case/base.rb	/^  class Base$/;"	c	module:UseCase
+AutoFill	app/concepts/songs/use_cases/auto_fill.rb	/^    class AutoFill$/;"	c	module:Songs.UseCases
+Base	app/lib/use_case/base.rb	/^  class Base$/;"	c	module:UseCase
 Channel	app/channels/application_cable/channel.rb	/^  class Channel < ActionCable::Channel::Base$/;"	c	module:ApplicationCable
 Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	module:ApplicationCable
 ConnectionTest	test/channels/application_cable/connection_test.rb	/^  class ConnectionTest < ActionCable::Connection::TestCase$/;"	c	module:ApplicationCable
@@ -47,11 +49,13 @@ DownloadController	app/controllers/download_controller.rb	/^class DownloadContro
 DownloadJob	app/sidekiq/download_job.rb	/^class DownloadJob$/;"	c	mixin:include:Sidekiq.Job
 DownloadJobTest	test/sidekiq/download_job_test.rb	/^class DownloadJobTest < Minitest::Test$/;"	c
 Downloads	app/concepts/downloads/repository.rb	/^module Downloads$/;"	m
+Downloads	app/concepts/downloads/use_cases/all.rb	/^module Downloads$/;"	m
 Downloads	app/concepts/downloads/use_cases/external.rb	/^module Downloads$/;"	m
 Downloads	app/concepts/downloads/use_cases/internal.rb	/^module Downloads$/;"	m
 Downloads	app/concepts/downloads/use_cases/retry.rb	/^module Downloads$/;"	m
 Downloads	app/concepts/downloads/use_cases/update.rb	/^module Downloads$/;"	m
 External	app/concepts/downloads/use_cases/external.rb	/^    class External < UseCase::Base$/;"	c	module:Downloads.UseCases
+Fuzzy	fuzzy.rb	/^class Fuzzy$/;"	c
 Internal	app/concepts/downloads/use_cases/internal.rb	/^    class Internal$/;"	c	module:Downloads.UseCases
 Invidious	app/concepts/invidious.rb	/^class Invidious$/;"	c
 Mapp	config/application.rb	/^module Mapp$/;"	m
@@ -68,6 +72,7 @@ SearchHelper	app/helpers/search_helper.rb	/^module SearchHelper$/;"	m
 Song	app/models/song.rb	/^class Song < ApplicationRecord$/;"	c
 Song, type: :model	spec/models/song_spec.rb	/^RSpec.describe Song, type: :model do$/;"	d
 SongTest	test/models/song_test.rb	/^class SongTest < ActiveSupport::TestCase$/;"	c
+Songs	app/concepts/songs/use_cases/auto_fill.rb	/^module Songs$/;"	m
 SongsController	app/controllers/songs_controller.rb	/^class SongsController < ApplicationController$/;"	c
 SongsControllerTest	test/controllers/songs_controller_test.rb	/^class SongsControllerTest < ActionDispatch::IntegrationTest$/;"	c
 SongsTest	test/system/songs_test.rb	/^class SongsTest < ApplicationSystemTestCase$/;"	c
@@ -75,12 +80,14 @@ StaticPagesController	app/controllers/static_pages_controller.rb	/^class StaticP
 TestCase	test/test_helper.rb	/^  class TestCase$/;"	c	module:ActiveSupport
 The change you wanted was rejected.	public/422.html	/^      <h1>The change you wanted was rejected.<\/h1>$/;"	h
 The page you were looking for doesn't exist.	public/404.html	/^      <h1>The page you were looking for doesn't exist.<\/h1>$/;"	h
-Update	app/concepts/downloads/use_cases/update.rb	/^    class Update < UseCase::Base$/;"	c	module:Downloads.UseCases
-UseCase	lib/use_case/base.rb	/^module UseCase$/;"	m
+Update	app/concepts/downloads/use_cases/update.rb	/^    class Update < ::UseCase::Base$/;"	c	module:Downloads.UseCases
+UseCase	app/lib/use_case/base.rb	/^module UseCase$/;"	m
+UseCases	app/concepts/downloads/use_cases/all.rb	/^  module UseCases$/;"	m	module:Downloads
 UseCases	app/concepts/downloads/use_cases/external.rb	/^  module UseCases$/;"	m	module:Downloads
 UseCases	app/concepts/downloads/use_cases/internal.rb	/^  module UseCases$/;"	m	module:Downloads
 UseCases	app/concepts/downloads/use_cases/retry.rb	/^  module UseCases$/;"	m	module:Downloads
 UseCases	app/concepts/downloads/use_cases/update.rb	/^  module UseCases$/;"	m	module:Downloads
+UseCases	app/concepts/songs/use_cases/auto_fill.rb	/^  module UseCases$/;"	m	module:Songs
 User	app/models/user.rb	/^class User < ApplicationRecord$/;"	c
 User, type: :model	spec/models/user_spec.rb	/^RSpec.describe User, type: :model do$/;"	d
 UserSong	app/models/user_song.rb	/^class UserSong < ApplicationRecord$/;"	c
@@ -90,23 +97,30 @@ We're sorry, but something went wrong.	public/500.html	/^      <h1>We're sorry, 
 activate_bundler	bin/bundle	/^  def activate_bundler$/;"	f
 activation_error_handling	bin/bundle	/^  def activation_error_handling$/;"	f
 add	app/controllers/playlist_controller.rb	/^  def add$/;"	f	class:PlaylistController
-add_song_params	app/concepts/downloads/repository.rb	/^    def add_song_params(song)$/;"	f	class:Downloads.Repository
+add_song_params	app/concepts/downloads/repository.rb	/^      def add_song_params(song)$/;"	S	class:Downloads.Repository
 all	app/controllers/download_controller.rb	/^  def all$/;"	f	class:DownloadController
 api	app/concepts/invidious.rb	/^    def api$/;"	S	class:Invidious
 application	app/javascript/controllers/application.js	/^const application = Application.start()$/;"	C
+assign_weights	fuzzy.rb	/^  def self.assign_weights(index, regexp)$/;"	S	class:Fuzzy
 associations	spec/models/device_spec.rb	/^  describe 'associations' do$/;"	d
 associations	spec/models/song_spec.rb	/^  describe 'associations' do$/;"	d
 associations	spec/models/user_spec.rb	/^  describe 'associations' do$/;"	d
 attach_image	app/sidekiq/download_job.rb	/^  def attach_image(song, image_url, video_id)$/;"	f	class:DownloadJob
+attach_items	app/sidekiq/download_job.rb	/^  def attach_items(params, song)$/;"	f	class:DownloadJob
 attach_mp3	app/sidekiq/download_job.rb	/^  def attach_mp3(song, video_id)$/;"	f	class:DownloadJob
+attach_user	app/sidekiq/download_job.rb	/^  def attach_user(params, song)$/;"	f	class:DownloadJob
+auto_fill	app/controllers/songs_controller.rb	/^  def auto_fill$/;"	f	class:SongsController
 available_apis	app/concepts/invidious.rb	/^    def available_apis$/;"	S	class:Invidious
+build_regexp	fuzzy.rb	/^  def self.build_regexp(string)$/;"	S	class:Fuzzy
 bundler_requirement	bin/bundle	/^  def bundler_requirement$/;"	f
 bundler_requirement_for	bin/bundle	/^  def bundler_requirement_for(version)$/;"	f
+call	app/concepts/downloads/use_cases/all.rb	/^      def call$/;"	f	class:Downloads.UseCases.All
 call	app/concepts/downloads/use_cases/external.rb	/^      def call$/;"	f	class:Downloads.UseCases.External
 call	app/concepts/downloads/use_cases/internal.rb	/^      def call$/;"	f	class:Downloads.UseCases.Internal
 call	app/concepts/downloads/use_cases/retry.rb	/^      def call$/;"	f	class:Downloads.UseCases.Retry
 call	app/concepts/downloads/use_cases/update.rb	/^      def call$/;"	f	class:Downloads.UseCases.Update
-call_download_job	app/concepts/downloads/repository.rb	/^    def call_download_job(params)$/;"	f	class:Downloads.Repository
+call	app/concepts/songs/use_cases/auto_fill.rb	/^        def call(params)$/;"	S	class:Songs.UseCases.AutoFill
+call_download_job	app/concepts/downloads/repository.rb	/^      def call_download_job(params)$/;"	S	class:Downloads.Repository
 change	db/migrate/20220501094118_devise_create_users.rb	/^  def change$/;"	f	class:DeviseCreateUsers
 change	db/migrate/20220503163330_create_songs.rb	/^  def change$/;"	f	class:CreateSongs
 change	db/migrate/20220503170628_create_user_songs.rb	/^  def change$/;"	f	class:CreateUserSongs
@@ -122,18 +136,22 @@ cli_arg_version	bin/bundle	/^  def cli_arg_version$/;"	f
 connect	app/javascript/controllers/hello_controller.js	/^  connect() {$/;"	m	class:AnonymousClass84762e030101
 contact	app/controllers/static_pages_controller.rb	/^  def contact; end$/;"	f	class:StaticPagesController
 context	app/controllers/application_controller.rb	/^  def context$/;"	f	class:ApplicationController
+context	app/lib/use_case/base.rb	/^    attr_reader :params, :context$/;"	A	class:UseCase.Base
 copyright_claims	app/controllers/static_pages_controller.rb	/^  def copyright_claims; end$/;"	f	class:StaticPagesController
 create	app/controllers/songs_controller.rb	/^  def create$/;"	f	class:SongsController
-current_user	lib/use_case/base.rb	/^    def current_user$/;"	f	class:UseCase.Base
+create_song	app/sidekiq/download_job.rb	/^  def create_song(params)$/;"	f	class:DownloadJob
+current_user	app/lib/use_case/base.rb	/^    def current_user$/;"	f	class:UseCase.Base
 default	config/database.yml	/^default: &default$/;"	a
 destroy	app/controllers/devices_controller.rb	/^  def destroy$/;"	f	class:DevicesController
 destroy	app/controllers/songs_controller.rb	/^  def destroy$/;"	f	class:SongsController
-download_all	app/controllers/download_controller.rb	/^  def download_all$/;"	f	class:DownloadController
+done	fuzzy.rb	/^  def self.done(index)$/;"	S	class:Fuzzy
 download_link	app/helpers/search_helper.rb	/^  def download_link(query)$/;"	f	module:SearchHelper
 download_params	app/controllers/download_controller.rb	/^  def download_params$/;"	f	class:DownloadController
 edit	app/controllers/songs_controller.rb	/^  def edit; end$/;"	f	class:SongsController
 env_var_version	bin/bundle	/^  def env_var_version$/;"	f
 external	app/controllers/download_controller.rb	/^  def external$/;"	f	class:DownloadController
+find	fuzzy.rb	/^  def self.find(strings, input)$/;"	S	class:Fuzzy
+find_artists	app/concepts/songs/use_cases/auto_fill.rb	/^        def find_artists(params)$/;"	S	class:Songs.UseCases.AutoFill
 gemfile	bin/bundle	/^  def gemfile$/;"	f
 generate_url	app/helpers/search_helper.rb	/^  def generate_url$/;"	f	module:SearchHelper
 get	app/controllers/download_controller.rb	/^  def get$/;"	f	class:DownloadController
@@ -145,7 +163,7 @@ handle_prev_page	app/helpers/search_helper.rb	/^  def handle_prev_page$/;"	f	mod
 handle_search	app/helpers/search_helper.rb	/^  def handle_search$/;"	f	module:SearchHelper
 home	app/controllers/static_pages_controller.rb	/^  def home; end$/;"	f	class:StaticPagesController
 index	app/controllers/songs_controller.rb	/^  def index$/;"	f	class:SongsController
-initialize	lib/use_case/base.rb	/^    def initialize(params:, context: nil)$/;"	f	class:UseCase.Base
+initialize	app/lib/use_case/base.rb	/^    def initialize(params:, context: {})$/;"	f	class:UseCase.Base
 internal	app/controllers/download_controller.rb	/^  def internal$/;"	f	class:DownloadController
 invoked_as_script?	bin/bundle	/^  def invoked_as_script?$/;"	f
 link?	app/helpers/search_helper.rb	/^  def link?$/;"	f	module:SearchHelper
@@ -154,7 +172,7 @@ lockfile	bin/bundle	/^  def lockfile$/;"	f
 lockfile_version	bin/bundle	/^  def lockfile_version$/;"	f
 merge	app/controllers/devices_controller.rb	/^  def merge$/;"	f	class:DevicesController
 new	app/controllers/songs_controller.rb	/^  def new$/;"	f	class:SongsController
-params	lib/use_case/base.rb	/^    def params$/;"	f	class:UseCase.Base
+params	app/lib/use_case/base.rb	/^    attr_reader :params, :context$/;"	A	class:UseCase.Base
 perform	app/sidekiq/download_job.rb	/^  def perform(params)$/;"	f	class:DownloadJob
 post	app/controllers/search_controller.rb	/^  def post$/;"	f	class:SearchController
 primary_and_foreign_key_types	db/migrate/20220504032810_create_active_storage_tables.active_storage.rb	/^  def primary_and_foreign_key_types$/;"	f	class:CreateActiveStorageTables
@@ -162,27 +180,35 @@ privacy_policy	app/controllers/static_pages_controller.rb	/^  def privacy_policy
 query_params	app/controllers/search_controller.rb	/^  def query_params$/;"	f	class:SearchController
 redownload	app/models/song.rb	/^  def redownload$/;"	f	class:Song
 remove	app/controllers/playlist_controller.rb	/^  def remove$/;"	f	class:PlaylistController
+repository	app/concepts/downloads/use_cases/all.rb	/^      def repository$/;"	f	class:Downloads.UseCases.All
 repository	app/concepts/downloads/use_cases/external.rb	/^      def repository$/;"	f	class:Downloads.UseCases.External
+repository	app/concepts/downloads/use_cases/update.rb	/^      def repository$/;"	f	class:Downloads.UseCases.Update
+request	app/concepts/songs/use_cases/auto_fill.rb	/^        def request(url, params)$/;"	S	class:Songs.UseCases.AutoFill
 retry	app/controllers/download_controller.rb	/^  def retry$/;"	f	class:DownloadController
 search	app/helpers/search_helper.rb	/^  def search(url)$/;"	f	module:SearchHelper
-set_params	app/concepts/downloads/repository.rb	/^    def set_params(song)$/;"	f	class:Downloads.Repository
+set_params	app/concepts/downloads/repository.rb	/^      def set_params(song)$/;"	S	class:Downloads.Repository
 set_song	app/controllers/songs_controller.rb	/^  def set_song$/;"	f	class:SongsController
 show	app/controllers/profiles_controller.rb	/^  def show; end$/;"	f	class:ProfilesController
 show	app/controllers/songs_controller.rb	/^  def show; end$/;"	f	class:SongsController
 song	app/concepts/downloads/use_cases/retry.rb	/^      def song$/;"	f	class:Downloads.UseCases.Retry
 song	app/concepts/downloads/use_cases/update.rb	/^      def song$/;"	f	class:Downloads.UseCases.Update
 song_params	app/controllers/songs_controller.rb	/^  def song_params$/;"	f	class:SongsController
+strict_params	app/concepts/downloads/repository.rb	/^      def strict_params(params)$/;"	S	class:Downloads.Repository
+strict_params	app/helpers/search_helper.rb	/^  def strict_params(video_id, response, current_user)$/;"	f	module:SearchHelper
 system!	bin/setup	/^def system!(*args)$/;"	f
 terms_of_use	app/controllers/static_pages_controller.rb	/^  def terms_of_use; end$/;"	f	class:StaticPagesController
 test_example	test/sidekiq/download_job_test.rb	/^  def test_example$/;"	f	class:DownloadJobTest
+trending	app/controllers/search_controller.rb	/^  def trending$/;"	f	class:SearchController
 update	app/controllers/download_controller.rb	/^  def update$/;"	f	class:DownloadController
 update	app/controllers/songs_controller.rb	/^  def update$/;"	f	class:SongsController
-update_metadata	app/concepts/downloads/repository.rb	/^    def update_metadata(song)$/;"	f	class:Downloads.Repository
-update_song_attributes	app/concepts/downloads/repository.rb	/^    def update_song_attributes(song)$/;"	f	class:Downloads.Repository
-user_agent	lib/use_case/base.rb	/^    def user_agent $/;"	f	class:UseCase.Base
+update_metadata	app/concepts/downloads/repository.rb	/^      def update_metadata(song)$/;"	S	class:Downloads.Repository
+update_song_attributes	app/concepts/downloads/repository.rb	/^      def update_song_attributes(song)$/;"	S	class:Downloads.Repository
+user_agent	app/lib/use_case/base.rb	/^    def user_agent $/;"	f	class:UseCase.Base
 user_index	app/controllers/songs_controller.rb	/^  def user_index$/;"	f	class:SongsController
+user_not_updated	app/controllers/songs_controller.rb	/^  def user_not_updated$/;"	f	class:SongsController
+user_updated	app/controllers/songs_controller.rb	/^  def user_updated$/;"	f	class:SongsController
 validations	spec/models/device_spec.rb	/^  describe 'validations' do$/;"	d
 validations	spec/models/song_spec.rb	/^  describe 'validations' do$/;"	d
 validations	spec/models/user_spec.rb	/^  describe 'validations' do$/;"	d
 wipe_device	app/controllers/devices_controller.rb	/^  def wipe_device$/;"	f	class:DevicesController
-write_and_update	app/concepts/downloads/repository.rb	/^    def write_and_update(song, body)$/;"	f	class:Downloads.Repository
+write_and_update	app/concepts/downloads/repository.rb	/^      def write_and_update(song, body)$/;"	S	class:Downloads.Repository
