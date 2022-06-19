@@ -1,3 +1,15 @@
+# MusicApp_v2(Mapp)
+
+This is the second iteration of the music app which is using Ruby on Rails trying to follow best practices that I have learnt from my work experience.
+
+## Features
+- Download all tracks with a single click
+- Auto fill metadata using musicbrainz API
+- Use Invidious instances to get youtube data
+- Use Caching for the trending search page and active invidious instances
+- Merge devices in the app
+- Album art and metadata updating inline
+
 # README
 
 This README would normally document whatever steps are necessary to get the

@@ -53,7 +53,7 @@ module Downloads
 
         { image:,
           file: mp3,
-          title: song.title,
+          title: song.title.gsub("/", " "),
           artist: song.artist,
           year: song.year,
           genre: song.genre,
