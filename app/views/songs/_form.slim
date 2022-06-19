@@ -1,20 +1,47 @@
-.columns
-  .column
-    = form_with(model: song) do |form| 
-      - if song.errors.any? 
-        .danger style="color: red" #{pluralize(song.errors.count, "error") } prohibited this song from being saved:
-          ul
-            - song.errors.each do |error| 
-              li
-                = error.full_message
+.card.p-4.m-3.my-5
+  .columns
+    .column.is-3
+      - if song.image.attached?
+        = image_tag(song.image)
+      .field.is-grouped-centered.is-grouped
+        .control
+          button.button.auto-fill data-id="#{song.id}" Auto fill
+      .field
+        div.forming data-id="#{song.id}"
+    .column
+      = form_with(model: song) do |form| 
+        - if song.errors.any? 
+          .danger style="color: red" #{pluralize(song.errors.count, "error") } prohibited this song from being saved:
+            ul
+              - song.errors.each do |error| 
+                li
+                  = error.full_message
 
-      = form.text_field :title, class: "input", placeholder: "Title", id: "title"
-      = form.text_field :artist, class: "input", placeholder: "Artist", id: "artist"
-      = form.text_field :album, class: "input", placeholder: "Album", id: "album"
-      = form.text_field :year, class: "input", placeholder: "Year", id: "year"
-      = form.text_field :genre, class: "input", placeholder: "Genre", id: "genre"
+        .field
+          .label Title
+          .contol
+            = form.text_field :title, class: "input name", placeholder: "Title", data: {id: "#{song.id}"}
+        .field
+          .label Artists
+          .contol
+            = form.text_field :artist, class: "input artist", placeholder: "Artist", data: {id: "#{song.id}"}
+        .field
+          .label Album
+          .contol
+            = form.text_field :album, class: "input album", placeholder: "Album", data: {id: "#{song.id}"}
+        .columns
+          .column
+            .field 
+              .label Year
+              .control
+                = form.text_field :year, class: "input year", placeholder: "Year", data: {id: "#{song.id}"}
+          .column
+            .field
+              .label Genre
+              .control
+                = form.text_field :genre, class: "input genre", placeholder: "Genre", data: {id: "#{song.id}"}
 
-      = form.submit :Update, class: "button" 
-  .column.is-4
-    - if song.image.attached?
-      = image_tag(song.image)
+        .field.is-grouped-centered.is-grouped
+          .control
+            = form.submit :Update, class: "button is-success" 
+

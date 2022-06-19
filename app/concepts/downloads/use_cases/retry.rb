@@ -5,20 +5,25 @@ module Downloads
     class Retry < ::UseCase::Base
       def call
         clean_attributes
-        song.destroy
-        DownloadJob.perform_async(download_params)
+        DownloadJob.perform_async(job_params)
       end
 
       private
+
+      def job_params
+        {
+          video_id: song.video_id,
+          image_url: song.image_url
+        }.to_json
+      end
 
       def song
         @song ||= Song.find(params[:id])
       end
 
       def clean_attributes
-        download_params = song.attributes.symbolize_keys        
-        download_params[:channel] = download_params[:album]
-        download_params.except!(:album, :id, :genre, :updated, :created_at, :updated_at)
+        song.mp3.delete
+        song.image.delete
       end
     end
   end

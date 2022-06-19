@@ -26,8 +26,8 @@ class SongsController < ApplicationController
 
   def auto_fill
     response = ::Songs::UseCases::AutoFill.call(params)
-     # Net::HTTP.get("https://musicbrainz.org/ws/2/artist?query=post+malone&limit=1&offset=0")
-     render json: response.to_json
+    # Net::HTTP.get("https://musicbrainz.org/ws/2/artist?query=post+malone&limit=1&offset=0")
+    render json: response.to_json
   end
 
   def show; end
@@ -43,7 +43,7 @@ class SongsController < ApplicationController
 
     respond_to do |format|
       if @song.save
-        format.html { redirect_to song_url(@song), notice: 'Song was successfully created.' }
+        format.html { redirect_to song_url(@song), notice: "Song was successfully created." }
         format.json { render :show, status: :created, location: @song }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class SongsController < ApplicationController
     parsed_params.merge!({ updated: 1 }).except!(:id, :authenticity_token, :commit)
     pp parsed_params
     if @song.update(parsed_params)
-      redirect_back fallback_location: songs_path, notice: 'Song was successfully updated.'
+      redirect_back fallback_location: songs_path, notice: "Song was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -68,7 +68,7 @@ class SongsController < ApplicationController
     @song.destroy
 
     respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
+      format.html { redirect_to songs_url, notice: "Song was successfully destroyed." }
       format.json { head :no_content }
     end
   end

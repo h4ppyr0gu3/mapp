@@ -1,0 +1,128 @@
+javascript: 
+
+  auto = document.getElementsByClassName("auto-fill")
+
+  for( i = 0; i < auto.length; i++ ) {
+    auto[i].addEventListener("click", (e) => {
+      e.preventDefault
+      id = e.target.dataset.id
+      artist_el = artist_func(id)
+      fetch(("http://localhost:3000/auto_fill?artist=" +
+        encodeURIComponent(artist_func(id).value))).then(data => data.json())
+        .then(data => artistDropdown(data, id))
+    })
+  }
+
+  artist_func = function(id) {
+    artist = find_item_by(id, "artist");
+    return artist
+  }
+
+  album_func = function(id) {
+    album = find_item_by(id, "album");
+    return album
+  }
+
+  title_func = function(id) {
+    title = find_item_by(id, "name")
+    return title
+  }
+
+  year_func = function(id) {
+    year = find_item_by(id, "year")
+    return year
+  }
+
+  genre_func = function(id) {
+    genre = find_item_by(id, "genre")
+    return genre
+  }
+
+
+  form_func = function(id) {
+    form = find_item_by(id, "forming")
+    return form
+  }
+
+  function find_item_by(id, class_name) {
+    items = document.getElementsByClassName(class_name);
+    for ( i = 0; i < items.length; i++) {
+      if (items[i].dataset.id == id) {
+        return items[i]
+      }
+    }
+  }
+
+  function artistDropdown(data, id) {
+    form = form_func(id)
+    form.innerHTML = ""
+    var selectList = "<div class='field has-addons'>" +
+    "<div class='control'><div class='select is-fullwidth'><select id='artist-select'>"
+    for (var i = 0; i < data.artists.length; i++) {
+      var option = document.createElement("option");
+      selectList = selectList + "<option value='" + 
+        data.artists[i].id+ "'>" + 
+        data.artists[i].name + "</option>"
+    }
+    selectList = selectList + "</select></div></div><div class='control'>" + 
+    "<button class='button is-primary' id='artist-submit'>Select Artist" + 
+    "</button></div></div>"
+    form.innerHTML = selectList
+    addListenersForArtist(id)
+  }
+
+  function addListenersForArtist(id) {
+    artist_select = document.getElementById("artist-select")
+    artist_submit = document.getElementById("artist-submit")
+    artist_id = artist_select.options[0].value
+    artist_select.addEventListener("change", (e) => {
+      artist_id = e.target.options[e.target.options.selectedIndex].value
+    })
+    artist_submit.addEventListener('click', (e) => {
+      e.preventDefault
+      fetch(("http://localhost:3000/auto_fill?artist_id=" +
+        artist_id + "&title=" + title_func(id).value))
+        .then(data => data.json()).then(data => songDropdown(data, id))
+    })
+  }
+
+  function songDropdown(data, id) {
+    var selectSong = "<div class='field has-addons'>" +
+    "<div class='control'><div class='select is-fullwidth'><select id='song-select'>"
+    for (var i = 0; i < data.tracks.length; i++) {
+      var option = document.createElement("option");
+      selectSong = selectSong + "<option value='" +
+        data.tracks[i].id+ "'>" +
+        data.tracks[i].title + "</option>"
+    }
+    selectSong = selectSong + "</select></div></div><div class='control'>" + 
+    "<button class='button is-primary' id='song-submit'>Select Song" + 
+    "</button></div></div>"
+    form.innerHTML += selectSong
+    addEventListenersForSong(id)
+  }
+
+  function addEventListenersForSong(id) {
+    song_select = document.getElementById("song-select")
+    song_submit = document.getElementById("song-submit")
+    song_id = song_select.options[0].value
+    // title.value = song_select.options[0].text
+    song_select.addEventListener("change", (e) => {
+      song_id = e.target.options[e.target.options.selectedIndex].value
+    })
+    song_submit.addEventListener('click', (e) => {
+      e.preventDefault
+      title.value = song_select.options[song_select.options.selectedIndex].text
+      fetch(("http://localhost:3000/auto_fill?song_id=" +
+        song_id)).then(data => data.json()).then(data => fillForm(data,id))
+      console.log(song_id)
+    })
+  }
+
+  function fillForm(data, id) {
+    console.log(data)
+    year_func(id).value = data.date
+    genre_func(id).value = data.genre
+    album_func(id).value = data.title
+    artist_func(id).value = data.artists
+  }

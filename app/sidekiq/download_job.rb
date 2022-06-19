@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-require 'down'
+require "down"
 
 class DownloadJob
   include Sidekiq::Job
 
   def perform(params)
     params = JSON.parse(params).symbolize_keys
-    dir = Rails.root.join('tmp', 'downloads')
+    dir = Rails.root.join("tmp", "downloads")
     system("#{Rails.root.join('lib', 'scripts', 'download.sh')} #{dir} #{params[:video_id]}")
     song = create_song(params)
     return if song.nil?
+
     attach_items(params, song)
     attach_user(params, song)
   end
@@ -19,21 +20,23 @@ class DownloadJob
 
   def attach_user(params, song)
     return if params[:user_id].nil?
+
     ::UserSong.create(user_id: params[:user_id], song_id: song.id)
   end
 
   def create_song(params)
     song = Song.find_by(video_id: params[:video_id])
-    if song.nil?
-      song = Song.create(
-        title: params[:title], 
-        artist: params[:channel], 
-        video_id: params[:video_id],
-        image_url: params[:image_url]
-      )
-    end
-    return song if Song.exists?(video_id: params[:video_id])
-    return nil
+    return song unless song.nil?
+
+    song = Song.create(
+      title: params[:title],
+      artist: params[:channel],
+      video_id: params[:video_id],
+      image_url: params[:image_url]
+    )
+    return song if song.save
+
+    nil
   end
 
   def attach_items(params, song)
@@ -42,19 +45,27 @@ class DownloadJob
   end
 
   def attach_image(song, image_url, video_id)
-    unless song.image.attached? || image_url.nil?
-      image = Rails.root.join('tmp', 'downloads', "#{video_id}.jpg")
+    return if song.image.attached? || image_url.nil?
+
+    image = Rails.root.join("tmp", "downloads", "#{video_id}.jpg")
+    begin
       ::Down.download(image_url, destination: image)
-      song.image.attach(
-        io: File.open(image),
-        filename: "#{image_url}.jpg"
-      )
+      song.image.attach(io: File.open(image), filename: "#{image_url}.jpg")
       system("rm #{image}") if song.image.attached?
+    rescue StandardError
+      attach_generic_image(song)
     end
   end
 
+  def attach_generic_image(song)
+    song.image.attach(
+      io: File.open(Rails.root.join("app", "assets", "images", "generic_mp3.jpg")),
+      filename: "generic_#{song.video_id}.jpg"
+    )
+  end
+
   def attach_mp3(song, video_id)
-    file_path = Rails.root.join('tmp', 'downloads', "#{video_id}.mp3")
+    file_path = Rails.root.join("tmp", "downloads", "#{video_id}.mp3")
     if File.exist?(file_path)
       song.mp3.attach(
         io: File.open(file_path),

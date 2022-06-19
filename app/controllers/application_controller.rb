@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def context
     @context ||= {
       user: current_user,
-      user_agent: request.user_agent,
+      user_agent: request.user_agent
     }
   end
 end

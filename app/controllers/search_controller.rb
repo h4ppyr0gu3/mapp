@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class SearchController < ApplicationController
   before_action :authenticate_user!
@@ -9,7 +9,7 @@ class SearchController < ApplicationController
   include SearchHelper
 
   def get
-    res = Rails.cache.fetch('trending', expires_in: 12.hours) do
+    res = Rails.cache.fetch("trending", expires_in: 1.hours) do
       trending
     end
     @trending = JSON.parse(res)
@@ -18,7 +18,7 @@ class SearchController < ApplicationController
   def post
     query_params
     @value = params[:query]
-    @response = if params[:commit] == 'Search'
+    @response = if params[:commit] == "Search"
                   handle_search
                 else
                   handle_pagination
@@ -30,7 +30,7 @@ class SearchController < ApplicationController
   def trending
     api = Invidious.api
     uri = URI("#{api}/api/v1/trending?type=Music")
-    return Net::HTTP.get(uri)
+    Net::HTTP.get(uri)
   end
 
   def query_params
