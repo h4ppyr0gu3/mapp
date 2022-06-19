@@ -10,6 +10,15 @@ This is the second iteration of the music app which is using Ruby on Rails tryin
 - Merge devices in the app
 - Album art and metadata updating inline
 
+## Dependencies
+
+I would like to continue to investigate microservice architecture so wherever possible I am trying to create a dependency in a different language to try and learn something new through this experience
+The current dependencies are:
+- Postgres
+- Redis
+- [idedit](https://github.com/h4ppyr0gu3/idedit/)(crystal microservice)
+- Docker(optional)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -35,34 +44,3 @@ Things you may want to cover:
 
 * ...
 
-* yewtu.be
-vid.puffyan.us 
-* invidious.snopyta.org 
-* invidious.kavin.rocks 
-inv.riverside.rocks 	
-* invidious-us.kavin.rocks 
-invidious.osi.kr 
-y.com.sb 
-tube.cthd.icu
-invidious.flokinet.to
-yt.artemislena.eu 	
-invidious.lunar.icu
-invidious.mutahar.rocks 	
-invidious.se...ivacy.com 
-invidious.weblibre.org 	
-invidious.es...elbob.xyz 	
-youtube.076.ne.jp 	
-invidious.privacy.gd
-inv.bp.mutahar.rocks
-invidious.namazso.eu
-
-https://api.invidious.io/
-
-uri = URI("https://api.invidious.io/instances.json")
-res = Net::HTTP.get(uri)
-parsed = JSON.parse(res)
-parsed.each do |k, v|
-parsed["api"]
-     arr << v["uri"]
-   end
- end
