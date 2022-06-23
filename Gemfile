@@ -21,6 +21,7 @@ gem "slim"
 gem "sprockets-rails"
 gem "tzinfo-data"
 gem "zipline"
+gem 'rack-cors'
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

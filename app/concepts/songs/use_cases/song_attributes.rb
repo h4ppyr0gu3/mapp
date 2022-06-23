@@ -31,7 +31,7 @@ module Songs
         end
 
         def song_artists(response)
-          return "unknown" if response["artists"].empty?
+          return "unknown" if response["artists"].nil?
 
           artists = []
           response["artists"].map do |artist|

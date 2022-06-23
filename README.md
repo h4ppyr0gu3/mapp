@@ -12,11 +12,12 @@ This is the second iteration of the music app which is using Ruby on Rails tryin
 - Album art and metadata updating inline
 - Search(online or database) or enter url
 
-### Upcoming
+### Upcoming Features
 
 - Notifications
 - UX improvements
 - CI/CD pipeline
+- Emailing capabilities
 
 ## Dependencies
 

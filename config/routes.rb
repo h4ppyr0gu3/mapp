@@ -4,6 +4,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
+  mount ActionCable.server => '/cable'
   resources :songs
   devise_for :users
 
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   get 'contact', to: 'static_pages#contact'
   get 'terms', to: 'static_pages#terms_of_use'
   get 'copyright', to: 'static_pages#copyright_claims'
+  get 'test', to: 'test#test'
 
   # Search
   get 'search', to: 'search#get'
