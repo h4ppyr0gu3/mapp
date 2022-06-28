@@ -16,8 +16,9 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
         .buttons
           - if user_signed_in?
             #field style="position: relative"
-              button.button#notifications
+              button.button.mx-3#notifications
                 | Notifications
+              div#notification-dropdown
             .button#notify Notify me
             = link_to "Profile", profile_path, class: "button is-link"
             = button_to "Log Out", destroy_user_session_path, method: :delete, class: "button"
@@ -28,10 +29,17 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
 = render "layouts/error_messages"
 
 javascript:
+
+  var notification_opened = false;
+  var notification_count = 0;
+  var notifications = document.getElementById("notifications")
+  var notify = document.getElementById("notify")
+  var field = document.getElementById("field")
+  var notification_dropdown = document.getElementById("notification-dropdown")
+  var local_uuid = ""
+
   document.addEventListener('DOMContentLoaded', () => {
-
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
     if ($navbarBurgers.length > 0) {
       $navbarBurgers.forEach( el => {
         el.addEventListener('click', () => {
@@ -44,43 +52,94 @@ javascript:
     }
   });
 
-  notify = document.getElementById("notify")
-  field = document.getElementById("field")
-  // preField = field.innerHTML
-  // field.innerHTML += "<div class='has-background-danger' style='position: absolute; border-color:red; border: solid 1px red; bottom: -20px; right: 0px; border-radius: 0.5rem; max-height: 0px; font-size: 0.8rem; padding: 3px; padding-top: 0px'><div class='has-background-success'><div>some content</div><div>More content</div></div></div>";
-  /
   notify.addEventListener("click", (e) => {
     e.preventDefault()
-    / notifications.innerHTML = "Notifications<span class='has-background-danger' style='position: absolute; top: -10px; right: -10px; border-radius: 0.5rem; max-height: 20px; font-size: 0.8rem; padding: 3px; padding-top: 0px'>" + notification_count + "</span>"
     console.log("clicked")
     fetch("http://localhost:3000/test")
     console.log("sent")
-    // notifications.innerHTML = "Notifications<span class='has-background-danger' style='position: absolute; bottom: 0px; right: 0px; border-radius: 0.5rem; max-height: 500px; max-width: 300px; over-flow:auto; font-size: 0.8rem; padding: 3px; padding-top: 0px'>" + notification_count + "</span>"
   })
 
-  notifications = document.getElementById("notifications")
-
-  ws = new WebSocket("ws://localhost:3000/cable")
-  notification_count = 0;
-
-  ws.onmessage = (socketMessage) => {
-    const response = socketMessage.data;
-    const msg = JSON.parse(response);
-    if (msg.type === "ping") {
-        return;
+  notifications.addEventListener("click", (e) => {
+    e.preventDefault
+    notification_opened = !notification_opened
+    if (notification_opened) {
+      show_notifications();
+      console.log("mark as read")
+    } else {
+      hide_notifications();
+      console.log("hide")
     }
-    console.log("socket message", msg)
-    console.log("FROM RAILS: ", msg);
+  })
 
+  if (local_uuid === "") {
+    fetch("http://localhost:3000/get_uuid")
+      .then(data => data.json())
+      .then(data => set_uuid(data))
   }
-  ws.onopen = function(event) {
-    console.log('WebSocket is connected.');      
-    const msg = {
-      command: 'subscribe',
-      identifier: JSON.stringify({
-        id: 1,
-        channel: 'NotificationsChannel'
-      }),
-    }; 
-    ws.send(JSON.stringify(msg));
-  };
+
+  function show_notifications() {
+    var notification_elements = document.getElementsByClassName("notification-element")
+    for ( i=0; i < notification_elements.length; i++ ) {
+      notification_elements[i].style.display = "block"
+    }
+    notifications.innerHTML = "Notifications"
+    notification_count = 0
+  }
+
+  function hide_notifications() {
+    var notification_elements = document.getElementsByClassName("notification-element")
+    for ( i=0; i < notification_elements.length; i++ ) {
+      notification_elements[i].style.display = "none"
+    }
+  }
+
+  function create_open_notification(msg) {
+    old = notification_dropdown.innerHTML 
+    notification_dropdown.innerHTML = "<div class='notification-element' style='display:none;position: relative;padding: 3px'>" + msg.message.test + "</div>" + old
+    notification_count += 1
+  }
+
+  function create_closed_notification(msg) {
+    old = notification_dropdown.innerHTML 
+    notification.innerHTML = "<div class='notification-element'>" + msg.message.test + "</div>" + old
+  }
+
+  function set_uuid(json) {
+    local_uuid = json.uuid
+    ws = new WebSocket("ws://localhost:3000/cable")
+    setup_ws(ws)
+  }
+
+  function setup_ws(ws) {
+    ws.onopen = function(event) {
+    console.log(event)
+      const msg = {
+        command: 'subscribe',
+        identifier: JSON.stringify({
+          uuid: local_uuid,
+          channel: 'NotificationsChannel'
+        }),
+      }; 
+      console.log('WebSocket is connected.');      
+      ws.send(JSON.stringify(msg));
+    };
+
+    ws.onmessage = (socketMessage) => {
+      const response = socketMessage.data;
+      const msg = JSON.parse(response);
+      if (msg.type === "ping") {
+          return;
+      }
+      if (!notification_opened) {
+        create_open_notification(msg)
+      } else {
+        create_closed_notification(msg)
+      }
+      if (notification_count > 0) {
+        notifications.innerHTML = "Notifications<span class='has-background-danger' style='position: absolute; top: -10px; right: -10px; border-radius: 0.5rem; max-height: 20px; font-size: 0.8rem; padding: 3px; padding-top: 0px'>" + notification_count + "</span>"
+      } else {
+        notifications.innerHTML = "Notifications"
+      }
+      console.log("FROM RAILS: ", msg);
+    }
+  }

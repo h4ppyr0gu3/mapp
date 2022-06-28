@@ -1,0 +1,10 @@
+#notification-dropdown {
+  max-height: 10rem;
+  overflow: auto;
+  position: absolute;
+  min-width: 10rem;
+  max-width: 20rem;
+  z-index: 3;
+  background: #e8e8e8;
+  border-radius: 0.5rem;
+}

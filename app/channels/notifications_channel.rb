@@ -1,11 +1,10 @@
 class NotificationsChannel < ApplicationCable::Channel
-  def subscribed
-    puts params
-    stream_for "notifications"
+  def connect
+    puts cookies
   end
 
-  def recieved(params)
-    puts JSON.parse(params)
+  def subscribed
+    stream_for "notifications_for_#{params[:uuid]}"
   end
 
   def unsubscribed
