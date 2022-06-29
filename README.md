@@ -11,22 +11,53 @@ This is the second iteration of the music app which is using Ruby on Rails tryin
 - Merge devices in the app
 - Album art and metadata updating inline
 - Search(online or database) or enter url
+- Notifications with websockets
+- Zip files for large downloads
 
 ### Upcoming Features
 
-- Notifications
 - UX improvements
 - CI/CD pipeline
 - Emailing capabilities
+- Auto downloading albums using MusicBrainz search interface
+- Cleaning youtube titles
+- extra security features
+- chat room to continue playing with websockets
+- maybe radio to go with chat room
+- use youtube photos for more reliability
+- specs need to be written
+- API only interface with security in mind
+- Ability to have multiple independent instances communicating
 
 ## Dependencies
 
 I would like to continue to investigate microservice architecture so wherever possible I am trying to create a dependency in a different language to try and learn something new through this experience
 The current dependencies are:
+### External Services
 - Postgres
 - Redis
 - [idedit](https://github.com/h4ppyr0gu3/idedit/)(crystal microservice)
 - Docker(optional)
+
+### Internal Services
+- Sidekiq for job queues
+
+## Contribution
+
+Create Pull Request and we can talk
+
+## License 
+
+MIT
+
+#### Ruby Version
+3.1.2
+#### Rails Version
+7.0.3
+#### Postgres Version
+14.3
+#### Redis Version
+7.0.2
 
 # README
 
