@@ -38,3 +38,5 @@
 .tool-versions
 .env
 tags
+# storing tmp files insecurely
+/public/**/*

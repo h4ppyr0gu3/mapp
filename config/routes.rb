@@ -41,5 +41,8 @@ Rails.application.routes.draw do
   get 'update_download', to: 'download#update'
   get 'download_all', to: 'download#all'
   get 'retry_download', to: 'download#retry'
+
+  # Notifications
   get 'get_uuid', to: 'notifications#get_uuid'
+  get 'mark_as_read', to: 'notifications#mark_as_read'
 end

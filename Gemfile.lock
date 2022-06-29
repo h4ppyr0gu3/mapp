@@ -239,6 +239,7 @@ GEM
     rubocop-rspec (2.11.1)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
+    rubyzip (2.3.2)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     sidekiq (6.5.0)
@@ -305,6 +306,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  rubyzip
   shoulda-matchers
   sidekiq
   slim

@@ -3,8 +3,14 @@
   overflow: auto;
   position: absolute;
   min-width: 10rem;
-  max-width: 20rem;
+  max-width: 30rem;
   z-index: 3;
-  background: #e8e8e8;
+  background: #f9f9f9;
   border-radius: 0.5rem;
+}
+
+.notification-element {
+  padding: 5px;
+  margin: 5px;
+  border-top: 2px solid #c7c9c7;
 }

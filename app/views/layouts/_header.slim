@@ -19,7 +19,6 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
               button.button.mx-3#notifications
                 | Notifications
               div#notification-dropdown
-            .button#notify Notify me
             = link_to "Profile", profile_path, class: "button is-link"
             = button_to "Log Out", destroy_user_session_path, method: :delete, class: "button"
           - else
@@ -33,10 +32,10 @@ javascript:
   var notification_opened = false;
   var notification_count = 0;
   var notifications = document.getElementById("notifications")
-  var notify = document.getElementById("notify")
   var field = document.getElementById("field")
   var notification_dropdown = document.getElementById("notification-dropdown")
   var local_uuid = ""
+  var last_id
 
   document.addEventListener('DOMContentLoaded', () => {
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -52,22 +51,13 @@ javascript:
     }
   });
 
-  notify.addEventListener("click", (e) => {
-    e.preventDefault()
-    console.log("clicked")
-    fetch("http://localhost:3000/test")
-    console.log("sent")
-  })
-
   notifications.addEventListener("click", (e) => {
     e.preventDefault
     notification_opened = !notification_opened
     if (notification_opened) {
       show_notifications();
-      console.log("mark as read")
     } else {
       hide_notifications();
-      console.log("hide")
     }
   })
 
@@ -84,6 +74,7 @@ javascript:
     }
     notifications.innerHTML = "Notifications"
     notification_count = 0
+    fetch("http://localhost:3000/mark_as_read?id=" + last_id)
   }
 
   function hide_notifications() {
@@ -95,13 +86,15 @@ javascript:
 
   function create_open_notification(msg) {
     old = notification_dropdown.innerHTML 
-    notification_dropdown.innerHTML = "<div class='notification-element' style='display:none;position: relative;padding: 3px'>" + msg.message.test + "</div>" + old
-    notification_count += 1
+    notification_dropdown.innerHTML = "<div class='notification-element'>" + msg.message.text + "</div>" + old
+    fetch("http://localhost:3000/mark_as_read?id=" + msg.message.id)
   }
 
   function create_closed_notification(msg) {
+    last_id = msg.message.id
     old = notification_dropdown.innerHTML 
-    notification.innerHTML = "<div class='notification-element'>" + msg.message.test + "</div>" + old
+    notification_dropdown.innerHTML = "<div class='notification-element' style='display:none;position: relative;'>" + msg.message.text + "</div>" + old
+    notification_count += 1
   }
 
   function set_uuid(json) {
@@ -112,7 +105,6 @@ javascript:
 
   function setup_ws(ws) {
     ws.onopen = function(event) {
-    console.log(event)
       const msg = {
         command: 'subscribe',
         identifier: JSON.stringify({
@@ -120,7 +112,6 @@ javascript:
           channel: 'NotificationsChannel'
         }),
       }; 
-      console.log('WebSocket is connected.');      
       ws.send(JSON.stringify(msg));
     };
 
@@ -130,7 +121,7 @@ javascript:
       if (msg.type === "ping") {
           return;
       }
-      if (!notification_opened) {
+      if (notification_opened) {
         create_open_notification(msg)
       } else {
         create_closed_notification(msg)
@@ -140,6 +131,5 @@ javascript:
       } else {
         notifications.innerHTML = "Notifications"
       }
-      console.log("FROM RAILS: ", msg);
     }
   }

@@ -13,15 +13,16 @@ gem "jsbundling-rails"
 gem "kaminari"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
+gem "rack-cors"
 gem "rails", "~> 7.0.2", ">= 7.0.2.4"
 gem "ransack"
 gem "redis", "~> 4.0"
+gem "rubyzip"
 gem "sidekiq"
 gem "slim"
 gem "sprockets-rails"
 gem "tzinfo-data"
 gem "zipline"
-gem 'rack-cors'
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

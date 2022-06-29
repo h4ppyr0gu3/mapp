@@ -14,6 +14,10 @@ module Downloads
 
       private
 
+      def current_user
+        @current_user ||= User.find(context[:user][:id])
+      end
+
       def find_available_ids
         available_ids = []
         current_user.songs.each do |song|

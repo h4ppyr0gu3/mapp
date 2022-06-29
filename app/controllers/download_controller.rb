@@ -18,8 +18,16 @@ class DownloadController < ApplicationController
   end
 
   def all
-    files = Downloads::UseCases::All.new(params: request.user_agent, context:).call
-    zipline(files, "mapp.zip")
+    job_params = {
+      user_id: current_user.id,
+      user_agent: request.user_agent,
+      context:
+    }.to_json
+    # files = Downloads::UseCases::All.new(params: request.user_agent, context:).call
+    pp job_params
+    ZipJob.perform_async(job_params)
+    redirect_back fallback_location: songs_path, notice: "Zipping files, you will be notified when it is done."
+    # zipline(files, "mapp.zip")
   end
 
   def update

@@ -12,7 +12,7 @@ class SearchController < ApplicationController
     res = Rails.cache.fetch("trending", expires_in: 1.hours) do
       trending
     end
-    ActionCable.server.broadcast 'notifications_channel', "here is a test"
+    ActionCable.server.broadcast "notifications_channel", "here is a test"
     @trending = JSON.parse(res)
   end
 
