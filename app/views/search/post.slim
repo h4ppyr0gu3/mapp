@@ -36,7 +36,7 @@
               = response["title"]
             .column
               .button.play data-id="#{idx}" Watch Video
-              .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" data-image="#{response["videoThumbnails"][4]["url"]}" Download
+                .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" data-image="https://img.youtube.com/vi/#{response["videoId"]}/hqdefault.jpg" Download
 
       .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{response["videoId"]}"
 

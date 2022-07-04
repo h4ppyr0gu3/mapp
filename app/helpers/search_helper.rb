@@ -25,7 +25,7 @@ module SearchHelper
   def strict_params(video_id, response, current_user)
     {
       video_id:,
-      image_url: response["videoThumbnails"][4]["url"],
+      image_url: "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg",
       title: response["title"],
       channel: response["author"],
       user_id: current_user.id

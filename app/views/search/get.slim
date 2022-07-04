@@ -24,7 +24,7 @@
               = trending["title"]
             .column
               .button.play data-id="#{idx}" Watch Video
-              .button.download data-id="#{idx}" data-title="#{trending["title"]}" data-channel="#{trending["author"]}" data-video="#{trending["videoId"]}" data-user="#{current_user.present? ? current_user.id : nil}" data-image="#{trending["videoThumbnails"][4]["url"]}" Download
+              .button.download data-id="#{idx}" data-title="#{trending["title"]}" data-channel="#{trending["author"]}" data-video="#{trending["videoId"]}" data-user="#{current_user.present? ? current_user.id : nil}" data-image="https://img.youtube.com/vi/#{trending["videoId"]}/hqdefault.jpg" Download
       .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{trending["videoId"]}"
 
 = render "layouts/search_js"
