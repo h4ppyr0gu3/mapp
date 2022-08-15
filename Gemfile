@@ -25,6 +25,7 @@ gem "tzinfo-data"
 gem "zipline"
 gem "sass-rails"
 gem "uglifier"
+gem "sitemap_generator"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
