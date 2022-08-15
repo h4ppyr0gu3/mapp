@@ -37,6 +37,9 @@
 
 .tool-versions
 .env
+.env.test
 tags
 # storing tmp files insecurely
 /public/**/*
+
+package-lock.json

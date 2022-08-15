@@ -23,6 +23,8 @@ gem "slim"
 gem "sprockets-rails"
 gem "tzinfo-data"
 gem "zipline"
+gem "sass-rails"
+gem "uglifier"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

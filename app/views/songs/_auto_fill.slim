@@ -7,7 +7,7 @@ javascript:
       e.preventDefault
       id = e.target.dataset.id
       artist_el = artist_func(id)
-      fetch(("http://localhost:3000/auto_fill?artist=" +
+      fetch(("#{ENV['API_URL']}/auto_fill?artist=" +
         encodeURIComponent(artist_func(id).value))).then(data => data.json())
         .then(data => artistDropdown(data, id))
     })
@@ -80,7 +80,7 @@ javascript:
     })
     artist_submit.addEventListener('click', (e) => {
       e.preventDefault
-      fetch(("http://localhost:3000/auto_fill?artist_id=" +
+      fetch(("#{ENV['API_URL']}/auto_fill?artist_id=" +
         artist_id + "&title=" + title_func(id).value))
         .then(data => data.json()).then(data => songDropdown(data, id))
     })
@@ -113,7 +113,7 @@ javascript:
     song_submit.addEventListener('click', (e) => {
       e.preventDefault
       title.value = song_select.options[song_select.options.selectedIndex].text
-      fetch(("http://localhost:3000/auto_fill?song_id=" +
+      fetch(("#{ENV['API_URL']}/auto_fill?song_id=" +
         song_id)).then(data => data.json()).then(data => fillForm(data,id))
       console.log(song_id)
     })

@@ -30,7 +30,6 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -75,7 +74,10 @@ Rails.application.configure do
     'Cache-Control' => "public, max-age=#{2.days.to_i}"
   }
   config.action_mailer.perform_caching = false
-
+  config.assets.compress = true 
+  config.assets.compile = false
+  config.assets.js_compressor  = :uglifier
+  config.serve_static_assets = true
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -89,7 +91,8 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
+  config.hosts << "music.h4ppyr0gu3.one"
+  config.hosts << "h4ppyr0gu3.one"
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")

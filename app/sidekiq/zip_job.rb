@@ -13,7 +13,7 @@ class ZipJob
     create_zip_file(filepaths)
     Notification.create!(
       user_id: current_user.id,
-      text: "Your download is ready, <a href='http://localhost:3000/mapp_#{current_user.email}.zip'>here you go</a>",
+      text: "Your download is ready, <a href='#{ENV['API_URL']}/mapp_#{current_user.email}.zip'>here you go</a>",
       read: false
     )
   end

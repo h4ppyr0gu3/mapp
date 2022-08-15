@@ -7,8 +7,27 @@
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <%# <link rel="stylesheet" href="custom.css"> %>
-    <%= stylesheet_link_tag 'custom.css' %>
-    <%= favicon_link_tag 'fav.ico' %>
+<style>
+#notification-dropdown {
+  max-height: 10rem;
+  overflow: auto;
+  position: absolute;
+  min-width: 10rem;
+  max-width: 30rem;
+  z-index: 3;
+  background: #f9f9f9;
+  border-radius: 0.5rem;
+}
+
+.notification-element {
+  padding: 5px;
+  margin: 5px;
+  border-top: 2px solid #c7c9c7;
+}
+</style>
+<!-- <%# <%= stylesheet_link_tag 'custom.css' %> %> -->
+<!-- <%# <%= favicon_link_tag 'fav.ico' %> %> -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   </head>
 
   <body>

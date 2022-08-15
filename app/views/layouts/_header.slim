@@ -62,7 +62,7 @@ javascript:
   })
 
   if (local_uuid === "") {
-    fetch("http://localhost:3000/get_uuid")
+    fetch("#{ENV['API_URL']}/get_uuid")
       .then(data => data.json())
       .then(data => set_uuid(data))
   }
@@ -74,7 +74,7 @@ javascript:
     }
     notifications.innerHTML = "Notifications"
     notification_count = 0
-    fetch("http://localhost:3000/mark_as_read?id=" + last_id)
+    fetch("#{ENV['API_URL']}/mark_as_read?id=" + last_id)
   }
 
   function hide_notifications() {
@@ -87,7 +87,7 @@ javascript:
   function create_open_notification(msg) {
     old = notification_dropdown.innerHTML 
     notification_dropdown.innerHTML = "<div class='notification-element'>" + msg.message.text + "</div>" + old
-    fetch("http://localhost:3000/mark_as_read?id=" + msg.message.id)
+    fetch("#{ENV['API_URL']}/mark_as_read?id=" + msg.message.id)
   }
 
   function create_closed_notification(msg) {
@@ -99,7 +99,7 @@ javascript:
 
   function set_uuid(json) {
     local_uuid = json.uuid
-    ws = new WebSocket("ws://localhost:3000/cable")
+    ws = new WebSocket("#{ENV['WS_URL']}/cable")
     setup_ws(ws)
   }
 
