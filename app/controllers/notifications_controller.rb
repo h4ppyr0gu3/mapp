@@ -9,15 +9,9 @@ class NotificationsController < ApplicationController
     render json: { uuid: }
   end
 
-  # rubocop:disable Lint/SuppressedException
   def mark_as_read
-    read_at = Notification.find_by(user_id: current_user.id, id: params[:id]).created_at
-    Notification.where(user_id: current_user.id, read: false)
-                .where("created_at <= ?", read_at)
-                .each do |notification|
-                  notification.update(read: true)
-                end
-  rescue NoMethodError
+    current_user.notifications.each do |notification|
+      notification.update(read: true)
+    end
   end
-  # rubocop:enable Lint/SuppressedException
 end

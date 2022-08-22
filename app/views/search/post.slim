@@ -6,23 +6,24 @@
       .control.is-expanded
         = f.text_field :query, class: "input", value: "#{@value}"
       .control
+        = f.submit "Search", class: "button"
+    .field.is-flex.is-justify-content-center
+      .control
         .select
           = select_tag(:date, options_for_select([['date', nil], ["hour"], ["today"], ["week"], ["month"], ["year"]], selected: :option ))
         .select
           = select_tag(:sort_by, options_for_select([["relevance"], ["rating"], ["date"], ["views"]], selected: :option ))
-      .control
-        = f.submit "Search", class: "button"
 
-  .is-centered-middle
+  .is-centered-middle.mt-5
     = form_with(url: search_path) do |f| 
       = f.hidden_field :prev_url, value: "#{@prev_url}"
       = f.hidden_field :page, value: "#{@page}"
       = f.hidden_field :query, value: "#{@value}"
-      .field.is-grouped.is-grouped-center
+      .field.is-flex.is-justify-content-center
         - if @page.to_i > 1
-          .control
+          .control.px-5
             = f.submit "Prev", class: "button"
-        .control
+        .control.px-5
           = f.submit "Next", class: "button"
 
   - @response.each_with_index do |response, idx|
@@ -39,5 +40,17 @@
               .button.download data-id="#{idx}" data-title="#{response["title"]}" data-channel="#{response["author"]}" data-video="#{response["videoId"]}" data-user="#{current_user.id}" data-image="https://img.youtube.com/vi/#{response["videoId"]}/hqdefault.jpg" Download
 
       .card-content.p-0.m-0.video data-id="#{idx}" data-url="https://www.youtube.com/embed/#{response["videoId"]}"
+
+  .is-centered-middle.mt-5
+    = form_with(url: search_path) do |f| 
+      = f.hidden_field :prev_url, value: "#{@prev_url}"
+      = f.hidden_field :page, value: "#{@page}"
+      = f.hidden_field :query, value: "#{@value}"
+      .field.is-flex.is-justify-content-center
+        - if @page.to_i > 1
+          .control.px-5
+            = f.submit "Prev", class: "button"
+        .control.px-5
+          = f.submit "Next", class: "button"
 
 = render 'layouts/search_js'

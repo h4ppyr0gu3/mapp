@@ -37,6 +37,7 @@
 
 .tool-versions
 .env
+.env.development
 .env.test
 tags
 # storing tmp files insecurely

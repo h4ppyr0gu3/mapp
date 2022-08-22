@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   post 'add', to: 'playlist#add'
   get 'profile', to: 'profiles#show'
 
+  # Albums
+  get 'albums', to: 'albums#get'
+
   # Devices
   delete 'wipe_device', to: 'devices#wipe_device'
   delete 'delete_device', to: 'devices#destroy'

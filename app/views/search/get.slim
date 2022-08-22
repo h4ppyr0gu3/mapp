@@ -6,12 +6,13 @@
       .control.is-expanded
         = f.text_field :query, class: "input", placeholder: "enter phrase or url"
       .control
+        = f.submit "Search", class: "button"
+    .field.is-flex.is-justify-content-center
+      .control
         .select
           = select_tag(:date, options_for_select([['date', nil], ["hour"], ["today"], ["week"], ["month"], ["year"]], selected: :option ))
         .select
           = select_tag(:sort_by, options_for_select([["relevance"], ["rating"], ["date"], ["views"]], selected: :option ))
-      .control
-        = f.submit "Search", class: "button"
 
   - @trending.each_with_index do |trending, idx|
     .card.p-2.m-2 style="border-radius: 10px"

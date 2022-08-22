@@ -5,20 +5,35 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
       span aria-hidden="true" 
       span aria-hidden="true" 
       span aria-hidden="true" 
+        - if @notifications_count > 1
+          span.has-background-danger style='position: absolute; top: -10px; right: -10px; \
+          border-radius: 0.5rem; max-height: 20px; font-size: 0.8rem; padding: 3px; \
+          padding-top: 0px; z-index: 20;' #{@notifications_count}
   .navbar-menu#burger
     .navbar-start
       = link_to "All Songs", songs_path, class: "navbar-item has-text-dark"
       = link_to "Search", search_path, class: "navbar-item has-text-dark"
+      = link_to "Album Request", albums_path, class: "navbar-item has-text-dark"
       - if user_signed_in?
         = link_to "My Songs", user_songs_path, class: "navbar-item has-text-dark"
     .navbar-end
       .navbar-item
         .buttons
           - if user_signed_in?
-            #field style="position: relative"
-              button.button.mx-3#notifications
-                | Notifications
-              div#notification-dropdown
+            .dropdown.mx-3#drop-trigger
+              .dropdown-trigger
+                - if @notifications_count > 1
+                  span.has-background-danger style='position: absolute; top: -10px; right: -10px; \
+                  border-radius: 0.5rem; max-height: 20px; font-size: 0.8rem; padding: 3px; \
+                  padding-top: 0px; z-index: 20;' #{@notifications_count}
+                button.button aria-haspopup="true" aria-controls="dropdown-menu"
+                  span Notifications
+              .dropdown-menu#dropdown-menu role="menu" style="max-height: 20rem; overflow: auto;"
+                .dropdown-content.p-2
+                  .dropdown-item.button#mark-read Mark all as read
+                  - @notifications.each do |notification|
+                    a.dropdown-item style="white-space: normal !important;"
+                      = notification.text.html_safe
             = link_to "Profile", profile_path, class: "button is-link"
             = button_to "Log Out", destroy_user_session_path, method: :delete, class: "button"
           - else
@@ -28,14 +43,6 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
 = render "layouts/error_messages"
 
 javascript:
-
-  var notification_opened = false;
-  var notification_count = 0;
-  var notifications = document.getElementById("notifications")
-  var field = document.getElementById("field")
-  var notification_dropdown = document.getElementById("notification-dropdown")
-  var local_uuid = ""
-  var last_id
 
   document.addEventListener('DOMContentLoaded', () => {
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -49,87 +56,14 @@ javascript:
         });
       });
     }
+    var drop_trigger = document.getElementById("drop-trigger");
+    drop_trigger.addEventListener('click', (e) => {
+      drop_trigger.classList.toggle('is-active');
+    });
+    var mark_read = document.getElementById("mark-read");
+    mark_read.addEventListener('click', (e) => {
+      e.preventDefault();
+      fetch("#{ENV['API_URL']}/mark_as_read")
+    });
   });
 
-  notifications.addEventListener("click", (e) => {
-    e.preventDefault
-    notification_opened = !notification_opened
-    if (notification_opened) {
-      show_notifications();
-    } else {
-      hide_notifications();
-    }
-  })
-
-  if (local_uuid === "") {
-    fetch("#{ENV['API_URL']}/get_uuid")
-      .then(data => data.json())
-      .then(data => set_uuid(data))
-  }
-
-  function show_notifications() {
-    var notification_elements = document.getElementsByClassName("notification-element")
-    for ( i=0; i < notification_elements.length; i++ ) {
-      notification_elements[i].style.display = "block"
-    }
-    notifications.innerHTML = "Notifications"
-    notification_count = 0
-    fetch("#{ENV['API_URL']}/mark_as_read?id=" + last_id)
-  }
-
-  function hide_notifications() {
-    var notification_elements = document.getElementsByClassName("notification-element")
-    for ( i=0; i < notification_elements.length; i++ ) {
-      notification_elements[i].style.display = "none"
-    }
-  }
-
-  function create_open_notification(msg) {
-    old = notification_dropdown.innerHTML 
-    notification_dropdown.innerHTML = "<div class='notification-element'>" + msg.message.text + "</div>" + old
-    fetch("#{ENV['API_URL']}/mark_as_read?id=" + msg.message.id)
-  }
-
-  function create_closed_notification(msg) {
-    last_id = msg.message.id
-    old = notification_dropdown.innerHTML 
-    notification_dropdown.innerHTML = "<div class='notification-element' style='display:none;position: relative;'>" + msg.message.text + "</div>" + old
-    notification_count += 1
-  }
-
-  function set_uuid(json) {
-    local_uuid = json.uuid
-    ws = new WebSocket("#{ENV['WS_URL']}/cable")
-    setup_ws(ws)
-  }
-
-  function setup_ws(ws) {
-    ws.onopen = function(event) {
-      const msg = {
-        command: 'subscribe',
-        identifier: JSON.stringify({
-          uuid: local_uuid,
-          channel: 'NotificationsChannel'
-        }),
-      }; 
-      ws.send(JSON.stringify(msg));
-    };
-
-    ws.onmessage = (socketMessage) => {
-      const response = socketMessage.data;
-      const msg = JSON.parse(response);
-      if (msg.type === "ping") {
-          return;
-      }
-      if (notification_opened) {
-        create_open_notification(msg)
-      } else {
-        create_closed_notification(msg)
-      }
-      if (notification_count > 0) {
-        notifications.innerHTML = "Notifications<span class='has-background-danger' style='position: absolute; top: -10px; right: -10px; border-radius: 0.5rem; max-height: 20px; font-size: 0.8rem; padding: 3px; padding-top: 0px'>" + notification_count + "</span>"
-      } else {
-        notifications.innerHTML = "Notifications"
-      }
-    }
-  }
