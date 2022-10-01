@@ -2,7 +2,10 @@ FROM ruby:3.1.2-bullseye
 
 RUN apt-get update -qq && \
  apt-get install -y build-essential openssl ffmpeg \
- libssl-dev less vim libsasl2-dev git youtube-dl imagemagick
+ libssl-dev less vim libsasl2-dev git imagemagick curl
+
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+RUN chmod a+rx /usr/local/bin/yt-dlp
 
 ENV WORK_ROOT /root
 ENV RAILS_ROOT $WORK_ROOT/app/
@@ -21,4 +24,3 @@ ADD ./ $RAILS_ROOT
 RUN bundle install
 
 EXPOSE 3000
-
