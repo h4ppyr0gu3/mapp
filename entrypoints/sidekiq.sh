@@ -1,4 +1,6 @@
 #!/bin/bash
 
-bundle exec sidekiq -e docker
+source .env
+
+bundle exec sidekiq -e production
 

@@ -1,46 +1,28 @@
-# PostgreSQL. Versions 9.3 and up are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On macOS with Homebrew:
-#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
-# On macOS with MacPorts:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem "pg"
-#
-default: &default
-  adapter: postgresql
+production:
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV["POSTGRES_HOST"] %>
-  port: 5432
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  username: <%= ENV["POSTGRES_USERNAME"] %>
-  database: <%= ENV["POSTGRES_DATABASE"] %>
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  url: <%= ENV.fetch("POSTGRES_PROD_URL") %>
 
 development:
-  <<: *default
+  encoding: unicode
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV.fetch("POSTGRES_DEV_URL") %>
 
 test:
-  <<: *default
-
-production:
-  <<: *default
-  database: production
+  encoding: unicode
+  adapter: postgresql
+  password: postgres
+  username: postgres
+  host: localhost
+  port: 5432
 
 docker: 
-  <<: *default
+  encoding: unicode
+  adapter: postgresql
   database: mapp_docker
-  host: database
+  host: localhost
   port: 5432
   username: postgres
   password: postgres
-

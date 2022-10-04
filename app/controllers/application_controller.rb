@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
       @notifications_count = current_user.notifications.where(read: false).count
     else
       @notifications = []
+      @notifications_count = 0
     end
   end
 
