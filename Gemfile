@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
+gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem "devise"
@@ -13,20 +14,20 @@ gem "jsbundling-rails"
 gem "kaminari"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
+gem "pundit", "~> 2.2"
 gem "rack-cors"
 gem "rails", "~> 7.0.2", ">= 7.0.2.4"
 gem "ransack"
 gem "redis", "~> 4.0"
 gem "rubyzip"
+gem "sass-rails"
 gem "sidekiq"
+gem "sitemap_generator"
 gem "slim"
 gem "sprockets-rails"
 gem "tzinfo-data"
-gem "zipline"
-gem "sass-rails"
 gem "uglifier"
-gem "sitemap_generator"
-gem "aws-sdk-s3", require: false
+gem "zipline"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
