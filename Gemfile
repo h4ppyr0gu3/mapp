@@ -43,3 +43,5 @@ group :development do
   gem "rubocop"
   gem "web-console"
 end
+
+gem "prometheus_exporter", "~> 2.0"

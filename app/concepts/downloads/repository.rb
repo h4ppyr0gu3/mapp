@@ -4,7 +4,7 @@ module Downloads
   class Repository
     class << self
       def update_metadata(song)
-        uri = URI("#{ENV.fetch('IDEDIT_URL', nil)}/edit")
+        uri = URI("#{ENV.fetch('IDEDIT_URL', "http://localhost:2000"  )}/edit")
         id_params = set_params(song)
         return if id_params.nil?
 
