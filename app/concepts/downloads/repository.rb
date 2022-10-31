@@ -4,20 +4,43 @@ module Downloads
   class Repository
     class << self
       def update_metadata(song)
-        uri = URI("#{ENV.fetch('IDEDIT_URL', "http://localhost:2000"  )}/edit")
-        id_params = set_params(song)
-        return if id_params.nil?
-
-        res = Net::HTTP.post_form(uri, id_params)
-        return unless res.instance_of?(Net::HTTPOK)
-
-        body = res.body.to_s.force_encoding("ASCII-8BIT")
-        write_and_update(song, body) unless res.body.nil?
+        song_file_path = Rails.root.join("tmp", "downloads", "#{song.video_id}.mp3").to_s
+        new_song_file_path = Rails.root.join("tmp", "downloads", "new_#{song.video_id}.mp3").to_s
+        image_file_path = Rails.root.join("tmp", "downloads", "#{song.video_id}.jpg").to_s
+        File.binwrite(song_file_path, song.mp3.download)
+        File.binwrite(image_file_path, song.image.download)
+        system_command = "ffmpeg -i #{song_file_path} -i #{image_file_path} -map 0:a -map 1:0 -id3v2_version 4 " +
+                         create_ffmpeg_metadata_string(song) + " " + new_song_file_path
+        system(system_command)
+        song.mp3.purge if song.mp3.attached?
+        song.mp3.attach(
+          io: File.open(new_song_file_path),
+          filename: "#{song.title}.mp3"
+        )
+        system("rm #{new_song_file_path} #{song_file_path} #{image_file_path}") if song.mp3.attached?
+        song.update(updated: 2)
       end
+
+      # rubocop:disable Metrics:AbcComplexity
+      def create_ffmpeg_metadata_string(song)
+        # metadata << "-metadata title='#{song.title}'" if song.title != nil
+        # metadata << "-metadata album_artist='London Symphony'"
+        # metadata << "-metadata track='#{song.track_no}'"
+        metadata = []
+        metadata << "-metadata title='#{song.title}'" unless song.title.nil?
+        metadata << "-metadata artist='#{song.artist}'" unless song.artist.nil?
+        metadata << "-metadata album='#{song.album}'" unless song.album.nil?
+        metadata << "-metadata date='#{song.year}'" unless song.year.nil?
+        metadata << "-metadata genre='#{song.genre}'" unless song.genre.nil?
+        metadata.join(" ")
+      end
+      # rubocop:enable Metrics:AbcComplexity
+
+      def write_to_local_file_system(song); end
 
       def write_and_update(song, body)
         song.mp3.purge
-        path = Rails.root.join("tmp", "downloads", "idedit", "#{song.title}.mp3")
+        path = Rails.root.join("tmp", "downloads", "idedit", "#{song.video_id}.mp3")
         File.binwrite(path, body)
         song.mp3.attach(
           io: File.open(path),
