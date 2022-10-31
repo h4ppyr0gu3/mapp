@@ -4,9 +4,8 @@ module Downloads
   module UseCases
     class Update < ::UseCase::Base
       def call
-        if song.nil? || !song.mp3.attached? 
-          return
-        end
+        return if song.nil? || !song.mp3.attached?
+
         # unless song.mp3.attached?
         # define in model
         # song.redownload

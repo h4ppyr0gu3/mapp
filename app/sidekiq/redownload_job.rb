@@ -18,7 +18,7 @@ class RedownloadJob
 
   private
 
-  def attach_items(params, song)
+  def attach_items(_params, song)
     attach_image(song, song.image_url, song.video_id)
     attach_mp3(song, song.video_id)
   end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'securerandom'
+
+require "securerandom"
 
 class ZipJob
   include Sidekiq::Job
@@ -19,7 +20,7 @@ class ZipJob
     create_zip_file(filepaths, random_id)
     Notification.create!(
       user_id: current_user.id,
-      text: "Your download is ready, <a href='#{ENV['API_URL']}/mapp_#{random_id}.zip'>here you go</a>",
+      text: "Your download is ready, <a href='#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip'>here you go</a>",
       read: false
     )
   end
@@ -49,14 +50,12 @@ class ZipJob
     FileUtils.mkdir_p(temp_folder) unless Dir.exist?(temp_folder)
 
     files.map do |song|
-      begin
-        filename = song.last.to_s
-        filepath = File.join temp_folder, filename
-        File.binwrite(filepath, song.first.download)
-        filepath
-      rescue ActiveStorage::FileNotFoundError
-        Rails.logger.info("Failed to find song: #{song}")
-      end
+      filename = song.last.to_s
+      filepath = File.join temp_folder, filename
+      File.binwrite(filepath, song.first.download)
+      filepath
+    rescue ActiveStorage::FileNotFoundError
+      Rails.logger.info("Failed to find song: #{song}")
     end
   end
 
@@ -70,6 +69,7 @@ class ZipJob
       ::Zip::File.open(zip_file, create: true) do |zipfile|
         filepaths.each do |file|
           next if file.is_a? Integer
+
           begin
             filename = File.basename file
             zipfile.add(filename, file)
@@ -80,9 +80,10 @@ class ZipJob
       end
       zip_file
     ensure
-      filepaths.each do |filepath| 
+      filepaths.each do |filepath|
         next if filepath.is_a? Integer
-        FileUtils.rm(filepath) 
+
+        FileUtils.rm(filepath)
       end
     end
   end

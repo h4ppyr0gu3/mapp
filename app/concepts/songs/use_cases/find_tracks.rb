@@ -60,10 +60,9 @@ module Songs
           return first_request["recordings"] if first_request["recording-count"] < 100
 
           all_tracks = []
-          all_tracks = Rails.cache.fetch("artists_#{params[:artist_id]}", expires_in: 12.hours) do
+          Rails.cache.fetch("artists_#{params[:artist_id]}", expires_in: 12.hours) do
             get_all_tracks(params, first_request)
           end
-          all_tracks
         end
 
         def get_all_tracks(params, first_request)
@@ -73,7 +72,7 @@ module Songs
         end
 
         def cached_tracks(params)
-          Rails.cache.fetch("artists_#{params[:artist_id]}", expires_in: 12.hours) do 
+          Rails.cache.fetch("artists_#{params[:artist_id]}", expires_in: 12.hours) do
             get_tracks(params)
           end
         end

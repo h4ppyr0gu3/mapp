@@ -10,7 +10,7 @@ class DownloadController < ApplicationController
   def redownload_all
     Song.all.pluck(:video_id).map do |video_id|
       song_params = {
-        video_id: video_id,
+        video_id:,
         image_url: "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg"
       }.to_json
       RedownloadJob.perform_async(song_params)
