@@ -2,13 +2,14 @@ production:
   encoding: unicode
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
-  url: <%= ENV.fetch("POSTGRES_PROD_URL") { "postgres://postgres:postgres@localhost:5432/mapp_dev" } %>
+  # url: <%= ENV.fetch("POSTGRES_PROD_URL") { "postgres://postgres:postgres@localhost:5432/mapp_dev" } %>
+  url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
 
 development:
   encoding: unicode
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://postgres:postgres@localhost:5432/mapp_dev" } %>
+  url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
 
 test:
   encoding: unicode

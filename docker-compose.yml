@@ -8,6 +8,7 @@ services:
       - redis
       - idedit
       - sidekiq
+      - prometheus_exporter
     ports: 
       - 3000:3000
     volumes:
@@ -19,7 +20,7 @@ services:
       - REDIS_URL=redis
       - REDIS_PORT=6379
       - POSTGRES_PASSWORD
-      - RAILS_MASTER_KEY=2f28c42b30b5613178b01aee71776139
+      - RAILS_MASTER_KEY=0e3799f899f7863b06bdad95f0f70a5e
     entrypoint: ./entrypoints/app.sh
 
   redis:
@@ -45,7 +46,7 @@ services:
       - POSTGRES_PASSWORD
       - IDEDIT_URL="http://idedit:2000"
       - REDIS_PORT=6379
-      - RAILS_MASTER_KEY=2f28c42b30b5613178b01aee71776139
+      - RAILS_MASTER_KEY=0e3799f899f7863b06bdad95f0f70a5e
     depends_on:     
       - database
       - redis
@@ -53,6 +54,26 @@ services:
       - ./:/root/app/
       - gemdata:/bundle
     entrypoint: ./entrypoints/sidekiq.sh
+
+  prometheus_exporter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      - REDIS_URL=redis
+      - POSTGRES_PASSWORD
+      - IDEDIT_URL="http://idedit:2000"
+      - REDIS_PORT=6379
+      - RAILS_MASTER_KEY=0e3799f899f7863b06bdad95f0f70a5e
+    depends_on:     
+      - database
+      - redis
+    volumes:
+      - ./:/root/app/
+      - gemdata:/bundle
+    ports: 
+      - 9394:9394
+    entrypoint: ./entrypoints/prometheus_exporter.sh
 
 volumes:
   pgdata:

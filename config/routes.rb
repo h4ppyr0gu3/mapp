@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'external_download', to: 'download#external'
   get 'update_download', to: 'download#update'
   get 'download_all', to: 'download#all'
+  get 'redownload_all', to: 'download#redownload_all'
   get 'retry_download', to: 'download#retry'
 
   # Notifications

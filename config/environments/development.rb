@@ -38,7 +38,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :minio
+  config.active_storage.service = :local
 
   config.hosts << "h4pyr0gu3.one"
   config.hosts << "music.h4ppyr0gu3.one"
