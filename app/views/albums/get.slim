@@ -1,2 +1,10 @@
 .container
   .is-size-3 Album requests
+  div id="multi-step-form" 
+    form class="p-10"
+      div v-for="(fieldKeys, step) in steps"
+        div 
+          | {{step}
+
+javascript: 
+

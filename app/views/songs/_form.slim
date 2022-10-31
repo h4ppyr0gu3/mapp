@@ -1,8 +1,7 @@
 .card.p-4.m-3.my-5
   .columns
     .column.is-3
-      - if song.image.attached?
-        = image_tag(song.image)
+      img src="https://img.youtube.com/vi/#{song.video_id}/hqdefault.jpg"
       .field.is-grouped-centered.is-grouped
         .control
           button.button.auto-fill data-id="#{song.id}" Auto fill

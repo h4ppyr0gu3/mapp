@@ -4,6 +4,7 @@
       .is-size-1 My Songs
     .column.is-2.is-flex style="align-items:center;"
       = link_to "Download All", download_all_path, class: "button is-success"
+      = link_to "ReDownload All", redownload_all_path, class: "button is-info ml-2"
   .columns
     .column
       = search_form_for @q, url: user_songs_path do |f|

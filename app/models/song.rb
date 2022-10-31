@@ -10,6 +10,8 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :video_id, presence: true, uniqueness: true
 
+  enum updated: { vanilla: 0, by_the_user: 1, written: 2 }
+
   def redownload
     # redownload the file then attach the mp3 file
   end

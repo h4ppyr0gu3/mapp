@@ -1,0 +1,5360 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.5
+-- Dumped by pg_dump version 14.5
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: active_storage_attachments; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.active_storage_attachments (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    record_type character varying NOT NULL,
+    record_id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_attachments OWNER TO david;
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.active_storage_attachments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_attachments_id_seq OWNER TO david;
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.active_storage_attachments_id_seq OWNED BY public.active_storage_attachments.id;
+
+
+--
+-- Name: active_storage_blobs; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.active_storage_blobs (
+    id bigint NOT NULL,
+    key character varying NOT NULL,
+    filename character varying NOT NULL,
+    content_type character varying,
+    metadata text,
+    service_name character varying NOT NULL,
+    byte_size bigint NOT NULL,
+    checksum character varying,
+    created_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_blobs OWNER TO david;
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.active_storage_blobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_blobs_id_seq OWNER TO david;
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.active_storage_blobs_id_seq OWNED BY public.active_storage_blobs.id;
+
+
+--
+-- Name: active_storage_variant_records; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.active_storage_variant_records (
+    id bigint NOT NULL,
+    blob_id bigint NOT NULL,
+    variation_digest character varying NOT NULL
+);
+
+
+ALTER TABLE public.active_storage_variant_records OWNER TO david;
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.active_storage_variant_records_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_storage_variant_records_id_seq OWNER TO david;
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.active_storage_variant_records_id_seq OWNED BY public.active_storage_variant_records.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ar_internal_metadata OWNER TO david;
+
+--
+-- Name: device_songs; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.device_songs (
+    id bigint NOT NULL,
+    song_id bigint,
+    device_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.device_songs OWNER TO david;
+
+--
+-- Name: device_songs_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.device_songs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.device_songs_id_seq OWNER TO david;
+
+--
+-- Name: device_songs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.device_songs_id_seq OWNED BY public.device_songs.id;
+
+
+--
+-- Name: devices; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.devices (
+    id bigint NOT NULL,
+    device_name character varying,
+    user_agent character varying,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.devices OWNER TO david;
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.devices_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.devices_id_seq OWNER TO david;
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.devices_id_seq OWNED BY public.devices.id;
+
+
+--
+-- Name: notifications; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.notifications (
+    id bigint NOT NULL,
+    user_id bigint,
+    text character varying,
+    read boolean DEFAULT false NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.notifications OWNER TO david;
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notifications_id_seq OWNER TO david;
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
+
+
+--
+-- Name: profiles; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.profiles (
+    id bigint NOT NULL,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.profiles OWNER TO david;
+
+--
+-- Name: profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.profiles_id_seq OWNER TO david;
+
+--
+-- Name: profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.profiles_id_seq OWNED BY public.profiles.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO david;
+
+--
+-- Name: songs; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.songs (
+    id bigint NOT NULL,
+    title character varying,
+    artist character varying,
+    year character varying,
+    album character varying,
+    genre character varying,
+    video_id character varying,
+    updated integer DEFAULT 0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    image_url character varying
+);
+
+
+ALTER TABLE public.songs OWNER TO david;
+
+--
+-- Name: songs_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.songs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.songs_id_seq OWNER TO david;
+
+--
+-- Name: songs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.songs_id_seq OWNED BY public.songs.id;
+
+
+--
+-- Name: user_songs; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.user_songs (
+    id bigint NOT NULL,
+    song_id integer,
+    user_id integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_songs OWNER TO david;
+
+--
+-- Name: user_songs_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.user_songs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_songs_id_seq OWNER TO david;
+
+--
+-- Name: user_songs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.user_songs_id_seq OWNED BY public.user_songs.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: david
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp(6) without time zone,
+    remember_created_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    uuid character varying
+);
+
+
+ALTER TABLE public.users OWNER TO david;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: david
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO david;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: david
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_attachments ALTER COLUMN id SET DEFAULT nextval('public.active_storage_attachments_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_blobs id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_blobs ALTER COLUMN id SET DEFAULT nextval('public.active_storage_blobs_id_seq'::regclass);
+
+
+--
+-- Name: active_storage_variant_records id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records ALTER COLUMN id SET DEFAULT nextval('public.active_storage_variant_records_id_seq'::regclass);
+
+
+--
+-- Name: device_songs id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.device_songs ALTER COLUMN id SET DEFAULT nextval('public.device_songs_id_seq'::regclass);
+
+
+--
+-- Name: devices id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.devices ALTER COLUMN id SET DEFAULT nextval('public.devices_id_seq'::regclass);
+
+
+--
+-- Name: notifications id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('public.notifications_id_seq'::regclass);
+
+
+--
+-- Name: profiles id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.profiles_id_seq'::regclass);
+
+
+--
+-- Name: songs id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.songs ALTER COLUMN id SET DEFAULT nextval('public.songs_id_seq'::regclass);
+
+
+--
+-- Name: user_songs id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.user_songs ALTER COLUMN id SET DEFAULT nextval('public.user_songs_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: active_storage_attachments; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.active_storage_attachments (id, name, record_type, record_id, blob_id, created_at) FROM stdin;
+1	image	Song	1	1	2022-08-15 18:20:58.120639
+382	mp3	Song	109	382	2022-08-15 19:48:20.492855
+3	image	Song	2	3	2022-08-15 18:21:10.766699
+383	mp3	Song	110	383	2022-08-15 19:48:21.584095
+5	image	Song	3	5	2022-08-15 18:21:25.866845
+384	mp3	Song	111	384	2022-08-15 19:48:23.116883
+7	image	Song	4	7	2022-08-15 18:21:42.898286
+385	mp3	Song	112	385	2022-08-15 19:48:24.707928
+9	image	Song	5	9	2022-08-15 18:21:44.008626
+386	mp3	Song	113	386	2022-08-15 19:48:26.306041
+11	image	Song	6	11	2022-08-15 18:21:46.54372
+387	mp3	Song	114	387	2022-08-15 19:48:27.843518
+13	image	Song	7	13	2022-08-15 18:21:48.985074
+388	mp3	Song	115	388	2022-08-15 19:48:29.252014
+15	image	Song	8	15	2022-08-15 18:21:49.992973
+389	mp3	Song	116	389	2022-08-15 19:48:30.942766
+17	image	Song	9	17	2022-08-15 18:21:50.18702
+390	mp3	Song	117	390	2022-08-15 19:48:32.684969
+19	image	Song	10	19	2022-08-15 18:21:51.763161
+391	mp3	Song	118	391	2022-08-15 19:48:34.297819
+21	image	Song	11	21	2022-08-15 18:21:53.448057
+392	mp3	Song	119	392	2022-08-15 19:48:35.756933
+23	image	Song	12	23	2022-08-15 18:21:55.69072
+393	mp3	Song	120	393	2022-08-15 19:48:36.856495
+25	image	Song	13	25	2022-08-15 18:21:57.502232
+394	mp3	Song	121	394	2022-08-15 19:48:37.995029
+27	image	Song	14	27	2022-08-15 18:22:00.976935
+395	mp3	Song	122	395	2022-08-15 19:48:39.588813
+29	image	Song	15	29	2022-08-15 18:22:07.193643
+396	mp3	Song	123	396	2022-08-15 19:48:41.289265
+31	image	Song	16	31	2022-08-15 18:22:08.674529
+397	mp3	Song	124	397	2022-08-15 19:48:42.785047
+33	image	Song	17	33	2022-08-15 18:22:12.197125
+398	mp3	Song	125	398	2022-08-15 19:48:43.617124
+35	image	Song	18	35	2022-08-15 18:22:16.56441
+399	mp3	Song	126	399	2022-08-15 19:48:44.88745
+37	image	Song	19	37	2022-08-15 18:22:20.344775
+400	mp3	Song	127	400	2022-08-15 19:48:46.352
+39	image	Song	20	39	2022-08-15 18:22:24.389869
+401	mp3	Song	128	401	2022-08-15 19:48:48.188442
+41	image	Song	21	41	2022-08-15 18:22:27.117718
+402	mp3	Song	131	402	2022-08-15 19:48:49.577911
+43	image	Song	22	43	2022-08-15 18:22:36.276519
+411	image	Song	136	411	2022-08-16 07:22:46.171362
+45	image	Song	23	45	2022-08-15 18:22:59.142157
+927	mp3	Song	219	927	2022-08-16 15:44:46.005488
+47	image	Song	24	47	2022-08-15 18:26:07.513035
+415	image	Song	138	415	2022-08-16 07:23:21.1536
+49	image	Song	25	49	2022-08-15 18:26:07.822515
+928	mp3	Song	287	928	2022-08-16 15:44:47.869554
+51	image	Song	26	51	2022-08-15 18:26:09.16594
+419	image	Song	140	419	2022-08-16 07:24:29.483541
+53	image	Song	27	53	2022-08-15 18:26:11.308436
+929	mp3	Song	289	929	2022-08-16 15:44:49.430036
+55	image	Song	29	55	2022-08-15 18:26:15.493396
+56	image	Song	28	56	2022-08-15 18:26:15.518083
+497	image	Song	179	497	2022-08-16 07:43:25.636769
+930	mp3	Song	291	930	2022-08-16 15:44:51.147831
+59	image	Song	30	59	2022-08-15 18:26:16.829585
+501	image	Song	181	501	2022-08-16 07:43:28.628939
+61	image	Song	31	61	2022-08-15 18:26:18.423791
+931	mp3	Song	293	931	2022-08-16 15:44:52.796478
+505	image	Song	183	505	2022-08-16 07:43:31.493324
+64	image	Song	32	64	2022-08-15 18:26:19.925291
+932	mp3	Song	295	932	2022-08-16 15:44:54.107026
+66	image	Song	33	66	2022-08-15 18:26:24.339318
+509	image	Song	185	509	2022-08-16 07:43:35.515769
+68	image	Song	34	68	2022-08-15 18:26:25.741172
+933	mp3	Song	297	933	2022-08-16 15:44:55.616813
+70	image	Song	35	70	2022-08-15 18:26:30.507185
+513	image	Song	187	513	2022-08-16 07:43:41.280459
+72	image	Song	36	72	2022-08-15 18:26:37.643896
+934	mp3	Song	299	934	2022-08-16 15:44:56.908014
+74	image	Song	37	74	2022-08-15 18:26:41.157232
+517	image	Song	189	517	2022-08-16 07:43:47.077523
+76	image	Song	38	76	2022-08-15 18:26:45.203203
+935	mp3	Song	265	935	2022-08-16 15:44:58.213652
+78	image	Song	39	78	2022-08-15 18:26:51.187712
+523	image	Song	192	523	2022-08-16 07:43:51.667936
+80	image	Song	40	80	2022-08-15 18:26:52.988704
+936	mp3	Song	267	936	2022-08-16 15:44:59.430717
+82	image	Song	41	82	2022-08-15 18:26:55.994148
+527	image	Song	194	527	2022-08-16 07:44:00.159902
+84	image	Song	42	84	2022-08-15 18:27:02.940738
+937	mp3	Song	269	937	2022-08-16 15:45:00.375169
+86	image	Song	43	86	2022-08-15 18:27:03.59006
+531	image	Song	196	531	2022-08-16 07:44:06.7272
+88	image	Song	44	88	2022-08-15 18:27:06.542053
+938	mp3	Song	271	938	2022-08-16 15:45:01.407625
+90	image	Song	45	90	2022-08-15 18:27:32.447925
+535	image	Song	198	535	2022-08-16 07:44:46.500612
+92	image	Song	46	92	2022-08-15 18:27:41.044742
+939	mp3	Song	273	939	2022-08-16 15:45:02.528374
+94	image	Song	47	94	2022-08-15 18:27:59.602265
+940	mp3	Song	275	940	2022-08-16 15:45:03.481796
+96	image	Song	48	96	2022-08-15 18:28:30.346308
+941	mp3	Song	277	941	2022-08-16 15:45:04.509398
+98	image	Song	49	98	2022-08-15 18:28:37.116027
+942	mp3	Song	279	942	2022-08-16 15:45:05.85259
+100	image	Song	50	100	2022-08-15 18:28:48.241255
+542	mp3	Song	146	542	2022-08-16 09:17:06.452296
+102	image	Song	51	102	2022-08-15 18:28:59.043395
+104	image	Song	52	104	2022-08-15 18:29:49.314732
+544	mp3	Song	139	544	2022-08-16 09:17:09.479102
+106	image	Song	53	106	2022-08-15 18:29:50.537511
+108	image	Song	54	108	2022-08-15 18:29:52.682227
+546	mp3	Song	140	546	2022-08-16 09:17:12.093252
+403	image	Song	132	403	2022-08-16 06:54:10.671444
+112	image	Song	56	112	2022-08-15 18:29:57.021498
+943	mp3	Song	283	943	2022-08-16 15:45:32.058353
+116	image	Song	58	116	2022-08-15 18:30:07.583137
+413	image	Song	137	413	2022-08-16 07:22:59.415455
+120	image	Song	60	120	2022-08-15 18:30:15.351049
+944	mp3	Song	285	944	2022-08-16 15:45:33.439862
+417	image	Song	139	417	2022-08-16 07:24:10.065036
+945	mp3	Song	288	945	2022-08-16 15:45:35.291063
+499	image	Song	180	499	2022-08-16 07:43:26.299992
+946	mp3	Song	290	946	2022-08-16 15:45:36.652798
+503	image	Song	182	503	2022-08-16 07:43:31.441602
+947	mp3	Song	292	947	2022-08-16 15:45:39.033051
+547	mp3	Song	147	547	2022-08-16 09:17:13.534962
+948	mp3	Song	294	948	2022-08-16 15:45:41.093437
+549	mp3	Song	141	549	2022-08-16 09:17:16.463289
+550	mp3	Song	133	550	2022-08-16 09:17:17.561271
+949	mp3	Song	298	949	2022-08-16 15:45:42.613584
+552	mp3	Song	142	552	2022-08-16 09:17:20.245524
+553	mp3	Song	148	553	2022-08-16 09:17:21.613185
+554	mp3	Song	143	554	2022-08-16 09:17:22.909516
+1037	image	Song	338	1037	2022-08-16 16:49:08.089413
+1933	mp3	Song	526	1933	2022-09-20 19:16:40.490641
+557	mp3	Song	145	557	2022-08-16 09:17:27.540574
+558	mp3	Song	149	558	2022-08-16 09:17:29.451998
+1041	image	Song	340	1041	2022-08-16 16:49:10.939818
+1934	mp3	Song	528	1934	2022-09-20 19:16:42.002274
+1045	image	Song	342	1045	2022-08-16 16:49:38.107184
+1935	mp3	Song	570	1935	2022-09-20 19:16:43.423991
+563	mp3	Song	155	563	2022-08-16 09:17:35.562204
+1166	image	Song	404	1166	2022-08-16 19:03:36.097794
+1936	mp3	Song	572	1936	2022-09-20 19:16:44.104796
+1198	image	Song	420	1198	2022-08-18 12:07:21.080782
+1937	mp3	Song	463	1937	2022-09-20 19:16:45.231589
+1202	image	Song	422	1202	2022-08-18 12:08:08.836867
+569	mp3	Song	163	569	2022-08-16 09:17:42.641637
+1938	mp3	Song	605	1938	2022-09-20 19:16:47.225217
+1206	image	Song	424	1206	2022-08-18 12:08:11.548072
+1939	mp3	Song	606	1939	2022-09-20 19:16:48.200549
+573	mp3	Song	136	573	2022-08-16 09:17:47.937009
+1210	image	Song	426	1210	2022-08-18 12:08:14.222988
+1940	mp3	Song	607	1940	2022-09-20 19:16:49.812037
+1214	image	Song	428	1214	2022-08-18 12:08:18.875682
+1941	mp3	Song	608	1941	2022-09-20 19:16:51.061546
+1218	image	Song	430	1218	2022-08-18 12:08:23.329247
+1942	mp3	Song	449	1942	2022-09-20 19:16:52.601704
+1222	image	Song	432	1222	2022-08-18 12:08:26.63498
+1943	mp3	Song	568	1943	2022-09-20 19:16:53.627541
+1224	image	Song	433	1224	2022-08-18 12:08:26.843999
+1944	mp3	Song	592	1944	2022-09-20 19:16:54.855773
+1228	image	Song	435	1228	2022-08-18 12:08:31.198386
+1945	mp3	Song	593	1945	2022-09-20 19:16:55.984511
+1232	image	Song	437	1232	2022-08-18 12:08:35.346141
+1946	mp3	Song	594	1946	2022-09-20 19:16:57.067137
+1236	image	Song	439	1236	2022-08-18 12:08:46.912637
+1947	mp3	Song	595	1947	2022-09-20 19:16:58.545031
+1240	image	Song	441	1240	2022-08-18 12:08:54.151926
+1948	mp3	Song	596	1948	2022-09-20 19:16:59.90523
+1244	image	Song	443	1244	2022-08-18 12:08:56.549021
+1949	mp3	Song	610	1949	2022-09-20 19:17:01.342113
+1248	image	Song	445	1248	2022-08-18 12:09:11.186842
+1950	mp3	Song	609	1950	2022-09-20 19:17:02.382501
+1252	image	Song	447	1252	2022-08-18 12:09:43.244677
+1951	mp3	Song	598	1951	2022-09-20 19:17:03.402789
+1282	image	Song	462	1282	2022-08-19 08:19:51.378947
+1952	mp3	Song	599	1952	2022-09-20 19:17:05.437602
+1286	image	Song	464	1286	2022-08-19 08:19:56.381722
+1953	mp3	Song	600	1953	2022-09-20 19:17:07.259769
+1290	image	Song	466	1290	2022-08-19 08:20:00.578966
+607	image	Song	200	607	2022-08-16 10:37:25.463601
+1954	mp3	Song	601	1954	2022-09-20 19:17:08.611209
+611	image	Song	202	611	2022-08-16 14:16:53.037376
+1294	image	Song	468	1294	2022-08-19 08:20:15.421354
+615	image	Song	204	615	2022-08-16 14:16:59.07373
+1955	mp3	Song	602	1955	2022-09-20 19:17:09.690473
+619	image	Song	206	619	2022-08-16 14:17:12.777464
+1298	image	Song	470	1298	2022-08-19 08:20:25.074906
+623	image	Song	208	623	2022-08-16 14:17:16.630506
+1956	mp3	Song	603	1956	2022-09-20 19:17:11.554699
+627	image	Song	210	627	2022-08-16 14:17:36.929685
+1302	image	Song	472	1302	2022-08-19 08:20:29.328186
+631	image	Song	212	631	2022-08-16 14:17:40.385558
+1957	mp3	Song	604	1957	2022-09-20 19:17:13.624921
+635	image	Song	214	635	2022-08-16 14:17:46.691909
+1344	image	Song	493	1344	2022-08-19 10:06:47.323202
+639	image	Song	216	639	2022-08-16 14:17:51.305732
+1958	mp3	Song	611	1958	2022-09-20 19:17:15.45712
+643	image	Song	218	643	2022-08-16 14:18:09.146515
+1959	mp3	Song	612	1959	2022-09-20 19:17:17.007999
+647	image	Song	220	647	2022-08-16 14:18:11.757195
+1348	image	Song	495	1348	2022-08-19 10:07:06.739069
+651	image	Song	222	651	2022-08-16 14:18:16.18242
+1960	mp3	Song	613	1960	2022-09-20 19:17:18.143779
+655	image	Song	224	655	2022-08-16 14:18:18.592632
+1352	image	Song	497	1352	2022-08-19 10:07:13.391127
+659	image	Song	226	659	2022-08-16 14:18:31.297727
+1961	mp3	Song	617	1961	2022-09-20 19:17:19.35108
+663	image	Song	228	663	2022-08-16 14:18:36.84751
+1356	image	Song	499	1356	2022-08-19 10:07:18.845449
+667	image	Song	230	667	2022-08-16 14:18:42.62681
+671	image	Song	232	671	2022-08-16 14:18:46.25072
+1360	image	Song	501	1360	2022-08-19 10:07:23.376234
+675	image	Song	234	675	2022-08-16 14:18:52.441759
+679	image	Song	236	679	2022-08-16 14:19:09.195102
+681	image	Song	237	681	2022-08-16 14:19:10.135947
+683	image	Song	238	683	2022-08-16 14:19:12.71462
+685	image	Song	239	685	2022-08-16 14:19:17.43227
+110	image	Song	55	110	2022-08-15 18:29:54.139563
+405	image	Song	133	405	2022-08-16 07:13:00.641814
+114	image	Song	57	114	2022-08-15 18:29:57.489192
+950	mp3	Song	300	950	2022-08-16 15:45:44.327186
+118	image	Song	59	118	2022-08-15 18:30:09.221056
+409	image	Song	135	409	2022-08-16 07:13:58.357339
+951	mp3	Song	216	951	2022-08-16 15:45:45.701793
+123	image	Song	61	123	2022-08-15 18:30:22.098706
+421	image	Song	141	421	2022-08-16 07:36:48.657656
+125	image	Song	62	125	2022-08-15 18:30:25.547813
+952	mp3	Song	266	952	2022-08-16 15:45:46.562837
+127	image	Song	63	127	2022-08-15 18:30:36.771766
+425	image	Song	143	425	2022-08-16 07:37:02.44282
+953	mp3	Song	268	953	2022-08-16 15:45:47.554223
+431	image	Song	146	431	2022-08-16 07:37:12.362595
+131	image	Song	64	131	2022-08-15 18:30:54.569164
+954	mp3	Song	270	954	2022-08-16 15:45:48.833452
+133	image	Song	65	133	2022-08-15 18:30:56.402035
+435	image	Song	148	435	2022-08-16 07:37:17.127429
+135	image	Song	66	135	2022-08-15 18:30:57.948864
+955	mp3	Song	272	955	2022-08-16 15:45:49.897079
+439	image	Song	150	439	2022-08-16 07:37:35.355181
+138	image	Song	67	138	2022-08-15 18:31:51.046807
+956	mp3	Song	274	956	2022-08-16 15:45:51.361797
+140	image	Song	68	140	2022-08-15 18:31:53.888745
+443	image	Song	152	443	2022-08-16 07:37:37.927715
+142	image	Song	69	142	2022-08-15 18:31:58.643165
+957	mp3	Song	276	957	2022-08-16 15:45:52.514858
+144	image	Song	70	144	2022-08-15 18:32:08.29107
+447	image	Song	154	447	2022-08-16 07:37:42.713806
+146	image	Song	71	146	2022-08-15 18:32:12.157883
+958	mp3	Song	278	958	2022-08-16 15:45:54.079604
+148	image	Song	72	148	2022-08-15 18:32:14.119002
+451	image	Song	156	451	2022-08-16 07:37:52.082992
+150	image	Song	73	150	2022-08-15 18:32:15.462012
+959	mp3	Song	280	959	2022-08-16 15:45:55.078264
+152	image	Song	74	152	2022-08-15 18:32:22.543918
+455	image	Song	158	455	2022-08-16 07:37:54.726361
+154	image	Song	75	154	2022-08-15 18:32:24.018927
+960	mp3	Song	282	960	2022-08-16 15:45:55.986321
+156	image	Song	76	156	2022-08-15 18:32:24.789815
+459	image	Song	160	459	2022-08-16 07:38:02.42226
+158	image	Song	77	158	2022-08-15 18:32:31.88358
+961	mp3	Song	284	961	2022-08-16 15:45:57.044718
+463	image	Song	162	463	2022-08-16 07:38:04.431185
+161	image	Song	78	161	2022-08-15 18:32:53.114073
+962	mp3	Song	286	962	2022-08-16 15:45:58.466789
+163	image	Song	79	163	2022-08-15 18:32:56.33296
+467	image	Song	164	467	2022-08-16 07:40:58.766845
+963	image	Song	301	963	2022-08-16 15:47:00.464803
+166	image	Song	80	166	2022-08-15 18:32:58.811644
+471	image	Song	166	471	2022-08-16 07:41:28.509155
+168	image	Song	81	168	2022-08-15 18:33:00.362763
+1962	mp3	Song	618	1962	2022-09-20 19:17:21.610525
+170	image	Song	82	170	2022-08-15 18:33:07.613114
+475	image	Song	168	475	2022-08-16 07:41:30.810985
+172	image	Song	83	172	2022-08-15 18:33:09.78745
+1049	image	Song	344	1049	2022-08-16 18:10:03.840323
+174	image	Song	84	174	2022-08-15 18:33:10.7265
+479	image	Song	170	479	2022-08-16 07:41:34.005554
+176	image	Song	85	176	2022-08-15 18:33:12.479486
+1963	mp3	Song	619	1963	2022-09-20 19:17:23.311579
+178	image	Song	86	178	2022-08-15 18:33:15.931949
+483	image	Song	172	483	2022-08-16 07:41:37.774275
+180	image	Song	87	180	2022-08-15 18:33:21.48182
+1053	image	Song	346	1053	2022-08-16 18:15:03.684358
+487	image	Song	174	487	2022-08-16 07:41:43.153885
+183	image	Song	88	183	2022-08-15 18:33:32.978725
+1964	mp3	Song	614	1964	2022-09-20 19:17:24.804866
+185	image	Song	89	185	2022-08-15 18:33:34.181637
+491	image	Song	176	491	2022-08-16 07:41:49.494707
+187	image	Song	90	187	2022-08-15 18:33:38.956269
+1168	image	Song	405	1168	2022-08-16 20:14:16.432269
+189	image	Song	91	189	2022-08-15 18:33:40.946167
+495	image	Song	178	495	2022-08-16 07:41:54.620128
+191	image	Song	92	191	2022-08-15 18:33:43.226567
+1965	mp3	Song	620	1965	2022-09-20 19:17:26.344181
+193	image	Song	93	193	2022-08-15 18:33:47.33303
+507	image	Song	184	507	2022-08-16 07:43:33.99607
+195	image	Song	94	195	2022-08-15 18:33:49.701967
+1170	image	Song	407	1170	2022-08-16 20:14:19.164981
+197	image	Song	95	197	2022-08-15 18:33:58.946715
+511	image	Song	186	511	2022-08-16 07:43:36.341911
+199	image	Song	96	199	2022-08-15 18:34:33.778923
+1966	mp3	Song	615	1966	2022-09-20 19:17:27.688494
+515	image	Song	188	515	2022-08-16 07:43:44.116827
+202	image	Song	97	202	2022-08-15 18:42:08.813242
+1174	image	Song	408	1174	2022-08-16 20:14:22.337402
+204	image	Song	98	204	2022-08-15 18:42:54.759086
+519	image	Song	190	519	2022-08-16 07:43:48.058295
+206	image	Song	99	206	2022-08-15 18:44:11.18375
+1967	mp3	Song	621	1967	2022-09-20 19:17:29.05246
+208	image	Song	100	208	2022-08-15 18:44:18.592279
+521	image	Song	191	521	2022-08-16 07:43:48.281067
+210	image	Song	101	210	2022-08-15 18:44:25.09123
+1178	image	Song	410	1178	2022-08-16 20:14:25.267491
+212	image	Song	102	212	2022-08-15 18:44:27.714089
+1968	mp3	Song	622	1968	2022-09-20 19:17:30.333528
+214	image	Song	103	214	2022-08-15 18:44:30.766367
+216	image	Song	104	216	2022-08-15 18:45:00.387625
+218	image	Song	105	218	2022-08-15 18:45:03.600958
+220	image	Song	106	220	2022-08-15 18:45:16.429993
+224	image	Song	107	224	2022-08-15 19:21:27.247632
+226	image	Song	108	226	2022-08-15 19:21:46.152239
+228	image	Song	109	228	2022-08-15 19:21:48.023808
+231	image	Song	110	231	2022-08-15 19:21:50.514515
+965	image	Song	302	965	2022-08-16 15:47:47.799851
+233	image	Song	111	233	2022-08-15 19:21:54.049386
+1969	mp3	Song	616	1969	2022-09-20 19:17:33.232734
+235	image	Song	112	235	2022-08-15 19:21:57.334626
+1051	image	Song	345	1051	2022-08-16 18:14:42.199343
+237	image	Song	113	237	2022-08-15 19:21:59.486176
+1970	mp3	Song	623	1970	2022-09-20 19:17:34.548496
+239	image	Song	114	239	2022-08-15 19:22:01.027866
+1055	image	Song	347	1055	2022-08-16 18:15:07.444078
+241	image	Song	115	241	2022-08-15 19:22:03.037639
+1971	mp3	Song	624	1971	2022-09-20 19:17:36.05331
+243	image	Song	116	243	2022-08-15 19:22:04.842975
+1172	image	Song	406	1172	2022-08-16 20:14:19.189047
+245	image	Song	117	245	2022-08-15 19:22:07.592265
+1972	mp3	Song	631	1972	2022-09-20 19:17:37.113796
+247	image	Song	118	247	2022-08-15 19:22:09.29406
+1200	image	Song	421	1200	2022-08-18 12:07:46.480897
+249	image	Song	119	249	2022-08-15 19:22:10.435841
+1973	mp3	Song	625	1973	2022-09-20 19:17:38.158119
+251	image	Song	120	251	2022-08-15 19:22:10.906342
+1204	image	Song	423	1204	2022-08-18 12:08:09.966158
+253	image	Song	121	253	2022-08-15 19:22:13.657519
+255	image	Song	122	255	2022-08-15 19:22:17.725208
+1208	image	Song	425	1208	2022-08-18 12:08:13.150341
+257	image	Song	123	257	2022-08-15 19:22:20.488023
+1212	image	Song	427	1212	2022-08-18 12:08:15.041824
+260	image	Song	124	260	2022-08-15 19:22:20.727031
+262	image	Song	125	262	2022-08-15 19:22:21.107519
+1216	image	Song	429	1216	2022-08-18 12:08:19.940541
+264	image	Song	126	264	2022-08-15 19:22:24.896881
+266	image	Song	127	266	2022-08-15 19:30:03.770593
+1220	image	Song	431	1220	2022-08-18 12:08:25.692292
+268	image	Song	128	268	2022-08-15 19:31:32.458611
+272	image	Song	131	272	2022-08-15 19:32:32.905041
+1226	image	Song	434	1226	2022-08-18 12:08:30.607597
+274	mp3	Song	1	274	2022-08-15 19:43:35.929808
+275	mp3	Song	2	275	2022-08-15 19:44:14.365503
+276	mp3	Song	3	276	2022-08-15 19:44:16.063624
+277	mp3	Song	4	277	2022-08-15 19:44:17.753892
+278	mp3	Song	5	278	2022-08-15 19:44:19.097492
+279	mp3	Song	6	279	2022-08-15 19:44:20.431949
+280	mp3	Song	7	280	2022-08-15 19:44:22.028096
+281	mp3	Song	8	281	2022-08-15 19:44:23.640637
+282	mp3	Song	9	282	2022-08-15 19:44:24.826629
+283	mp3	Song	10	283	2022-08-15 19:44:26.186031
+284	mp3	Song	11	284	2022-08-15 19:44:27.466874
+285	mp3	Song	12	285	2022-08-15 19:44:28.808314
+286	mp3	Song	13	286	2022-08-15 19:44:30.116995
+287	mp3	Song	14	287	2022-08-15 19:44:31.235921
+288	mp3	Song	15	288	2022-08-15 19:44:32.685246
+289	mp3	Song	16	289	2022-08-15 19:44:34.067673
+290	mp3	Song	17	290	2022-08-15 19:44:35.286525
+291	mp3	Song	18	291	2022-08-15 19:44:36.44032
+292	mp3	Song	19	292	2022-08-15 19:44:37.933689
+293	mp3	Song	20	293	2022-08-15 19:44:39.186777
+294	mp3	Song	21	294	2022-08-15 19:44:40.776051
+295	mp3	Song	22	295	2022-08-15 19:44:42.581622
+296	mp3	Song	23	296	2022-08-15 19:44:44.02807
+297	mp3	Song	24	297	2022-08-15 19:44:45.15972
+298	mp3	Song	25	298	2022-08-15 19:44:46.774179
+299	mp3	Song	26	299	2022-08-15 19:44:48.183621
+300	mp3	Song	27	300	2022-08-15 19:44:49.382475
+301	mp3	Song	29	301	2022-08-15 19:44:51.098747
+302	mp3	Song	28	302	2022-08-15 19:44:52.412365
+303	mp3	Song	30	303	2022-08-15 19:44:53.590951
+304	mp3	Song	31	304	2022-08-15 19:44:55.063121
+305	mp3	Song	32	305	2022-08-15 19:44:55.623032
+306	mp3	Song	33	306	2022-08-15 19:44:56.624253
+307	mp3	Song	34	307	2022-08-15 19:45:44.224836
+308	mp3	Song	35	308	2022-08-15 19:45:45.600306
+309	mp3	Song	36	309	2022-08-15 19:45:46.756792
+310	mp3	Song	37	310	2022-08-15 19:45:48.374977
+311	mp3	Song	38	311	2022-08-15 19:45:49.75534
+312	mp3	Song	39	312	2022-08-15 19:45:50.978855
+313	mp3	Song	40	313	2022-08-15 19:45:51.949139
+314	mp3	Song	41	314	2022-08-15 19:45:53.319626
+316	mp3	Song	43	316	2022-08-15 19:45:55.899914
+318	mp3	Song	45	318	2022-08-15 19:46:22.21124
+319	mp3	Song	46	319	2022-08-15 19:46:23.130133
+320	mp3	Song	47	320	2022-08-15 19:46:24.646301
+321	mp3	Song	48	321	2022-08-15 19:46:26.381964
+322	mp3	Song	49	322	2022-08-15 19:46:28.455357
+323	mp3	Song	50	323	2022-08-15 19:46:29.6609
+324	mp3	Song	51	324	2022-08-15 19:46:31.594903
+325	mp3	Song	52	325	2022-08-15 19:46:33.397021
+326	mp3	Song	53	326	2022-08-15 19:46:36.087528
+327	mp3	Song	54	327	2022-08-15 19:46:37.99478
+328	mp3	Song	55	328	2022-08-15 19:46:40.769851
+329	mp3	Song	56	329	2022-08-15 19:46:42.814835
+330	mp3	Song	57	330	2022-08-15 19:46:44.994429
+331	mp3	Song	58	331	2022-08-15 19:46:47.028791
+332	mp3	Song	59	332	2022-08-15 19:46:49.501393
+333	mp3	Song	60	333	2022-08-15 19:46:52.131722
+334	mp3	Song	62	334	2022-08-15 19:46:55.41482
+335	mp3	Song	63	335	2022-08-15 19:46:57.2602
+336	mp3	Song	61	336	2022-08-15 19:47:00.124135
+337	mp3	Song	64	337	2022-08-15 19:47:01.646403
+338	mp3	Song	65	338	2022-08-15 19:47:03.017809
+339	mp3	Song	66	339	2022-08-15 19:47:04.699586
+340	mp3	Song	67	340	2022-08-15 19:47:06.179628
+341	mp3	Song	68	341	2022-08-15 19:47:08.642016
+342	mp3	Song	69	342	2022-08-15 19:47:10.090682
+343	mp3	Song	70	343	2022-08-15 19:47:11.448149
+344	mp3	Song	71	344	2022-08-15 19:47:12.865763
+345	mp3	Song	72	345	2022-08-15 19:47:14.576345
+346	mp3	Song	73	346	2022-08-15 19:47:16.396416
+347	mp3	Song	74	347	2022-08-15 19:47:18.275705
+348	mp3	Song	75	348	2022-08-15 19:47:20.324395
+349	mp3	Song	76	349	2022-08-15 19:47:21.713922
+350	mp3	Song	77	350	2022-08-15 19:47:23.522315
+351	mp3	Song	78	351	2022-08-15 19:47:25.131638
+352	mp3	Song	79	352	2022-08-15 19:47:26.783379
+353	mp3	Song	80	353	2022-08-15 19:47:28.372876
+354	mp3	Song	81	354	2022-08-15 19:47:29.86233
+355	mp3	Song	82	355	2022-08-15 19:47:31.568356
+356	mp3	Song	83	356	2022-08-15 19:47:33.617347
+357	mp3	Song	84	357	2022-08-15 19:47:35.220546
+358	mp3	Song	85	358	2022-08-15 19:47:36.553082
+359	mp3	Song	86	359	2022-08-15 19:47:38.073435
+360	mp3	Song	87	360	2022-08-15 19:47:40.129651
+361	mp3	Song	88	361	2022-08-15 19:47:42.148934
+362	mp3	Song	89	362	2022-08-15 19:47:43.628181
+363	mp3	Song	90	363	2022-08-15 19:47:45.073054
+364	mp3	Song	91	364	2022-08-15 19:47:46.514451
+365	mp3	Song	92	365	2022-08-15 19:47:47.989419
+366	mp3	Song	93	366	2022-08-15 19:47:49.699053
+367	mp3	Song	94	367	2022-08-15 19:47:51.0455
+368	mp3	Song	95	368	2022-08-15 19:47:52.405681
+369	mp3	Song	96	369	2022-08-15 19:47:54.434022
+370	mp3	Song	97	370	2022-08-15 19:47:55.95673
+371	mp3	Song	98	371	2022-08-15 19:47:57.731404
+372	mp3	Song	99	372	2022-08-15 19:47:59.729624
+373	mp3	Song	100	373	2022-08-15 19:48:01.910979
+374	mp3	Song	101	374	2022-08-15 19:48:03.623322
+375	mp3	Song	102	375	2022-08-15 19:48:05.137542
+376	mp3	Song	103	376	2022-08-15 19:48:06.829928
+377	mp3	Song	104	377	2022-08-15 19:48:09.077133
+378	mp3	Song	105	378	2022-08-15 19:48:13.692104
+379	mp3	Song	106	379	2022-08-15 19:48:16.137419
+380	mp3	Song	107	380	2022-08-15 19:48:17.953834
+381	mp3	Song	108	381	2022-08-15 19:48:19.016875
+407	image	Song	134	407	2022-08-16 07:13:44.213074
+967	image	Song	303	967	2022-08-16 16:34:46.497644
+423	image	Song	142	423	2022-08-16 07:36:56.39509
+1974	mp3	Song	632	1974	2022-09-20 19:17:39.560877
+427	image	Song	144	427	2022-08-16 07:37:07.817314
+971	image	Song	305	971	2022-08-16 16:34:49.177688
+429	image	Song	145	429	2022-08-16 07:37:08.001661
+1975	mp3	Song	638	1975	2022-09-20 19:17:41.36242
+433	image	Song	147	433	2022-08-16 07:37:13.89466
+975	image	Song	307	975	2022-08-16 16:34:52.429052
+437	image	Song	149	437	2022-08-16 07:37:19.564965
+1976	mp3	Song	639	1976	2022-09-20 19:17:42.80783
+441	image	Song	151	441	2022-08-16 07:37:35.926025
+979	image	Song	309	979	2022-08-16 16:35:36.192962
+445	image	Song	153	445	2022-08-16 07:37:39.852766
+1977	mp3	Song	640	1977	2022-09-20 19:17:44.248942
+449	image	Song	155	449	2022-08-16 07:37:46.124967
+983	image	Song	311	983	2022-08-16 16:35:39.377984
+453	image	Song	157	453	2022-08-16 07:37:53.433389
+1978	mp3	Song	633	1978	2022-09-20 19:17:46.429832
+457	image	Song	159	457	2022-08-16 07:37:58.24423
+985	image	Song	313	985	2022-08-16 16:35:42.129564
+461	image	Song	161	461	2022-08-16 07:38:03.223216
+1979	mp3	Song	634	1979	2022-09-20 19:17:47.753137
+465	image	Song	163	465	2022-08-16 07:38:37.825349
+991	image	Song	315	991	2022-08-16 16:35:45.623029
+469	image	Song	165	469	2022-08-16 07:41:28.14961
+1980	mp3	Song	626	1980	2022-09-20 19:17:48.955641
+473	image	Song	167	473	2022-08-16 07:41:29.75266
+995	image	Song	317	995	2022-08-16 16:35:48.888939
+477	image	Song	169	477	2022-08-16 07:41:33.023103
+1981	mp3	Song	635	1981	2022-09-20 19:17:50.112521
+481	image	Song	171	481	2022-08-16 07:41:36.997494
+999	image	Song	319	999	2022-08-16 16:35:51.450182
+485	image	Song	173	485	2022-08-16 07:41:42.172238
+1982	mp3	Song	636	1982	2022-09-20 19:17:51.686986
+489	image	Song	175	489	2022-08-16 07:41:45.811439
+1003	image	Song	321	1003	2022-08-16 16:35:55.232915
+493	image	Song	177	493	2022-08-16 07:41:52.352259
+1983	mp3	Song	627	1983	2022-09-20 19:17:52.797811
+525	image	Song	193	525	2022-08-16 07:43:58.209123
+1007	image	Song	323	1007	2022-08-16 16:36:08.262302
+529	image	Song	195	529	2022-08-16 07:44:05.235938
+1984	mp3	Song	628	1984	2022-09-20 19:17:54.371565
+533	image	Song	197	533	2022-08-16 07:44:10.148084
+537	image	Song	199	537	2022-08-16 07:44:56.354792
+609	image	Song	201	609	2022-08-16 14:16:51.566511
+613	image	Song	203	613	2022-08-16 14:16:56.000677
+617	image	Song	205	617	2022-08-16 14:16:59.33966
+621	image	Song	207	621	2022-08-16 14:17:15.178253
+625	image	Song	209	625	2022-08-16 14:17:19.820599
+629	image	Song	211	629	2022-08-16 14:17:38.221859
+633	image	Song	213	633	2022-08-16 14:17:42.322453
+637	image	Song	215	637	2022-08-16 14:17:48.26284
+641	image	Song	217	641	2022-08-16 14:17:54.294563
+645	image	Song	219	645	2022-08-16 14:18:09.954635
+649	image	Song	221	649	2022-08-16 14:18:14.539009
+653	image	Song	223	653	2022-08-16 14:18:16.952656
+657	image	Song	225	657	2022-08-16 14:18:20.340223
+661	image	Song	227	661	2022-08-16 14:18:35.089577
+665	image	Song	229	665	2022-08-16 14:18:40.394768
+669	image	Song	231	669	2022-08-16 14:18:43.578703
+673	image	Song	233	673	2022-08-16 14:18:48.433057
+677	image	Song	235	677	2022-08-16 14:19:07.413131
+969	image	Song	304	969	2022-08-16 16:34:47.184918
+689	image	Song	241	689	2022-08-16 14:19:20.842484
+1985	mp3	Song	630	1985	2022-09-20 19:17:55.65937
+693	image	Song	243	693	2022-08-16 14:19:31.958155
+973	image	Song	306	973	2022-08-16 16:34:51.720202
+697	image	Song	245	697	2022-08-16 14:19:39.196242
+1986	mp3	Song	637	1986	2022-09-20 19:17:57.537468
+977	image	Song	308	977	2022-08-16 16:34:53.217126
+981	image	Song	310	981	2022-08-16 16:35:38.758293
+987	image	Song	312	987	2022-08-16 16:35:42.156862
+1031	image	Song	335	1031	2022-08-16 16:37:47.241541
+1057	image	Song	348	1057	2022-08-16 18:31:29.800217
+1061	image	Song	350	1061	2022-08-16 18:31:44.192668
+1065	image	Song	352	1065	2022-08-16 18:31:55.110873
+1068	image	Song	354	1068	2022-08-16 18:31:59.948373
+1176	image	Song	409	1176	2022-08-16 20:14:22.636466
+1180	image	Song	411	1180	2022-08-16 20:14:31.92709
+1184	image	Song	413	1184	2022-08-16 20:14:44.489817
+1188	image	Song	415	1188	2022-08-16 20:14:49.19231
+1192	image	Song	417	1192	2022-08-16 20:20:17.618425
+1230	image	Song	436	1230	2022-08-18 12:08:33.979946
+1234	image	Song	438	1234	2022-08-18 12:08:45.150748
+1238	image	Song	440	1238	2022-08-18 12:08:51.127333
+1242	image	Song	442	1242	2022-08-18 12:08:54.720123
+1246	image	Song	444	1246	2022-08-18 12:09:00.892013
+1250	image	Song	446	1250	2022-08-18 12:09:12.694301
+1284	image	Song	463	1284	2022-08-19 08:19:54.242412
+1288	image	Song	465	1288	2022-08-19 08:19:59.638273
+1292	image	Song	467	1292	2022-08-19 08:20:05.172555
+1296	image	Song	469	1296	2022-08-19 08:20:19.674374
+1300	image	Song	471	1300	2022-08-19 08:20:27.975667
+1346	image	Song	494	1346	2022-08-19 10:07:05.202507
+1350	image	Song	496	1350	2022-08-19 10:07:11.438118
+1354	image	Song	498	1354	2022-08-19 10:07:15.682292
+1358	image	Song	500	1358	2022-08-19 10:07:22.799344
+1362	image	Song	502	1362	2022-08-19 10:07:32.215158
+1366	image	Song	504	1366	2022-08-19 10:07:38.39374
+1370	image	Song	506	1370	2022-08-19 10:07:45.231345
+1374	image	Song	508	1374	2022-08-19 10:08:16.123768
+1378	image	Song	510	1378	2022-08-19 10:08:18.855638
+1382	image	Song	512	1382	2022-08-19 10:08:21.576612
+1386	image	Song	514	1386	2022-08-19 10:08:32.579607
+1390	image	Song	516	1390	2022-08-19 10:08:34.898298
+1394	image	Song	518	1394	2022-08-19 10:08:48.975419
+1398	image	Song	520	1398	2022-08-19 10:08:54.434183
+1402	image	Song	522	1402	2022-08-19 10:08:58.887133
+1406	image	Song	524	1406	2022-08-19 10:09:02.317103
+1410	image	Song	526	1410	2022-08-19 10:09:08.606871
+1412	image	Song	527	1412	2022-08-19 10:09:10.836981
+1413	image	Song	528	1413	2022-08-19 10:09:10.865176
+1416	image	Song	529	1416	2022-08-19 10:09:23.311511
+1418	image	Song	530	1418	2022-08-19 10:09:26.874638
+1420	image	Song	531	1420	2022-08-19 10:09:27.835752
+1422	image	Song	532	1422	2022-08-19 10:09:30.624747
+1424	image	Song	533	1424	2022-08-19 10:09:35.842138
+1426	image	Song	534	1426	2022-08-19 10:09:43.8414
+1428	image	Song	535	1428	2022-08-19 10:10:04.762039
+687	image	Song	240	687	2022-08-16 14:19:18.804062
+989	image	Song	314	989	2022-08-16 16:35:44.393791
+691	image	Song	242	691	2022-08-16 14:19:23.996826
+695	image	Song	244	695	2022-08-16 14:19:33.138897
+993	image	Song	316	993	2022-08-16 16:35:46.723826
+699	image	Song	246	699	2022-08-16 14:19:39.730678
+701	image	Song	247	701	2022-08-16 14:19:44.870924
+997	image	Song	318	997	2022-08-16 16:35:50.388638
+703	image	Song	248	703	2022-08-16 14:19:46.541558
+705	image	Song	249	705	2022-08-16 14:19:52.567574
+1001	image	Song	320	1001	2022-08-16 16:35:53.424635
+707	image	Song	250	707	2022-08-16 14:19:56.310485
+709	image	Song	251	709	2022-08-16 14:19:57.732433
+1005	image	Song	322	1005	2022-08-16 16:35:55.983129
+711	image	Song	252	711	2022-08-16 14:19:59.50196
+713	image	Song	253	713	2022-08-16 14:20:15.48169
+1009	image	Song	324	1009	2022-08-16 16:36:34.178159
+715	image	Song	254	715	2022-08-16 14:20:19.147764
+717	image	Song	255	717	2022-08-16 14:20:20.264472
+1013	image	Song	326	1013	2022-08-16 16:36:39.207253
+719	image	Song	256	719	2022-08-16 14:20:21.4677
+721	image	Song	257	721	2022-08-16 14:20:22.974774
+1017	image	Song	328	1017	2022-08-16 16:36:46.971217
+723	image	Song	258	723	2022-08-16 14:20:27.598569
+725	image	Song	259	725	2022-08-16 14:20:34.500007
+1021	image	Song	330	1021	2022-08-16 16:36:58.706508
+727	image	Song	260	727	2022-08-16 14:20:38.544955
+729	image	Song	261	729	2022-08-16 14:20:40.188339
+1025	image	Song	332	1025	2022-08-16 16:37:36.414087
+731	image	Song	262	731	2022-08-16 14:20:40.999305
+733	image	Song	263	733	2022-08-16 14:20:41.899255
+1029	image	Song	334	1029	2022-08-16 16:37:38.062543
+735	image	Song	264	735	2022-08-16 14:20:43.911891
+737	image	Song	265	737	2022-08-16 14:20:45.280515
+739	image	Song	266	739	2022-08-16 14:20:45.531441
+741	image	Song	267	741	2022-08-16 14:20:48.70421
+743	image	Song	268	743	2022-08-16 14:20:50.635292
+745	image	Song	269	745	2022-08-16 14:20:52.23108
+747	image	Song	271	747	2022-08-16 14:21:22.236811
+749	image	Song	270	749	2022-08-16 14:21:22.721165
+751	image	Song	272	751	2022-08-16 14:21:22.84426
+753	image	Song	273	753	2022-08-16 14:21:25.646773
+755	image	Song	274	755	2022-08-16 14:21:43.049814
+757	image	Song	275	757	2022-08-16 14:21:43.946223
+759	image	Song	276	759	2022-08-16 14:21:45.567864
+761	image	Song	277	761	2022-08-16 14:21:49.894894
+763	image	Song	278	763	2022-08-16 14:21:52.857969
+765	image	Song	279	765	2022-08-16 14:21:55.281586
+767	image	Song	280	767	2022-08-16 14:21:55.865923
+771	image	Song	282	771	2022-08-16 14:22:00.445746
+773	image	Song	283	773	2022-08-16 14:22:03.241189
+775	image	Song	284	775	2022-08-16 14:22:04.140672
+777	image	Song	285	777	2022-08-16 14:22:06.591853
+779	image	Song	286	779	2022-08-16 14:22:08.563934
+781	image	Song	287	781	2022-08-16 14:22:11.623948
+783	image	Song	288	783	2022-08-16 14:22:38.187248
+785	image	Song	289	785	2022-08-16 14:22:59.70522
+787	image	Song	290	787	2022-08-16 14:23:01.006265
+789	image	Song	291	789	2022-08-16 14:23:06.241626
+791	image	Song	292	791	2022-08-16 14:23:09.10359
+793	image	Song	293	793	2022-08-16 14:23:09.405023
+795	image	Song	294	795	2022-08-16 14:23:17.783864
+797	image	Song	295	797	2022-08-16 14:23:18.094773
+1033	image	Song	336	1033	2022-08-16 16:37:54.004209
+1059	image	Song	349	1059	2022-08-16 18:31:43.625911
+1063	image	Song	351	1063	2022-08-16 18:31:51.523435
+1070	image	Song	355	1070	2022-08-16 18:32:07.724764
+1182	image	Song	412	1182	2022-08-16 20:14:32.540979
+1186	image	Song	414	1186	2022-08-16 20:14:46.348227
+1190	image	Song	416	1190	2022-08-16 20:20:12.631913
+1254	image	Song	448	1254	2022-08-18 13:48:12.599792
+1304	image	Song	473	1304	2022-08-19 08:20:34.09053
+1308	image	Song	475	1308	2022-08-19 08:21:02.427215
+1312	image	Song	477	1312	2022-08-19 08:21:07.53142
+1316	image	Song	479	1316	2022-08-19 08:21:18.992117
+1320	image	Song	481	1320	2022-08-19 08:21:31.031607
+1324	image	Song	483	1324	2022-08-19 08:21:34.772087
+800	image	Song	297	800	2022-08-16 14:23:21.156543
+804	image	Song	299	804	2022-08-16 14:23:37.620752
+1011	image	Song	325	1011	2022-08-16 16:36:36.05872
+1015	image	Song	327	1015	2022-08-16 16:36:41.254596
+1019	image	Song	329	1019	2022-08-16 16:36:50.445539
+1023	image	Song	331	1023	2022-08-16 16:37:32.366307
+1027	image	Song	333	1027	2022-08-16 16:37:36.446895
+1072	image	Song	356	1072	2022-08-16 18:52:15.809303
+1076	image	Song	358	1076	2022-08-16 18:52:37.921249
+1080	image	Song	360	1080	2022-08-16 18:52:44.223523
+1087	image	Song	364	1087	2022-08-16 18:53:21.574959
+1091	image	Song	366	1091	2022-08-16 18:53:27.492038
+1095	image	Song	368	1095	2022-08-16 18:53:29.563542
+1099	image	Song	370	1099	2022-08-16 18:53:33.516918
+1103	image	Song	372	1103	2022-08-16 18:53:37.260911
+1107	image	Song	374	1107	2022-08-16 18:53:45.319311
+1111	image	Song	376	1111	2022-08-16 18:53:53.130914
+1115	image	Song	378	1115	2022-08-16 18:53:56.901226
+1119	image	Song	380	1119	2022-08-16 18:56:03.628191
+1126	image	Song	384	1126	2022-08-16 18:56:09.303674
+1130	image	Song	386	1130	2022-08-16 18:56:13.27577
+1134	image	Song	388	1134	2022-08-16 18:56:16.902449
+1138	image	Song	390	1138	2022-08-16 18:56:22.035006
+1142	image	Song	392	1142	2022-08-16 18:56:26.770161
+1146	image	Song	394	1146	2022-08-16 18:56:31.976532
+1150	image	Song	396	1150	2022-08-16 18:56:37.318374
+1154	image	Song	398	1154	2022-08-16 18:57:26.370258
+1158	image	Song	400	1158	2022-08-16 18:57:33.406943
+1162	image	Song	402	1162	2022-08-16 18:57:37.993052
+1194	image	Song	418	1194	2022-08-17 11:42:12.287019
+1256	image	Song	449	1256	2022-08-19 07:15:04.794569
+1260	image	Song	451	1260	2022-08-19 07:16:29.277458
+1264	image	Song	453	1264	2022-08-19 07:17:55.004764
+1268	image	Song	455	1268	2022-08-19 07:17:59.898578
+1272	image	Song	457	1272	2022-08-19 07:18:02.773712
+1276	image	Song	459	1276	2022-08-19 07:18:06.242837
+1280	image	Song	461	1280	2022-08-19 07:18:41.48756
+1306	image	Song	474	1306	2022-08-19 08:20:40.923529
+1310	image	Song	476	1310	2022-08-19 08:21:06.645793
+1314	image	Song	478	1314	2022-08-19 08:21:14.152321
+1318	image	Song	480	1318	2022-08-19 08:21:27.175978
+1322	image	Song	482	1322	2022-08-19 08:21:31.556456
+1326	image	Song	484	1326	2022-08-19 08:21:42.34686
+1330	image	Song	486	1330	2022-08-19 08:23:38.263552
+1334	image	Song	488	1334	2022-08-19 08:23:50.328451
+1338	image	Song	490	1338	2022-08-19 08:23:58.306361
+1342	image	Song	492	1342	2022-08-19 08:24:40.576533
+1364	image	Song	503	1364	2022-08-19 10:07:36.042621
+1368	image	Song	505	1368	2022-08-19 10:07:42.319067
+1372	image	Song	507	1372	2022-08-19 10:07:48.245137
+1376	image	Song	509	1376	2022-08-19 10:08:17.3351
+1380	image	Song	511	1380	2022-08-19 10:08:19.337098
+802	image	Song	298	802	2022-08-16 14:23:24.493974
+806	image	Song	300	806	2022-08-16 14:23:57.847849
+808	mp3	Song	42	808	2022-08-16 15:41:58.220097
+809	mp3	Song	44	809	2022-08-16 15:41:59.500074
+810	mp3	Song	159	810	2022-08-16 15:42:00.383247
+811	mp3	Song	134	811	2022-08-16 15:42:01.646461
+812	mp3	Song	137	812	2022-08-16 15:42:02.996983
+813	mp3	Song	153	813	2022-08-16 15:42:03.985396
+814	mp3	Song	138	814	2022-08-16 15:42:05.731529
+815	mp3	Song	144	815	2022-08-16 15:42:07.71856
+816	mp3	Song	165	816	2022-08-16 15:42:09.147223
+817	mp3	Song	157	817	2022-08-16 15:42:10.443507
+818	mp3	Song	156	818	2022-08-16 15:42:11.894344
+819	mp3	Song	151	819	2022-08-16 15:42:13.084633
+820	mp3	Song	152	820	2022-08-16 15:42:14.319596
+821	mp3	Song	158	821	2022-08-16 15:42:15.599544
+822	mp3	Song	161	822	2022-08-16 15:42:16.768513
+823	mp3	Song	160	823	2022-08-16 15:42:18.266787
+824	mp3	Song	162	824	2022-08-16 15:42:19.501109
+825	mp3	Song	164	825	2022-08-16 15:42:20.42014
+826	mp3	Song	166	826	2022-08-16 15:42:21.659914
+827	mp3	Song	150	827	2022-08-16 15:42:23.118361
+828	mp3	Song	132	828	2022-08-16 15:42:24.384163
+829	mp3	Song	167	829	2022-08-16 15:42:25.506585
+830	mp3	Song	169	830	2022-08-16 15:42:27.002706
+831	mp3	Song	171	831	2022-08-16 15:42:28.319478
+832	mp3	Song	173	832	2022-08-16 15:42:29.888113
+833	mp3	Song	175	833	2022-08-16 15:42:31.241768
+834	mp3	Song	177	834	2022-08-16 15:42:32.561806
+835	mp3	Song	179	835	2022-08-16 15:42:34.164167
+836	mp3	Song	181	836	2022-08-16 15:42:35.418234
+837	mp3	Song	183	837	2022-08-16 15:42:36.533059
+838	mp3	Song	194	838	2022-08-16 15:42:37.756332
+839	mp3	Song	185	839	2022-08-16 15:42:38.479271
+840	mp3	Song	187	840	2022-08-16 15:42:39.223254
+841	mp3	Song	189	841	2022-08-16 15:42:40.739684
+842	mp3	Song	192	842	2022-08-16 15:42:42.05173
+843	mp3	Song	196	843	2022-08-16 15:42:44.435301
+844	mp3	Song	193	844	2022-08-16 15:42:45.849697
+845	mp3	Song	207	845	2022-08-16 15:42:47.269225
+846	mp3	Song	176	846	2022-08-16 15:42:48.442147
+847	mp3	Song	182	847	2022-08-16 15:42:50.057531
+848	mp3	Song	203	848	2022-08-16 15:42:51.62726
+849	mp3	Song	188	849	2022-08-16 15:42:52.890817
+850	mp3	Song	198	850	2022-08-16 15:42:54.502616
+851	mp3	Song	197	851	2022-08-16 15:42:56.10871
+852	mp3	Song	184	852	2022-08-16 15:42:57.379063
+853	mp3	Song	204	853	2022-08-16 15:42:58.784029
+854	mp3	Song	168	854	2022-08-16 15:43:00.089662
+855	mp3	Song	210	855	2022-08-16 15:43:01.841464
+856	mp3	Song	201	856	2022-08-16 15:43:03.376677
+857	mp3	Song	170	857	2022-08-16 15:43:04.398354
+858	mp3	Song	205	858	2022-08-16 15:43:05.23478
+859	mp3	Song	195	859	2022-08-16 15:43:06.477066
+860	mp3	Song	190	860	2022-08-16 15:43:10.537621
+861	mp3	Song	154	861	2022-08-16 15:43:11.721091
+862	mp3	Song	178	862	2022-08-16 15:43:12.906981
+863	mp3	Song	191	863	2022-08-16 15:43:13.970592
+864	mp3	Song	208	864	2022-08-16 15:43:15.700075
+865	mp3	Song	199	865	2022-08-16 15:43:17.156213
+866	mp3	Song	202	866	2022-08-16 15:43:18.370307
+867	mp3	Song	186	867	2022-08-16 15:43:19.791956
+868	mp3	Song	172	868	2022-08-16 15:43:21.051081
+869	mp3	Song	180	869	2022-08-16 15:43:22.831673
+870	mp3	Song	206	870	2022-08-16 15:43:23.902618
+871	mp3	Song	174	871	2022-08-16 15:43:25.191204
+872	mp3	Song	212	872	2022-08-16 15:43:26.563961
+873	mp3	Song	209	873	2022-08-16 15:43:28.152467
+874	mp3	Song	211	874	2022-08-16 15:43:29.212711
+875	mp3	Song	213	875	2022-08-16 15:43:30.573586
+876	mp3	Song	214	876	2022-08-16 15:43:32.329801
+877	mp3	Song	215	877	2022-08-16 15:43:33.823777
+878	mp3	Song	217	878	2022-08-16 15:43:35.6909
+879	mp3	Song	135	879	2022-08-16 15:43:37.117229
+880	mp3	Song	200	880	2022-08-16 15:43:38.639457
+881	mp3	Song	218	881	2022-08-16 15:43:40.034078
+882	mp3	Song	220	882	2022-08-16 15:43:41.923373
+883	mp3	Song	222	883	2022-08-16 15:43:43.098445
+884	mp3	Song	224	884	2022-08-16 15:43:44.567626
+885	mp3	Song	226	885	2022-08-16 15:43:45.835192
+886	mp3	Song	228	886	2022-08-16 15:43:47.945173
+887	mp3	Song	230	887	2022-08-16 15:43:49.560128
+888	mp3	Song	221	888	2022-08-16 15:43:51.216747
+889	mp3	Song	252	889	2022-08-16 15:43:52.899279
+890	mp3	Song	223	890	2022-08-16 15:43:55.013224
+891	mp3	Song	239	891	2022-08-16 15:43:56.230841
+892	mp3	Song	225	892	2022-08-16 15:43:57.518915
+893	mp3	Song	227	893	2022-08-16 15:43:59.440616
+894	mp3	Song	247	894	2022-08-16 15:44:00.651292
+895	mp3	Song	229	895	2022-08-16 15:44:01.75689
+896	mp3	Song	240	896	2022-08-16 15:44:03.04455
+897	mp3	Song	231	897	2022-08-16 15:44:04.2002
+898	mp3	Song	232	898	2022-08-16 15:44:05.450059
+899	mp3	Song	236	899	2022-08-16 15:44:06.951221
+900	mp3	Song	241	900	2022-08-16 15:44:08.180186
+901	mp3	Song	235	901	2022-08-16 15:44:09.709848
+902	mp3	Song	233	902	2022-08-16 15:44:11.325042
+903	mp3	Song	237	903	2022-08-16 15:44:12.347728
+904	mp3	Song	242	904	2022-08-16 15:44:13.654711
+905	mp3	Song	234	905	2022-08-16 15:44:16.376169
+906	mp3	Song	238	906	2022-08-16 15:44:18.015841
+907	mp3	Song	248	907	2022-08-16 15:44:19.466906
+908	mp3	Song	243	908	2022-08-16 15:44:20.905375
+909	mp3	Song	244	909	2022-08-16 15:44:22.242128
+910	mp3	Song	258	910	2022-08-16 15:44:23.698834
+911	mp3	Song	245	911	2022-08-16 15:44:24.749984
+912	mp3	Song	249	912	2022-08-16 15:44:26.121742
+913	mp3	Song	246	913	2022-08-16 15:44:27.697395
+914	mp3	Song	253	914	2022-08-16 15:44:28.971432
+915	mp3	Song	250	915	2022-08-16 15:44:30.401429
+916	mp3	Song	251	916	2022-08-16 15:44:31.892743
+917	mp3	Song	256	917	2022-08-16 15:44:32.909473
+918	mp3	Song	254	918	2022-08-16 15:44:34.473288
+919	mp3	Song	255	919	2022-08-16 15:44:35.814382
+920	mp3	Song	257	920	2022-08-16 15:44:36.860599
+921	mp3	Song	260	921	2022-08-16 15:44:37.876349
+922	mp3	Song	259	922	2022-08-16 15:44:38.806489
+923	mp3	Song	261	923	2022-08-16 15:44:39.88317
+924	mp3	Song	262	924	2022-08-16 15:44:41.131935
+925	mp3	Song	263	925	2022-08-16 15:44:42.21275
+926	mp3	Song	264	926	2022-08-16 15:44:43.713513
+1035	image	Song	337	1035	2022-08-16 16:48:44.172927
+1039	image	Song	339	1039	2022-08-16 16:49:10.482287
+1043	image	Song	341	1043	2022-08-16 16:49:29.889603
+1047	image	Song	343	1047	2022-08-16 16:49:42.7891
+1074	image	Song	357	1074	2022-08-16 18:52:28.180567
+1078	image	Song	359	1078	2022-08-16 18:52:41.57645
+1082	image	Song	361	1082	2022-08-16 18:52:48.449475
+1085	image	Song	363	1085	2022-08-16 18:53:19.783992
+1089	image	Song	365	1089	2022-08-16 18:53:23.656974
+1093	image	Song	367	1093	2022-08-16 18:53:28.193302
+1097	image	Song	369	1097	2022-08-16 18:53:30.284144
+1101	image	Song	371	1101	2022-08-16 18:53:34.758068
+1105	image	Song	373	1105	2022-08-16 18:53:39.567042
+1109	image	Song	375	1109	2022-08-16 18:53:48.242307
+1113	image	Song	377	1113	2022-08-16 18:53:53.386518
+1117	image	Song	379	1117	2022-08-16 18:53:57.647458
+1121	image	Song	381	1121	2022-08-16 18:56:06.22054
+1124	image	Song	383	1124	2022-08-16 18:56:07.683138
+1128	image	Song	385	1128	2022-08-16 18:56:12.916976
+1132	image	Song	387	1132	2022-08-16 18:56:15.759001
+1136	image	Song	389	1136	2022-08-16 18:56:18.281044
+1140	image	Song	391	1140	2022-08-16 18:56:25.560087
+1144	image	Song	393	1144	2022-08-16 18:56:28.451534
+1148	image	Song	395	1148	2022-08-16 18:56:34.918914
+1152	image	Song	397	1152	2022-08-16 18:57:24.997966
+1156	image	Song	399	1156	2022-08-16 18:57:28.892972
+1160	image	Song	401	1160	2022-08-16 18:57:34.424594
+1164	image	Song	403	1164	2022-08-16 18:57:39.940016
+1196	image	Song	419	1196	2022-08-18 11:36:08.309007
+1258	image	Song	450	1258	2022-08-19 07:15:49.257023
+1262	image	Song	452	1262	2022-08-19 07:17:53.764121
+1266	image	Song	454	1266	2022-08-19 07:17:56.71573
+1270	image	Song	456	1270	2022-08-19 07:18:00.197245
+1274	image	Song	458	1274	2022-08-19 07:18:05.884859
+1277	image	Song	460	1277	2022-08-19 07:18:06.277183
+1328	image	Song	485	1328	2022-08-19 08:23:24.508595
+1332	image	Song	487	1332	2022-08-19 08:23:42.099237
+1336	image	Song	489	1336	2022-08-19 08:23:52.725979
+1340	image	Song	491	1340	2022-08-19 08:23:59.823836
+1384	image	Song	513	1384	2022-08-19 10:08:26.931077
+1388	image	Song	515	1388	2022-08-19 10:08:33.601594
+1392	image	Song	517	1392	2022-08-19 10:08:41.005956
+1396	image	Song	519	1396	2022-08-19 10:08:53.330666
+1400	image	Song	521	1400	2022-08-19 10:08:58.246291
+1404	image	Song	523	1404	2022-08-19 10:09:00.127761
+1408	image	Song	525	1408	2022-08-19 10:09:06.336196
+1432	image	Song	537	1432	2022-08-19 10:10:12.175341
+1436	image	Song	539	1436	2022-08-19 10:10:20.788802
+1440	image	Song	541	1440	2022-08-19 10:10:24.662665
+1444	image	Song	543	1444	2022-08-19 10:10:26.423238
+1448	image	Song	545	1448	2022-08-19 10:10:32.660781
+1430	image	Song	536	1430	2022-08-19 10:10:07.981066
+1434	image	Song	538	1434	2022-08-19 10:10:18.918963
+1438	image	Song	540	1438	2022-08-19 10:10:22.37954
+1442	image	Song	542	1442	2022-08-19 10:10:25.304178
+1446	image	Song	544	1446	2022-08-19 10:10:30.469234
+1450	image	Song	546	1450	2022-08-19 10:10:32.742157
+1452	image	Song	547	1452	2022-08-19 10:10:35.673083
+1454	image	Song	548	1454	2022-08-19 10:10:37.465958
+1456	image	Song	549	1456	2022-08-19 10:10:39.274224
+1458	image	Song	550	1458	2022-08-19 10:10:52.570161
+1460	image	Song	551	1460	2022-08-19 10:10:55.203945
+1462	image	Song	552	1462	2022-08-19 10:10:57.235256
+1464	image	Song	553	1464	2022-08-19 10:11:00.388371
+1466	image	Song	554	1466	2022-08-19 10:11:02.931591
+1468	image	Song	555	1468	2022-08-19 10:11:03.271198
+1470	image	Song	556	1470	2022-08-19 10:11:05.723059
+1472	image	Song	557	1472	2022-08-19 10:11:07.631715
+1474	image	Song	558	1474	2022-08-19 10:11:20.948623
+1476	image	Song	559	1476	2022-08-19 10:11:24.149101
+1478	image	Song	560	1478	2022-08-19 12:44:41.199324
+1480	image	Song	561	1480	2022-08-19 12:48:04.673709
+1482	image	Song	562	1482	2022-08-19 12:48:19.398939
+1484	image	Song	563	1484	2022-08-19 12:48:31.344393
+1486	image	Song	564	1486	2022-08-19 12:48:31.672565
+1488	image	Song	565	1488	2022-08-19 12:48:48.287973
+1490	image	Song	566	1490	2022-08-19 12:49:02.875065
+1492	image	Song	567	1492	2022-08-19 12:49:05.217598
+1494	image	Song	568	1494	2022-08-19 12:49:05.517374
+1496	image	Song	569	1496	2022-08-19 12:49:08.722724
+1498	image	Song	570	1498	2022-08-19 12:49:10.493237
+1500	image	Song	571	1500	2022-08-19 12:49:11.300206
+1502	image	Song	572	1502	2022-08-19 12:49:13.46531
+1504	image	Song	573	1504	2022-08-19 12:49:16.928548
+1506	image	Song	574	1506	2022-08-19 12:49:19.632028
+1508	image	Song	575	1508	2022-08-19 12:49:25.198242
+1510	image	Song	576	1510	2022-08-19 12:49:25.257924
+1512	image	Song	577	1512	2022-08-19 12:49:27.27066
+1514	image	Song	578	1514	2022-08-19 12:49:29.069189
+1516	image	Song	579	1516	2022-08-19 12:49:35.261689
+1518	image	Song	580	1518	2022-08-19 12:50:58.734388
+1520	image	Song	581	1520	2022-08-19 12:51:28.014029
+1522	image	Song	582	1522	2022-08-19 12:53:15.123592
+1524	image	Song	583	1524	2022-08-19 12:54:03.686922
+1526	image	Song	584	1526	2022-08-19 12:54:08.619141
+1528	image	Song	585	1528	2022-08-19 12:54:14.198252
+1530	image	Song	586	1530	2022-08-19 12:54:14.869656
+1532	image	Song	587	1532	2022-08-19 12:54:17.410754
+1534	image	Song	588	1534	2022-08-19 12:54:19.632962
+1536	image	Song	589	1536	2022-08-19 12:54:20.009872
+1538	image	Song	591	1538	2022-08-19 12:54:31.056409
+1539	image	Song	590	1539	2022-08-19 12:54:31.073591
+1542	image	Song	592	1542	2022-08-19 13:31:10.986892
+1544	image	Song	593	1544	2022-08-19 13:31:12.0751
+1546	image	Song	594	1546	2022-08-19 13:31:15.950026
+1550	image	Song	596	1550	2022-08-19 13:31:26.189793
+1548	image	Song	595	1548	2022-08-19 13:31:20.762952
+1552	image	Song	597	1552	2022-08-22 15:29:48.344298
+1554	image	Song	598	1554	2022-08-22 15:42:54.765754
+1556	image	Song	599	1556	2022-08-22 15:44:33.094692
+1558	image	Song	382	1558	2022-08-24 02:18:05.943477
+1559	image	Song	600	1559	2022-08-24 14:33:41.036115
+1561	image	Song	601	1561	2022-08-24 14:34:04.289396
+1563	image	Song	602	1563	2022-08-24 14:35:43.300731
+1565	image	Song	603	1565	2022-08-24 14:36:14.937785
+1567	image	Song	604	1567	2022-08-24 14:36:35.744958
+1569	image	Song	605	1569	2022-08-24 14:36:38.835042
+1571	image	Song	606	1571	2022-08-24 14:58:51.565312
+1574	image	Song	607	1574	2022-08-25 08:33:35.137209
+1576	image	Song	608	1576	2022-08-25 08:35:05.717357
+1578	image	Song	609	1578	2022-08-25 10:51:02.232184
+1580	image	Song	281	1580	2022-08-25 21:32:23.509463
+1582	image	Song	610	1582	2022-08-26 10:53:16.950369
+1584	image	Song	611	1584	2022-08-26 13:45:18.91626
+1586	image	Song	612	1586	2022-08-26 13:54:39.71201
+1588	image	Song	613	1588	2022-08-26 13:58:40.359817
+1590	image	Song	362	1590	2022-08-28 07:33:51.643684
+1591	image	Song	353	1591	2022-08-28 19:46:10.897899
+1592	image	Song	296	1592	2022-08-29 02:48:41.450726
+1594	image	Song	129	1594	2022-08-29 20:48:05.946863
+1595	image	Song	614	1595	2022-08-31 08:10:18.398401
+1597	image	Song	615	1597	2022-08-31 08:12:02.402873
+1599	image	Song	616	1599	2022-09-03 10:02:37.3543
+1601	image	Song	617	1601	2022-09-03 10:04:03.3675
+1603	image	Song	618	1603	2022-09-03 10:04:49.271507
+1605	image	Song	619	1605	2022-09-03 10:05:19.595969
+1607	image	Song	620	1607	2022-09-04 20:00:57.090877
+1609	image	Song	621	1609	2022-09-04 20:01:05.300647
+1611	image	Song	622	1611	2022-09-04 20:01:16.724956
+1613	image	Song	623	1613	2022-09-04 20:01:51.83747
+1615	image	Song	624	1615	2022-09-04 20:02:47.606029
+1617	image	Song	625	1617	2022-09-04 20:03:44.902229
+1619	image	Song	626	1619	2022-09-04 20:13:02.797449
+1621	image	Song	627	1621	2022-09-04 20:13:33.446021
+1623	image	Song	628	1623	2022-09-04 20:13:47.658643
+1626	image	Song	630	1626	2022-09-04 20:14:25.027114
+1628	image	Song	631	1628	2022-09-04 20:14:37.974832
+1630	image	Song	632	1630	2022-09-05 16:03:43.861268
+1632	image	Song	633	1632	2022-09-05 16:11:40.49936
+1634	image	Song	634	1634	2022-09-05 19:58:12.851956
+1636	image	Song	130	1636	2022-09-06 03:58:01.246624
+1637	image	Song	635	1637	2022-09-06 16:03:46.596924
+1639	image	Song	636	1639	2022-09-06 16:37:02.703614
+1641	image	Song	637	1641	2022-09-09 15:17:50.363446
+1643	image	Song	638	1643	2022-09-09 15:37:33.285858
+1645	image	Song	639	1645	2022-09-09 17:08:28.011992
+1647	image	Song	629	1647	2022-09-17 19:30:42.800538
+1648	image	Song	640	1648	2022-09-20 16:53:19.73341
+1650	mp3	Song	355	1650	2022-09-20 19:09:46.657288
+1651	mp3	Song	351	1651	2022-09-20 19:09:48.41675
+1652	mp3	Song	406	1652	2022-09-20 19:09:49.40886
+1653	mp3	Song	485	1653	2022-09-20 19:09:50.202129
+1654	mp3	Song	352	1654	2022-09-20 19:09:51.445767
+1655	mp3	Song	354	1655	2022-09-20 19:09:53.18946
+1656	mp3	Song	537	1656	2022-09-20 19:09:54.688296
+1657	mp3	Song	487	1657	2022-09-20 19:09:56.013015
+1658	mp3	Song	489	1658	2022-09-20 19:09:57.626248
+1659	mp3	Song	409	1659	2022-09-20 19:09:58.624518
+1660	mp3	Song	411	1660	2022-09-20 19:09:59.630436
+1661	mp3	Song	413	1661	2022-09-20 19:10:00.512132
+1662	mp3	Song	473	1662	2022-09-20 19:10:01.428599
+1663	mp3	Song	447	1663	2022-09-20 19:10:02.892527
+1664	mp3	Song	475	1664	2022-09-20 19:10:04.339405
+1665	mp3	Song	491	1665	2022-09-20 19:10:05.495944
+1666	mp3	Song	477	1666	2022-09-20 19:10:06.51756
+1667	mp3	Song	479	1667	2022-09-20 19:10:08.000094
+1668	mp3	Song	539	1668	2022-09-20 19:10:09.365334
+1669	mp3	Song	481	1669	2022-09-20 19:10:10.69777
+1670	mp3	Song	529	1670	2022-09-20 19:10:12.22259
+1671	mp3	Song	531	1671	2022-09-20 19:10:13.506412
+1672	mp3	Song	575	1672	2022-09-20 19:10:14.984758
+1673	mp3	Song	533	1673	2022-09-20 19:10:15.945265
+1674	mp3	Song	541	1674	2022-09-20 19:10:16.91453
+1675	mp3	Song	535	1675	2022-09-20 19:10:18.19085
+1676	mp3	Song	543	1676	2022-09-20 19:10:19.320223
+1677	mp3	Song	582	1677	2022-09-20 19:10:20.827872
+1678	mp3	Song	545	1678	2022-09-20 19:10:22.376069
+1679	mp3	Song	573	1679	2022-09-20 19:10:23.776307
+1680	mp3	Song	577	1680	2022-09-20 19:10:25.130738
+1681	mp3	Song	579	1681	2022-09-20 19:10:26.222558
+1682	mp3	Song	581	1682	2022-09-20 19:10:27.554864
+1683	mp3	Song	583	1683	2022-09-20 19:10:28.812427
+1684	mp3	Song	584	1684	2022-09-20 19:10:30.235759
+1685	mp3	Song	587	1685	2022-09-20 19:10:31.122351
+1686	mp3	Song	585	1686	2022-09-20 19:10:32.106744
+1687	mp3	Song	586	1687	2022-09-20 19:10:33.136907
+1688	mp3	Song	588	1688	2022-09-20 19:10:34.464166
+1689	mp3	Song	589	1689	2022-09-20 19:10:35.410004
+1690	mp3	Song	590	1690	2022-09-20 19:10:36.696846
+1691	mp3	Song	591	1691	2022-09-20 19:10:37.557781
+1692	mp3	Song	483	1692	2022-09-20 19:10:38.749457
+1693	mp3	Song	358	1693	2022-09-20 19:10:40.008844
+1694	mp3	Song	356	1694	2022-09-20 19:10:41.419131
+1695	mp3	Song	490	1695	2022-09-20 19:10:42.181724
+1696	mp3	Song	417	1696	2022-09-20 19:10:43.394891
+1697	mp3	Song	448	1697	2022-09-20 19:10:44.799451
+1698	mp3	Song	492	1698	2022-09-20 19:10:46.130256
+1699	mp3	Song	476	1699	2022-09-20 19:10:47.62146
+1700	mp3	Song	478	1700	2022-09-20 19:10:49.079534
+1701	mp3	Song	540	1701	2022-09-20 19:10:50.40686
+1702	mp3	Song	480	1702	2022-09-20 19:10:51.222222
+1703	mp3	Song	530	1703	2022-09-20 19:10:53.013954
+1704	mp3	Song	357	1704	2022-09-20 19:10:54.697047
+1705	mp3	Song	359	1705	2022-09-20 19:10:57.027689
+1706	mp3	Song	361	1706	2022-09-20 19:10:58.680256
+1707	mp3	Song	363	1707	2022-09-20 19:11:00.043257
+1708	mp3	Song	365	1708	2022-09-20 19:11:01.584425
+1709	mp3	Song	367	1709	2022-09-20 19:11:02.846732
+1710	mp3	Song	369	1710	2022-09-20 19:11:04.076007
+1711	mp3	Song	371	1711	2022-09-20 19:11:05.004775
+1712	mp3	Song	373	1712	2022-09-20 19:11:06.821108
+1713	mp3	Song	482	1713	2022-09-20 19:11:07.900472
+1714	mp3	Song	415	1714	2022-09-20 19:11:09.009787
+1715	mp3	Song	484	1715	2022-09-20 19:11:10.324806
+1716	mp3	Song	486	1716	2022-09-20 19:11:11.769397
+1717	mp3	Song	532	1717	2022-09-20 19:11:13.716252
+1718	mp3	Song	488	1718	2022-09-20 19:11:14.994048
+1719	mp3	Song	548	1719	2022-09-20 19:11:16.724758
+1720	mp3	Song	534	1720	2022-09-20 19:11:18.834793
+1721	mp3	Song	542	1721	2022-09-20 19:11:20.704888
+1722	mp3	Song	536	1722	2022-09-20 19:11:22.856386
+1723	mp3	Song	538	1723	2022-09-20 19:11:25.049841
+1724	mp3	Song	544	1724	2022-09-20 19:11:26.632565
+1725	mp3	Song	546	1725	2022-09-20 19:11:27.772655
+1726	mp3	Song	550	1726	2022-09-20 19:11:29.359527
+1727	mp3	Song	554	1727	2022-09-20 19:11:30.775656
+1728	mp3	Song	552	1728	2022-09-20 19:11:31.831691
+1729	mp3	Song	576	1729	2022-09-20 19:11:32.809527
+1730	mp3	Song	556	1730	2022-09-20 19:11:34.520006
+1731	mp3	Song	558	1731	2022-09-20 19:11:35.957383
+1732	mp3	Song	574	1732	2022-09-20 19:11:37.192224
+1733	mp3	Song	578	1733	2022-09-20 19:11:38.383027
+1734	mp3	Song	580	1734	2022-09-20 19:11:39.97292
+1735	mp3	Song	474	1735	2022-09-20 19:11:41.545349
+1736	mp3	Song	360	1736	2022-09-20 19:11:43.13781
+1737	mp3	Song	366	1737	2022-09-20 19:11:45.412358
+1738	mp3	Song	364	1738	2022-09-20 19:11:47.011705
+1739	mp3	Song	503	1739	2022-09-20 19:11:48.237656
+1740	mp3	Song	455	1740	2022-09-20 19:11:49.726645
+1741	mp3	Song	497	1741	2022-09-20 19:11:51.603022
+1742	mp3	Song	457	1742	2022-09-20 19:11:53.327543
+1743	mp3	Song	368	1743	2022-09-20 19:11:57.036378
+1744	mp3	Song	370	1744	2022-09-20 19:11:58.572995
+1745	mp3	Song	372	1745	2022-09-20 19:11:59.944878
+1746	mp3	Song	374	1746	2022-09-20 19:12:01.224346
+1747	mp3	Song	459	1747	2022-09-20 19:12:02.750589
+1748	mp3	Song	416	1748	2022-09-20 19:12:03.77679
+1749	mp3	Song	451	1749	2022-09-20 19:12:04.540714
+1750	mp3	Song	461	1750	2022-09-20 19:12:06.116457
+1751	mp3	Song	453	1751	2022-09-20 19:12:07.655887
+1752	mp3	Song	499	1752	2022-09-20 19:12:09.32216
+1753	mp3	Song	493	1753	2022-09-20 19:12:10.420438
+1754	mp3	Song	495	1754	2022-09-20 19:12:11.560823
+1755	mp3	Song	501	1755	2022-09-20 19:12:13.395194
+1756	mp3	Song	505	1756	2022-09-20 19:12:15.045891
+1757	mp3	Song	509	1757	2022-09-20 19:12:16.718139
+1758	mp3	Song	507	1758	2022-09-20 19:12:18.005079
+1759	mp3	Song	511	1759	2022-09-20 19:12:19.843608
+1760	mp3	Song	513	1760	2022-09-20 19:12:21.667584
+1761	mp3	Song	560	1761	2022-09-20 19:12:22.937252
+1762	mp3	Song	562	1762	2022-09-20 19:12:24.322543
+1763	mp3	Song	564	1763	2022-09-20 19:12:25.726944
+1764	mp3	Song	566	1764	2022-09-20 19:12:26.786899
+1765	mp3	Song	597	1765	2022-09-20 19:12:29.399986
+1766	mp3	Song	377	1766	2022-09-20 19:12:31.119879
+1767	mp3	Song	375	1767	2022-09-20 19:12:32.346792
+1768	mp3	Song	418	1768	2022-09-20 19:12:33.555913
+1769	mp3	Song	506	1769	2022-09-20 19:12:34.990162
+1770	mp3	Song	419	1770	2022-09-20 19:12:36.7339
+1771	mp3	Song	494	1771	2022-09-20 19:12:38.031102
+1772	mp3	Song	452	1772	2022-09-20 19:12:39.46671
+1773	mp3	Song	454	1773	2022-09-20 19:12:41.179197
+1774	mp3	Song	502	1774	2022-09-20 19:12:42.454837
+1775	mp3	Song	456	1775	2022-09-20 19:12:44.426941
+1776	mp3	Song	398	1776	2022-09-20 19:12:45.5794
+1777	mp3	Song	496	1777	2022-09-20 19:12:47.348136
+1778	mp3	Song	376	1778	2022-09-20 19:12:49.365022
+1779	mp3	Song	458	1779	2022-09-20 19:12:51.162155
+1780	mp3	Song	378	1780	2022-09-20 19:12:53.523477
+1781	mp3	Song	380	1781	2022-09-20 19:12:54.982837
+1782	mp3	Song	400	1782	2022-09-20 19:12:56.148587
+1783	mp3	Song	384	1783	2022-09-20 19:12:57.775829
+1784	mp3	Song	386	1784	2022-09-20 19:12:59.22812
+1785	mp3	Song	388	1785	2022-09-20 19:13:00.451723
+1786	mp3	Song	402	1786	2022-09-20 19:13:01.611036
+1787	mp3	Song	390	1787	2022-09-20 19:13:03.296588
+1788	mp3	Song	392	1788	2022-09-20 19:13:04.632271
+1789	mp3	Song	394	1789	2022-09-20 19:13:06.154429
+1790	mp3	Song	396	1790	2022-09-20 19:13:07.442912
+1791	mp3	Song	460	1791	2022-09-20 19:13:08.714812
+1792	mp3	Song	498	1792	2022-09-20 19:13:10.152799
+1793	mp3	Song	500	1793	2022-09-20 19:13:12.195017
+1794	mp3	Song	504	1794	2022-09-20 19:13:13.28934
+1795	mp3	Song	510	1795	2022-09-20 19:13:14.229009
+1796	mp3	Song	508	1796	2022-09-20 19:13:15.637201
+1797	mp3	Song	512	1797	2022-09-20 19:13:17.142467
+1798	mp3	Song	514	1798	2022-09-20 19:13:19.105385
+1799	mp3	Song	561	1799	2022-09-20 19:13:21.585754
+1800	mp3	Song	563	1800	2022-09-20 19:13:23.546337
+1801	mp3	Song	450	1801	2022-09-20 19:13:24.45148
+1802	mp3	Song	379	1802	2022-09-20 19:13:25.986049
+1803	mp3	Song	383	1803	2022-09-20 19:13:27.87688
+1804	mp3	Song	395	1804	2022-09-20 19:13:29.068958
+1805	mp3	Song	401	1805	2022-09-20 19:13:30.195994
+1806	mp3	Song	403	1806	2022-09-20 19:13:31.226434
+1807	mp3	Song	281	1807	2022-09-20 19:13:32.741486
+1808	mp3	Song	385	1808	2022-09-20 19:13:34.56646
+1809	mp3	Song	422	1809	2022-09-20 19:13:36.63084
+1810	mp3	Song	432	1810	2022-09-20 19:13:38.412815
+1811	mp3	Song	424	1811	2022-09-20 19:13:40.465513
+1812	mp3	Song	387	1812	2022-09-20 19:13:41.844502
+1813	mp3	Song	389	1813	2022-09-20 19:13:42.886688
+1814	mp3	Song	428	1814	2022-09-20 19:13:44.765603
+1815	mp3	Song	397	1815	2022-09-20 19:13:46.033463
+1816	mp3	Song	381	1816	2022-09-20 19:13:48.268588
+1817	mp3	Song	391	1817	2022-09-20 19:13:49.857057
+1818	mp3	Song	393	1818	2022-09-20 19:13:51.215194
+1819	mp3	Song	399	1819	2022-09-20 19:13:52.274942
+1820	mp3	Song	426	1820	2022-09-20 19:13:54.272373
+1821	mp3	Song	430	1821	2022-09-20 19:13:56.248237
+1822	mp3	Song	435	1822	2022-09-20 19:13:57.932693
+1823	mp3	Song	433	1823	2022-09-20 19:13:59.226536
+1824	mp3	Song	437	1824	2022-09-20 19:14:01.342097
+1825	mp3	Song	439	1825	2022-09-20 19:14:03.313044
+1826	mp3	Song	441	1826	2022-09-20 19:14:05.385291
+1827	mp3	Song	443	1827	2022-09-20 19:14:06.933395
+1828	mp3	Song	420	1828	2022-09-20 19:14:08.512318
+1829	mp3	Song	317	1829	2022-09-20 19:14:09.633911
+1830	mp3	Song	307	1830	2022-09-20 19:14:10.91662
+1831	mp3	Song	303	1831	2022-09-20 19:14:12.107485
+1832	mp3	Song	301	1832	2022-09-20 19:14:13.257756
+1833	mp3	Song	302	1833	2022-09-20 19:14:14.734392
+1834	mp3	Song	311	1834	2022-09-20 19:14:15.64427
+1835	mp3	Song	304	1835	2022-09-20 19:14:16.59956
+1836	mp3	Song	308	1836	2022-09-20 19:14:17.55403
+1837	mp3	Song	305	1837	2022-09-20 19:14:18.757979
+1838	mp3	Song	309	1838	2022-09-20 19:14:19.920189
+1839	mp3	Song	310	1839	2022-09-20 19:14:21.144233
+1840	mp3	Song	314	1840	2022-09-20 19:14:22.384542
+1841	mp3	Song	313	1841	2022-09-20 19:14:24.087553
+1842	mp3	Song	312	1842	2022-09-20 19:14:24.974215
+1843	mp3	Song	316	1843	2022-09-20 19:14:26.01287
+1844	mp3	Song	315	1844	2022-09-20 19:14:27.154936
+1845	mp3	Song	318	1845	2022-09-20 19:14:28.119167
+1846	mp3	Song	319	1846	2022-09-20 19:14:29.066165
+1847	mp3	Song	320	1847	2022-09-20 19:14:30.265976
+1848	mp3	Song	321	1848	2022-09-20 19:14:31.684844
+1849	mp3	Song	322	1849	2022-09-20 19:14:32.778723
+1850	mp3	Song	306	1850	2022-09-20 19:14:34.247456
+1851	mp3	Song	466	1851	2022-09-20 19:14:35.294363
+1852	mp3	Song	323	1852	2022-09-20 19:14:36.408391
+1853	mp3	Song	325	1853	2022-09-20 19:14:37.1278
+1854	mp3	Song	404	1854	2022-09-20 19:14:38.203368
+1855	mp3	Song	569	1855	2022-09-20 19:14:39.324578
+1856	mp3	Song	327	1856	2022-09-20 19:14:40.472737
+1857	mp3	Song	329	1857	2022-09-20 19:14:41.543763
+1858	mp3	Song	331	1858	2022-09-20 19:14:42.885691
+1859	mp3	Song	333	1859	2022-09-20 19:14:44.070432
+1860	mp3	Song	468	1860	2022-09-20 19:14:45.243759
+1861	mp3	Song	521	1861	2022-09-20 19:14:47.46986
+1862	mp3	Song	470	1862	2022-09-20 19:14:48.709775
+1863	mp3	Song	421	1863	2022-09-20 19:14:50.284336
+1864	mp3	Song	423	1864	2022-09-20 19:14:52.305529
+1865	mp3	Song	472	1865	2022-09-20 19:14:53.754251
+1866	mp3	Song	425	1866	2022-09-20 19:14:55.987709
+1867	mp3	Song	427	1867	2022-09-20 19:14:57.923388
+1868	mp3	Song	429	1868	2022-09-20 19:14:59.560915
+1869	mp3	Song	515	1869	2022-09-20 19:15:01.250264
+1870	mp3	Song	431	1870	2022-09-20 19:15:03.317663
+1871	mp3	Song	523	1871	2022-09-20 19:15:04.719685
+1872	mp3	Song	434	1872	2022-09-20 19:15:06.614378
+1873	mp3	Song	436	1873	2022-09-20 19:15:08.706554
+1874	mp3	Song	438	1874	2022-09-20 19:15:10.098507
+1875	mp3	Song	440	1875	2022-09-20 19:15:12.223883
+1876	mp3	Song	442	1876	2022-09-20 19:15:14.038199
+1877	mp3	Song	444	1877	2022-09-20 19:15:15.722736
+1878	mp3	Song	446	1878	2022-09-20 19:15:17.078214
+1879	mp3	Song	517	1879	2022-09-20 19:15:18.059228
+1880	mp3	Song	464	1880	2022-09-20 19:15:19.361398
+1881	mp3	Song	519	1881	2022-09-20 19:15:22.087986
+1882	mp3	Song	553	1882	2022-09-20 19:15:23.362335
+1883	mp3	Song	525	1883	2022-09-20 19:15:24.892524
+1884	mp3	Song	549	1884	2022-09-20 19:15:26.180168
+1885	mp3	Song	527	1885	2022-09-20 19:15:28.192596
+1886	mp3	Song	557	1886	2022-09-20 19:15:29.944412
+1887	mp3	Song	551	1887	2022-09-20 19:15:31.95982
+1888	mp3	Song	555	1888	2022-09-20 19:15:34.113153
+1889	mp3	Song	559	1889	2022-09-20 19:15:35.354267
+1890	mp3	Song	565	1890	2022-09-20 19:15:36.553001
+1891	mp3	Song	567	1891	2022-09-20 19:15:38.022401
+1892	mp3	Song	571	1892	2022-09-20 19:15:39.353685
+1893	mp3	Song	547	1893	2022-09-20 19:15:40.802699
+1894	mp3	Song	462	1894	2022-09-20 19:15:42.182388
+1895	mp3	Song	334	1895	2022-09-20 19:15:43.686182
+1896	mp3	Song	335	1896	2022-09-20 19:15:45.039497
+1897	mp3	Song	336	1897	2022-09-20 19:15:46.414966
+1898	mp3	Song	344	1898	2022-09-20 19:15:47.869448
+1899	mp3	Song	340	1899	2022-09-20 19:15:49.480388
+1900	mp3	Song	337	1900	2022-09-20 19:15:51.168958
+1901	mp3	Song	338	1901	2022-09-20 19:15:52.586952
+1902	mp3	Song	339	1902	2022-09-20 19:15:55.026148
+1903	mp3	Song	328	1903	2022-09-20 19:15:56.227535
+1904	mp3	Song	407	1904	2022-09-20 19:15:57.697665
+1905	mp3	Song	408	1905	2022-09-20 19:15:59.024637
+1906	mp3	Song	341	1906	2022-09-20 19:16:01.076946
+1907	mp3	Song	469	1907	2022-09-20 19:16:02.76993
+1908	mp3	Song	445	1908	2022-09-20 19:16:04.877722
+1909	mp3	Song	346	1909	2022-09-20 19:16:06.221615
+1910	mp3	Song	465	1910	2022-09-20 19:16:07.272451
+1911	mp3	Song	347	1911	2022-09-20 19:16:08.266368
+1912	mp3	Song	348	1912	2022-09-20 19:16:09.516117
+1913	mp3	Song	345	1913	2022-09-20 19:16:10.591022
+1914	mp3	Song	349	1914	2022-09-20 19:16:12.497275
+1915	mp3	Song	410	1915	2022-09-20 19:16:13.58859
+1916	mp3	Song	467	1916	2022-09-20 19:16:14.630157
+1917	mp3	Song	324	1917	2022-09-20 19:16:16.382855
+1918	mp3	Song	471	1918	2022-09-20 19:16:17.517458
+1919	mp3	Song	342	1919	2022-09-20 19:16:18.987877
+1920	mp3	Song	412	1920	2022-09-20 19:16:20.375231
+1921	mp3	Song	326	1921	2022-09-20 19:16:21.467608
+1922	mp3	Song	350	1922	2022-09-20 19:16:23.224805
+1923	mp3	Song	330	1923	2022-09-20 19:16:25.048918
+1924	mp3	Song	343	1924	2022-09-20 19:16:26.994498
+1925	mp3	Song	332	1925	2022-09-20 19:16:28.781348
+1926	mp3	Song	414	1926	2022-09-20 19:16:30.038094
+1927	mp3	Song	405	1927	2022-09-20 19:16:30.833839
+1928	mp3	Song	518	1928	2022-09-20 19:16:32.836269
+1929	mp3	Song	516	1929	2022-09-20 19:16:34.160841
+1930	mp3	Song	520	1930	2022-09-20 19:16:35.606884
+1931	mp3	Song	522	1931	2022-09-20 19:16:36.985278
+1932	mp3	Song	524	1932	2022-09-20 19:16:38.367931
+\.
+
+
+--
+-- Data for Name: active_storage_blobs; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.active_storage_blobs (id, key, filename, content_type, metadata, service_name, byte_size, checksum, created_at) FROM stdin;
+1	o7zxgh9mtk3ahnh4e1yr5l8eyg48	https://img.youtube.com/vi/03SeeJcQu9c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	45539	VwdNBcqIHETnxgX5jhnxkQ==	2022-08-15 18:20:58.119557
+307	s9edhqq3gezwxx0hg5m1hi5f0lz2	Therapy Music.mp3	audio/mpeg	{"identified":true,"duration":254.651902,"bit_rate":132928,"analyzed":true}	local	4254825	OQS3JA989Xiqq38+3tJNyA==	2022-08-15 19:45:44.224055
+3	sgm4aqm4uepp9j2v557ei862wce7	https://img.youtube.com/vi/wcCvg7_Fkos/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	69916	L0/r2JcsrFO2gGozPFykNw==	2022-08-15 18:21:10.76419
+308	f9m3l6o1zd181qxxeunl98i3v9ux	Unacceptable.mp3	audio/mpeg	{"identified":true,"duration":186.984,"bit_rate":133081,"analyzed":true}	local	3121600	WaXKPuoEBTihfvs8jvfyag==	2022-08-15 19:45:45.59926
+5	c6r7l1rx5xvr8pyd897d0vhx8xjx	https://img.youtube.com/vi/whEYfFMtkLs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15669	6RDoy7wgZOqWleifW4GhFg==	2022-08-15 18:21:25.86497
+309	enateb5e0l06g87cwzdiwd546lw5	Fix This.mp3	audio/mpeg	{"identified":true,"duration":178.68,"bit_rate":114621,"analyzed":true}	local	2564730	S/Dryt0mFLQqmSystAfMfQ==	2022-08-15 19:45:46.755891
+7	td93mbp2rb5juctbilehdqlyidbv	https://img.youtube.com/vi/KIiMR84NY9M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3058	900I+ShhH1+63udJp0McJA==	2022-08-15 18:21:42.89739
+310	tguix0cxlwafe3lgzddnnbun22lh	September 16.mp3	audio/mpeg	{"identified":true,"duration":808.301476,"bit_rate":37522,"analyzed":true}	local	3798668	DMDhmt1AFXP92O+Nr/WHtA==	2022-08-15 19:45:48.374078
+9	f2ujye6jzxeh1mv8zzr7gr9lmhlo	https://img.youtube.com/vi/t6eEJMvkZ5c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12318	Q40cDTKF7VpC3IRnCQYRGQ==	2022-08-15 18:21:44.007585
+311	wr8pf3d8cij73wuqjfj8huk3cz5i	Cherry Hill.mp3	audio/mpeg	{"identified":true,"duration":414.77649,"bit_rate":59684,"analyzed":true}	local	3103546	mYFcSR43jad13na6zx5BAQ==	2022-08-15 19:45:49.754474
+11	2qpos2odhsst2y1x4aew2h13wc78	https://img.youtube.com/vi/ZadUPeKrl9s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6799	KpahWJBu95P+bW9HOXLvYg==	2022-08-15 18:21:46.542464
+312	mfi1xdzqmi70ev9t45gk0m6yxjs6	Are You Entertained (ft. Ed Sheeran).mp3	audio/mpeg	{"identified":true,"duration":177.919126,"bit_rate":127383,"analyzed":true}	local	2837539	ldtOiBQB4vw5dUdLO+vYGA==	2022-08-15 19:45:50.978119
+13	3lc8cs9w1lvf13gy6kcr7ilzl6p0	https://img.youtube.com/vi/SYjn-JeiOMc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6799	KpahWJBu95P+bW9HOXLvYg==	2022-08-15 18:21:48.983978
+313	bfclcvlp8sr7gmzw9eacn35wcmvd	Aw Aw.mp3	audio/mpeg	{"identified":true,"duration":172.14433,"bit_rate":105536,"analyzed":true}	local	2275628	+xm37GwJl+slbj8ZDSEa+A==	2022-08-15 19:45:51.948511
+15	gnulp3fqn9wz5w464zi6vee6sbbu	https://img.youtube.com/vi/LtVnLCzCHeI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3043	r8B5RTRnZ3Kq5xlBctfoGg==	2022-08-15 18:21:49.992025
+314	aqiyodtkdck7cgos4x5jz1lo58vs	Some Time.mp3	audio/mpeg	{"identified":true,"duration":198.912,"bit_rate":131138,"analyzed":true}	local	3267852	Tckz2aSubAMG6g8QE3qV+Q==	2022-08-15 19:45:53.318676
+17	v9xpkh5vwaybt801vmuawhy7vt3p	https://img.youtube.com/vi/eQLPYKiH_B8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6872	xdGntaGSHPIMMbRRVg2l5w==	2022-08-15 18:21:50.18588
+843	telyjskah6mvlx24e7p4mqjihcno	Legacy.mp3	audio/mpeg	{"identified":true,"duration":333.748518,"bit_rate":143692,"analyzed":true}	local	6004272	RthjAApp3r2oc8DelZmU9g==	2022-08-16 15:42:44.434638
+19	5q0bw4xqhds0mfzjej67rjw0xv8q	https://img.youtube.com/vi/kReS0_2gtpg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6799	KpahWJBu95P+bW9HOXLvYg==	2022-08-15 18:21:51.761859
+316	qmvqc2ajj6dvys7j8ob2zibgsyuu	Psycho Pt.2.mp3	audio/mpeg	{"identified":true,"duration":153.815417,"bit_rate":125851,"analyzed":true}	local	2424155	o2UQQW0M7nFyxghJKIu39A==	2022-08-15 19:45:55.899084
+21	266lk9qvhmf5tgxfc2pf44ikkjrx	https://img.youtube.com/vi/qDDT01HTq5A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6799	KpahWJBu95P+bW9HOXLvYg==	2022-08-15 18:21:53.447275
+844	onqlken5mzkj18cgxh54vuk3q5mq	Run It.mp3	audio/mpeg	{"identified":true,"duration":243.669224,"bit_rate":112608,"analyzed":true}	local	3445140	+8YZe74C8e9nkTeiVELqEA==	2022-08-16 15:42:45.849046
+23	jah7bm99zc8ekx816x3cna3h5tzh	https://img.youtube.com/vi/U6SqN0wgpFI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6872	xdGntaGSHPIMMbRRVg2l5w==	2022-08-15 18:21:55.68986
+25	jvv3xqjbzwpstg6d881kmai5xiu4	https://img.youtube.com/vi/4W2RjV0tqqI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7690	WXudsOhRyEyIAMbdUImOvQ==	2022-08-15 18:21:57.50154
+319	tsmd08d8tvwoq8wf64bvymq6bmzt	What They Want.mp3	audio/mpeg	{"identified":true,"duration":269.27092,"bit_rate":49904,"analyzed":true}	local	1700354	y5R4ZESJYM3B5GO4o5ZlCQ==	2022-08-15 19:46:23.129261
+27	vs9hc00jynsz0zuhvlwo36jmq7yj	https://img.youtube.com/vi/zDEmHo0Uo5A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16811	Gvjb4H2rXyTlAF7EkLkrRA==	2022-08-15 18:22:00.974721
+318	5oc7boozgmpz9aqk7mrnilivd92v	Russ - It's All In Your Head (Audio Book).mp3	audio/mpeg	{"identified":true,"duration":5137.056,"bit_rate":91951,"analyzed":true}	local	59053178	Fkhowkbx3ZFjMQnbk6R8yg==	2022-08-15 19:46:22.210518
+320	kfoy2kew3b4eni2gfb48c8phjusw	Fuck the World (Summer in London).mp3	audio/mpeg	{"identified":true,"duration":279.748773,"bit_rate":96614,"analyzed":true}	local	3389461	ldZWhlLy1MApnJ5TYJgOKg==	2022-08-15 19:46:24.645269
+29	zzfgvoj4o4j41vj6l4ai441a8nav	https://img.youtube.com/vi/yHN9bHKtBl4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3043	r8B5RTRnZ3Kq5xlBctfoGg==	2022-08-15 18:22:07.192695
+321	55sy0jsp7enx213bv6b0y62bfi4d	King's Rant.mp3	audio/mpeg	{"identified":true,"duration":288.292114,"bit_rate":103850,"analyzed":true}	local	3753417	brwrlu+khYKFOYbQL/df+g==	2022-08-15 19:46:26.381305
+31	lr7mj32bt1fn4wf2z22rghf7lkk3	https://img.youtube.com/vi/OAcZ01d8ZVY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6872	xdGntaGSHPIMMbRRVg2l5w==	2022-08-15 18:22:08.672891
+322	i0075wf4tpbvanq195uaf81js0mr	Tadow.mp3	audio/mpeg	{"identified":true,"duration":326.859665,"bit_rate":114198,"analyzed":true}	local	4675686	D9Lf45PJtwbNAm//S4O3UQ==	2022-08-15 19:46:28.454678
+33	9a5t9btr823hs2cr4ise7fit2bw2	https://img.youtube.com/vi/ele2DMU49Jk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7360	TeOpJFS4Qkdn+qUHXzlPcw==	2022-08-15 18:22:12.19623
+323	pt44rqn1wya6tl2b6j5u2trwjhsc	Lady Lady.mp3	audio/mpeg	{"identified":true,"duration":153.583337,"bit_rate":138270,"analyzed":true}	local	2672752	D2YNGiYvRJrOjYSrS3E4lg==	2022-08-15 19:46:29.660196
+1771	m8i10rk0dgsoyognsnwcwnkte9x0	Watch Out.mp3	audio/mpeg	{"identified":true,"duration":280.415271,"bit_rate":93953,"analyzed":true}	local	3323470	H0ISaXmOzK5nxlmMkg3a8w==	2022-09-20 19:12:38.030488
+35	3771gmhwu94bmkgg5oy61h7zqb6e	https://img.youtube.com/vi/ciZLAEQk8wI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20625	4Gg45Ow/eU3MVN94PEKavQ==	2022-08-15 18:22:16.563536
+37	oapwial9x9wrtl1d37l8x2hjr132	https://img.youtube.com/vi/OPFgOGpK3b0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14213	Y8UqCBp4XpiVWSTSNvsjGg==	2022-08-15 18:22:20.342764
+324	u7iuye4ef7rlmhykbe666u991jiw	Mystery Lady.mp3	audio/mpeg	{"identified":true,"duration":403.76278,"bit_rate":80617,"analyzed":true}	local	4101232	Bj46yDYefvYvWaON30tqbg==	2022-08-15 19:46:31.594237
+39	ogn63eep78q9xv6gpf0rifsdydve	https://img.youtube.com/vi/KiEcHwLED6E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7647	keAGYM9klDsG5vzSMveBUg==	2022-08-15 18:22:24.388386
+325	xkg097iauzw83qyesy33tcv8g1m7	Desire.mp3	audio/mpeg	{"identified":true,"duration":309.786725,"bit_rate":109586,"analyzed":true}	local	4279417	k0nH0rH/yACjP6heNatvuQ==	2022-08-15 19:46:33.396171
+41	u0atfbp4yhfirul1zsydxzhqemro	https://img.youtube.com/vi/cgh-JcYNGuM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6799	KpahWJBu95P+bW9HOXLvYg==	2022-08-15 18:22:27.115563
+326	bqpj6jh2ejcjyddalblbhxby17zf	Desire.mp3	audio/mpeg	{"identified":true,"duration":370.00643,"bit_rate":123475,"analyzed":true}	local	5710864	dxtWGtTkM3geyBO52QHNwA==	2022-08-15 19:46:36.086601
+43	beqwuxvk5pumtutg85eiinloeqa3	https://img.youtube.com/vi/jlSVpplAqkI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3058	900I+ShhH1+63udJp0McJA==	2022-08-15 18:22:36.274784
+327	5339a7ykpyx0odrd0mn2wrieadxw	Battle Lines.mp3	audio/mpeg	{"identified":true,"duration":254.328,"bit_rate":133022,"analyzed":true}	local	4234598	SuO+WJju1HAoV40LLOLSMA==	2022-08-15 19:46:37.994112
+45	zqjk8wejqw78kehem2hjj24hdrtp	https://img.youtube.com/vi/UDP-h_1Ok3I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7647	keAGYM9klDsG5vzSMveBUg==	2022-08-15 18:22:59.13997
+328	afnzgaui8eicir57nm6yjgkkequw	Grace.mp3	audio/mpeg	{"identified":true,"duration":524.40681,"bit_rate":99388,"analyzed":true}	local	6529841	TeFln9A2xdwl0OMh0DXE8w==	2022-08-15 19:46:40.76912
+47	c9aomnpde9f15cf9cjbrd30rkbzv	https://img.youtube.com/vi/iCyarMAEUVU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7677	bVgZD6OkPfWtPt+eg70fzQ==	2022-08-15 18:26:07.51213
+329	1ahi8pufj58smwdnpt88f7fc7tic	Heaven Only Knows.mp3	audio/mpeg	{"identified":true,"duration":274.799689,"bit_rate":131386,"analyzed":true}	local	4519908	utH12vpja0qxrVeDcRJx1Q==	2022-08-15 19:46:42.814125
+49	vh7skqohhfynm5sxyvl4z98ahsn1	https://img.youtube.com/vi/cuqvuffSKCI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23045	eAzYjgZmpuKmjomesME9xA==	2022-08-15 18:26:07.821757
+330	weg2rx0ejfh42kesludozd8sovjn	Outlier.mp3	audio/mpeg	{"identified":true,"duration":310.428287,"bit_rate":125229,"analyzed":true}	local	4886658	7QflKQaS/XOXfi8Zsm+XhA==	2022-08-15 19:46:44.993776
+51	8ple0jsqggkhi0f77c9cyu69unu6	https://img.youtube.com/vi/u6v4U5vbUrQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7714	t53eoWQRW7fEDoVlQXsgxQ==	2022-08-15 18:26:09.164802
+331	0wjmzvxwwzb8qpczo1odirg1r6e1	The Only Thing We Know.mp3	audio/mpeg	{"identified":true,"duration":329.220594,"bit_rate":117143,"analyzed":true}	local	4826818	bdz7+Xfsx2QSUB1tzWel1Q==	2022-08-15 19:46:47.027936
+53	81ic6nn1gsqwp1fznd547igc0a0y	https://img.youtube.com/vi/Y6-n3JRwmsE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	2909	L05GQ+bvRV4yzC6sABjgNQ==	2022-08-15 18:26:11.30718
+332	slez9t6di35l8p2hoh8psbfc23j2	I Ain't Gonna Be the First to Cry.mp3	audio/mpeg	{"identified":true,"duration":362.976877,"bit_rate":120142,"analyzed":true}	local	5494884	9NRn2U7OBnmzFwhwNGlzeA==	2022-08-15 19:46:49.500587
+55	4mdjkgipbcee90eatli1peyko6nb	https://img.youtube.com/vi/MABiyJzhKp4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5552	BfXNUfteyA2KyaOo6tK9AQ==	2022-08-15 18:26:15.491925
+333	0mfbh7hyb24zz69tzz93l0b0o22f	Love We Found.mp3	audio/mpeg	{"identified":true,"duration":405.2939,"bit_rate":121725,"analyzed":true}	local	6193557	Zf4Wm/4fr0roCIJG6edcpg==	2022-08-15 19:46:52.130845
+56	oso7ug6k0xqw7socf4eb3qb64pjo	https://img.youtube.com/vi/TSmuQ1G2GoU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3038	eWy+8JlKdFiqjtHxOsub2g==	2022-08-15 18:26:15.515447
+334	cr89ualiry65bzl50asb9gw76rc6	Tearing Me Up.mp3	audio/mpeg	{"identified":true,"duration":506.629465,"bit_rate":122863,"analyzed":true}	local	7824606	mEOMrQE/GUmeqjN4NjDizw==	2022-08-15 19:46:55.414184
+59	di4vka7qmp8idm1srr41ex80z8w0	https://img.youtube.com/vi/qU4PghlE2lE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5710	9UojG2HMPY2CgCQWwT7XFQ==	2022-08-15 18:26:16.828519
+335	o8rfelrvu0lb78lk5mcn5fjwia0q	Inner Light.mp3	audio/mpeg	{"identified":true,"duration":275.421061,"bit_rate":124925,"analyzed":true}	local	4311565	xhwUZ0SDjeEht3X046w60w==	2022-08-15 19:46:57.259454
+61	x241jnbkgszgkdwg5btqudibqx2w	https://img.youtube.com/vi/2bFhL3AKyxs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7714	t53eoWQRW7fEDoVlQXsgxQ==	2022-08-15 18:26:18.422787
+336	dxbvb7v9c2e4d7ne05ct5byqim8x	The Blame.mp3	audio/mpeg	{"identified":true,"duration":398.531258,"bit_rate":135855,"analyzed":true}	local	6793639	vmHBtJuwoWC49G4DaR5pYQ==	2022-08-15 19:47:00.12325
+64	500mnfirbfq4yb4iig86p20nj098	generic_buCkL0KLKFw.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11244	DI2QkRIcso52AQqsXR7/cw==	2022-08-15 18:26:19.924516
+337	1zzl4tjmvercvih3luoktev96xmz	Something About You (Elderbrook VIP).mp3	audio/mpeg	{"identified":true,"duration":261.963343,"bit_rate":99681,"analyzed":true}	local	3298296	WNDoB6XZuJVwUo7R95CGRQ==	2022-08-15 19:47:01.645447
+66	odn44f4yh4fxfrogi0svkub7ja9f	https://img.youtube.com/vi/R6fUquMJ8jc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	2628	HvUM3FFHHk8Dp6IpA+0/Fw==	2022-08-15 18:26:24.338497
+338	qzytuw4u1iln4dbl6p94z4anisvq	Talking.mp3	audio/mpeg	{"identified":true,"duration":315.456129,"bit_rate":76143,"analyzed":true}	local	3010841	zwG81hixV56RBOLU4dpQwA==	2022-08-15 19:47:03.01705
+68	yskraiz9tj7y4ggnt06zl8az09dl	https://img.youtube.com/vi/HE1HXmiAw1o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22086	ZAPTywLTguZvvYMVImoYbA==	2022-08-15 18:26:25.740029
+339	caedpcg45944xd9c39iqxbxpzzsp	Numb.mp3	audio/mpeg	{"identified":true,"duration":270.588822,"bit_rate":105852,"analyzed":true}	local	3591656	ZAbIRMPEXzsuMk6DRiwBoQ==	2022-08-15 19:47:04.698276
+70	nrhpz3dx6t27l2cmpby1w1m7wn3g	https://img.youtube.com/vi/HqqJrX-SbnQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9927	aTL+rSISB1Zx/qWxIr9Dug==	2022-08-15 18:26:30.506198
+72	dgz0u2zaa7dmg6357sjii6s5ccfi	https://img.youtube.com/vi/vGnuDPEsUds/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3461	8TCHiLj9qWvI9Rxngm2cCQ==	2022-08-15 18:26:37.642496
+845	9nevbc8zja0orftfq2ci4d2uwmly	PTSD.mp3	audio/mpeg	{"identified":true,"duration":265.913356,"bit_rate":105051,"analyzed":true}	local	3501692	qHhE4+vxaCVg+yuyIZWd8g==	2022-08-16 15:42:47.268219
+846	ki6c2hkshe4d3xyndhxvmeb9lr23	Stuntin' On You.mp3	audio/mpeg	{"identified":true,"duration":390.190364,"bit_rate":54464,"analyzed":true}	local	2656416	YlsyIIzTDv4GLsG2zDLt1Q==	2022-08-16 15:42:48.441374
+74	e19w83t93vnoafnq5l1r48h79dsh	https://img.youtube.com/vi/9ftwhlbkudI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6113	nwQrFDRZaowoEaK1jGoXvA==	2022-08-15 18:26:41.156198
+76	928ktiq8njfxucdwpw6t3bdjp88f	https://img.youtube.com/vi/IoOli-fR_cs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7677	bVgZD6OkPfWtPt+eg70fzQ==	2022-08-15 18:26:45.201805
+481	32v2ozvnz9scw548ln00p86jxh2k	https://img.youtube.com/vi/Bw5rcL5MB5g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	45359	+R+Bb1ga/dvJdxIA9wewwQ==	2022-08-16 07:41:36.996668
+856	yzypbwgyqvl51xkiouripki3uauh	Dior.mp3	audio/mpeg	{"identified":true,"duration":183.849437,"bit_rate":154673,"analyzed":true}	local	3564434	xKAo4sQdd+x0KZD7afSKrQ==	2022-08-16 15:43:03.375864
+80	8hqizl9aarxc2b4846kerlj2gzwj	https://img.youtube.com/vi/wy4y3zx7lO4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3315	/TNM/UB5yWhSm5Lj6FXbmQ==	2022-08-15 18:26:52.987743
+84	thsvhk91294darowziv6e8qymlan	https://img.youtube.com/vi/IE4tDd-iew8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20974	VVtXPWf/x0fYstQslBOokg==	2022-08-15 18:27:02.93926
+485	2qc3afcsyewg4y1fklnp30zofa8p	https://img.youtube.com/vi/J_7qO9SC48s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33598	TzS6fP731GLXGmlD/tynHA==	2022-08-16 07:41:42.171374
+969	ywtqmw7cvh3t88t7ekcfm4qxzmjz	https://img.youtube.com/vi/qjI6Gru3Tho/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:34:47.183899
+88	yr6wtrxwq9mzjb63n7weuzrlba6j	https://img.youtube.com/vi/73-Iko7I_e0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23045	eAzYjgZmpuKmjomesME9xA==	2022-08-15 18:27:06.541169
+340	8n0cfbitto26ruzc3ep4s9h87omm	Your Soul.mp3	audio/mpeg	{"identified":true,"duration":328.264428,"bit_rate":80778,"analyzed":true}	local	3326587	mNDI4y/4RapNqN5c7lhd+w==	2022-08-15 19:47:06.1786
+341	0x5edfvwz6fyccwiopoe5mfrqen4	Whiskey.mp3	audio/mpeg	{"identified":true,"duration":466.77028,"bit_rate":88303,"analyzed":true}	local	5174464	oOFiqXmOsbfwf3jsiWLucg==	2022-08-15 19:47:08.64132
+342	fl5un93rlg9c0hch8sosse77uyrz	Floating Palace.mp3	audio/mpeg	{"identified":true,"duration":219.113602,"bit_rate":109725,"analyzed":true}	local	3024265	X37lsRS71lZjnmXSgmFPug==	2022-08-15 19:47:10.08979
+343	1hxnf1y0nqiwjfmf6uqx9adeuhdv	Red Moon Rising.mp3	audio/mpeg	{"identified":true,"duration":228.811392,"bit_rate":100701,"analyzed":true}	local	2902558	Ccv/pVo81a6G9X3rAWbaYw==	2022-08-15 19:47:11.446908
+344	pjxby649x2lmxvgc2eez09fd0afr	Devil Eyes.mp3	audio/mpeg	{"identified":true,"duration":293.206989,"bit_rate":88773,"analyzed":true}	local	3266492	vKJd6yFIZZ4KTjvrQtuCrA==	2022-08-15 19:47:12.864609
+345	u3ae9l6wm747i25517r5jgutt9n5	Wild One.mp3	audio/mpeg	{"identified":true,"duration":331.174821,"bit_rate":93221,"analyzed":true}	local	3881408	LoK1TNYiiWavWYvimIxlkw==	2022-08-15 19:47:14.575515
+346	gaf22f9rpdomcv2fabfc1zp6qxry	Life Happens.mp3	audio/mpeg	{"identified":true,"duration":330.848882,"bit_rate":94423,"analyzed":true}	local	3925453	hJuD8MFkWH3GxGVXsTgfeA==	2022-08-15 19:47:16.395407
+347	7s4l0fkodh08c4gnix1s31lkfgv5	Distress.mp3	audio/mpeg	{"identified":true,"duration":352.169955,"bit_rate":94896,"analyzed":true}	local	4196349	0Toz85PeCSL6BFqsxwskDg==	2022-08-15 19:47:18.274557
+489	rii6dwft9l8kmo01awggt165rad9	https://img.youtube.com/vi/kQeth1w-S_c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20374	LS+LVvMMf7zCLGxg2pvXVQ==	2022-08-16 07:41:45.809369
+493	aqxnq61nt1e4l988imlmj63xd7n0	https://img.youtube.com/vi/hqfZMqqFjU4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:52.351382
+973	xjv6pnckbwowelw95b5x5jzd3umk	https://img.youtube.com/vi/_AcmyFsSm18/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33972	uDybZ0Tw85XcumQHXJdUuw==	2022-08-16 16:34:51.719084
+497	tp3i4kwl2xvl23ghtgx07ccxkr3b	https://img.youtube.com/vi/cycUHgg0zzU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12002	2ciRrTSnh7kmMxgCV677mg==	2022-08-16 07:43:25.635724
+501	dkt5xwv0yaq7w9t29g3rm2qr92km	https://img.youtube.com/vi/sUpu7618KrM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23406	LxPPE7Ax62V2kjV0tGryOw==	2022-08-16 07:43:28.62798
+977	tmxyax0dp7rkzl3bewedtlhgwr5j	https://img.youtube.com/vi/OQvJ7ZmYYmo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:34:53.215077
+505	opdftgdc9a0sc2dfgif9a21s5irg	https://img.youtube.com/vi/MMMrZ5PlBOE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30655	+QrsHj+GGhBvhlBWqZmvKQ==	2022-08-16 07:43:31.492293
+509	a0kxvfq8579wcjjl8fvo4anifn5q	https://img.youtube.com/vi/ehBZXAP-yU8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8410	Jzn5uQdSEvpy7+nf1gbmUg==	2022-08-16 07:43:35.514871
+981	s6kvz20fs2p8970arej02ffoke8b	https://img.youtube.com/vi/g2NVwQriRsk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:35:38.757207
+1772	iiapvruw2q7f3a1pevjqxpp3394m	Burn It to the Ground.mp3	audio/mpeg	{"identified":true,"duration":234.583516,"bit_rate":121097,"analyzed":true}	local	3565881	YrQBJCnx6dNTMp+rkay6NA==	2022-09-20 19:12:39.465954
+513	a171v7frk0llqfyn3kx6oq6henvg	https://img.youtube.com/vi/JRA7ka37J18/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29045	BfODm9I3rIttkriND0B5/w==	2022-08-16 07:43:41.279321
+517	0p7oyq2wwhct425jtnsi7my0mc21	https://img.youtube.com/vi/ZK4qHrudy88/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20395	pL7tlIIL5kfX8ptBjcbwbQ==	2022-08-16 07:43:47.076668
+78	mxa2qui1x2lcbqlgkw4rmz76zmb5	https://img.youtube.com/vi/NkLe87fNWMo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3080	jBQH9HLyTrvcaaCsNuPo+Q==	2022-08-15 18:26:51.186486
+403	6lweza803a9656qkyucnvw3a6bw0	https://img.youtube.com/vi/voeZfmaEt5c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27768	DQ1vpplxGpsdOgPpwXS25Q==	2022-08-16 06:54:10.669621
+82	uqipfzjcrjss1zlozv72bb48okla	https://img.youtube.com/vi/QOZke5DwV_s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6073	0qfxKp/fJxM+DXjZC3k7JQ==	2022-08-15 18:26:55.992758
+348	kn9yormnb35of081dzh4eneck6xm	Safe Harbor.mp3	audio/mpeg	{"identified":true,"duration":318.650003,"bit_rate":114821,"analyzed":true}	local	4593966	HcrYZs5o3XMGLEa7bjx1FA==	2022-08-15 19:47:20.323687
+86	8clo3v3hjohxy69x8oamvljsmiuh	https://img.youtube.com/vi/28ip6Xavjf4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3018	gVeOO6dfC7RhUw5p44pFBw==	2022-08-15 18:27:03.588873
+90	ktrin98g6ydd6eam50b7o9tnt2p5	https://img.youtube.com/vi/GEQ_3Lis41s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6983	7VtXAUyWd8RdBkt8Mo7NCg==	2022-08-15 18:27:32.445483
+349	mxdqv44pjhzz7kpj7r5rn25nox6a	Two Rivers.mp3	audio/mpeg	{"identified":true,"duration":423.182502,"bit_rate":53539,"analyzed":true}	local	2854452	R++w6aZDzn2n5SrJCWhpHw==	2022-08-15 19:47:21.71257
+92	4lcbi4l9ce0rljb9r6zius4xqexl	https://img.youtube.com/vi/oorK4RPgZ8Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19207	a8XIy7XA5Yl/yDUKt8IWIg==	2022-08-15 18:27:41.042352
+94	6zjhwidm9jemmvf2pkp4z18f45zj	https://img.youtube.com/vi/k_Wd87fHX5g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9522	DLShOQlaD/TzftKNVDTR2g==	2022-08-15 18:27:59.599824
+350	urqydrn7xoas8eaeya47bzjcqmhd	Enough.mp3	audio/mpeg	{"identified":true,"duration":344.676275,"bit_rate":93950,"analyzed":true}	local	4070379	GJ4zi5r8kJSTiiNBnuJ61Q==	2022-08-15 19:47:23.521315
+96	6li3p72vy138iiglbr0cc0p0mb70	https://img.youtube.com/vi/wsLlgcagkUc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9658	0Jp11QG2VXDw7g9MATh5BQ==	2022-08-15 18:28:30.345579
+98	027s4rkvp364gnyu5wpxgetw81qd	https://img.youtube.com/vi/zwf5MpcuKDM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8419	A7h/H61UnNrXWvdGOtqFLg==	2022-08-15 18:28:37.114208
+351	85av7g2tq9w2mjh86yagub36lxn5	Better.mp3	audio/mpeg	{"identified":true,"duration":472.950062,"bit_rate":60855,"analyzed":true}	local	3610315	HjNUeVkgjcjkxC1On4c6Jg==	2022-08-15 19:47:25.130716
+100	l7rn4rhl2922vzefv9y1zq9z2del	https://img.youtube.com/vi/UgjmPHCAmR0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16845	7xHEuyoUr0IMYHtXK4b1OQ==	2022-08-15 18:28:48.238553
+102	tx2cbcz3nokfqdx47s4o7460lhba	https://img.youtube.com/vi/5i6A1IHAQsg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30963	cJs/zSTHOHBbVdwPB96WJw==	2022-08-15 18:28:59.041027
+352	d956rrsishbqs66yljv199a91feq	Young Dumb & Broke.mp3	audio/mpeg	{"identified":true,"duration":468.543839,"bit_rate":59069,"analyzed":true}	local	3477810	HTlXJrsVZ3n04bjKpbjRWA==	2022-08-15 19:47:26.782618
+104	i4aljxqbv8aes1krk2ejk9mwswwe	https://img.youtube.com/vi/cRSqM-67EiE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	34488	mTy5F3j/AZ35heUxOmUciw==	2022-08-15 18:29:49.313838
+353	zizgb31snlrh3p4r85nfu93p51qy	Coaster.mp3	audio/mpeg	{"identified":true,"duration":501.14502,"bit_rate":53641,"analyzed":true}	local	3372897	5cL7aFJycByP8F+0OBJgoA==	2022-08-15 19:47:28.371911
+106	vwm6k9ed8brd98db1kiijhy5sx9t	https://img.youtube.com/vi/S4EKJFgBqDY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25607	koUorSVNn5S2Hl6asPD9LA==	2022-08-15 18:29:50.536149
+108	notit2td7grfn8mbgzuo7diep453	https://img.youtube.com/vi/aWTGQ4oa2tE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	4461	AdO0iorjc+E9ZrVk1rejyw==	2022-08-15 18:29:52.681085
+354	lmdtp49nikktgzo2w01wztxsh9uf	Saved.mp3	audio/mpeg	{"identified":true,"duration":312.390635,"bit_rate":83249,"analyzed":true}	local	3280579	L6OzlgF3xVvozHWm4WShuA==	2022-08-15 19:47:29.861142
+110	76kc6c479rqjrazlsfv2supuzlwl	https://img.youtube.com/vi/hyAoQAzwX5g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13452	90nRPzaO7Xlt4TSFM0RU+Q==	2022-08-15 18:29:54.138736
+112	xfjcg1huwylrgjexyi3t97lv1ojy	https://img.youtube.com/vi/xjt6tZmuoWM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5367	lQJI42zmLejLt4IwgWhP2g==	2022-08-15 18:29:57.020771
+355	t4t34rzvu6kogagvslzrzkc6m0xi	Motion.mp3	audio/mpeg	{"identified":true,"duration":502.084075,"bit_rate":60541,"analyzed":true}	local	3834811	w0vhRAMSaPKpr+HUD4KlKQ==	2022-08-15 19:47:31.567535
+114	pwizskmyg8cfdz016tchtbbblg4h	https://img.youtube.com/vi/npuDaBH0f6U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25913	mSwSQmKEITawpTCtMtV5/g==	2022-08-15 18:29:57.486981
+116	4ybfgqdktwbf2p8ss8kxejwaj8eh	https://img.youtube.com/vi/RDiKw_Xv1Aw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	4629	LtL9uesIbbnRv515z9CkNw==	2022-08-15 18:30:07.582322
+356	41mdi15moowqernzne5d7g6l7p48	Hundred.mp3	audio/mpeg	{"identified":true,"duration":495.185209,"bit_rate":73992,"analyzed":true}	local	4596720	4Ly29Qmp+WRyoHIb1wqiGA==	2022-08-15 19:47:33.616265
+118	3vzd4crfpop7mfgf8vtn8xqtqa21	https://img.youtube.com/vi/MzKrszohZVY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	42311	15a5QRhQYfegYVc7weZ2OA==	2022-08-15 18:30:09.218549
+357	3gjun00zyv3lbqopsmd8qas3crjw	Right Back.mp3	audio/mpeg	{"identified":true,"duration":359.612082,"bit_rate":78759,"analyzed":true}	local	3566649	0r9nn+BsBPL+HFZ7tWG0wg==	2022-08-15 19:47:35.219698
+358	qn7k8ztwjm7sxysgtw7p0o7t66um	Numb.mp3	audio/mpeg	{"identified":true,"duration":360.173916,"bit_rate":60857,"analyzed":true}	local	2791303	z4tzX5Tfsk6h16ZdB6sGJA==	2022-08-15 19:47:36.551988
+359	fjl5tmnn7udgxwmuh9dd3rroybnu	Skyline.mp3	audio/mpeg	{"identified":true,"duration":285.87124,"bit_rate":97950,"analyzed":true}	local	3530744	xOGSvRvOlXIOKfT9J69ByA==	2022-08-15 19:47:38.072116
+360	5rgwwt4cq46edvae6u35r368sp3o	Last Call.mp3	audio/mpeg	{"identified":true,"duration":356.089532,"bit_rate":105526,"analyzed":true}	local	4717040	1Sjwl5Tjr8cjQTHm+VM1ig==	2022-08-15 19:47:40.128757
+361	w8wswqckujy1gmmm43zavfdjbjwk	Vertigo.mp3	audio/mpeg	{"identified":true,"duration":536.410486,"bit_rate":66146,"analyzed":true}	local	4470405	bDIxngIhrkkzE7P6XiBELA==	2022-08-15 19:47:42.147952
+362	533zp7bgmo9tkdy648sz63etpd04	Love Lies.mp3	audio/mpeg	{"identified":true,"duration":738.318841,"bit_rate":34155,"analyzed":true}	local	3180289	Dmul19+WthILpz7o/Y8z8Q==	2022-08-15 19:47:43.627246
+363	2t8bj9ws8qzay18saj31ewjhp9rg	Stay.mp3	audio/mpeg	{"identified":true,"duration":406.065943,"bit_rate":61326,"analyzed":true}	local	3155359	0d3MC7y8n1flJSim5aPlEg==	2022-08-15 19:47:45.072172
+120	bazxasqti41qeq4ek69edpd06rau	https://img.youtube.com/vi/St78u4TXqVg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25328	VdNkhXehJfIBqIok6i37OA==	2022-08-15 18:30:15.350076
+364	xjmix47z5u5knx6ah4ds2b5oua5j	Suncity.mp3	audio/mpeg	{"identified":true,"duration":454.306582,"bit_rate":53643,"analyzed":true}	local	3081577	qLHEaimZ1XFjAs9v+NgfMw==	2022-08-15 19:47:46.51339
+405	z9lrsc1hm5wxx88lvn042fosaq5q	https://img.youtube.com/vi/zMr_Uzi807U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8075	gmx6Vd8HGajKlLtc10P99A==	2022-08-16 07:13:00.639559
+1773	e2cra70iouu38s75vld88c9rkrzb	Rockstar.mp3	audio/mpeg	{"identified":true,"duration":308.029271,"bit_rate":114653,"analyzed":true}	local	4442279	aq6+HmFP7JDbYw1F4hSOHw==	2022-09-20 19:12:41.178556
+409	hu96ipv2zsasu8xbd0sjnw6g2jmo	https://img.youtube.com/vi/jzojKysJ_ss/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10787	qwsjiLPXyy8eIgZp6/qi3Q==	2022-08-16 07:13:58.355286
+1774	19klp05eixjbl9mvqob5fwcraw62	I'm Different.mp3	audio/mpeg	{"identified":true,"duration":814.41,"bit_rate":32000,"analyzed":true}	local	3284158	I3CPN0LApoEvlT+Vlu9LHg==	2022-09-20 19:12:42.45423
+503	m6h51qazxi9sx4h4svkxgszj0ahh	https://img.youtube.com/vi/M2NIMHVmGwk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5313	Slrvd8agAcnN1KErknoowg==	2022-08-16 07:43:31.440873
+507	xz2iom5bll0wey1gkuxs96qf377c	https://img.youtube.com/vi/4EVFKrmXFmA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7674	PFheuqsm+QX8No0v0GntHQ==	2022-08-16 07:43:33.994873
+1775	vkll41n6l80xg6revjflwxshaecf	This Afternoon.mp3	audio/mpeg	{"identified":true,"duration":329.544044,"bit_rate":112603,"analyzed":true}	local	4652991	E+2b7fPtJ1bsLP/6WbCEEw==	2022-09-20 19:12:44.426166
+511	tvmuv1pdwj8w8mw7wfvjke5lqbp0	https://img.youtube.com/vi/_qQsPw4CqUI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9597	z82kxJL4BM+WEIScVJ5qHg==	2022-08-16 07:43:36.340564
+1776	dc9vzicinu0kvc4p4l7md7pkvvu6	Jamrock Land.mp3	audio/mpeg	{"identified":true,"duration":157.2,"bit_rate":134347,"analyzed":true}	local	2651300	9lLwPvR0/33bwUB3J3/4Pw==	2022-09-20 19:12:45.578668
+515	9q431u30pvh6mnd2xohndvbdvore	https://img.youtube.com/vi/sRbEaaX0byA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30642	tCnbmJKXxQYFjSVMCwVBWA==	2022-08-16 07:43:44.11556
+1777	too6hvfros738mgiy6jam94l2yfg	4 AM.mp3	audio/mpeg	{"identified":true,"duration":255.487769,"bit_rate":141811,"analyzed":true}	local	4551522	mXB5Igr8h7TZOfyX+deE/A==	2022-09-20 19:12:47.347296
+519	6y2tbev7lkh58jvr62s7eu2ii1l5	https://img.youtube.com/vi/TJXsOXVnHFA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31426	R13lbVxfQjGkWphYTnPeVA==	2022-08-16 07:43:48.057527
+1778	drb7gldhwxw5qxxtx3j8gcxn8gc3	Come to Life.mp3	audio/mpeg	{"identified":true,"duration":335.643676,"bit_rate":116523,"analyzed":true}	local	4891513	sbLyG3kSTHk7N8uIc6ZzXw==	2022-09-20 19:12:49.364416
+521	9rtzfj4bwa9gyhfpma55t33bkatv	https://img.youtube.com/vi/Ii5UwyO_Zf0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30918	/GJ1GNbzrSYnKNcFGU5+Wg==	2022-08-16 07:43:48.279195
+1779	h61hkg6g67hr24rw7tyjyx4ui3wf	Photograph.mp3	audio/mpeg	{"identified":true,"duration":357.560368,"bit_rate":98405,"analyzed":true}	local	4426021	2IBycul71b/woG+Vs51pDQ==	2022-09-20 19:12:51.160997
+523	utcv5uq1ar5f6sdjf4vtwl4syug7	https://img.youtube.com/vi/dKxtNCWSznk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31517	0fXr+7SIipsbMdsXOlY+oA==	2022-08-16 07:43:51.665913
+525	f7788iwi16edb0t6jfpp4y0ykg2p	https://img.youtube.com/vi/baATiZQplUY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13832	WH0AB3pJOkLWSA1gXzl8Ug==	2022-08-16 07:43:58.208143
+1780	px6tyu0hm3mt1u46y0q1rczr7hdl	Monster.mp3	audio/mpeg	{"identified":true,"duration":378.936,"bit_rate":123254,"analyzed":true}	local	5849744	o1+M1zbk9cM6DmhClOxdSA==	2022-09-20 19:12:53.52286
+527	wbpkip1abhcxzxvdflnnprb1nm1z	https://img.youtube.com/vi/anI5b2PEmdA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11027	61c9MYdfLl4R+ykXd7qv8A==	2022-08-16 07:44:00.157502
+529	7ctr3510c5ns1cvrmsy3hususemo	https://img.youtube.com/vi/ESDhMCWpJC4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	41086	ViY4GByeoLclblpmR+CDlQ==	2022-08-16 07:44:05.234904
+1781	d00joznl286qtq2jwwb1swb4so8q	Day 'N' Nite.mp3	audio/mpeg	{"identified":true,"duration":326.69106,"bit_rate":84832,"analyzed":true}	local	3480357	sVLdj/q6gKxmN4nOk9YuTg==	2022-09-20 19:12:54.982026
+533	ll3992cz2vwrgfaq92azmt0h9ryb	https://img.youtube.com/vi/6-zRqxl5Gkk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9841	xqWMruIwdQHqVe3Ne21Jgg==	2022-08-16 07:44:10.146064
+1782	i3n0cje6ymwymb6zjb0gsdktfwc0	Corona (City Of Wuhan).mp3	audio/mpeg	{"identified":true,"duration":228.430057,"bit_rate":99531,"analyzed":true}	local	2864206	B34guqj86BHgPKVS4evfzw==	2022-09-20 19:12:56.147898
+1783	fo5aes003gapxz516x0a1d454n49	Pursuit of Happiness.mp3	audio/mpeg	{"identified":true,"duration":362.448126,"bit_rate":94103,"analyzed":true}	local	4282130	d9BH3SAiyoBrnEwqHUkntA==	2022-09-20 19:12:57.774583
+552	0adpbwcabi3woodukur5emo6gcnq	Marsh [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":218.482867,"bit_rate":122568,"analyzed":true}	local	3356240	VJmWaeGmdCyUe8UbhaSMIA==	2022-08-16 09:17:20.24453
+553	u0zrb47mpg3zsqnoiy14osqhmpbp	Guns Blazing.mp3	audio/mpeg	{"identified":true,"duration":189.482003,"bit_rate":139692,"analyzed":true}	local	3327756	aPl9UxzH81Vtc+1Sgva9Eg==	2022-08-16 09:17:21.612388
+1784	xzwj5w0wvs4nevq2q4xy4rrbdayo	Soundtrack 2 My Life.mp3	audio/mpeg	{"identified":true,"duration":897.228,"bit_rate":32000,"analyzed":true}	local	3605909	WqnL5lQOOZUCmmQBimmjiA==	2022-09-20 19:12:59.227243
+1785	6y7uhzirsvev0bsqev38fy5mn0yy	Heaven at Nite.mp3	audio/mpeg	{"identified":true,"duration":332.0316,"bit_rate":74811,"analyzed":true}	local	3123883	27fSWBvl58PxD4lIkdAdMQ==	2022-09-20 19:13:00.451073
+1786	zbbg1ail64tlr4l3m84lfnip9thx	Snowfall.mp3	audio/mpeg	{"identified":true,"duration":165.556505,"bit_rate":141810,"analyzed":true}	local	2948859	0BeAqqJGjjqH4EGF9JUDBg==	2022-09-20 19:13:01.610382
+1787	0l2zmkn0fmu9sor6hwhfc5v1mowo	Marijuana.mp3	audio/mpeg	{"identified":true,"duration":277.778307,"bit_rate":121727,"analyzed":true}	local	4258102	eEx9xiE6gRaXUwuA7qFdaQ==	2022-09-20 19:13:03.29596
+1788	u9vryhamhivpxbve1fa61gdnybm4	Embrace the Martian.mp3	audio/mpeg	{"identified":true,"duration":252.049204,"bit_rate":105846,"analyzed":true}	local	3353785	f/TSuzSqA/6oxxRougxe3g==	2022-09-20 19:13:04.631581
+607	xlzjc1dhmoqzkt8m11vzm0eyx8s3	https://img.youtube.com/vi/BMwAIndkhps/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14927	WwXNzTWPLgdhVrGwpt0+7g==	2022-08-16 10:37:25.461472
+365	w8ik5ulxmhw0h10elridqzne1115	Saturday Nights.mp3	audio/mpeg	{"identified":true,"duration":508.117424,"bit_rate":52221,"analyzed":true}	local	3352045	NFCKGsyYfKPkdHg/cQLE5Q==	2022-08-15 19:47:47.988497
+140	9jr703ws1bjrk2g9o0zclbt8alvp	https://img.youtube.com/vi/QpgevVPHI-4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20859	c+fFowSCXW7UxBsW6MJ/6A==	2022-08-15 18:31:53.887852
+123	2s7od5ou7ye2yjtm8stymsp7yyxt	https://img.youtube.com/vi/AUzjKBC46zo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24410	PSgZIIwTf0hTR+k/x7TwfA==	2022-08-15 18:30:22.097396
+125	0k7t3ruomvb6dmnkgqt36eahen6w	https://img.youtube.com/vi/NAS5Z1GvxrQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	42195	5bpi4rpSN36OzWD8i8+jrQ==	2022-08-15 18:30:25.545573
+407	p46v5ysp902sa03xy2cwliiosxqk	https://img.youtube.com/vi/TeSjqG8sCAk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	28762	jCV/V21yuxHg3rCduF+JPQ==	2022-08-16 07:13:44.210644
+366	4qjs3uju6q3zw4oa9nemvi2277r1	Location.mp3	audio/mpeg	{"identified":true,"duration":554.768294,"bit_rate":55208,"analyzed":true}	local	3855627	av+wfhryth6cH0Pq9a6s7A==	2022-08-15 19:47:49.697837
+127	wl18g56l4vnpgru2gidxs0jq8k2d	https://img.youtube.com/vi/xZiSW0rI_9Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9208	foMJqVEAL7IjybUdVvwinw==	2022-08-15 18:30:36.769572
+367	5mvtoz2befrpehxu1n9865elvcak	My Bad.mp3	audio/mpeg	{"identified":true,"duration":535.030309,"bit_rate":40153,"analyzed":true}	local	2713076	do1f2UHC0BHeYYCBGprxIQ==	2022-08-15 19:47:51.044694
+131	vihz2squ8pdn4kuh79z58dunaaej	https://img.youtube.com/vi/baQ2IbszCRU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32605	e8e2ZbfDm5UIxXLlAjtIog==	2022-08-15 18:30:54.568425
+368	54eree7l4zto507zrtnvq6n0mbzn	Free Spirit.mp3	audio/mpeg	{"identified":true,"duration":343.965213,"bit_rate":72441,"analyzed":true}	local	3134835	Ceb1YxjqjMYw+7xP98rZqQ==	2022-08-15 19:47:52.404682
+133	lxrxg03vdb5u3b8jn568gsd1wzf9	https://img.youtube.com/vi/apB2G3Y9RXw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6952	/9JlX8fRtr/jVDLYxWVAlg==	2022-08-15 18:30:56.401047
+135	0aecdqpmu0eom73ahk5pn1d38g4i	https://img.youtube.com/vi/5FVhN8F8qxs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9907	9w9dczt/7avIwEnb1zSwtQ==	2022-08-15 18:30:57.9478
+369	5d7b9kzc4a8jfybmmu0helmn01m8	Keep Me.mp3	audio/mpeg	{"identified":true,"duration":1061.222563,"bit_rate":33896,"analyzed":true}	local	4521275	/UrIVPYKXpF8+rKr0P99AQ==	2022-08-15 19:47:54.433234
+370	jnm52lw2ikvr6sgkpz06s3ygimzp	Weekend.mp3	audio/mpeg	{"identified":true,"duration":208.152,"bit_rate":126996,"analyzed":true}	local	3311768	zx/yXbXcN3hObDZQulD9cA==	2022-08-15 19:47:55.955794
+138	0yj2t20iuo2ioefx4cxgtjnnajpt	https://img.youtube.com/vi/EPAPMJ-tCig/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10562	VIaTql5sLS6GHCePPOW36A==	2022-08-15 18:31:51.045983
+371	svpjrg4pz31xzv5zuuuxkx9pnoos	Sky Walker.mp3	audio/mpeg	{"identified":true,"duration":259.296,"bit_rate":122043,"analyzed":true}	local	3967954	U3PNwv3Ar8mIT3a+cgDvUg==	2022-08-15 19:47:57.730468
+142	dybhc6kyx6ih54zbmmaqauxlbg3g	https://img.youtube.com/vi/31bC0qDQdoQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17516	VWPnVPbQ6IranYI8hVnx+A==	2022-08-15 18:31:58.642493
+144	dymowxhclvvyl2rgtjz8n2wlmrt6	https://img.youtube.com/vi/BKlRemAmsaw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20897	bIeAaBk+koSDPeAkXE4lbQ==	2022-08-15 18:32:08.288909
+372	mkbkio40zkjactwewvj82pmghyyc	$ave Dat Money.mp3	audio/mpeg	{"identified":true,"duration":344.824729,"bit_rate":104461,"analyzed":true}	local	4519648	RN7ypPpmUnKTCD3in33Rgw==	2022-08-15 19:47:59.72877
+146	afwbsokfpxtb8m7ldkid60jwgjxu	https://img.youtube.com/vi/Ywq6FMLbWH4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11435	GcdoyrtAmc2NMWfSGgz7hw==	2022-08-15 18:32:12.156863
+148	pghux23amdw2deewxhh45jexqwxp	https://img.youtube.com/vi/igeBD55Nzs8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20897	bIeAaBk+koSDPeAkXE4lbQ==	2022-08-15 18:32:14.118222
+373	lxvf5dipzbgxrymw1lvtzavx8let	Lemme Freak.mp3	audio/mpeg	{"identified":true,"duration":1186.242,"bit_rate":32000,"analyzed":true}	local	4754485	30U2t4fJaECdxRHcZ7mdIg==	2022-08-15 19:48:01.910254
+150	ovwb7d3wshfalgv82uozsq48nu57	https://img.youtube.com/vi/9dIYAN1Idrc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19022	Mph6ben/bq8DgvYXHo+JPA==	2022-08-15 18:32:15.460956
+152	zr2on05332s1ldmpvc7bu4ie5qz7	https://img.youtube.com/vi/ONbwHjJLTfs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17454	xcCVoBk3NgVVMx1F1JoEUw==	2022-08-15 18:32:22.542716
+374	nsd7qusej237kflofnygegf8tnw0	Too High.mp3	audio/mpeg	{"identified":true,"duration":372.795514,"bit_rate":82030,"analyzed":true}	local	3831239	//A1+OHD8GTXmvN9w1N9mQ==	2022-08-15 19:48:03.622416
+154	3e28tajtifgg9cn6faqey2btn6xj	https://img.youtube.com/vi/RZgQD532m-k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19041	X6UBUTAGtBO+uuGvymxthQ==	2022-08-15 18:32:24.018191
+156	ik8ivyggmj9si7kn2u3ewtzvah0s	https://img.youtube.com/vi/UK71SShzdLA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20897	bIeAaBk+koSDPeAkXE4lbQ==	2022-08-15 18:32:24.788878
+375	rzktqg43gd4c4ospmasg2r21pxfj	Freaky Friday.mp3	audio/mpeg	{"identified":true,"duration":307.479792,"bit_rate":90856,"analyzed":true}	local	3506284	t6Kcn9f9N0AqGiCulAAJXA==	2022-08-15 19:48:05.136577
+376	dsotnng0lon3r85440a82jaajtep	White Crime.mp3	audio/mpeg	{"identified":true,"duration":630.647524,"bit_rate":45274,"analyzed":true}	local	3579066	GuoEYxctMC0U+8Lp0KgB1g==	2022-08-15 19:48:06.829235
+377	7g55w620goymjscsfztq4v7uxem0	Lion King.mp3	audio/mpeg	{"identified":true,"duration":1270.824,"bit_rate":32000,"analyzed":true}	local	5096277	OcKi1XPWwB0Xi1kO9Gp04Q==	2022-08-15 19:48:09.076171
+378	nl6ytio2j7cpttdsce3twq38jwo8	Pillow Talking.mp3	audio/mpeg	{"identified":true,"duration":1008.446404,"bit_rate":78494,"analyzed":true}	local	9917200	MJBc+8mStb4Gz7uXLtZmvA==	2022-08-15 19:48:13.691402
+379	hp85tfsmm9rzm7dn5lt1wyehptqi	Professional Rapper.mp3	audio/mpeg	{"identified":true,"duration":1319.1,"bit_rate":32000,"analyzed":true}	local	5295403	RavenN/b737uLyR1A27+Vg==	2022-08-15 19:48:16.136547
+380	48xg7yco8b246nslj3179w3907h5	Let's Get Lost.mp3	audio/mpeg	{"identified":true,"duration":241.368,"bit_rate":127281,"analyzed":true}	local	3854574	tIpSYxW7aQJwWWzeTvbVsA==	2022-08-15 19:48:17.952556
+381	pklo0v10jjyf6no6x7leiri9iy1q	Wow..mp3	audio/mpeg	{"identified":true,"duration":150.576,"bit_rate":115107,"analyzed":true}	local	2180642	OKUI6RbCinKoqlq6iwux4g==	2022-08-15 19:48:19.016146
+158	pd1vtgby17ce2xlup1zsg6klr4br	https://img.youtube.com/vi/LgW1-K_Dp3o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21136	m2BSWK6dOR37tDWCKAMOSA==	2022-08-15 18:32:31.881542
+161	l2z7t2sihqrfnca2xqo4nmsneodn	generic_KkOF8UiB7u8.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11244	DI2QkRIcso52AQqsXR7/cw==	2022-08-15 18:32:53.113472
+394	brdx8e5bvht7ui1mbt61pwxstr79	White Iverson.mp3	audio/mpeg	{"identified":true,"duration":529.436447,"bit_rate":34719,"analyzed":true}	local	2315215	Vh0DoCGDtq5mgF8RWU/a5g==	2022-08-15 19:48:37.994356
+382	51id1oustav8afbd92hvcxggsqmc	Cooped Up.mp3	audio/mpeg	{"identified":true,"duration":188.132254,"bit_rate":129266,"analyzed":true}	local	3051856	xLzZwjy5Wmlv9h6hxKhAbA==	2022-08-15 19:48:20.49195
+166	bw8l2e4fyagrs7svvv1dsivqj01k	generic_vAs7H_OoCeM.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11244	DI2QkRIcso52AQqsXR7/cw==	2022-08-15 18:32:58.811013
+170	8nkkmhlv5a3qefxkb8nyu1cd9jw2	https://img.youtube.com/vi/P1tI4VFMRmE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33828	omPnSr03HuCB8Sqagylv6g==	2022-08-15 18:33:07.612334
+411	qdndo18l97ilburrzr9qkrizxho7	https://img.youtube.com/vi/zAJE0yjOAP8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26577	Rvbma5nfCX4BHuniIhKPFw==	2022-08-16 07:22:46.168889
+395	esq4byif92msat1udy4ibddv9e93	rockstar.mp3	audio/mpeg	{"identified":true,"duration":385.607408,"bit_rate":73221,"analyzed":true}	local	3561656	+Gk2tlTi6CIfWO3GpL8duA==	2022-08-15 19:48:39.587765
+174	fbeez355tfbm26ursccrco6t7vj5	https://img.youtube.com/vi/IKDxdxwOaJE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24792	cPjaFt2t2RjmuOPiFx7Uqg==	2022-08-15 18:33:10.725521
+847	dhlnz1no089hxfw97z75epce486l	Flexicution.mp3	audio/mpeg	{"identified":true,"duration":213.56658,"bit_rate":139389,"analyzed":true}	local	3727958	stVtKinxCju0evF1wOC3rw==	2022-08-16 15:42:50.056647
+178	jtrwjnfwulig50oeyohdkam9qzi3	https://img.youtube.com/vi/Z-0tTi7GaPg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29207	z9QGGXI0VpaZtFSQc3ozZA==	2022-08-15 18:33:15.931025
+396	u2oi8gsovicgmtmoiz2z26wgjreo	Reputation.mp3	audio/mpeg	{"identified":true,"duration":424.282636,"bit_rate":71838,"analyzed":true}	local	3822139	mHTozT3IImqZhbPI+2LJsQ==	2022-08-15 19:48:41.288364
+383	arz8608c0x2u5esgz116jztm6ikr	Hollywood’s Bleeding.mp3	audio/mpeg	{"identified":true,"duration":361.730338,"bit_rate":52221,"analyzed":true}	local	2373957	aJC1buW9IHuBiMNSFoPVJg==	2022-08-15 19:48:21.583402
+384	vlayxd5jelmazqhjocesi7xxb7gd	One Right Now.mp3	audio/mpeg	{"identified":true,"duration":391.528961,"bit_rate":66763,"analyzed":true}	local	3293436	DXN2OKCNIKGjFdRmMPuhLw==	2022-08-15 19:48:23.115902
+385	zy0r4702ne6me3lpaf9jozgm96iw	Take What You Want.mp3	audio/mpeg	{"identified":true,"duration":384.957593,"bit_rate":74186,"analyzed":true}	local	3584242	yBB0Fin8dSD81MsqzDfZFQ==	2022-08-15 19:48:24.707078
+386	k5hulmz3jlfc1f77jo8vr2m8eula	Stay.mp3	audio/mpeg	{"identified":true,"duration":203.995835,"bit_rate":141185,"analyzed":true}	local	3625442	0Z0bQSYzQI28Fj3rRxkStg==	2022-08-15 19:48:26.30473
+387	4jrulygpr5yhaftr1q8gtla4x156	I Like You (A Happier Song).mp3	audio/mpeg	{"identified":true,"duration":247.695893,"bit_rate":101964,"analyzed":true}	local	3169273	6NXoAfELfmKD/IXdR7y+vg==	2022-08-15 19:48:27.842327
+388	6l2ezwjnh3b2ezv577zoitqvanoa	I’m Gonna Be.mp3	audio/mpeg	{"identified":true,"duration":201.744,"bit_rate":117241,"analyzed":true}	local	2970690	bjZaDUFJXuLhxZH1o6atHw==	2022-08-15 19:48:29.251301
+389	tl5al0c68whj5e3ziylnhjadc1dm	Die for Me.mp3	audio/mpeg	{"identified":true,"duration":246.336,"bit_rate":121955,"analyzed":true}	local	3769108	3TLtVxevTn3y4lV9kuzGog==	2022-08-15 19:48:30.941986
+390	fcmgoe3lnfkbcctlaqb4paco64ny	Wasting Angels.mp3	audio/mpeg	{"identified":true,"duration":324.181722,"bit_rate":94430,"analyzed":true}	local	3838819	kJNsk3PxNQy13hVYhE4Ruw==	2022-08-15 19:48:32.684118
+391	mog1433nw5h8tf7exc06nxcur54k	Congratulations.mp3	audio/mpeg	{"identified":true,"duration":291.672036,"bit_rate":99084,"analyzed":true}	local	3635530	pIlUAo4qAtr5jp5ibgnctQ==	2022-08-15 19:48:34.296881
+392	sbfzo8853brrtcnvsaj9ldnxm0eh	A Thousand Bad Times.mp3	audio/mpeg	{"identified":true,"duration":403.731566,"bit_rate":64582,"analyzed":true}	local	3273240	HoCrKA5Xaw3wICi37H8yaA==	2022-08-15 19:48:35.755754
+393	r4wq6qdhnohwn2fhud8kzyxqiy7m	I Know.mp3	audio/mpeg	{"identified":true,"duration":142.512,"bit_rate":122079,"analyzed":true}	local	2188806	qpmZwFR2CkCz6y9Th7UZOA==	2022-08-15 19:48:36.855772
+397	2ozicldud2ho2i0x2mxczmdjqiw7	Enemies.mp3	audio/mpeg	{"identified":true,"duration":247.897132,"bit_rate":101645,"analyzed":true}	local	3162415	PzA2CJYBXwEk1r1leF+xMA==	2022-08-15 19:48:42.784352
+398	9pxa2ps6n7wrj8193akiozf1mivw	Internet.mp3	audio/mpeg	{"identified":true,"duration":123.072,"bit_rate":120014,"analyzed":true}	local	1860394	QY8M8OGPBgyj+lwMJdxTTA==	2022-08-15 19:48:43.616322
+399	0vhs3vbinahxmfwgrm8agwhpfi8p	Insane.mp3	audio/mpeg	{"identified":true,"duration":189.883356,"bit_rate":116834,"analyzed":true}	local	2785283	+plgSWebRONWyMPQtwQduw==	2022-08-15 19:48:44.886719
+400	qoo3c41aqxr0bels08a2jp3hxboc	Your Heart.mp3	audio/mpeg	{"identified":true,"duration":329.945334,"bit_rate":78477,"analyzed":true}	local	3261766	MwvcdgAgUh4h+avwSgABsg==	2022-08-15 19:48:46.351025
+401	801mk1d1kaokn5uat02lmj0d2my8	Tumblr Girls.mp3	audio/mpeg	{"identified":true,"duration":789.788436,"bit_rate":40782,"analyzed":true}	local	4040455	w3MrK4tlORoI66uMhxnAiw==	2022-08-15 19:48:48.187603
+402	l6zjoxbss6ef59j8xbwbijp8wpqm	Drew Barrymore.mp3	audio/mpeg	{"identified":true,"duration":633.595132,"bit_rate":38126,"analyzed":true}	local	3019618	QzialdUJJ+3tOsH7g1Tchg==	2022-08-15 19:48:49.577117
+415	f7plqfzyqhd6benudcb9271elx9l	https://img.youtube.com/vi/hl7b8j1oe6w/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6585	xcDA1+qjtY6Z6BkFjsYqrQ==	2022-08-16 07:23:21.151464
+848	26l5hr3k2x7kk01mclvrez9sy2oa	Hello.mp3	audio/mpeg	{"identified":true,"duration":323.370312,"bit_rate":85528,"analyzed":true}	local	3481633	3RmNKWt0eC5Wy8YrG5jAvA==	2022-08-16 15:42:51.626453
+419	pjvs4stuem0l5www0gxnq8kk8w4o	https://img.youtube.com/vi/9XvXF1LrWgA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7407	Fcz9M0qACMRBXAlPmBRb/Q==	2022-08-16 07:24:29.480887
+849	ikoaswtoze21qslnj95sk75ijlu5	Ten Years.mp3	audio/mpeg	{"identified":true,"duration":179.958282,"bit_rate":128003,"analyzed":true}	local	2928026	3X172IGL6VF3S2/ViGo1HA==	2022-08-16 15:42:52.890073
+850	lmss4v81urqh38ml4cobnsygjqnw	Twelve Carat Toothache .mp3	audio/mpeg	{"identified":true,"duration":285.810996,"bit_rate":103543,"analyzed":true}	local	3737586	NNdb/CWM3xlyWu5q+SzxXw==	2022-08-16 15:42:54.50177
+851	ajagdgkcv2et6bx300x7zxh29jq7	Keanu Reeves.mp3	audio/mpeg	{"identified":true,"duration":256.462421,"bit_rate":118472,"analyzed":true}	local	3809380	yuNNtr30tW5jq/qGaRVr6w==	2022-08-16 15:42:56.107817
+163	1h40u73qzvgraghf8vewzcd78wrw	https://img.youtube.com/vi/g9Aaf1fWdLQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16829	SGqvf8Cj4XOIfcCNIdbndg==	2022-08-15 18:32:56.332051
+413	3r6tvurksgm616uuv6adsmajnoqw	https://img.youtube.com/vi/W2y5f9Uhxb0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18988	lITDxMZpXKoAIBcNZMUtRw==	2022-08-16 07:22:59.414354
+168	xk0mx0hd1fnpzp0q43sjla2gj725	https://img.youtube.com/vi/Dyg32hMf7Fk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	28354	uqqC11Q1rF0f7IACKsXV1Q==	2022-08-15 18:33:00.360842
+542	l4af41rxjpby3hxjjcb7ojes8s9j	Book of Rhymes.mp3	audio/mpeg	{"identified":true,"duration":275.567034,"bit_rate":134283,"analyzed":true}	local	4644616	zGiOWacbO/8JN3dlrzscvQ==	2022-08-16 09:17:06.451468
+172	dujnvjr0on6o5atni131at3tucgf	https://img.youtube.com/vi/qcGNoZ3r9t8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15343	1p9CVRD8fYMWoneUdI+L+g==	2022-08-15 18:33:09.786104
+417	7798xqt5mqfyctlchdr8qj89mqfm	https://img.youtube.com/vi/Fi2qPtroqgQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13302	ukY0xDWeN0w8XiC28VeIVQ==	2022-08-16 07:24:10.062685
+176	192oqqrpgjs15zyz1k4dzueo5hg2	https://img.youtube.com/vi/LgTDgu2IrqE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	49974	sbUnl1dJb2SGfIFhN88Utw==	2022-08-15 18:33:12.478483
+852	ua0bdzkjyo3v2jxrxatdi76rar9h	44 More.mp3	audio/mpeg	{"identified":true,"duration":215.768798,"bit_rate":112629,"analyzed":true}	local	3046822	djuXQpaQZKfuGtqivtagjw==	2022-08-16 15:42:57.37827
+546	2igev1bhmg4yc6lue4r1j78g97dd	Godzilla (feat. Juice WRLD) [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":210.84,"bit_rate":129355,"analyzed":true}	local	3417868	rOjXABcBJwJPlIAFq2cgRQ==	2022-08-16 09:17:12.092435
+180	eqd5uec2tqfh6qmetqz56rkricy2	https://img.youtube.com/vi/yD_v9Ol38BE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18543	FCRGbiwqMQhpDP8Oz/JbkQ==	2022-08-15 18:33:21.480009
+531	6c5t13xzn8cpdeqbw5ip8e5aak62	https://img.youtube.com/vi/ZlT_uJ3BE-c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8130	M6qlh46RG65DMY4VRgyljA==	2022-08-16 07:44:06.726427
+183	czzb8839qv7skleyqhd7lvp08jlb	https://img.youtube.com/vi/brq-z2IlfDA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33828	omPnSr03HuCB8Sqagylv6g==	2022-08-15 18:33:32.977741
+185	1iz4by0sqmgvgxcx569ecjt11lfo	https://img.youtube.com/vi/izIyhdEHSPo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26726	9P0b4qVYV7LpAKNIBms8NA==	2022-08-15 18:33:34.180382
+853	ujarlouz5ncl3utfevb4nhar6akb	For The Night.mp3	audio/mpeg	{"identified":true,"duration":275.845022,"bit_rate":97872,"analyzed":true}	local	3409337	/2nbjDC0i3dwWHsDdqF/Ow==	2022-08-16 15:42:58.783157
+187	2kfl8b9gagi6mir0mexsyuzhifxp	https://img.youtube.com/vi/t7Hq-ag0RzM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	41086	ViY4GByeoLclblpmR+CDlQ==	2022-08-15 18:33:38.955047
+854	e0hvjqrrll181i6llfvsvfs1drud	Gemini.mp3	audio/mpeg	{"identified":true,"duration":380.324498,"bit_rate":60857,"analyzed":true}	local	2908824	UfT5nQ/yYJNvdDxllz1AWg==	2022-08-16 15:43:00.088733
+189	renga6p41cuer99ajh0c5bpnkmrj	https://img.youtube.com/vi/iI2f8eA8x4Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33828	omPnSr03HuCB8Sqagylv6g==	2022-08-15 18:33:40.94549
+191	l9ufwedjx34v7nh556y46b4xpvmy	https://img.youtube.com/vi/esh8mNoPxGE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33828	omPnSr03HuCB8Sqagylv6g==	2022-08-15 18:33:43.224578
+814	fvguf978hk6ecih5fg6utj531qva	The Plan.mp3	audio/mpeg	{"identified":true,"duration":640.995701,"bit_rate":54892,"analyzed":true}	local	4406310	psWpvYyQ9xX0y+etKhSLyg==	2022-08-16 15:42:05.730801
+193	amvyi7upcrzoeh4glyt118y73mg1	https://img.youtube.com/vi/j0bbRsa-Y9E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25736	4q0HNBNix8/+IOKEuJJL9w==	2022-08-15 18:33:47.332161
+544	hf8x3aqvkoocb3bxrtktv18i8qdk	Been On.mp3	audio/mpeg	{"identified":true,"duration":348.990819,"bit_rate":69930,"analyzed":true}	local	3065325	p8xEod1A0RRQmn3M+/xjTQ==	2022-08-16 09:17:09.478385
+855	35qc1av15dtk3zf6yqoy38v2fl6h	30.mp3	audio/mpeg	{"identified":true,"duration":238.734633,"bit_rate":135537,"analyzed":true}	local	4075266	KRCXj7KspvOel2UtOqD3ng==	2022-08-16 15:43:01.84048
+195	40lwdbrwq1ufu2khoxi18n6wqlk4	https://img.youtube.com/vi/WzfRhSU9_qA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26295	lRtAdUyAwIQSz15Zu80Isw==	2022-08-15 18:33:49.700279
+197	y2v56s6ueljuw85d8kwoane6s1py	https://img.youtube.com/vi/qZvTGV8RM94/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18770	FcWaccuVxejT6Jr/avJU4w==	2022-08-15 18:33:58.944917
+547	wjx1thu6sgohxss3xceqex76yvac	Unaccommodating (feat. Young M.A) [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":216.624,"bit_rate":132212,"analyzed":true}	local	3588760	KLd136yM5QhBzUzaxlqQDw==	2022-08-16 09:17:13.533983
+199	stidvt6r948aik4c78sgauwbhwdz	https://img.youtube.com/vi/fHqL5KO_hUM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23462	DJN8KhH1C0PLSSbzsdS5PA==	2022-08-15 18:34:33.776913
+549	xavaw82er6u7dhfgjo1i5ap5wldi	Gnat.mp3	audio/mpeg	{"identified":true,"duration":223.27682,"bit_rate":136464,"analyzed":true}	local	3827756	hI67+rap3xiz3KnXNm/DRg==	2022-08-16 09:17:16.462252
+202	eplnv40twclqmnedcw0t0xkxlpd4	https://img.youtube.com/vi/EAL3PuyulZw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6185	wIOBebF64QpOrp4KDJoJGg==	2022-08-15 18:42:08.811381
+550	377q0qvwm6xyfcv72jx3vod267vx	Machine Gun Kelly – Candy feat. Trippie Redd (Official Audio).mp3	audio/mpeg	{"identified":true,"duration":155.290348,"bit_rate":138575,"analyzed":true}	local	2699554	PhZLAC4nV/kgmCg5zl9uyQ==	2022-08-16 09:17:17.560578
+204	hni3p2u7csr9lhdnztf2engan30r	https://img.youtube.com/vi/c5zuHTK4XHc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11011	haicZJB7IXhd/xbnEgsScw==	2022-08-15 18:42:54.755841
+811	5x238zh1q6ztpt0arya0ulhqll85	Noise.mp3	audio/mpeg	{"identified":true,"duration":209.341177,"bit_rate":115934,"analyzed":true}	local	3080270	P3T7gH9wGYmwB9iJ5Zpw0A==	2022-08-16 15:42:01.645599
+206	wuys7dls5taz70a0yhdyu1oghwy0	https://img.youtube.com/vi/C3X_zx8q8_s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15495	ILbDyHFLsQ6uzN1ix6ppig==	2022-08-15 18:44:11.181235
+808	pgtdjw3ynh4ly21lyvn0yaay7di4	3AM.mp3	audio/mpeg	{"identified":true,"duration":450.749821,"bit_rate":58558,"analyzed":true}	local	3338356	2lVBTBhX/A6kHMXhxoJ4PQ==	2022-08-16 15:41:58.219327
+812	pf3dufb3s50mdsbn3w8us0djw8g7	FIRE EMOJI.mp3	audio/mpeg	{"identified":true,"duration":235.771197,"bit_rate":113530,"analyzed":true}	local	3382782	yzWshFgz9c8sELZz0uIsWA==	2022-08-16 15:42:02.996205
+208	x9u59f1s1jqs634gxcw2kxyt3q0l	https://img.youtube.com/vi/zbmH7iX9sJE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8072	rF43syTqKhCzFHAYLAtUOQ==	2022-08-15 18:44:18.589922
+1789	bq4tdsr6lzvy2sqxyr48yl77rbzy	Mr. Solo Dolo III.mp3	audio/mpeg	{"identified":true,"duration":365.449406,"bit_rate":85119,"analyzed":true}	local	3911556	DwySMT0NiHGCeKlgMEeSbQ==	2022-09-20 19:13:06.153778
+212	bymysi9a6n5v16fwxq2ibc4ajpx1	https://img.youtube.com/vi/u8eN7ll73Do/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12735	TRF7Oz9rEFpzZVffE57FWQ==	2022-08-15 18:44:27.713263
+421	kd7a19s9z4doqmljjdtii0x3jw8y	https://img.youtube.com/vi/-cjFCjq_GMo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17679	0xYfCbk+ky/Xj6P71Kk02w==	2022-08-16 07:36:48.655226
+818	917bz1mvuprid1e7glrkkh2ib39a	The Break Up.mp3	audio/mpeg	{"identified":true,"duration":338.76098,"bit_rate":79989,"analyzed":true}	local	3436474	2xKLODCtth9IHBIxqyehPQ==	2022-08-16 15:42:11.893672
+216	g1s54f9uva9zmf053rgethmnv7wy	https://img.youtube.com/vi/7_RlH7rnAqg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11560	0PVEUIaLuvQNuYhTd6rgcQ==	2022-08-15 18:45:00.386822
+425	o56u0srzvfhmnrl2s2lr9x51punq	https://img.youtube.com/vi/cmxdavhOg0Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7407	Fcz9M0qACMRBXAlPmBRb/Q==	2022-08-16 07:37:02.44204
+220	4b8wfqprgigu5qwc9j6wccc7t213	https://img.youtube.com/vi/LlU4FuIJT2k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17490	EHqaMS4nF9dMiNme702Zmw==	2022-08-15 18:45:16.428265
+1790	rz6pqtz2s7ow1vo551xmits9y2ey	Leader of the Delinquents.mp3	audio/mpeg	{"identified":true,"duration":176.476733,"bit_rate":142436,"analyzed":true}	local	3150945	xBLt50ljQncVJ9EGyFKi3g==	2022-09-20 19:13:07.442285
+431	rx07n7nk2mngrxwqonx0mxvimvss	https://img.youtube.com/vi/0GbkMuRs_UA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17679	0xYfCbk+ky/Xj6P71Kk02w==	2022-08-16 07:37:12.361524
+435	6t91oasuj04fz7wsa1wl8inu4vbk	https://img.youtube.com/vi/748ZVZAJ5qM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17679	0xYfCbk+ky/Xj6P71Kk02w==	2022-08-16 07:37:17.126246
+439	cdeqr3u60u447wkafgcj74z844s5	https://img.youtube.com/vi/jfLpVbu5svQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8821	WAnzjEfWDwKB+k85ndrSzA==	2022-08-16 07:37:35.35431
+821	8u9pce7nqarhtwl3qjlzua1vmgkg	Why Are You Here.mp3	audio/mpeg	{"identified":true,"duration":297.049863,"bit_rate":79538,"analyzed":true}	local	2964842	4QRAmZT9SPr0B2/07NHo1Q==	2022-08-16 15:42:15.598746
+443	u6og7qk4m400ilx3lp9ylj7qvcfm	https://img.youtube.com/vi/lk0-yDyLqSE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17164	GLv+dUPFu6wAFvfg+RKXOQ==	2022-08-16 07:37:37.926939
+557	x3jcm47xtxamj2ge6fyyzhp8dnn5	Little Engine [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":206.477711,"bit_rate":110749,"analyzed":true}	local	2867280	eU62WUralGgUYPgbPIPJoA==	2022-08-16 09:17:27.539572
+447	8cx0h5rcy4mklniyblbkeywy3nqj	https://img.youtube.com/vi/ALIN85DsULY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10726	ASzebVueW9v9gqXhfbCWKw==	2022-08-16 07:37:42.712719
+563	h6h3keuopfiqhpj55ds9c0mx6ylb	my ex's best friend.mp3	audio/mpeg	{"identified":true,"duration":134.780474,"bit_rate":147454,"analyzed":true}	local	2513723	FDgtqPcSJTYhTH3uSdPhZg==	2022-08-16 09:17:35.561419
+451	5bqbzpm7y65eswczz0batvxu0azg	https://img.youtube.com/vi/KqFQUdMIzqs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31367	P3DjGvZiZ9OIpDPtUUAsPQ==	2022-08-16 07:37:52.081885
+819	xvsfegi213yqg993bqjiq924aagq	forget me too.mp3	audio/mpeg	{"identified":true,"duration":258.038935,"bit_rate":86759,"analyzed":true}	local	2834158	pmRmT6s7gASnU3gKFHIVXA==	2022-08-16 15:42:13.084019
+455	gbqbnzhcidbzk17kp90hrplna80s	https://img.youtube.com/vi/vL41VpNAv6I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9838	lr/kzy5qsJ+j4DJQiRm8JQ==	2022-08-16 07:37:54.725324
+459	gbtvo6n3v4d4vvz3f02ui5n7zpac	https://img.youtube.com/vi/IDVBwbizn9E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16644	zIl1ylKULNnQj1RCodRW9g==	2022-08-16 07:38:02.421373
+824	yuto6verke3oza5pc9l48r8x5cp5	lonely.mp3	audio/mpeg	{"identified":true,"duration":179.090041,"bit_rate":132006,"analyzed":true}	local	2990922	c+jx0ZwMMFwzeMJeBabsbA==	2022-08-16 15:42:19.500446
+463	z0i7fa5javoi0dsr94doca25tclw	https://img.youtube.com/vi/O7vHqm9HcXc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17944	FNYbxMa1o2sWzSSW5D5p1g==	2022-08-16 07:38:04.429284
+535	80bu21vc8a3lnw43xfikcd76ohp3	https://img.youtube.com/vi/pRWtNfSXLuY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20500	/nzWbn9uCu2Ynp/8Uuzr+w==	2022-08-16 07:44:46.498557
+554	vkjsj9xufo1e4b67zjvholwzju48	In Too Deep [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":191.285977,"bit_rate":130416,"analyzed":true}	local	3127220	WqHQJInMajZUwfAC3ffI4w==	2022-08-16 09:17:22.908684
+558	xr34qu7go9n4vigl3f6idas24tdz	I Will (feat. KXNG Crooked, Royce da 5'9" & Joell Ortiz) [Official Audio].mp3	audio/mpeg	{"identified":true,"duration":303.0,"bit_rate":115686,"analyzed":true}	local	4390390	8OeX/n/kwthGV4TfE3RHaQ==	2022-08-16 09:17:29.450995
+827	kx0koo1y3ajjtpc5atnhhrijofnh	bloody valentine.mp3	audio/mpeg	{"identified":true,"duration":225.530662,"bit_rate":124537,"analyzed":true}	local	3521294	a+s5D27I/MpUMLLgikyY1g==	2022-08-16 15:42:23.117201
+820	z3bap0fa3r8isbd0qm4b8fy4bn4p	Let You Go.mp3	audio/mpeg	{"identified":true,"duration":220.604045,"bit_rate":107290,"analyzed":true}	local	2993572	LHV5IeicYChjUSPtkXI6ag==	2022-08-16 15:42:14.318872
+822	3qhvdzj51758h6bru5oafi10ks8a	title track.mp3	audio/mpeg	{"identified":true,"duration":232.126512,"bit_rate":93525,"analyzed":true}	local	2749516	dYT9PEC3C+nhe/WKqCziHQ==	2022-08-16 15:42:16.767611
+823	5k1rsoqe516y6ssni2mvu09qp67o	Hollywood Whore.mp3	audio/mpeg	{"identified":true,"duration":303.859585,"bit_rate":92298,"analyzed":true}	local	3540204	9oXg8z3yK5KeZGuQT2swgQ==	2022-08-16 15:42:18.265969
+825	gmevslan3r5bmpwlpqbq02v47xja	ROCKING A CARDIGAN IN ATLANTA.mp3	audio/mpeg	{"identified":true,"duration":131.543008,"bit_rate":125385,"analyzed":true}	local	2062776	VTavUVsi0k6ixrTPNjlLPg==	2022-08-16 15:42:20.419293
+826	dbmaziu7fy3hjvtul3pp8qcuqjl7	High Right Now.mp3	audio/mpeg	{"identified":true,"duration":471.163502,"bit_rate":46183,"analyzed":true}	local	2735632	Ia+UAcyuPDovG0K6nWG/bg==	2022-08-16 15:42:21.658798
+828	3cracx7cvn032v5wmj0fcarhdu3m	Everywhere We Go.mp3	audio/mpeg	{"identified":true,"duration":200.83278,"bit_rate":121098,"analyzed":true}	local	3085778	63EjjP5UXmExFIi32dSZ6g==	2022-08-16 15:42:24.383327
+829	nh8uxoa1ybobaxnydxigo0p7413i	They Ain't You.mp3	audio/mpeg	{"identified":true,"duration":328.457622,"bit_rate":61483,"analyzed":true}	local	2539984	3qy8QrKvqRnu3WR8WtuCHA==	2022-08-16 15:42:25.505838
+210	pd35pt6i4kfloexvbxb09lphgmde	https://img.youtube.com/vi/fhfJzrO9LUQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7272	HmjL0VtqKLIBPGvGPME5GA==	2022-08-15 18:44:25.090309
+423	anizi27e7bq63ah1oy70jry0uutt	https://img.youtube.com/vi/0WkIZwM5_vc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7407	Fcz9M0qACMRBXAlPmBRb/Q==	2022-08-16 07:36:56.392893
+214	lopl57egv2cm49kevvsrzzc78n0c	https://img.youtube.com/vi/S7j5gtiwBLo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8629	KjKYRqKicY7u9BgIB3yKlw==	2022-08-15 18:44:30.763702
+857	9rj0tz5qgmomo09gs2fx0cabpwml	Understand Me.mp3	audio/mpeg	{"identified":true,"duration":307.683903,"bit_rate":59602,"analyzed":true}	local	2300050	SwGcwMFggd523sJUF7OwIA==	2022-08-16 15:43:04.397664
+218	hdlnbmq2knmgu1dot5kx4vlds40q	https://img.youtube.com/vi/ZFPT3PMU6co/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21093	7IpHUd2J1IpYJuPNiRP0sg==	2022-08-15 18:45:03.599817
+427	jhy7igfauktq5367x829lnu2javd	https://img.youtube.com/vi/BZ09A39xECk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7414	NBo48oMHMD9H/ZIgM9rraQ==	2022-08-16 07:37:07.81644
+858	sp5vdz0abjwk1oaidnv2d18xg70v	Imperfections (interlude).mp3	audio/mpeg	{"identified":true,"duration":173.847964,"bit_rate":85835,"analyzed":true}	local	1889941	6mfY4aL/CS/0nCYFd1QJqw==	2022-08-16 15:43:05.234115
+429	lis9cdlexf6b4sdflmr105rz5jhf	https://img.youtube.com/vi/trmoIfUVctQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7407	Fcz9M0qACMRBXAlPmBRb/Q==	2022-08-16 07:37:07.999367
+224	nlwdex8tvmsfxhnldpqb7urwppmc	https://img.youtube.com/vi/tsrl3AVsUlE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13071	MVpepGCt9dIDmQ/ikF9Tqg==	2022-08-15 19:21:27.246037
+859	xv06cmxb6uqp8ob6zbnlz9f1ol6k	Ballin.mp3	audio/mpeg	{"identified":true,"duration":626.654828,"bit_rate":37842,"analyzed":true}	local	2973832	ciMfEgFjHBiEQKI4myW37g==	2022-08-16 15:43:06.476316
+226	g5kjxvp2nz4hklxi4332rek4bowt	https://img.youtube.com/vi/NA4uIFbVCPM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12841	SDvrNt6Vp+p7gYRngl6lcA==	2022-08-15 19:21:46.150937
+433	easepd4teej9p7sih6a7c678fd4q	https://img.youtube.com/vi/MHZGOJ1kysc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7407	Fcz9M0qACMRBXAlPmBRb/Q==	2022-08-16 07:37:13.892784
+228	vwck5c79yw4o2ds9mpynxg6pc5ut	https://img.youtube.com/vi/LUBUchYczsA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10457	j1hJrVqSIrXw9nYbVha6gg==	2022-08-15 19:21:48.022531
+860	c21hnt6rfqnqi4tfu1wyjm88a7nz	Sayonara.mp3	audio/mpeg	{"identified":true,"duration":645.988974,"bit_rate":124068,"analyzed":true}	local	10067664	Tk4bERIk9FBgbCGmw3pBWg==	2022-08-16 15:43:10.536862
+437	hxgoww5y7otz1izoxowzbnb7r5v8	https://img.youtube.com/vi/qZp5gf9xgnE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7415	S1Jj9V3dcxpA2DSlBwv/bA==	2022-08-16 07:37:19.562823
+231	2ty946jnyktanbm43qg83r4jmitc	generic_w5GrxfjuTTI.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11244	DI2QkRIcso52AQqsXR7/cw==	2022-08-15 19:21:50.513614
+233	07ol86gx7j70v9iiigd0mn4h4krs	https://img.youtube.com/vi/OCogbzIvYg0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24483	r775vFVwoSS/d1r+Eu3kfw==	2022-08-15 19:21:54.048427
+861	q9fzhpnkyuh1nib21lfkhxdbcetn	I Think I’m OKAY.mp3	audio/mpeg	{"identified":true,"duration":291.713467,"bit_rate":72592,"analyzed":true}	local	2659316	VSvkjfasPoJc31wNKzfsFQ==	2022-08-16 15:43:11.719975
+235	y8xbzj7v844k7s0kmkio8l8fmeod	https://img.youtube.com/vi/LYa_ReqRlcs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12841	SDvrNt6Vp+p7gYRngl6lcA==	2022-08-15 19:21:57.332675
+441	10wz8m2s4csz1bk9z8bfw5wa8qau	https://img.youtube.com/vi/7gVNNPv8w4Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17850	QU///sctDwDLH7PStWcxtg==	2022-08-16 07:37:35.925105
+237	t4u45una4kgoqo8j414c2ovj1u6x	https://img.youtube.com/vi/4Ukh9aQBzWc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23857	pc2PPPsSpdCrUV+XXp1TdA==	2022-08-15 19:21:59.485066
+862	ft436vzx7v8o6hbcz3zs3motez8n	Back Outside.mp3	audio/mpeg	{"identified":true,"duration":278.980007,"bit_rate":73224,"analyzed":true}	local	2598710	hkL4Bu5G3AgXy7zDfnNymA==	2022-08-16 15:43:12.906149
+239	r4messwxdg46s3s5sz6penbkxzx8	https://img.youtube.com/vi/_a0T5qwxANg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-15 19:22:01.025779
+445	50zssctg62uz4ylvrqtffc5tx21f	https://img.youtube.com/vi/D56V01lqnNQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17999	3DzSkZE0OTSTpq9XL4grEg==	2022-08-16 07:37:39.851868
+241	ykaql7yjez2n61tzm54c03szozpf	https://img.youtube.com/vi/s1XbPXdgEEA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12841	SDvrNt6Vp+p7gYRngl6lcA==	2022-08-15 19:22:03.036694
+863	0f7pdbm640nc5x1qkgyfgi5v1q7p	Porta one.mp3	audio/mpeg	{"identified":true,"duration":115.648449,"bit_rate":148394,"analyzed":true}	local	2194054	TbH8D+yWftvlgY/krWwxbA==	2022-08-16 15:43:13.969923
+243	10ttvnhe772btoif08ic51zyd602	https://img.youtube.com/vi/I_QpDE-Uco0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12543	xs3YAxGD1V9JxzeGb0kpOw==	2022-08-15 19:22:04.841181
+449	89z0j7al9bb2k4zfsmnskq9uivai	https://img.youtube.com/vi/cHZb0Sq5KOA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	28008	sYU/QQYRp23K8mhKvPs/zA==	2022-08-16 07:37:46.122845
+245	vaavibchieuxjkk8zfu6zu993awi	https://img.youtube.com/vi/AfwRUj8JDXg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-15 19:22:07.591212
+864	67gdzwuky0mclh95ze8jt4gyzq6z	Scenario.mp3	audio/mpeg	{"identified":true,"duration":231.41108,"bit_rate":138776,"analyzed":true}	local	4024174	evQlaDoJdYGe4+0MrSXv0A==	2022-08-16 15:43:15.699349
+247	okdobxp4t6ggy72o49gywrzinufd	https://img.youtube.com/vi/R8vpQdZErbw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21539	i3iOA87eYHtgNz0h/K6Q7g==	2022-08-15 19:22:09.292733
+453	tkd1x64xb5uekcmycl7w6vso6avx	https://img.youtube.com/vi/tAztwrYHCWE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3446	vdTesgktk2M+F5Giqbj1NQ==	2022-08-16 07:37:53.431869
+249	w6j415010vrtytds2qhwki4r05fz	https://img.youtube.com/vi/ul-9U681Y2c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12543	xs3YAxGD1V9JxzeGb0kpOw==	2022-08-15 19:22:10.435065
+251	fgamuf4wgl4tyjq02799o5jog1fp	https://img.youtube.com/vi/k7fiZ_if2Bg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12841	SDvrNt6Vp+p7gYRngl6lcA==	2022-08-15 19:22:10.905505
+253	d7pebm8vrskv9mo9v49yp9z89551	https://img.youtube.com/vi/XhmGfZ1SeuY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16046	sI4ok/UKCmmRkil3cYkUAA==	2022-08-15 19:22:13.656755
+865	ykb6hroxw293f5ze82u23zca8mlk	When I’m Alone.mp3	audio/mpeg	{"identified":true,"duration":280.344711,"bit_rate":91996,"analyzed":true}	local	3236148	4NGw1LV8Jkh4Cfmy0ASjmw==	2022-08-16 15:43:17.155214
+457	y4z3s0z05vy0wva14xd5gvculuqp	https://img.youtube.com/vi/cjGcwmbyFRA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23321	JmV4FCqHAyxVBziLyXkVng==	2022-08-16 07:37:58.24217
+866	t7br0dvp1xdwtia1hicxw6md3ucc	What You Know Bout Love.mp3	audio/mpeg	{"identified":true,"duration":302.674986,"bit_rate":77572,"analyzed":true}	local	2960361	myAxH3jegBuIFC0MFs5sTQ==	2022-08-16 15:43:18.369635
+461	whogghchlxh43safh1xkfnj6guf1	https://img.youtube.com/vi/HLTLVVicjEo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17944	FNYbxMa1o2sWzSSW5D5p1g==	2022-08-16 07:38:03.222184
+867	tfj8u6l8qdqr698d83qboho7fzzg	Everyday.mp3	audio/mpeg	{"identified":true,"duration":213.807741,"bit_rate":122044,"analyzed":true}	local	3272858	w1UiQ+j2fj7H8ohw+qGm8A==	2022-08-16 15:43:19.79133
+537	s4pnrtqauvb3d5r8j8icgnizuemq	https://img.youtube.com/vi/pqg2mD7o_nU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-16 07:44:56.352666
+868	jfnzvmanlgovmuwx5y51hh99nmfb	I Think I Luv Her.mp3	audio/mpeg	{"identified":true,"duration":319.842432,"bit_rate":72299,"analyzed":true}	local	2933326	8OGgI1IglQlG/uM40oX35Q==	2022-08-16 15:43:21.050328
+869	ipoejgxmw4s9ejlia7ckospt8n06	Homicide.mp3	audio/mpeg	{"identified":true,"duration":245.448,"bit_rate":130353,"analyzed":true}	local	4010148	a7dvCzvYwUiUX3b+ovrJ7w==	2022-08-16 15:43:22.830776
+569	lgvuq1cskd0fsstzq2vwh6uho5ee	Smoke and Drive.mp3	audio/mpeg	{"identified":true,"duration":200.763272,"bit_rate":97213,"analyzed":true}	local	2455129	rukmWiNeA+GsH2JA5FS78g==	2022-08-16 09:17:42.640453
+870	xqknst1yui982exr8m5msptxcnsy	Remember.mp3	audio/mpeg	{"identified":true,"duration":172.867106,"bit_rate":100712,"analyzed":true}	local	2191117	FZM9Vx3G0HRuiKEmA8+E1w==	2022-08-16 15:43:23.901887
+871	n8okqr94muwsbjc4rr4mbprryab2	Who Shot Johnny.mp3	audio/mpeg	{"identified":true,"duration":349.587239,"bit_rate":65200,"analyzed":true}	local	2864674	vbEujAgjTKTO7evngUY6IQ==	2022-08-16 15:43:25.190379
+872	zxli3ucm56kjmatk6m1y3m1jv5u0	Demeanor.mp3	audio/mpeg	{"identified":true,"duration":199.011605,"bit_rate":121417,"analyzed":true}	local	3040658	cmgMUn9z6mBIFqlzEnGkZQ==	2022-08-16 15:43:26.563036
+573	g94uyhyf36zjzfwwm16zoilig38y	Zim Zimma.mp3	audio/mpeg	{"identified":true,"duration":287.513097,"bit_rate":115144,"analyzed":true}	local	4166186	+7Gl5/KzfgPMqDG3AY4bXw==	2022-08-16 09:17:47.936006
+873	oamgnklolcqd4t4cfcvktp6zi0ug	Paranoia.mp3	audio/mpeg	{"identified":true,"duration":334.480035,"bit_rate":85423,"analyzed":true}	local	3594764	/h9ZIoS82yiN1ImhJoPHAQ==	2022-08-16 15:43:28.151557
+874	c725naearlu0vngcahpciraizr88	44 BullDog.mp3	audio/mpeg	{"identified":true,"duration":270.697145,"bit_rate":66451,"analyzed":true}	local	2277100	KMv0sl+JPf6jf+/GUB93pw==	2022-08-16 15:43:29.211948
+875	1luadvts84zs6x7agumoygsbicig	GATTI.mp3	audio/mpeg	{"identified":true,"duration":338.248662,"bit_rate":72299,"analyzed":true}	local	3091385	6Qf5i0vw7eEtkKt+psPksw==	2022-08-16 15:43:30.572902
+876	ohvqdms69pponngyxvt3uqzn91ld	Mood Swings.mp3	audio/mpeg	{"identified":true,"duration":395.688113,"bit_rate":79375,"analyzed":true}	local	3945283	YgZRBwq/TDozO2TnrlU2RA==	2022-08-16 15:43:32.328931
+877	wxoh6bsgzsheuvabfc5tp47k1ov3	Diana.mp3	audio/mpeg	{"identified":true,"duration":289.461098,"bit_rate":91460,"analyzed":true}	local	3325615	uF8ICsxjBlJNh9UQV1jhBg==	2022-08-16 15:43:33.822926
+878	sfji5m9z93aj2qfwgrjhfy5himxe	Snitching.mp3	audio/mpeg	{"identified":true,"duration":322.33287,"bit_rate":103536,"analyzed":true}	local	4193894	53X3uowLZ61Kac6lDGW1pA==	2022-08-16 15:43:35.689992
+879	hmjy11ciurvk6ghb521d15iv22t2	Siki.mp3	audio/mpeg	{"identified":true,"duration":142.366647,"bit_rate":175531,"analyzed":true}	local	3135928	vxCXj2zCJK+uScov46KOdg==	2022-08-16 15:43:37.116212
+880	gibvyq0bb1lyw4d96r5xrp79w6uo	The Meaning.mp3	audio/mpeg	{"identified":true,"duration":225.24,"bit_rate":127320,"analyzed":true}	local	3600850	4QmrB7hmXBOw/m6wbxFn9w==	2022-08-16 15:43:38.638527
+881	yfbx1n2j1u5rvair4w8oal25giah	HIGHEST IN THE ROOM.mp3	audio/mpeg	{"identified":true,"duration":390.380173,"bit_rate":64881,"analyzed":true}	local	3188453	YL4XIUNqgmvQLxMTwg8/iQ==	2022-08-16 15:43:40.033187
+882	l3rab0rfl1sl5ns5kvxozfwna7ja	MAFIA.mp3	audio/mpeg	{"identified":true,"duration":491.236374,"bit_rate":74031,"analyzed":true}	local	4571944	vPiiTZTZnYTql3oQ91g3ig==	2022-08-16 15:43:41.922467
+883	q4kgc1c2jyp8dgqhw8t3l83jc1fz	YOSEMITE.mp3	audio/mpeg	{"identified":true,"duration":281.048135,"bit_rate":75288,"analyzed":true}	local	2680110	0iMonyTWxa6JlbZTZXsD8Q==	2022-08-16 15:43:43.097742
+1791	aykkvill020silli46d2x1jjlfgh	Animals.mp3	audio/mpeg	{"identified":true,"duration":170.762639,"bit_rate":150265,"analyzed":true}	local	3229130	LT9J+CpgpA4GCSR3aCUlew==	2022-09-20 19:13:08.714065
+987	bqy19wuuaxne1d31v20bqwh3yflw	https://img.youtube.com/vi/w2_CPSXu1Cs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21326	OK2DH5zsOzq5W+W4wEUMkw==	2022-08-16 16:35:42.155245
+1031	sr6j9pufj4qgsj3k1wi5ymye9h2q	https://img.youtube.com/vi/w2IhccXakkE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23909	CO09OuGPoNpp2CBdRdGvWQ==	2022-08-16 16:37:47.239404
+1037	g1n5ipqwc6h68bqgmbyvlr7lfcxg	https://img.youtube.com/vi/jp06aZB_uqs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19428	0u70TLqLicW6kYhzio6cYQ==	2022-08-16 16:49:08.088466
+1041	xkdy202ghjmtyfldej6vm4j8dq90	https://img.youtube.com/vi/fk6LY-MWZnQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19343	F6VZUg+RDrVWqDMqZL3AYQ==	2022-08-16 16:49:10.937263
+255	slfbgjch8xqzx74fjb374v3wc93i	https://img.youtube.com/vi/4GFAZBKZVJY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30839	PDa+7VmpaFLa6Ba7uauIaw==	2022-08-15 19:22:17.724002
+465	vklicz0ld8kiqemqrs54lojy2gc7	https://img.youtube.com/vi/jqKtxmf8x7A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14062	lh9uJ9VYuBN6uD7x322qvQ==	2022-08-16 07:38:37.823392
+257	2j4rbgbku2xism0esb06ddodbi3t	https://img.youtube.com/vi/JnzVOgNR_rE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-15 19:22:20.486682
+884	nu0kd3qglq529mdbvhja8xkawtaj	CAN’T SAY.mp3	audio/mpeg	{"identified":true,"duration":426.813036,"bit_rate":61798,"analyzed":true}	local	3332192	htpWBz9d2WEK12dSSwb3QA==	2022-08-16 15:43:44.566647
+260	6yv8qxtd8tmlvgqf89v95qub2mk3	generic_qT_y5Yc8jSA.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11244	DI2QkRIcso52AQqsXR7/cw==	2022-08-15 19:22:20.725621
+469	r82mjz272hzjjf03o29cgytzpvdl	https://img.youtube.com/vi/4Do9gZpLnfg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24170	ukhnUtcpE4/pNHSirT1YaQ==	2022-08-16 07:41:28.148434
+262	cda9ocm7rnkn9shmg6depc0jzl14	https://img.youtube.com/vi/weXNuvoyEr0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12841	SDvrNt6Vp+p7gYRngl6lcA==	2022-08-15 19:22:21.106534
+885	vxwi6ym66y4hurblmj3fkc9awax4	ESCAPE PLAN.mp3	audio/mpeg	{"identified":true,"duration":285.878555,"bit_rate":77879,"analyzed":true}	local	2809108	6MCVJx5Llchfhhdb8Y6sDQ==	2022-08-16 15:43:45.834368
+264	1szyed1vudi936gopaowpu07jvkd	https://img.youtube.com/vi/GrAkPwB-LpE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-15 19:22:24.895116
+473	0txhsnemaswbc7lp1uleewg0am3s	https://img.youtube.com/vi/uikR9WLVRhs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:29.751353
+886	edgln0ma34czxkheiwz2ignwn119	goosebumps.mp3	audio/mpeg	{"identified":true,"duration":252.914648,"bit_rate":153541,"analyzed":true}	local	4878573	qyVe7OYQv8EJy/qihd0B4A==	2022-08-16 15:43:47.944282
+266	m4u6a5n7qi8ev787t95ec91zzbiy	https://img.youtube.com/vi/uvvJP-yQBE0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23637	Os2cFEIvfAfmoxiOE8iiqg==	2022-08-15 19:30:03.769543
+268	j05dx41di8dxop1rc607hnue6nmu	https://img.youtube.com/vi/fu7NR1qe_Mk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12788	mU+AVIR0Hw9twtOxdu+Eeg==	2022-08-15 19:31:32.456589
+477	094q1ef85imqx5scja393grbh6p3	https://img.youtube.com/vi/UlzCADBtRE4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:33.022307
+270	zv9806gf5sq3kajems4axhn6wiep	https://img.youtube.com/vi/padY-pMdMiE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29198	RzDoSIxDlf5MBVbCPp2Ziw==	2022-08-15 19:32:16.232055
+271	vdln0ayb0vy2xvvusce21j2yhz09	https://img.youtube.com/vi/ZSC7gfoA21M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27872	TQvCLmXA2kZmD7R6wuCu8g==	2022-08-15 19:32:17.477953
+272	zg79u0upcbivusrr0ocg1wwilzsr	https://img.youtube.com/vi/efXIGmlRz6A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15869	5g1lnotlCo+6cAtVNDBGSA==	2022-08-15 19:32:32.904154
+274	0b2j4iky5v2ltnse0ywnwaesb5gt	YES!.mp3	audio/mpeg	{"identified":true}	local	3313144	t3N4W3d6diRGglAuOP1m8w==	2022-08-15 19:43:35.928866
+275	c40yzwiaq374c4vr0knt3hmufhxr	SUPERDUPERKYLE.mp3	audio/mpeg	{"identified":true,"duration":220.52428,"bit_rate":101007,"analyzed":true}	local	2855695	Pn5ZBW7K89SGSzoo3BmAAw==	2022-08-15 19:44:14.364658
+276	hp86hlqoyc40cdajl227kdpgsumb	iSpy.mp3	audio/mpeg	{"identified":true,"duration":796.105134,"bit_rate":38960,"analyzed":true}	local	3894134	HvKSpm7EZ31Y5Ipt2p+8eA==	2022-08-15 19:44:16.062631
+277	t2552e95j5jia8elp1ro00g8c9ub	Reflex.mp3	audio/mpeg	{"identified":true,"duration":277.058285,"bit_rate":112620,"analyzed":true}	local	3904783	gEH1lzbFzqJdpFIMZ+8QaQ==	2022-08-15 19:44:17.753021
+278	1pdosfkkgqjagcwsooln25x8rxls	Trap.mp3	audio/mpeg	{"identified":true,"duration":196.50696,"bit_rate":120475,"analyzed":true}	local	2973077	JDZHfPGwViEP8z7Q2azsZQ==	2022-08-15 19:44:19.096621
+279	2bcmjz8yzsdz5ei2pire5cd7ayp3	94 Bentley.mp3	audio/mpeg	{"identified":true,"duration":173.472,"bit_rate":135550,"analyzed":true}	local	2947318	bv2p/Ap0aB2YYXGQgpOFtw==	2022-08-15 19:44:20.431066
+280	b4d4mduuc12ekri5a0sq8ol37xw1	Trophies.mp3	audio/mpeg	{"identified":true,"duration":224.016,"bit_rate":135052,"analyzed":true}	local	3789786	dnqjXxR15mkjsDTIkY2cNQ==	2022-08-15 19:44:22.027286
+281	ldwt4au0dtbhlyjpowzl1h6u3lt3	Selfish.mp3	audio/mpeg	{"identified":true,"duration":213.485737,"bit_rate":139699,"analyzed":true}	local	3732450	lRX4NBK9iMNgO1fkuZaAzQ==	2022-08-15 19:44:23.639773
+282	2cdxqvxarxzoizo44qlbousip0qo	5 Thousand Singles.mp3	audio/mpeg	{"identified":true,"duration":247.950007,"bit_rate":85132,"analyzed":true}	local	2646903	H1PyiKjP9sfkrXncqkxf0w==	2022-08-15 19:44:24.825891
+283	x6e16m7ub7qrarblg6xtrm19gzoz	Who Do You Blame.mp3	audio/mpeg	{"identified":true,"duration":214.737784,"bit_rate":112602,"analyzed":true}	local	3030754	seVlWRHJrNJnbG5l61SgOQ==	2022-08-15 19:44:26.184573
+284	7mlndianjklwtrbvku47e632w5v0	Cult4ever.mp3	audio/mpeg	{"identified":true,"duration":180.024,"bit_rate":137033,"analyzed":true}	local	3091724	LoO6PBWOuAm6O1FzUN5PUA==	2022-08-15 19:44:27.466007
+285	6wue5rcslc5oxeuz674t03butwle	Monica Lewinsky.mp3	audio/mpeg	{"identified":true,"duration":247.128427,"bit_rate":99691,"analyzed":true}	local	3087997	lq/U+v8t/4JOcqKUlC6BLA==	2022-08-15 19:44:28.807453
+286	72upijsuf6so3totm77dqw49o59k	Wedding Day.mp3	audio/mpeg	{"identified":true,"duration":238.943025,"bit_rate":105221,"analyzed":true}	local	3151875	mtvuFMZAQ4vgOmoAdXECzg==	2022-08-15 19:44:30.115639
+287	5xevw9yrdid7t6478i7bqrcdgpsb	All I Want Is a Yacht.mp3	audio/mpeg	{"identified":true,"duration":208.912349,"bit_rate":94420,"analyzed":true}	local	2483976	hoih8dCKa/qoYW8St/G72w==	2022-08-15 19:44:31.235226
+288	1un6ijfqq4o9v4046k1q3on9zn34	Nigga Shit (Swoosh).mp3	audio/mpeg	{"identified":true,"duration":251.910278,"bit_rate":103252,"analyzed":true}	local	3255786	xZn9CetSY84usbWoOTPsQQ==	2022-08-15 19:44:32.684348
+289	zods1r9hqq19qrfiwh6p9cwevept	I Can Fvcking Tell.mp3	audio/mpeg	{"identified":true,"duration":235.475405,"bit_rate":113375,"analyzed":true}	local	3345471	Ic6S2nks4NCWvswjFRNlsA==	2022-08-15 19:44:34.066208
+290	5xn2bpoecmiuddlnti7dz7oqao7v	Roses (Imanbek remix).mp3	audio/mpeg	{"identified":true,"duration":282.011402,"bit_rate":78934,"analyzed":true}	local	2791355	6vQaL88ZF4I+gE/fK8zJNQ==	2022-08-15 19:44:35.285483
+890	cd8t3n2zb0wg0jziza4ehglhimza	STARGAZING.mp3	audio/mpeg	{"identified":true,"duration":621.485331,"bit_rate":60299,"analyzed":true}	local	4719538	XJHHZFXEX90+0H1otnFhbw==	2022-08-16 15:43:55.01242
+291	i87zydw15g4xtz71fauqq9xxuymn	White Parents Are Gonna Hate This.mp3	audio/mpeg	{"identified":true,"duration":142.078069,"bit_rate":141183,"analyzed":true}	local	2529424	DEk+eCv+J3XL7/dkggnixA==	2022-08-15 19:44:36.439225
+292	wxk6m22l28qvg4310ay2sgtwdh6m	Sucks To Be You.mp3	audio/mpeg	{"identified":true,"duration":288.184093,"bit_rate":98559,"analyzed":true}	local	3566110	1aoi5l8DB+ZuVDRQOQd8qw==	2022-08-15 19:44:37.932748
+293	12u16hxwhr9wkpdx6impth7j373x	Call Me After You Hear This.mp3	audio/mpeg	{"identified":true,"duration":214.886135,"bit_rate":107065,"analyzed":true}	local	2884984	1u+4zVC204Rzd9+wAOo6Lw==	2022-08-15 19:44:39.185858
+294	pda2h4i185o8vle533xb47iskgj5	Borders.mp3	audio/mpeg	{"identified":true,"duration":313.256983,"bit_rate":94913,"analyzed":true}	local	3724832	mlLQETnsF2BMEXX7WE4SfQ==	2022-08-15 19:44:40.775232
+295	xwqc4f2i18qpybiyn20n8hequ79g	Surf Club.mp3	audio/mpeg	{"identified":true,"duration":151.889369,"bit_rate":221493,"analyzed":true}	local	4209805	2gtrO1HmymiPG2DUu3kWZg==	2022-08-15 19:44:42.580756
+296	x3qahrc40361415a5slxx3supnp8	High School Reunion.mp3	audio/mpeg	{"identified":true,"duration":241.774658,"bit_rate":111679,"analyzed":true}	local	3384264	8mGp7mBYfPqNB9glsjzGTw==	2022-08-15 19:44:44.027374
+297	ysqcb3tq5jrpb5gpizzp5qb185p7	Ride Slow.mp3	audio/mpeg	{"identified":true,"duration":531.813067,"bit_rate":39993,"analyzed":true}	local	2667702	S/GFEhfNCsweYxotUA3PDw==	2022-08-15 19:44:45.158453
+298	c1r1k5ixopugvuqo6s9io46zaczw	Missin You Crazy.mp3	audio/mpeg	{"identified":true,"duration":443.150186,"bit_rate":67130,"analyzed":true}	local	3743032	3HUhxNRVgKtKGaE+CF6OYg==	2022-08-15 19:44:46.773323
+299	b09bozsmv7bxwgxpiwz0i9ht6llt	Waves.mp3	audio/mpeg	{"identified":true,"duration":231.174346,"bit_rate":110487,"analyzed":true}	local	3201843	NzPaZgT/tzXEmfE1JuypqQ==	2022-08-15 19:44:48.182252
+300	s9lsozsrwys2mmgi53sdig3spzuk	3:15 (Breathe).mp3	audio/mpeg	{"identified":true,"duration":609.908711,"bit_rate":36850,"analyzed":true}	local	2813666	EZyg7IFhQMRlJGPIK/TsoQ==	2022-08-15 19:44:49.381729
+301	ruc2z4m32bupegt6keensojd7uoh	Prosper.mp3	audio/mpeg	{"identified":true,"duration":702.768958,"bit_rate":45178,"analyzed":true}	local	3975615	XhNWdFoIiR2cwixSsXajbg==	2022-08-15 19:44:51.097292
+302	4q5ogpw4jxphadb8tt2im5d9wibd	Utah Freestyle.mp3	audio/mpeg	{"identified":true,"duration":189.076197,"bit_rate":124375,"analyzed":true}	local	2943947	3VAEFf4OE+fEK5iq/HbNNg==	2022-08-15 19:44:52.411513
+303	q58y0ghl885swrakow7qspajbibz	RENT FREE .mp3	audio/mpeg	{"identified":true,"duration":568.564965,"bit_rate":38813,"analyzed":true}	local	2765531	DtPvpaHhnk7bQ+I49cKl3w==	2022-08-15 19:44:53.590067
+304	xj4sdw9xw8yqxrp7c6k6uu0w0vsy	Never Again.mp3	audio/mpeg	{"identified":true,"duration":283.54409,"bit_rate":94580,"analyzed":true}	local	3361335	5oeeeVWk14ArzomFqy/WGA==	2022-08-15 19:44:55.061943
+305	qfdkdpz55emtnxaef6q26cix0skt	Star.mp3	audio/mpeg	{"identified":true,"duration":88.450464,"bit_rate":111405,"analyzed":true}	local	1244379	acj7FLGuNxB88qYdLeeexw==	2022-08-15 19:44:55.622249
+306	57jjubhz6hebbokfqk34yq425y9a	Real.mp3	audio/mpeg	{"identified":true}	local	2313013	G4ftYJdPYUtPNDipMKinCw==	2022-08-15 19:44:56.623484
+467	x8ksey2dhepio3323ffnwgddo83h	https://img.youtube.com/vi/Uvrfxy-TDA4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32540	JRz0dIoeEd+iu0y1lJTBHg==	2022-08-16 07:40:58.764604
+887	6jlm42064f9bopam4havc7xxr4jr	COFFEE BEAN.mp3	audio/mpeg	{"identified":true,"duration":366.990497,"bit_rate":77028,"analyzed":true}	local	3568740	44OF8ujzxGz2zq7nW30jfg==	2022-08-16 15:43:49.559492
+888	2knegsj7c82wf635e0k40y9ddd0i	HOUSTONFORNICATION.mp3	audio/mpeg	{"identified":true,"duration":446.381092,"bit_rate":66257,"analyzed":true}	local	3732170	0m9PZifMLMWnL/r3zWfUZg==	2022-08-16 15:43:51.215885
+471	icy3t0vpwwvmlsf5zws0kmdtu215	https://img.youtube.com/vi/yE6WU1WLGcw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:28.50825
+889	13o20sgulnk5ef5qsueioybg60pq	moved to miami.mp3	audio/mpeg	{"identified":true,"duration":222.312,"bit_rate":144912,"analyzed":true}	local	4038792	6lVM4pY9Ebh3WCBnk9K/1Q==	2022-08-16 15:43:52.898267
+475	p97nmp7kn4yhyu8l1wynn4brv6e4	https://img.youtube.com/vi/vJh01O7psQs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:30.810229
+989	l9fg2awqge3leejjrx8mex2o5i8b	https://img.youtube.com/vi/KqQ49wyZg8A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:35:44.392519
+479	h67enzc3gizyaggp2p814rurlu3m	https://img.youtube.com/vi/s5Nt0ceBoLI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	39382	TKYWPkwy+3boqErNY8q49w==	2022-08-16 07:41:34.004177
+483	1rtqztquy7yzebhfgtnr3qwrhuuy	https://img.youtube.com/vi/FuXotQREOQI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24801	EkFTl2MQF3aZdlZ0AwBA4g==	2022-08-16 07:41:37.772084
+993	dzvmz7hes4c51k1psf2vznle10h2	https://img.youtube.com/vi/4hIc26dKOqc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:35:46.723002
+487	a13hhpdgd2at1o1ujy3cj72uzbm4	https://img.youtube.com/vi/UDCMvznDcJc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14082	0cnzCKPRJi0PlQEFIbtGnA==	2022-08-16 07:41:43.153175
+491	70pz93ki3nkilo4f9yz8c4xnzuzm	https://img.youtube.com/vi/ciUdC_xvpt0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	49061	o3QkXHVWKvS+0U1W2/JfuA==	2022-08-16 07:41:49.492948
+997	6yafw7cgmnrt90tadil72v6cbgtc	https://img.youtube.com/vi/5kEQvzJGzAc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:35:50.38757
+495	ip3nexmoe9xhd4r98g5gk5wzwi69	https://img.youtube.com/vi/663GWSv1Z5w/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27389	UUgp6hLonWIadraX9w8PlQ==	2022-08-16 07:41:54.618197
+499	mph13zvq09c6w24v8fdz46n03shb	https://img.youtube.com/vi/mfqsEpjEtrw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9497	oaHdGQcm6Q3RvmQf4dcU/g==	2022-08-16 07:43:26.298732
+609	492bd4giix2nogs6cndt5l6obisf	https://img.youtube.com/vi/goYgHnsQdtY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8441	GQY9hcUsQ6e1w5WDCMvuTQ==	2022-08-16 14:16:51.56545
+891	hfyu14ao7260hpc7m6lxdgwp8zq3	Ballin’.mp3	audio/mpeg	{"identified":true,"duration":180.528,"bit_rate":122719,"analyzed":true}	local	2778838	bY4JCNHMBYn72EQhCnlUJQ==	2022-08-16 15:43:56.229964
+611	at08cxio91eckrhqkom9yxd6qdgl	https://img.youtube.com/vi/7Mzxotj6Gvs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23948	Kc5fk7NpmGjfo8Ne0SAuTA==	2022-08-16 14:16:53.036375
+1792	1fny4wbb8cdckvjw9zm0zc8xugjp	Gotta Lotta.mp3	audio/mpeg	{"identified":true,"duration":400.07159,"bit_rate":74200,"analyzed":true}	local	3730861	tQQfJLqD28vlf+Pq8rPOVA==	2022-09-20 19:13:10.151617
+613	i1vi1hhf3gq9mzkw6vlt3fzwfa1a	https://img.youtube.com/vi/fazMSCZg-mw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22960	L39KENSzw67gafUvy6spWQ==	2022-08-16 14:16:55.999616
+615	ht02ir9onzlnxyrgnl3xo3l4bgos	https://img.youtube.com/vi/Q9pjm4cNsfc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33132	QIYuG5HGZ11spTB5/36N/w==	2022-08-16 14:16:59.072503
+892	j5aynpcj3u0lmwamum4wefugkood	THE SCOTTS.mp3	audio/mpeg	{"identified":true,"duration":316.204193,"bit_rate":71540,"analyzed":true}	local	2857394	epPEcY26/lrAqdp5afnp2g==	2022-08-16 15:43:57.51815
+617	1kqs09bcvji8cj0fupax4qnir9v9	https://img.youtube.com/vi/cekp15DY8MQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23154	w+/aFduRLfQGYYxLBWZkhA==	2022-08-16 14:16:59.337694
+619	x57n726mggjjqsb0ywfc89zcybeq	https://img.youtube.com/vi/_aGuWajFynM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13436	jTh6z0vpp14GxN2pkNuO4A==	2022-08-16 14:17:12.776494
+893	w7prrnkkdwy4mu6hapga3la371yy	Antidote.mp3	audio/mpeg	{"identified":true,"duration":264.888,"bit_rate":129374,"analyzed":true}	local	4296610	GE5n0YGkNX5yqYcFC1uYfw==	2022-08-16 15:43:59.439952
+621	lxc6w7rdpuqka60hhpimciig1ap5	https://img.youtube.com/vi/ELNUK2W0aVs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8441	GQY9hcUsQ6e1w5WDCMvuTQ==	2022-08-16 14:17:15.177466
+623	cfle1p7mpioab239ucyx3aznl5nq	https://img.youtube.com/vi/gRYbn1_K5s0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8435	RubhxpW10ar0zsm64qAvKw==	2022-08-16 14:17:16.629794
+894	v65lc5zje5wn0h1ppglexz1ar8tg	Bacc Seat.mp3	audio/mpeg	{"identified":true,"duration":172.584,"bit_rate":133696,"analyzed":true}	local	2895792	XUD5eBE23TwuH8iKFYZ27g==	2022-08-16 15:44:00.650618
+625	8lkd9e7pkb008yq7vwy21jy5tz7b	https://img.youtube.com/vi/1BWb0WBQXjw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21671	In0XdCe2Y6dPJp3TkG8t1w==	2022-08-16 14:17:19.818542
+627	u7fd8ln27vk0ex3umgdifphfu8qo	https://img.youtube.com/vi/c7KhX0qjn-o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29139	k057kTWJL59nQfDxdlAV0A==	2022-08-16 14:17:36.928833
+895	pet5rel6nc75o8rga4j9sq47l8vi	SKELETONS.mp3	audio/mpeg	{"identified":true,"duration":261.114418,"bit_rate":72917,"analyzed":true}	local	2415128	aH8rD4UBMRyeosFUYZnkIg==	2022-08-16 15:44:01.756077
+629	rkkk8x2ob3pi8q1k2mcmt404bbgv	https://img.youtube.com/vi/pBM5ouqK2tk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27111	02GfbMTyT2AD4mOuyir3Wg==	2022-08-16 14:17:38.221073
+631	7iavhyoqwkbjqx42wl5v828jsfw9	https://img.youtube.com/vi/Fba_CWRb9no/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18779	TAOPhCJ5ZtWJqnT2oobBog==	2022-08-16 14:17:40.384346
+896	loaw0w4u67kdlchxhk61m00r7bbj	Cream.mp3	audio/mpeg	{"identified":true,"duration":213.886882,"bit_rate":105058,"analyzed":true}	local	2824669	de9uq5KrH49/f1k2swkZjQ==	2022-08-16 15:44:03.043887
+633	tliugw1l6shog9h2onrz7dfrxyr4	https://img.youtube.com/vi/iUxnuKO-s_k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32990	WqfsGW9eSiedqjtq32ZWoQ==	2022-08-16 14:17:42.320424
+635	t4w428vkwmlf7xhpo798tzl8zas0	https://img.youtube.com/vi/Bo5hepNudl0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17792	V3CR7iSG3JshyuKpZcPJAw==	2022-08-16 14:17:46.690953
+897	pih6hrkdfletpxervt6bk33e8wzl	NC-17.mp3	audio/mpeg	{"identified":true,"duration":309.553336,"bit_rate":67684,"analyzed":true}	local	2654130	rT0WsTVQF1kB246fGTREaQ==	2022-08-16 15:44:04.199311
+637	61k9jvl0so3cf6r1ev2xldzfpk41	https://img.youtube.com/vi/wSR2WBBNkXw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14832	B0Cl2uSiqihVLeOSyLBFzA==	2022-08-16 14:17:48.2621
+639	88mphlbtkf4uqmw8wz3jv1orosls	https://img.youtube.com/vi/24cbJedcfsc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20358	5vspA2wUzzvfHQqOnJcr5g==	2022-08-16 14:17:51.304742
+641	m2gov5rd64rlsifvg7k22to9drsr	https://img.youtube.com/vi/BhbVY3DNYjk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20719	wX0KEvC0LTve5QwwjxXdEw==	2022-08-16 14:17:54.292678
+898	m9fijns2greahx8rahsmx24n214s	OUT WEST.mp3	audio/mpeg	{"identified":true,"duration":394.210581,"bit_rate":57954,"analyzed":true}	local	2890275	gJO2KtJmm6ZK1ckoBp8Q/w==	2022-08-16 15:44:05.449189
+899	qrpyofr7v7jemksxhdyp2worxt2h	Down Below.mp3	audio/mpeg	{"identified":true,"duration":298.338988,"bit_rate":95378,"analyzed":true}	local	3573646	OOuTCAVFek/SfH4w8WezRg==	2022-08-16 15:44:06.950437
+900	0350qd2139mgrcyds8xlgt2v2lm7	Moonwalkin.mp3	audio/mpeg	{"identified":true,"duration":215.492257,"bit_rate":101957,"analyzed":true}	local	2758291	lwZhCWjM4+vTZPhQqsliCA==	2022-08-16 15:44:08.179323
+901	jr2vvctjzqr1oczd2tpgqmgny556	The Box.mp3	audio/mpeg	{"identified":true,"duration":242.144365,"bit_rate":111384,"analyzed":true}	local	3391534	2IuJ2bO3A8If8MrH0QFEew==	2022-08-16 15:44:09.708924
+902	sbnlwzokiy7n2r8i2vcdehgrxd3d	5% TINT.mp3	audio/mpeg	{"identified":true,"duration":398.013029,"bit_rate":73221,"analyzed":true}	local	3678018	lP/YM+Gz3/XZCUw3Itk2YA==	2022-08-16 15:44:11.324269
+903	sshle3qnpezcv06m8gxyme07psjt	Start Wit Me.mp3	audio/mpeg	{"identified":true,"duration":254.277983,"bit_rate":71990,"analyzed":true}	local	2298301	l9C9xkY4ujidukB73zgNiQ==	2022-08-16 15:44:12.347064
+904	wty36jeqt9o9jztmq6ooy2nvc6lb	ROCKSTAR.mp3	audio/mpeg	{"identified":true,"duration":198.159405,"bit_rate":120448,"analyzed":true}	local	2994918	uR2xzljsf/B8cEw/1RiMyQ==	2022-08-16 15:44:13.653918
+905	y2z37csno34gor4jm2vulehltugt	STOP TRYING TO BE GOD.mp3	audio/mpeg	{"identified":true,"duration":748.284768,"bit_rate":66145,"analyzed":true}	local	6222094	ZCiOMQUjdB5X+If1Xp1Ygg==	2022-08-16 15:44:16.375418
+906	3zwzsrmxsdolvf8efss64yjh4r2s	High Fashion.mp3	audio/mpeg	{"identified":true,"duration":246.890945,"bit_rate":121718,"analyzed":true}	local	3768348	RjLzw+OcNFcwv+Vp7CXmyw==	2022-08-16 15:44:18.014539
+643	gy0evorq2oe79udgvs1unhos0qyk	https://img.youtube.com/vi/OWl9p3oFKgg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20922	P51DNq+HnCoZT6C3QSkrOg==	2022-08-16 14:18:09.145165
+645	8py6u1a892a9c81cpkgihbmo3fyn	https://img.youtube.com/vi/d-JBBNg8YKs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:09.953752
+1009	aok1d9wi8losid5b3c5y0xvzoazq	https://img.youtube.com/vi/t14ej7i8jus/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33972	uDybZ0Tw85XcumQHXJdUuw==	2022-08-16 16:36:34.175941
+649	1vb2pju9lglb0mloeizf5ac2t5em	https://img.youtube.com/vi/XzmnM2PLPfs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:14.538214
+918	39o2sb29elbnh2b6h1bjewev45gl	You.mp3	audio/mpeg	{"identified":true,"duration":291.55686,"bit_rate":98109,"analyzed":true}	local	3591723	bekpvy2y7euHVjPL3FDpiw==	2022-08-16 15:44:34.472217
+653	ik8d0h7dvusnc4rignk235dmkq11	https://img.youtube.com/vi/2a8PgqWrc_4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:16.951647
+657	2px7dq44f7oa14318mny2tyaahzo	https://img.youtube.com/vi/sw4r0k8WWqU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	28161	bd/+rM59JFoCYvcFAwSi8w==	2022-08-16 14:18:20.338256
+919	fnjgd9jgxhxoauxizssufnobug25	Wasted.mp3	audio/mpeg	{"identified":true,"duration":166.744248,"bit_rate":140550,"analyzed":true}	local	2949523	IEPL2OZuWqT5wArgejBZoA==	2022-08-16 15:44:35.813592
+661	o7ovlyyr6fl0p1zb4y7h92rcbe9b	https://img.youtube.com/vi/yA6W2pOi3XY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11641	72iv13AQsCpJfQLoRqI5xw==	2022-08-16 14:18:35.088768
+665	out42fufnxc3gc1kl9ozxhefxrrv	https://img.youtube.com/vi/tAyYYKcySXA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:40.393962
+920	4q1chmhg2eu5qpjxbavkb52sg2fk	XSCAPE.mp3	audio/mpeg	{"identified":true,"duration":148.38654,"bit_rate":136793,"analyzed":true}	local	2548983	crlB7ZRaBaUwTa1jWXlSqg==	2022-08-16 15:44:36.85998
+907	0z8uz3nwmcmpzn56m7yu0svo1so7	Peta.mp3	audio/mpeg	{"identified":true,"duration":215.510048,"bit_rate":125841,"analyzed":true}	local	3401118	LePR2rC4t6mOUfCJ+21HkQ==	2022-08-16 15:44:19.466111
+908	2f2vagmek1ii2y7199q38ezs28a3	War Baby.mp3	audio/mpeg	{"identified":true,"duration":195.984,"bit_rate":126621,"analyzed":true}	local	3112574	Ty9+e9u1jsz78J8oSVrpyg==	2022-08-16 15:44:20.904491
+909	k108fs7z05rq9u66kgf7vw5k8yj5	hibachi.mp3	audio/mpeg	{"identified":true,"duration":278.837279,"bit_rate":87223,"analyzed":true}	local	3052483	wT5FZPEAi4zafQqhwx3dzA==	2022-08-16 15:44:22.241364
+910	pv17wy2up0bdudrsr1eftbbjmo1n	BOGUS.mp3	audio/mpeg	{"identified":true,"duration":199.776,"bit_rate":132429,"analyzed":true}	local	3322390	FHr9TUePjt8Z8vDSmTJhZg==	2022-08-16 15:44:23.698108
+911	pkjff0sxv9w6cy0az5d2d1obha51	Intro.mp3	audio/mpeg	{"identified":true,"duration":161.591818,"bit_rate":117139,"analyzed":true}	local	2376617	qChyDtfFEdsDxiXS03J1yA==	2022-08-16 15:44:24.749274
+912	a92j49hz53g9hi515uf7i9mho03m	Boom Boom Room.mp3	audio/mpeg	{"identified":true,"duration":194.757775,"bit_rate":118774,"analyzed":true}	local	2903386	uRA+Nvcm2EurE4wu1jPWOw==	2022-08-16 15:44:26.121068
+913	hf1ag2tmsi2wrkkhdblsezazf8hl	Every Season.mp3	audio/mpeg	{"identified":true,"duration":248.78732,"bit_rate":112930,"analyzed":true}	local	3535471	kBnI1VWBzzM+NvlOTTrIXw==	2022-08-16 15:44:27.696466
+914	nldfgun12ew0pwukzpitvo2oom3u	After Party.mp3	audio/mpeg	{"identified":true,"duration":197.456133,"bit_rate":112009,"analyzed":true}	local	2784653	EpUcEqR9mXGhHTR2PDkgzw==	2022-08-16 15:44:28.970499
+915	nus71ba6s6dukiimobxpwc84rsb5	Real Talk.mp3	audio/mpeg	{"identified":true,"duration":235.253266,"bit_rate":107685,"analyzed":true}	local	3180147	fx1Qn+2Lr6CQkR7ZOF0cPg==	2022-08-16 15:44:30.400743
+916	umbkmvehqz10kvv1unlubxm6e8fl	Big Stepper.mp3	audio/mpeg	{"identified":true,"duration":178.992,"bit_rate":147985,"analyzed":true}	local	3325418	Sjt8aUpvEySwvlAkLoaAFg==	2022-08-16 15:44:31.891737
+917	jfvodv7rgqsykmtzpkxvxesvt581	Situation.mp3	audio/mpeg	{"identified":true,"duration":207.086326,"bit_rate":85142,"analyzed":true}	local	2210291	mLkHOLwQj2dUUuuzDlb9iw==	2022-08-16 15:44:32.908526
+921	0dsd9q0kfncjds083fp22t4zz11m	Recap.mp3	audio/mpeg	{"identified":true,"duration":190.160078,"bit_rate":103100,"analyzed":true}	local	2494891	YVTEA1KpIsGRCcMm62b+oQ==	2022-08-16 15:44:37.875709
+922	la8qjyc81d8jwwksanee270vxo4p	Best You Had.mp3	audio/mpeg	{"identified":true,"duration":146.735927,"bit_rate":124670,"analyzed":true}	local	2296915	9m4xjEajbgnguBYUUtAZ5Q==	2022-08-16 15:44:38.805659
+923	sqrx7v0nuspf39tnkrtabzglox9p	2AM.mp3	audio/mpeg	{"identified":true,"duration":182.862384,"bit_rate":116869,"analyzed":true}	local	2688082	3u6NDhKXKO5fBGad6yJ9Xg==	2022-08-16 15:44:39.882406
+924	4r7z8td7x7u53qqcybhw8p1xo9xd	No Photos.mp3	audio/mpeg	{"identified":true,"duration":234.203894,"bit_rate":102524,"analyzed":true}	local	3021481	P+dsZayQUacoK67DEzYYIA==	2022-08-16 15:44:41.131218
+925	6rpz7ee9xgee484rhss48z7055j7	Clap.mp3	audio/mpeg	{"identified":true,"duration":177.870146,"bit_rate":105241,"analyzed":true}	local	2347461	BR2TpeJvxrQcsxOc1JTCRA==	2022-08-16 15:44:42.212027
+926	a6d9ohio3wecuvkc767i0slhvni4	Company Pt 2.mp3	audio/mpeg	{"identified":true,"duration":259.300558,"bit_rate":109596,"analyzed":true}	local	3562978	UCd61cgIUuiJ835g+7ASew==	2022-08-16 15:44:43.712835
+1005	q5qqt4x2ot266o89gfncapranlgu	https://img.youtube.com/vi/hklO_R9oiIQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21868	EJ0oAUr7Ib00SNIH1egcPw==	2022-08-16 16:35:55.981377
+1013	qxfc9kjscoa8t98up52hf2m2o6b3	https://img.youtube.com/vi/hLw4qUBfhVY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	37934	pjFP7IWKkleO6Vwo+u7HqQ==	2022-08-16 16:36:39.206335
+1017	nqr97w4tq658qa2goqpnm0w0bc1s	https://img.youtube.com/vi/aT_nFiTkxy8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9108	SL3madWrRTm9XKWcLvDX0Q==	2022-08-16 16:36:46.969357
+647	iwrhm20ag5tvsc0l60bvcpos11w3	https://img.youtube.com/vi/89hJPNSNlFM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24659	NQ9r7uhg0S+q4SKxFFvO7Q==	2022-08-16 14:18:11.755797
+1793	5b0nyg68xmmzlsza88mpvpa7nbfu	Too Playa.mp3	audio/mpeg	{"identified":true,"duration":766.18728,"bit_rate":53065,"analyzed":true}	local	5104625	n0oLUiXK5FXV7Jt2Iawd7Q==	2022-09-20 19:13:12.194319
+651	fryfcl9019mp5i2kvyah9n2oa8wx	https://img.youtube.com/vi/ykMHDKB0-1o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:16.181051
+1692	gqn28h11tbvicy74softkauzuuk5	Paranoid.mp3	audio/mpeg	{"identified":true,"duration":182.75794,"bit_rate":123775,"analyzed":true}	local	2838962	Z7pjRPjOnxXSJbbcKS0cwg==	2022-09-20 19:10:38.748563
+655	jifnzatnqkhq3a62oznsyl24x3ms	https://img.youtube.com/vi/gpnQhbOMQDA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:18.591859
+659	18u17b301h65uppfq7inoltyokba	https://img.youtube.com/vi/ve_iZT4Huuo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24659	NQ9r7uhg0S+q4SKxFFvO7Q==	2022-08-16 14:18:31.296421
+1693	8llw8zu44nck30oxi9c0phuqhxv3	RGF Island.mp3	audio/mpeg	{"identified":true,"duration":183.535633,"bit_rate":127072,"analyzed":true}	local	2950227	c2DqxaFYS35Omqo+mnAgUg==	2022-09-20 19:10:40.008039
+663	dqszw5519aklk84bkbhbsbd4kisi	https://img.youtube.com/vi/Dst9gZkq1a8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22930	FA0t4yiX77ecZ4sbSRDiDA==	2022-08-16 14:18:36.845572
+667	qqanrtq4ikdl5ent5ab03jqoduih	https://img.youtube.com/vi/Z6d3BofQqN0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:42.625851
+1694	qvjrljq24sr0vaksglfpg9lrlnam	State of Elevation.mp3	audio/mpeg	{"identified":true,"duration":269.679081,"bit_rate":95052,"analyzed":true}	local	3223812	iZWqocyAdeM9E1AElU2IUg==	2022-09-20 19:10:41.418013
+669	txy1g3o4rnpvvs0vlavew3ypb0op	https://img.youtube.com/vi/K2taklQnVzY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:43.577818
+671	5tv7ufyvlzotj8pxyagaymcxt462	https://img.youtube.com/vi/Z4reQmzuB4M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32990	WqfsGW9eSiedqjtq32ZWoQ==	2022-08-16 14:18:46.249748
+1695	j5jyonu2yhfmg6ovy5yx5lef7c4v	Molly.mp3	audio/mpeg	{"identified":true,"duration":183.153322,"bit_rate":65196,"analyzed":true}	local	1517177	0yylU1SJoysXoPrKhcJPzA==	2022-09-20 19:10:42.181042
+673	66qp007gtoiisxlvo14i2wxm93r4	https://img.youtube.com/vi/6SLD1ZQZ_4Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:48.432233
+675	9krhhydpbiskcs3kex65od7z8q2v	https://img.youtube.com/vi/AcXp7m1g5yE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33733	V5k47C1QhmT+/8ZzAmh+lA==	2022-08-16 14:18:52.439914
+1696	bb70ola29bgd0ctxmllaspgohbs3	THOT!.mp3	audio/mpeg	{"identified":true,"duration":157.44901,"bit_rate":141498,"analyzed":true}	local	2818751	W7UdV6lBzN/uWU0Dj8e38w==	2022-09-20 19:10:43.394005
+677	l9w0uutgsk8dbe6hx1ivscknld3l	https://img.youtube.com/vi/uLHqpjW3aDs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18677	Cm1ff6V2/COa45LvCFwoLQ==	2022-08-16 14:19:07.412225
+679	d917eb68xq30j2euo2trpwu4eq0z	https://img.youtube.com/vi/Eoh_dLPypj4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15323	zh30G/soelXyKe2DyhEvTw==	2022-08-16 14:19:09.193707
+1697	k0v5j4wjq3s5quzw063t0yehoqek	River.mp3	audio/mpeg	{"identified":true,"duration":404.673392,"bit_rate":66915,"analyzed":true}	local	3430252	klcBr9aiNW5OOBRo7Sc8tQ==	2022-09-20 19:10:44.798723
+681	i9376pxwkxjj510idti167hnfjmy	https://img.youtube.com/vi/lPXmGk9dqAM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8594	4/cxzKRhaNXlfdg2tW/l9w==	2022-08-16 14:19:10.134832
+683	z091jxq86rs8q7w0vcvf6uik382y	https://img.youtube.com/vi/iGU66wsjIPA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10433	1LuJ18ZfM85iEngd4WlkcA==	2022-08-16 14:19:12.712479
+1698	944h1o8wnet8pckujfpigzhfwewr	In the UK.mp3	audio/mpeg	{"identified":true,"duration":193.320947,"bit_rate":126164,"analyzed":true}	local	3085451	16Bwi3ajgSdIWKTx8jyUqg==	2022-09-20 19:10:46.129522
+685	827cjv7syhv8mqbwgq5b7ygtdmd4	https://img.youtube.com/vi/s9FCCiEs84k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8273	NU6fN/EVtIwR0wIm0BHM+w==	2022-08-16 14:19:17.431479
+687	xqshf0t93nrxl8pxjut1ebw1q91u	https://img.youtube.com/vi/adlg71K1YWw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14412	sEvMxaA0CR8K9qS4N7dI8g==	2022-08-16 14:19:18.803012
+1699	yfqqwpcgrpzbfd1bc3ll74u1s59b	Apart From You.mp3	audio/mpeg	{"identified":true,"duration":263.802785,"bit_rate":103684,"analyzed":true}	local	3425048	rcK8EhpaS3OXMLXK1MRuXw==	2022-09-20 19:10:47.620841
+689	x7u8bm3e299wcku896zhtt4es07m	https://img.youtube.com/vi/HLHAYK_PhSs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10392	JACuyBWtcPjU+RqO6LIGEg==	2022-08-16 14:19:20.84046
+1700	ebmu7xg188c4lkrqaf9gfnpp9gmi	Make Em Say.mp3	audio/mpeg	{"identified":true,"duration":228.796097,"bit_rate":116835,"analyzed":true}	local	3358334	E5jImjHXZHSxLhB6dEJojA==	2022-09-20 19:10:49.078648
+1701	to27xqin29y8x89znkj34gk0se2t	Value.mp3	audio/mpeg	{"identified":true,"duration":168.744,"bit_rate":139526,"analyzed":true}	local	2956094	6bHSskTKTt0/cX7x6pWl9Q==	2022-09-20 19:10:50.406129
+1702	u5ym6i0unfju8suuxh5sjch7bdwt	Clicc Clacc.mp3	audio/mpeg	{"identified":true,"duration":142.623984,"bit_rate":101650,"analyzed":true}	local	1831857	1i6BCaVhZlQNCrTelRdwvQ==	2022-09-20 19:10:51.221444
+1703	ju1myk8eup0vwzjmz2ugxbue61j7	Crooked Smile.mp3	audio/mpeg	{"identified":true,"duration":456.164789,"bit_rate":79083,"analyzed":true}	local	4528927	oAjHZcWSaspOpgi3zlpEmQ==	2022-09-20 19:10:53.013015
+1704	rw4gz11d24sez7gxpcv5f8j7t29a	Trap Queen.mp3	audio/mpeg	{"identified":true,"duration":203.695258,"bit_rate":157274,"analyzed":true}	local	4017445	vJ1ah86PSbqEIuCVQozrTw==	2022-09-20 19:10:54.696225
+1705	entdrxcc32ok50v2rzjg7v8q6tb3	Again.mp3	audio/mpeg	{"identified":true,"duration":323.474349,"bit_rate":132316,"analyzed":true}	local	5385067	6lLbBnbLJV0mB41acL88hA==	2022-09-20 19:10:57.02704
+1706	yd4qfqtz3cfnhnel3qg3mo168qyq	D.A.M..mp3	audio/mpeg	{"identified":true,"duration":344.346469,"bit_rate":95362,"analyzed":true}	local	4139617	BPXS1r3NcbqxtPcMI/7zFg==	2022-09-20 19:10:58.679443
+1707	vagl21ld8qm7wyt7osfbbpzsud62	Praise God.mp3	audio/mpeg	{"identified":true,"duration":265.085634,"bit_rate":102576,"analyzed":true}	local	3401623	9EjcUYTS25N8+6sDNennig==	2022-09-20 19:11:00.042625
+1708	nv3hm2s3auta0h3103obpzp074gg	Through The Wire.mp3	audio/mpeg	{"identified":true,"duration":238.635348,"bit_rate":121420,"analyzed":true}	local	3654685	5i1vPY3WtxOQZvSpbJpNjw==	2022-09-20 19:11:01.583578
+691	jbnopr561155w0i5d4y57sa2817t	https://img.youtube.com/vi/83xBPCw5hh4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9935	Ck2Slkeqem4A3EECaR66tw==	2022-08-16 14:19:23.993347
+693	khs7pepytrhuug7suxpdb7gc93g1	https://img.youtube.com/vi/YK9UDVBqIBs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9331	Fq8yQC56TooZJrycsqu3NA==	2022-08-16 14:19:31.95732
+932	th6uhzmvr6mu5zcderozawjm0j4w	Swang.mp3	audio/mpeg	{"identified":true,"duration":263.893556,"bit_rate":91992,"analyzed":true}	local	3043777	1bTp5QUMgga9X8Jh4tx9xw==	2022-08-16 15:44:54.106281
+697	5nk8cssbhizy87gh8qxsy9mxo3aa	https://img.youtube.com/vi/bnfvsJT2WV0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9052	fv2ekOdGS8S2c2sGxF/4Jg==	2022-08-16 14:19:39.19299
+701	argpb2rcoshye1jgoydo0zmz1dtl	https://img.youtube.com/vi/yYliDCjxBaI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10211	97VUhOUMP/MIrHQM2dLCiQ==	2022-08-16 14:19:44.86936
+933	atj3m42gl9bcssi20sju592w05v6	Perplexing Pegasus.mp3	audio/mpeg	{"identified":true,"duration":346.520196,"bit_rate":84003,"analyzed":true}	local	3660089	2iWSow6DzTHV+7Kj6MpPPw==	2022-08-16 15:44:55.61548
+705	6d526lpxejbitf2zv211vyjvg1pn	https://img.youtube.com/vi/7MAOfnXRYbk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10371	XPtgf2Sioi6jGDpzkSK3Ig==	2022-08-16 14:19:52.566565
+709	er5gr8s72ssd4p4lvujtquf9hi3r	https://img.youtube.com/vi/6L_SVOb9S6E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13105	onJN/Lf40K9UnGcEtgRR0A==	2022-08-16 14:19:57.731519
+934	aqmmwxusu08rkgmxb6z8o4hryqpf	No Type.mp3	audio/mpeg	{"identified":true,"duration":419.080739,"bit_rate":58064,"analyzed":true}	local	3052503	X5ob/My3TCPHZ1utRbU7FA==	2022-08-16 15:44:56.90738
+713	dmitshov8u42wn212wh7mymxvoxd	https://img.youtube.com/vi/GqCiSYVexPE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18602	Uc79mqF7kIfZTQSAj7G2fg==	2022-08-16 14:20:15.480855
+717	jjtcmej63i4n83akzcr828ufxcnn	https://img.youtube.com/vi/YM6ukDewm-U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18602	Uc79mqF7kIfZTQSAj7G2fg==	2022-08-16 14:20:20.263705
+935	m7hhx4t0ewsg30tws4lx99lpxp2r	Flocky Flocky.mp3	audio/mpeg	{"identified":true,"duration":232.863613,"bit_rate":106770,"analyzed":true}	local	3121768	v0bR1lPHDRkZkS1NCtiKlg==	2022-08-16 15:44:58.212991
+721	1072b4a4pibq8vlnukqzrdo6qf8y	https://img.youtube.com/vi/pNDB4iy0viM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10272	szPBBun08QSf+WnhAXWipA==	2022-08-16 14:20:22.972898
+725	o1u363v6mr0tzgcltch0p9ijwhdf	https://img.youtube.com/vi/yMmf-UW_OP4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8778	Dyqqh5eRpON1dxfpWkxxpA==	2022-08-16 14:20:34.498958
+936	nrvizkpg37kernu56prd5sq68wus	Company.mp3	audio/mpeg	{"identified":true,"duration":425.130178,"bit_rate":57329,"analyzed":true}	local	3066581	dyvYc5//yTLG7X0gWWYBJQ==	2022-08-16 15:44:59.429976
+729	aeac3rfrqrsxgiitsieaqr6gfmey	https://img.youtube.com/vi/ZxYa6mZEArM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15289	yOOjcEtzmK2XwUQDId7WFQ==	2022-08-16 14:20:40.187095
+733	zjmx9eykv13pilf7e0lr32g0ysz7	https://img.youtube.com/vi/D3mptowQ-o4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6112	HgVPqHVpLqyweXbAXeohXw==	2022-08-16 14:20:41.898179
+937	25sz0z15sohtmbfgfuf74h2tw9k8	No Idea.mp3	audio/mpeg	{"identified":true,"duration":151.608,"bit_rate":120372,"analyzed":true}	local	2288190	jhREm6fNXEim76CMGJRb3w==	2022-08-16 15:45:00.37448
+927	dq0kbg8ogajz2t8u5bjmg9jhyt5n	SICKO MODE.mp3	audio/mpeg	{"identified":true,"duration":721.499874,"bit_rate":59685,"analyzed":true}	local	5418054	cAphSm0L3zL1r294J72q4g==	2022-08-16 15:44:46.004825
+928	tzpiydxhmqobdcn85965tma3gkyk	WHATS POPPIN (remix).mp3	audio/mpeg	{"identified":true,"duration":278.831222,"bit_rate":122042,"analyzed":true}	local	4311977	xj5qEj2zIRwJVE5+dcnZ1Q==	2022-08-16 15:44:47.868753
+929	8od1e3p8dt35y47mw0wwtrbaomsh	Look Alive.mp3	audio/mpeg	{"identified":true,"duration":294.609798,"bit_rate":99997,"analyzed":true}	local	3701335	esSQs7cfDa3+i/21W5XgnQ==	2022-08-16 15:44:49.429292
+930	njntr2hul5hsp6cyx9ear1cidg0p	Throw Sum Mo.mp3	audio/mpeg	{"identified":true,"duration":349.397037,"bit_rate":93223,"analyzed":true}	local	4090947	IyMqEzC1itaf2w3Fc2RTfw==	2022-08-16 15:44:51.147007
+931	1ll554cr14a76cp86l4kmzibdxyc	By Chance.mp3	audio/mpeg	{"identified":true,"duration":256.854521,"bit_rate":117137,"analyzed":true}	local	3777116	F6lsEIiZxz4B5dZ1wwcrUA==	2022-08-16 15:44:52.795769
+938	6zsp8d1nr4nzjw8j32bhm903yxgx	Whats Poppin.mp3	audio/mpeg	{"identified":true,"duration":166.580946,"bit_rate":120469,"analyzed":true}	local	2529814	eu2KFoQfZiICHcd5AHdwyQ==	2022-08-16 15:45:01.406914
+939	5rqcj0e2dchis2bijpdf5b6y45hf	SUVs (Black on Black).mp3	audio/mpeg	{"identified":true,"duration":171.447862,"bit_rate":128323,"analyzed":true}	local	2761480	9YOlc3dPBKIp01BYBFz2SA==	2022-08-16 15:45:02.527715
+940	furp7580i1gcapp535b4336dhc2y	Lil Secret.mp3	audio/mpeg	{"identified":true,"duration":143.355846,"bit_rate":120791,"analyzed":true}	local	2173037	EWnAYyY6i8e2TDCTe7Ko3w==	2022-08-16 15:45:03.481174
+941	cpm28uns9bv9iwgjkdu0xkaxk3f2	Tyler Herro.mp3	audio/mpeg	{"identified":true,"duration":196.932406,"bit_rate":101325,"analyzed":true}	local	2518523	XgYgEszeyD9d26ENp7Lyjw==	2022-08-16 15:45:04.508602
+942	8mfh2hca6626rk843zmvatf1apdv	Luv Is Dro.mp3	audio/mpeg	{"identified":true,"duration":164.664903,"bit_rate":151998,"analyzed":true}	local	3159555	6c+SaJKs8NZ2mnBfOMYhUA==	2022-08-16 15:45:05.851886
+943	zh8cayq1su2tfr4cdinmvrcxu1nf	OUT FRONT.mp3	audio/mpeg	{"identified":true,"duration":233.576947,"bit_rate":102583,"analyzed":true}	local	3014128	Gx+m7p53goap2YJdOw9WdQ==	2022-08-16 15:45:32.057582
+944	v35qo9nhgyc4xgwu93fr4cwst8fr	Rain.mp3	audio/mpeg	{"identified":true,"duration":226.679084,"bit_rate":118763,"analyzed":true}	local	3395843	C1GjCc9taqAi79bg4LTMYQ==	2022-08-16 15:45:33.439149
+945	wbzt2hxpzy659u2v8ylhog2nqgd0	Aries (YuGo) Part 2.mp3	audio/mpeg	{"identified":true,"duration":360.827521,"bit_rate":102262,"analyzed":true}	local	4623991	vw39JGmZZF2buxjrne5c0Q==	2022-08-16 15:45:35.290304
+946	odbdf77xqgo4lxkc02kyqay93yq9	No Flex Zone.mp3	audio/mpeg	{"identified":true,"duration":466.88099,"bit_rate":59163,"analyzed":true}	local	3492725	hT+r5h6uyJm931qV1Y2L1A==	2022-08-16 15:45:36.652041
+947	mo2bzujeu1jfnzb6j3tr95ks03nq	Powerglide.mp3	audio/mpeg	{"identified":true,"duration":437.408004,"bit_rate":108852,"analyzed":true}	local	5979236	v7W+Yw9s9eTXqZE26vwyQg==	2022-08-16 15:45:39.032394
+948	enznsyn5s1azibyo5qkx63j9yfbh	Black Beatles.mp3	audio/mpeg	{"identified":true,"duration":291.912,"bit_rate":139822,"analyzed":true}	local	5117912	zdeV6gjs445lLP3eMljjiA==	2022-08-16 15:45:41.092599
+695	y8djisp5eiku73dc3x41vkovguk1	https://img.youtube.com/vi/TScsJM4465U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10816	GNvjNIXLqBg2WgqSiXcfoQ==	2022-08-16 14:19:33.138013
+1794	nb3x8xectkse86qoa5k8rxuqdck8	Ounces Back.mp3	audio/mpeg	{"identified":true,"duration":179.788539,"bit_rate":111680,"analyzed":true}	local	2550726	EyB6ibmG/gtg50EGoD+sFQ==	2022-09-20 19:13:13.288593
+699	vlw8qy9eee7vhl425rrahzfz582x	https://img.youtube.com/vi/he7nqDQlSyA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22072	HTw4BSOKhai7/TAQZ3GBeA==	2022-08-16 14:19:39.728656
+949	2q6hhl2ie52120vw8qx1u9kfvtv3	My X.mp3	audio/mpeg	{"identified":true,"duration":251.704888,"bit_rate":119995,"analyzed":true}	local	3795144	dBXOaKvEa+IvOOhQdIrHHg==	2022-08-16 15:45:42.612922
+703	set71we6kikc85oyb8tn4qfha4gx	https://img.youtube.com/vi/Jd6q69hO6X4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9595	dOKCIFWrdVbm7eBFkPQ2TQ==	2022-08-16 14:19:46.540683
+707	t12o60721z9tgqccqhum1jjulxrw	https://img.youtube.com/vi/ejkkd2AXFFA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12062	xG3evcuzlnEgB09opIfl4Q==	2022-08-16 14:19:56.309564
+950	i982txo5ttmaqg80oxmv1ki23luy	Dancin With My AK.mp3	audio/mpeg	{"identified":true,"duration":265.808897,"bit_rate":136764,"analyzed":true}	local	4556387	ywQ1Aps02tOi37P7qwB6bQ==	2022-08-16 15:45:44.326473
+711	xfjwbf8af8cb9sj9ms4rsfv0j6ze	https://img.youtube.com/vi/DtTj4TODL_U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10531	wEgaPHHcYUK2HL1vcR+WNg==	2022-08-16 14:19:59.499918
+715	2rn3eqq3jgzxmgv9mhy9dsi2v8hv	https://img.youtube.com/vi/XkQ1pltpQnw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14694	sxASX/qLEECGbm8hHv8nMQ==	2022-08-16 14:20:19.146966
+951	hxokdeibsb260bffif6019q3t6xv	The Woo.mp3	audio/mpeg	{"identified":true,"duration":281.888257,"bit_rate":99067,"analyzed":true}	local	3512607	0zOwI8NRKtvccrh48EhDJQ==	2022-08-16 15:45:45.701108
+719	g7oxbpvz4cl4e0j73mbzoq61nrxn	https://img.youtube.com/vi/8PsqW7ydLGA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	4894	QMRE6dnAf/9nUU7n5horgg==	2022-08-16 14:20:21.466688
+723	ar9vg1d84zlj6qnlhkmnnn0ev6tl	https://img.youtube.com/vi/t8sIUEEIxvg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14145	rPFNWLRAqbAMFXsS6KQIVA==	2022-08-16 14:20:27.59679
+952	dljia5k9i6fw4m880j3xvhhwfbaz	5X.mp3	audio/mpeg	{"identified":true,"duration":133.611719,"bit_rate":134279,"analyzed":true}	local	2258091	QwnPtbNq4vKCpAa6TXCx7Q==	2022-08-16 15:45:46.56213
+727	fob2zc41a4xtm856wdsidx447h33	https://img.youtube.com/vi/X58oA7kF2q4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	42688	efQMrq35jB0YWGJiSaa+MQ==	2022-08-16 14:20:38.543971
+731	3rhljxs07an6cm9tugw3631atepm	https://img.youtube.com/vi/atPD98l7jUE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18602	Uc79mqF7kIfZTQSAj7G2fg==	2022-08-16 14:20:40.998429
+953	93bmyq6gs2beqjl6nz41ketq3pwh	Cardigan.mp3	audio/mpeg	{"identified":true,"duration":174.672313,"bit_rate":114051,"analyzed":true}	local	2490215	RdWejEktwkVS1LSAiSrY2g==	2022-08-16 15:45:47.553583
+735	ava45egn5xac2lp7od3iq1xlj44n	https://img.youtube.com/vi/QUxT-6QsCaQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9247	17jtQsaAr90Moz76wr2XVQ==	2022-08-16 14:20:43.910567
+737	fv5fy1m3ddk09kozscsdxq8xo18o	https://img.youtube.com/vi/zWma_JNjEls/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12407	pViVA+kTa6pRi5fBwkwR+g==	2022-08-16 14:20:45.279706
+954	abd0qocegfz7qre5vlaba1j3b5oa	First Class.mp3	audio/mpeg	{"identified":true,"duration":173.04,"bit_rate":141759,"analyzed":true}	local	3074970	Dk33NhzkF6zqrI6oviN7Ag==	2022-08-16 15:45:48.832741
+739	1u2kedduij339qp5kk1oaqttm5vv	https://img.youtube.com/vi/XyMKAzSVJ_k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14012	RRre1WSFt3OjwJdr0lDA9w==	2022-08-16 14:20:45.530669
+956	u8r5t7u5j7ly171w9ieeh3yhjyw5	Poison.mp3	audio/mpeg	{"identified":true,"duration":325.616171,"bit_rate":88305,"analyzed":true}	local	3602769	geC/syP8bXKV8prJ4ub8aA==	2022-08-16 15:45:51.361106
+741	xz5qd25mghi3fqam9cl7k9vro30g	https://img.youtube.com/vi/s788mfFmcW4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18610	i6xK4P0eaOy/kuQYVXnyEw==	2022-08-16 14:20:48.702977
+743	4mlsf3zvqo0l5p93c5ieg0o4pqv6	https://img.youtube.com/vi/M8_SHG6roTg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18002	gy6apW9qDPoMlUjLtBa/Zg==	2022-08-16 14:20:50.634451
+745	vtimetmimrid03m8d8dp9ualgghs	https://img.youtube.com/vi/iCfXgG83Pqs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5771	4W5+BQAAmn3/vdxA6dAzqA==	2022-08-16 14:20:52.229846
+955	76vaeqx32bdtyoiv8284ffdwcpk4	Dua Lipa.mp3	audio/mpeg	{"identified":true,"duration":142.688422,"bit_rate":133543,"analyzed":true}	local	2390401	VE6ka9+k9A5kcvqm3yKjTg==	2022-08-16 15:45:49.896266
+747	glol5lyov3ok83aywkxwu1tlrasa	https://img.youtube.com/vi/EzrM9RJnAhA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19893	ZUA2HmBrjglgYP+pbkCinA==	2022-08-16 14:21:22.235896
+957	zzfpp6krjxbgvqcwlqhn647ae3tw	Creme.mp3	audio/mpeg	{"identified":true,"duration":168.086998,"bit_rate":120003,"analyzed":true}	local	2558006	JqYj5d4qsJgsLQuz+20b1g==	2022-08-16 15:45:52.514201
+958	522eprakrgku8ddyqan67r5bix20	Side Piece.mp3	audio/mpeg	{"identified":true,"duration":321.484475,"bit_rate":95107,"analyzed":true}	local	3830465	gamLjtv4Tn5xZ6nspvEcvw==	2022-08-16 15:45:54.07854
+959	vhw4wlzci3734ka5pfg0y4d8gbxc	Movie Star.mp3	audio/mpeg	{"identified":true,"duration":251.21854,"bit_rate":74046,"analyzed":true}	local	2333821	wJggS2Q/LRqN0qe2TLIf2A==	2022-08-16 15:45:55.07733
+960	brxdgxk1jfb0f6zmels5aptydjc2	I Got a Shot.mp3	audio/mpeg	{"identified":true,"duration":171.173812,"bit_rate":108445,"analyzed":true}	local	2328897	gI4iu7hjPHkLO9qGj1DlqQ==	2022-08-16 15:45:55.985558
+961	t823t7mo4kurono7dx1lbzwukvnm	Funny Seeing You Here.mp3	audio/mpeg	{"identified":true,"duration":214.805681,"bit_rate":94427,"analyzed":true}	local	2589456	bZYyGLuiR3zMiuy+OeMGzg==	2022-08-16 15:45:57.043992
+962	tspnsono556855v8dw6nwwaezwfy	Nail Tech.mp3	audio/mpeg	{"identified":true,"duration":276.4797,"bit_rate":102389,"analyzed":true}	local	3562624	aT5F0HuIULH9SHtdem1Yog==	2022-08-16 15:45:58.466069
+1709	c7329mhingzdag6yz3vv8cmlbvp1	Heartless.mp3	audio/mpeg	{"identified":true,"duration":282.935591,"bit_rate":87519,"analyzed":true}	local	3129475	/An2glXp0HkTTKVxsmSVNA==	2022-09-20 19:11:02.845996
+1710	r1p0caifjra3s768weadbod97vef	Heartless.mp3	audio/mpeg	{"identified":true,"duration":718.012041,"bit_rate":33055,"analyzed":true}	local	2973505	mD2GiP86dE6DsGq1D16rXQ==	2022-09-20 19:11:04.075362
+1711	ob7iwiqbk2t6ibnyz22qq0v405q9	Moon.mp3	audio/mpeg	{"identified":true,"duration":221.928357,"bit_rate":81404,"analyzed":true}	local	2260931	0lwFZdeosrQ/VgyHGkOvKA==	2022-09-20 19:11:05.004148
+749	x2l6848rf1s7y7j2815lws3nclto	https://img.youtube.com/vi/QKW_EEDt2FE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7485	CBjlCOxnOBe8azHycEEAgA==	2022-08-16 14:21:22.720248
+751	u5zjugonpui81cdw3p0y061qkis7	https://img.youtube.com/vi/GUqYdsBjZxg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7058	dLeoC8/rNDfelpu9nKzJ5g==	2022-08-16 14:21:22.842155
+1747	i59gdoxubxmiz1buvd0vrp3vw2gu	Savin' Me.mp3	audio/mpeg	{"identified":true,"duration":244.542341,"bit_rate":121407,"analyzed":true}	local	3738887	Go95/kf+B1cqLLx4V0aFvQ==	2022-09-20 19:12:02.749603
+753	pzzs6prwdue57jhx02bpckii53hh	https://img.youtube.com/vi/98JGfgnXE1E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9855	rXIL5Bu/vBSuIEDMtlhEpQ==	2022-08-16 14:21:25.645
+755	3qhxaqaydj63ksqpk9ynxq72v8u0	https://img.youtube.com/vi/3M6kdVS4DTU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7070	/860eDCuYJtK8jv3zH1/2w==	2022-08-16 14:21:43.048627
+757	rtrjx9v213ax3juwqlyvtx06277c	https://img.youtube.com/vi/slyzfHqFe6c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7058	dLeoC8/rNDfelpu9nKzJ5g==	2022-08-16 14:21:43.945438
+1748	a7qrh5qpkj92gxepx9xl2izk29k0	GOODMORNINGTOKYO!.mp3	audio/mpeg	{"identified":true,"duration":159.777143,"bit_rate":115446,"analyzed":true}	local	2339607	01HhWSOFznmlB7oTgJc/tQ==	2022-09-20 19:12:03.776108
+759	r019cutk9vlh81k2q02umbeysn1a	https://img.youtube.com/vi/ebL7bDmpLGk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	35187	iX95AuJraA0stqrqPkSMBg==	2022-08-16 14:21:45.566212
+761	yc96r9l4sfahweq8czjsbmgfeqv4	https://img.youtube.com/vi/rYYjbIKmAT4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22814	BroBTzhXbP1pVsKaOoq2xQ==	2022-08-16 14:21:49.894078
+1749	vg344m2kpf06sm7cicunm45dqczr	Codeine Cowboy.mp3	audio/mpeg	{"identified":true,"duration":103.21035,"bit_rate":131704,"analyzed":true}	local	1712077	vM8T5MVwaIqZMLKaB+Vlig==	2022-09-20 19:12:04.539982
+763	w6kx0om6qksmouan0ujt5n3hmt6q	https://img.youtube.com/vi/O2_8GkA3HA8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7070	/860eDCuYJtK8jv3zH1/2w==	2022-08-16 14:21:52.857075
+765	hc7f21yaygyz2tl6i3j2culnrp50	https://img.youtube.com/vi/eASKchQ9Zvk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29378	kCirREXccOBfKSLCBcckdg==	2022-08-16 14:21:55.280578
+1750	9cxt0rlwf9rtfdbcavcxgx2pt44v	Into the Night.mp3	audio/mpeg	{"identified":true,"duration":258.301175,"bit_rate":113834,"analyzed":true}	local	3692861	Na9+B3Yw4u9AWur5j9aS7Q==	2022-09-20 19:12:06.115572
+767	euwqqb4jibhgy0yubdpxqeeoozi9	https://img.youtube.com/vi/ONMgi06ewgA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7058	dLeoC8/rNDfelpu9nKzJ5g==	2022-08-16 14:21:55.864302
+769	ou649rxtetdlfb43ru5i6kpbdmiy	https://img.youtube.com/vi/p5RpT7SxTuk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	41672	n0um8PpLeyP8lJ9MNvu8wg==	2022-08-16 14:21:59.824814
+1751	9dzrosw61m5a3l1id98xegye39w2	How You Remind Me.mp3	audio/mpeg	{"identified":true,"duration":258.455507,"bit_rate":113873,"analyzed":true}	local	3699182	Tdgd22M4ZLCVikco8sEahQ==	2022-09-20 19:12:07.654983
+771	a9x14e0ow2ymnh7zo82dz2tg547v	https://img.youtube.com/vi/YXgleA4fSD4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7058	dLeoC8/rNDfelpu9nKzJ5g==	2022-08-16 14:22:00.444976
+773	ygk9qn7msl8c4leyqo601eg9uaqq	https://img.youtube.com/vi/ugNGaL2gXUM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17565	9fYTrXlbXdWkr+1seYj9bw==	2022-08-16 14:22:03.2403
+1752	vvc4ilo0ddtwfdw47c0m6cixdj9s	Good Drank.mp3	audio/mpeg	{"identified":true,"duration":273.688593,"bit_rate":115296,"analyzed":true}	local	3972594	XYe87+8Z+NcTIWeSrYNhMg==	2022-09-20 19:12:09.321279
+775	08wyml4fwu6imanvghit27262gxu	https://img.youtube.com/vi/bVX0rT4gkyQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	52541	CnG8oHXujkEKp8c0MmZMMQ==	2022-08-16 14:22:04.139748
+777	gwkt58b24uszuora97bjgnnm1gpo	https://img.youtube.com/vi/y70y666qeMw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29290	O3o7sK3EratQGkX47DjjQw==	2022-08-16 14:22:06.591061
+1753	j7k1s7o0k1niyn51z5pg4jshgr3u	Chill Bill.mp3	audio/mpeg	{"identified":true,"duration":192.099542,"bit_rate":100299,"analyzed":true}	local	2418508	BSEAsdKPxAWXRXRh5c72rg==	2022-09-20 19:12:10.419775
+779	l3t3kgk19dffsunyqyudb0b78hm3	https://img.youtube.com/vi/WS6i4Ms2jvs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22635	zzXKfhNJd7cY5pY/Jp3gLg==	2022-08-16 14:22:08.563006
+781	2othqm0sqrcqo0d7eyngngxdp1i6	https://img.youtube.com/vi/EoxkdcQAZmQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	56728	xBEtI2P4brXBvJ3oAY469Q==	2022-08-16 14:22:11.621852
+1754	bh3jsed20sp5mhrb2bv59ziw94sw	Grey Area.mp3	audio/mpeg	{"identified":true,"duration":249.205515,"bit_rate":92913,"analyzed":true}	local	2917077	hh/GqeX5BWiI1T42DEkhRQ==	2022-09-20 19:12:11.560102
+783	o7176ebz0f3cjm0s0by024gw4d3e	https://img.youtube.com/vi/GEBakNV3JFE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9896	uezVahyoiWY6EohNobC5SQ==	2022-08-16 14:22:38.186153
+1755	pds5furzlspc4bc1d32oy4g854nz	Anyway.mp3	audio/mpeg	{"identified":true,"duration":227.688,"bit_rate":140898,"analyzed":true}	local	4023800	j6fcsoHdPQohHJWWxVtUrA==	2022-09-20 19:12:13.394136
+1756	ban3nclqc85x3b8ec3wv0yaypcmv	Bigger Than You.mp3	audio/mpeg	{"identified":true,"duration":226.488,"bit_rate":136592,"analyzed":true}	local	3882738	7CuaOosAUm6WqAQ0QRiQew==	2022-09-20 19:12:15.045261
+1757	qtxmzv7hexye5b6qk4tkofrspyrl	Wet Dreamz.mp3	audio/mpeg	{"identified":true,"duration":237.369254,"bit_rate":131698,"analyzed":true}	local	3925724	Ye9/yAbZBwLPTfKcBbNLcQ==	2022-09-20 19:12:16.717456
+1758	5siqfc8febkt057amvlo87tqf3bo	Big Amount.mp3	audio/mpeg	{"identified":true,"duration":227.81991,"bit_rate":110478,"analyzed":true}	local	3186959	JGVH0geKtGM4r99Xide0mw==	2022-09-20 19:12:18.004353
+1759	dqtvarpkll2nxmaak11sons5uhye	No Role Modelz.mp3	audio/mpeg	{"identified":true,"duration":333.110107,"bit_rate":106451,"analyzed":true}	local	4450588	Gv/XR8I1C0kdRtUfnssQmQ==	2022-09-20 19:12:19.842756
+1760	ut6vh2cla8va4k130tnaceve9umg	Apparently.mp3	audio/mpeg	{"identified":true,"duration":396.370069,"bit_rate":93950,"analyzed":true}	local	4654892	KIUBy/stDXIlsS0rSF/bKQ==	2022-09-20 19:12:21.666741
+1761	pets6ndbymrtyqqkihr7pkfq7sts	Leave Me Alone.mp3	audio/mpeg	{"identified":true,"duration":419.836836,"bit_rate":61484,"analyzed":true}	local	3243969	l+OlwAxLqlM/qnuZdkEZvQ==	2022-09-20 19:12:22.936635
+1762	6072gpfzvf8yvx7kx2f1ted8nk2o	Self Care.mp3	audio/mpeg	{"identified":true,"duration":342.888,"bit_rate":79355,"analyzed":true}	local	3408770	0ey8Dgo7A16nW5GoByqFPQ==	2022-09-20 19:12:24.321893
+785	zix8g6hw0rfgrdwfc0qxui5fbocr	https://img.youtube.com/vi/Uk_2Eo0No_k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17384	H45AP4SKMhTOfJu707BpwQ==	2022-08-16 14:22:59.704302
+789	la3hjaw3o7j63eaxdbceqno4ygzn	https://img.youtube.com/vi/2l0BAOqBp08/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17920	VSH4q/9jH563YkJSFDotnQ==	2022-08-16 14:23:06.240869
+793	sxjz10py668t5q74d3zxk9kusoc2	https://img.youtube.com/vi/XlYmB9JtCOI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14783	J33NHErJfCksoGFUT6igKQ==	2022-08-16 14:23:09.403266
+1033	v69umr75qetknfxcft8cnvfd4nx1	https://img.youtube.com/vi/lQ6m67Q0E4k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24937	GZxsg/SSQK/u1g6KE5Tofw==	2022-08-16 16:37:54.00208
+797	ws8us0zlzz41pfsu75gfmgtsilx4	https://img.youtube.com/vi/yr-udDR8KiE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7836	N0yHrsspwsHD+qrlkugtKg==	2022-08-16 14:23:18.093679
+800	8i7ki4rcvu1l0xhkn6i2qvnqub3l	https://img.youtube.com/vi/gAP47abpRMk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19976	Jbb0aiYw26zYXG4cOTLznQ==	2022-08-16 14:23:21.155773
+804	2npw9730rru47j1mlsov609jvtek	https://img.youtube.com/vi/ocP7b33n43Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9380	DK6dtd7vxaIWKJ/bKB+LZQ==	2022-08-16 14:23:37.618546
+963	foj82pf016kobdwbd7gcy8n0ag0y	https://img.youtube.com/vi/Qx8bJb4oQzE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10730	0hXMl7v3cvSRfcE+WANWDw==	2022-08-16 15:47:00.462496
+1011	7sb86b00fm7zp3ig4cuz6x5wv5hz	https://img.youtube.com/vi/uCBXaWvobdA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12659	KaFRzVWmjZQa46LL6IySIQ==	2022-08-16 16:36:36.057037
+1015	411g7eojfxlppxgr34mu9rhlkm48	https://img.youtube.com/vi/7ALoFoQbVrU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33972	uDybZ0Tw85XcumQHXJdUuw==	2022-08-16 16:36:41.252699
+1019	p7sne1b8p0redxhd339h78g9o6v2	https://img.youtube.com/vi/mBSo1l5syyk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:36:50.443545
+1023	fnddggwzza0ajgzeqjburjgrwcp1	https://img.youtube.com/vi/uCi0Ug4R1D4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:37:32.364176
+1027	qorqk5e077c5419hwaqkirxekqm9	https://img.youtube.com/vi/dAjIvm5eftY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:37:36.445076
+1049	e101ls13yi9huex43idbclcxuhyg	https://img.youtube.com/vi/B_3JVPm96ac/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18031	l+2odBRVFYHClaEQllfuEw==	2022-08-16 18:10:03.837885
+1053	ykg9c65ascnvl2xm5uoz8y30554w	https://img.youtube.com/vi/GNjStWG2vLU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33194	/3NCiPwHFpP0JA+SVvbRBg==	2022-08-16 18:15:03.683427
+1057	1ziwhto6mz40vv0z6e0s9sd2608m	https://img.youtube.com/vi/IbzYImxfP0o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9734	+08JbTNYLmnvAy3SPZiYTQ==	2022-08-16 18:31:29.798016
+1059	2orufp2ay1njq6aa68dhvh6n0q5z	https://img.youtube.com/vi/dAuAyA9dBBU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20119	2hlcWEc0y5AmFmShImBe7A==	2022-08-16 18:31:43.625054
+1061	2p2w2ucpdg4wp26m9ibbt8q7u54w	https://img.youtube.com/vi/2OTPOKaz8o4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13411	30PsJ8YnkC3V0EK0bTngAA==	2022-08-16 18:31:44.190305
+1063	7hd7utpcvjk68i3kj7vhg6bw6raz	https://img.youtube.com/vi/KGQLCCWWauc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25524	z2jaImTFEk/EWYfwp5lS7g==	2022-08-16 18:31:51.5227
+1065	p92jc0pqfamst1zm90prv98sreiw	https://img.youtube.com/vi/PF_dRZl2Ark/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25119	X5Z0xVTh5B3M6oqZPkDBIw==	2022-08-16 18:31:55.109098
+1763	y9hsxgulcy3acmxzou5a4bvol15h	Happier.mp3	audio/mpeg	{"identified":true,"duration":273.986666,"bit_rate":97498,"analyzed":true}	local	3355776	gmE7SM9FnPOh2oTBOWaarg==	2022-09-20 19:12:25.726171
+1764	awimm9fm9g1gobzeekgjoumtinr3	Hellboy.mp3	audio/mpeg	{"identified":true,"duration":177.192,"bit_rate":115009,"analyzed":true}	local	2559680	58RzXSwU+wqBgsRn+ub3mg==	2022-09-20 19:12:26.78625
+787	2cipqjzfscbn4t1l6dqdfnik8ar3	https://img.youtube.com/vi/TaCqTsiLMbc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	38480	EctTTHg7XttXovmqAcTgfA==	2022-08-16 14:23:01.005244
+791	w16hki7zd2bk2ao2kql2hkq95mpk	https://img.youtube.com/vi/uK7JtrAog3U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26167	66w+Ez3nBPPugnCRi1mf8w==	2022-08-16 14:23:09.102696
+1035	ig6dnopv1v1mxfjjhuwlrjj59wdx	https://img.youtube.com/vi/mVOnD21VHaE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11289	NqOw4LotN4TwCwnauZfOaQ==	2022-08-16 16:48:44.170628
+795	wxd00e1umcavk9c5g3giuu4k2neg	https://img.youtube.com/vi/7hCdjhQ1_Gc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14629	5+4oNmRd7wLdJXSrS2Uyhg==	2022-08-16 14:23:17.782689
+799	ht4wk31ofwjgdj0trstn3txhzzmq	https://img.youtube.com/vi/poYUzSVlNEE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17248	2ztEUKk+zoOUAFxhFIguYg==	2022-08-16 14:23:19.704331
+802	f7qcvletuqrojypxr2fsj5bvryed	https://img.youtube.com/vi/i9QFwTI8rBY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18305	xPnzUQyD5QLwFCtNNaqBlQ==	2022-08-16 14:23:24.493141
+806	g45pjydgrz3w3mno7za3lx1ms99a	https://img.youtube.com/vi/42YPOBIUEsU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10840	7oY+CJfAcHM/hE0vN53w/w==	2022-08-16 14:23:57.845782
+1039	3czb4u6eh8soia6zlgt0wdd92eur	https://img.youtube.com/vi/B-e7YCixJaY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22250	KeLA6V26TSu4mVVB8tJH6Q==	2022-08-16 16:49:10.481438
+809	z4z8a5h0f13es77zyvmdfg4larma	Voicemail.mp3	audio/mpeg	{"identified":true,"duration":531.375213,"bit_rate":45878,"analyzed":true}	local	3088250	8DFsTj4YJsriF1CrWbE0TA==	2022-08-16 15:41:59.498899
+810	xw0ffaammfjgz1o3ay97ebi50fb0	can't look back.mp3	audio/mpeg	{"identified":true,"duration":256.150807,"bit_rate":59838,"analyzed":true}	local	1957140	vCg6k4nisIH9VHXZfAt4rw==	2022-08-16 15:42:00.382595
+813	404leykv5kknyik8qil9l39yw4wf	drunk face.mp3	audio/mpeg	{"identified":true,"duration":405.299035,"bit_rate":46028,"analyzed":true}	local	2367880	1aPcxl6Ijrn5EAaYDOAzyw==	2022-08-16 15:42:03.984703
+815	s96ptesj2kyarywki3ez2xb8mbe6	Yah Yah.mp3	audio/mpeg	{"identified":true,"duration":292.082055,"bit_rate":135226,"analyzed":true}	local	4946154	4GUUTEC+UnIw1Op1PgCI3A==	2022-08-16 15:42:07.717899
+816	axvcpycav4hxonua60fpy8sxr8xz	Tommy Lee.mp3	audio/mpeg	{"identified":true,"duration":460.954895,"bit_rate":59994,"analyzed":true}	local	3498852	ha1NkkbJgOTb1V+Xs00icA==	2022-08-16 15:42:09.146374
+817	38f2kztiiva4hajwcug9ecu9i7x9	Love Race.mp3	audio/mpeg	{"identified":true,"duration":233.130515,"bit_rate":104448,"analyzed":true}	local	3048858	fzVsmNU6xu4zW9HxlViU8w==	2022-08-16 15:42:10.442519
+830	j7tib4xtvp3y3apdi28i717vysq6	Novacane.mp3	audio/mpeg	{"identified":true,"duration":569.672423,"bit_rate":47366,"analyzed":true}	local	3388540	9T3Kg21v1GS8wdePMVLNmA==	2022-08-16 15:42:27.001811
+965	e7olzrt662owy4g9j0u2gpzqnivs	https://img.youtube.com/vi/aeSMHCUS35M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21857	AJh7oAtyt0oeV155vZxlTQ==	2022-08-16 15:47:47.797693
+1021	hxln3dryq9iofa8bradj33ysojp8	https://img.youtube.com/vi/kXU0OoZgaoA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:36:58.705627
+1025	kxznxh9pkpkz2x7ufqqhq7vt7gc4	https://img.youtube.com/vi/rtqw4C0mOMc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9371	rR+Yv7XRhbaKUmbhRksw1g==	2022-08-16 16:37:36.41338
+1029	26ghwj40l2mgp0h6oso7mpcapmrb	https://img.youtube.com/vi/DP_Qlt9CSiY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12464	rKakkSCJIeTo7s287NpStQ==	2022-08-16 16:37:38.060446
+1043	qa9rk4yjw9hi75hxbzy5yyn6t9tr	https://img.youtube.com/vi/Dsq5wK1JMGM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11294	tLLnGhSdSgEZUSku0Ec8cA==	2022-08-16 16:49:29.887429
+1045	jtq28m2jfw6h8w0zayiy6bc98hbf	https://img.youtube.com/vi/NyXBJ9O5SLs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17951	8zX9akaxUjBtX5z0KP/HEQ==	2022-08-16 16:49:38.105125
+1047	kxfnj14sc3upb0z51t4ungb1uohx	https://img.youtube.com/vi/RmLoNcK_E6k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14703	yxNpKy2fAj8ObpMoBNmlXQ==	2022-08-16 16:49:42.787179
+1051	358yn9xjalry5mi01djwatomj5j5	https://img.youtube.com/vi/8ZVxoKBxb14/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13071	B4Sg+eAUVlFEk++bM5ZQgw==	2022-08-16 18:14:42.19714
+1055	t3ds6nifdrskpld3lpux753ldd92	https://img.youtube.com/vi/3EmfvAdyohk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16198	92HKBAWvtB1Fk7uZGyBCuQ==	2022-08-16 18:15:07.442204
+831	aqg6gbcavifz3y9sq20y3yj3acz6	High Right Now (remix).mp3	audio/mpeg	{"identified":true,"duration":538.267447,"bit_rate":44607,"analyzed":true}	local	3015236	btHlowb0ercco5kQffBDiA==	2022-08-16 15:42:28.318453
+832	uib8w19787ez2qj23ghyl7i1c7yu	All the Smoke.mp3	audio/mpeg	{"identified":true,"duration":640.832461,"bit_rate":45840,"analyzed":true}	local	3674136	DjeJfOLuK8zme9jWmgyEcQ==	2022-08-16 15:42:29.887289
+833	v6kj2kgmc61xx5y6ay64pfn47ne0	Do No Wrong.mp3	audio/mpeg	{"identified":true,"duration":332.192316,"bit_rate":71237,"analyzed":true}	local	2996472	0IxHz8r7/VwVHQUxZDVMvA==	2022-08-16 15:42:31.24089
+834	ftg2d2u4a46nij9i9fqg8pqgldc1	Salute.mp3	audio/mpeg	{"identified":true,"duration":397.086249,"bit_rate":61798,"analyzed":true}	local	3082980	riBoFaWfjjFrGOtIRMyRRg==	2022-08-16 15:42:32.561115
+835	ozdozxq2hvc7cgu542s4nz2kjvtj	1-800-273-8255.mp3	audio/mpeg	{"identified":true,"duration":528.024597,"bit_rate":56593,"analyzed":true}	local	3748866	HAlzL3mPGRqtdJpwvD4i3g==	2022-08-16 15:42:34.163465
+836	cubt2hcg8bmfndoiezoj0xikiddj	Everybody.mp3	audio/mpeg	{"identified":true,"duration":175.293349,"bit_rate":125233,"analyzed":true}	local	2785276	AvUz3cfpkS+GndTdyiMz+A==	2022-08-16 15:42:35.417535
+837	nqfky428dn9dq86galmxow2ka9qu	Breath Control.mp3	audio/mpeg	{"identified":true,"duration":130.396042,"bit_rate":150595,"analyzed":true}	local	2503264	HaB06aUzrCw1ivElLeaXlA==	2022-08-16 15:42:36.532398
+838	px6mel9rn4cvb56p1z3iztn42gy8	44 Bars.mp3	audio/mpeg	{"identified":true,"duration":178.862406,"bit_rate":122353,"analyzed":true}	local	2747984	kpQr3zKr/vQBU6nej6fJrQ==	2022-08-16 15:42:37.755448
+839	ky2y9lma3c1awbzu10waaawxpjzp	Perfect.mp3	audio/mpeg	{"identified":true,"duration":97.328995,"bit_rate":136163,"analyzed":true}	local	1666520	/MtutspskUsKUbf3gfKItA==	2022-08-16 15:42:38.478562
+840	xq0j9m22ch9ozr6b4rjkpcdzfxb9	Quasi.mp3	audio/mpeg	{"identified":true,"duration":110.185634,"bit_rate":128953,"analyzed":true}	local	1822924	Q0WKHKiTVhFGi5dGdK01fg==	2022-08-16 15:42:39.222585
+841	6cwupyowxpnhqadj1apevx156qle	Orville.mp3	audio/mpeg	{"identified":true,"duration":207.037376,"bit_rate":134283,"analyzed":true}	local	3513588	oFDIWpNgn0k7p17x53GeWQ==	2022-08-16 15:42:40.739012
+842	ft402t919hyynby2rkxbxln7xav4	Clouds.mp3	audio/mpeg	{"identified":true,"duration":164.345062,"bit_rate":146049,"analyzed":true}	local	3000382	QovDQ4wjEDMstq950rH+qg==	2022-08-16 15:42:42.050787
+967	2slbx3a9e876t76pfyy4lpcn3rgo	https://img.youtube.com/vi/-sib0AyJuBw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:34:46.496479
+971	wec5bikwavd2ujqtybbi1jydizq6	https://img.youtube.com/vi/7aS7KStPgNA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:34:49.17644
+975	mx0j4c7w03h9uzs23eb9bul4mh3m	https://img.youtube.com/vi/UI__tLmwh2g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:34:52.428268
+979	sbun0nv1tvyb00e84ft94lyhgeoc	https://img.youtube.com/vi/5Z55ko3q1c0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:35:36.192084
+983	vhan6rvzp0tm5a4jk07mdzhv6t61	https://img.youtube.com/vi/BGyltvvkc-g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:35:39.377057
+985	1k0vdjcbonuhxh7evd5t5i7y0npa	https://img.youtube.com/vi/o70FKH6n8LE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33972	uDybZ0Tw85XcumQHXJdUuw==	2022-08-16 16:35:42.128617
+991	khl204m0s4v14ivgb2x0tetpnste	https://img.youtube.com/vi/ktFLtS8GfoU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11616	zqB/zX4FWC2JL++jX6MNKw==	2022-08-16 16:35:45.622174
+995	hvga8vd0ekxieclxmhpzhynf57ld	https://img.youtube.com/vi/F7tTxeSe_pQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:35:48.886399
+999	ohy3li73d4jm4fqxveznwbyhbvjt	https://img.youtube.com/vi/-vnStM-iV7M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21064	ksBaX55g0qMRkoLkIG+EOg==	2022-08-16 16:35:51.449055
+1001	xzlkfqfutxxz3ahwxnbia815nhhw	https://img.youtube.com/vi/s4mcIelgjDQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:35:53.423468
+1003	cy10z3oqipbewms2qt53j0vtm7ev	https://img.youtube.com/vi/_3LuZx06QhQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18767	tb/Sysj9+g1xdlHqKkerbQ==	2022-08-16 16:35:55.232067
+1007	inrrjce6kkc2urg5ao5bkya9qw5n	https://img.youtube.com/vi/UJR5AR7hIJU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21082	z7qLdhzkF+sH0X1ZH+yMqw==	2022-08-16 16:36:08.259791
+1067	x8j595hzhi9ayc19uqc6lt303010	https://img.youtube.com/vi/ndrCUdUi6lU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19299	IY2S0QPBY/kS1NufKudpHQ==	2022-08-16 18:31:56.957865
+1068	jlrrqov3gqlio5lwwragugufj6z0	https://img.youtube.com/vi/vkIbns5LDow/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19992	xjkju2TBbH7WYJN2A+Yrng==	2022-08-16 18:31:59.946006
+1795	tktgzx56zbkexg2xks0hfueboq44	J. Cole - a m a r i (Official Audio).mp3	audio/mpeg	{"identified":true,"duration":239.181772,"bit_rate":77025,"analyzed":true}	local	2312792	UUf4pO01RWY0EfEj3kQ41A==	2022-09-20 19:13:14.228241
+1845	1oh8504xktk4aeox198a6zb5xfo3	Painting Pictures.mp3	audio/mpeg	{"identified":true,"duration":402.416243,"bit_rate":46790,"analyzed":true}	local	2376127	V9LLqE65iqbU6iWtmyuUBA==	2022-09-20 19:14:28.118558
+1070	xgy4nisfqg2wvd54d1effrnmrat3	https://img.youtube.com/vi/HHPLi3hW0jU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19984	N1Y7pzJMgufpUwSh4Lu8sA==	2022-08-16 18:32:07.723224
+1796	a71z0qttryo0vs6r8bujkgs4lbil	MIDDLE CHILD.mp3	audio/mpeg	{"identified":true,"duration":427.797558,"bit_rate":65836,"analyzed":true}	local	3527871	UZoRxNlZ3/VOq1sWge9FTA==	2022-09-20 19:13:15.636529
+1072	0ipbs7qs69jvv3nfvth634qhhjmx	https://img.youtube.com/vi/3rg3RNqN1aM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18171	JAHM0hK7v8IdrNH2hbTiGQ==	2022-08-16 18:52:15.807067
+1797	0uhbwylzc9krdho5vs0xck0hkwtw	m y . l i f e.mp3	audio/mpeg	{"identified":true,"duration":232.408924,"bit_rate":123309,"analyzed":true}	local	3592039	MVVwPdFJhCIwn6mrM2e4tw==	2022-09-20 19:13:17.141736
+1074	rqats29ogtlpl8o24okfr8d4zi7y	https://img.youtube.com/vi/bIR5tBW5hlQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11482	tk7mQb+GwZx4ivmu5NM/7w==	2022-08-16 18:52:28.1786
+1798	n1o5jk75giwvrwilcgj0fn20z42c	 The Promised Land .mp3	audio/mpeg	{"identified":true,"duration":620.424833,"bit_rate":63545,"analyzed":true}	local	4959564	6bFoDVE78HlH9p8nr86BRg==	2022-09-20 19:13:19.104361
+1076	22ehpxu8yptfvirzsprscdclbiu9	https://img.youtube.com/vi/bl5egtkC51Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33506	zTC4hzfBeBQFRNyWXMSh6Q==	2022-08-16 18:52:37.920424
+1799	lfihk31az0qjm7ophcjcosknq1yf	NF - Leave Me Alone.mp3	audio/mpeg	{"identified":true,"duration":312.648,"bit_rate":136279,"analyzed":true}	local	5339526	3d0lm+pkfspNNZWOncWhzg==	2022-09-20 19:13:21.584986
+1078	39e2o8mqf9mldhfumxg4kl6qbr3i	https://img.youtube.com/vi/77suwtdWzpk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33506	zTC4hzfBeBQFRNyWXMSh6Q==	2022-08-16 18:52:41.575229
+1800	a79ke9prxyol8riid1ajnls4wqir	Alone.mp3	audio/mpeg	{"identified":true,"duration":304.023928,"bit_rate":124374,"analyzed":true}	local	4741609	DW2ZK9bUXOMTyEEOKzeQcg==	2022-09-20 19:13:23.545682
+1080	dx5i896kr0ut32yzxy4u1phajmh3	https://img.youtube.com/vi/A-1G3UZRoGY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21428	Q5CpEjiDKREdGaQYhuBXQQ==	2022-08-16 18:52:44.221566
+1801	43j8bwgc6qi13bkt92mhoyj9vrhe	2k in the Soda.mp3	audio/mpeg	{"identified":true,"duration":126.198826,"bit_rate":135556,"analyzed":true}	local	2151281	jx7tIDLsmkpkVrbAUrqX1w==	2022-09-20 19:13:24.450359
+1082	2oi33zkju0ld4tt67131wbtvi8a1	https://img.youtube.com/vi/9ooKiXgDol0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33506	zTC4hzfBeBQFRNyWXMSh6Q==	2022-08-16 18:52:48.447422
+1802	fptt6dnkmacupz6iq93wpv8bndb5	Niggas in Paris.mp3	audio/mpeg	{"identified":true,"duration":327.196769,"bit_rate":83931,"analyzed":true}	local	3449768	8R1XnaHDFKZCRRMGdJqrhw==	2022-09-20 19:13:25.985334
+1084	k6598nx6xu655ult9f4147j4bgj9	https://img.youtube.com/vi/7SHAKi8l7Ls/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14352	QoVrO1CRCAkJuI4o5CZkoQ==	2022-08-16 18:53:01.568949
+1085	3c6fmhzujtjpate3vi3xbbx1m0ab	https://img.youtube.com/vi/9sJZOGxRxwM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	1314	vTAR7DjlwLkMTnm4Uo/kTA==	2022-08-16 18:53:19.783109
+1803	ee2nvcw2sdy8fp3ubavkkpfes77p	Pursuit of Happiness.mp3	audio/mpeg	{"identified":true,"duration":314.230772,"bit_rate":119087,"analyzed":true}	local	4702200	bTS29UITiQOJiCSPhwtx2A==	2022-09-20 19:13:27.876223
+1087	vp9bjrhca67gf6hlk6tlebrizugt	https://img.youtube.com/vi/bPjZmQAvk_8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	1314	vTAR7DjlwLkMTnm4Uo/kTA==	2022-08-16 18:53:21.57402
+1804	kz8ryq5ozxvhm1mc7owgty6wc5du	Maui Wowie.mp3	audio/mpeg	{"identified":true,"duration":134.372791,"bit_rate":146774,"analyzed":true}	local	2484157	46HaDpMiFYVFpz2NuTIsDQ==	2022-09-20 19:13:29.068259
+1089	3fh76evvf1lodcvq9ej2ww0ij9il	https://img.youtube.com/vi/AE8y25CcE6s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31404	U9OQYOz0bfzBkjlKfFySVQ==	2022-08-16 18:53:23.656153
+1805	rtgqgmjk3nsxkkgoio2bauxdqln1	Don Dada.mp3	audio/mpeg	{"identified":true,"duration":179.865596,"bit_rate":116693,"analyzed":true}	local	2639841	RNfMOew3CX8Yxa8KyvG/bQ==	2022-09-20 19:13:30.194851
+1091	aapx8ru39zjpsakexyiyjzov0jun	https://img.youtube.com/vi/3mwiO5st-us/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25851	vLKi0lqRLzQxVyU+IUGTOA==	2022-08-16 18:53:27.4909
+1806	og49m8ax5cph13d08jl7pj7t5jrw	Puglife.mp3	audio/mpeg	{"identified":true,"duration":144.834911,"bit_rate":133437,"analyzed":true}	local	2434230	paLKG8z+wuyC0J5SQ3w9OQ==	2022-09-20 19:13:31.225804
+1093	9soxebikt8s48tadxv6bqg7ziw9t	https://img.youtube.com/vi/Co0tTeuUVhU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32704	KQsjnLQuN0S8Lyfx6/Jv5w==	2022-08-16 18:53:28.191971
+1807	dnhmhspzy9ge2beltuasqmjiq3g6	21C Delta.mp3	audio/mpeg	{"identified":true,"duration":311.630333,"bit_rate":91477,"analyzed":true}	local	3606507	9anpCzH/TB2g4EhLTtJV2g==	2022-09-20 19:13:32.740688
+1095	s5xugfiu8hv57o7pr5ia36capp6t	https://img.youtube.com/vi/EMnQwBTJnMM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9581	eJJy4pIfJysYGYC8mtGC/g==	2022-08-16 18:53:29.562647
+1808	4ek44kv04nz1sbnng34tcd4dqwk0	Kitchen.mp3	audio/mpeg	{"identified":true,"duration":331.978309,"bit_rate":104744,"analyzed":true}	local	4359539	u9E/N/3422IddySbN9nurA==	2022-09-20 19:13:34.565833
+1097	y1w2752brgqjqhycxivr2xnorir7	https://img.youtube.com/vi/xk9EuEwMKcM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5278	We2PvmNZUx//sZPl53p/4g==	2022-08-16 18:53:30.28338
+1809	chh8ah4dm0ivf5u644r365er4tzy	Talkin’ 2 Myself.mp3	audio/mpeg	{"identified":true,"duration":295.703883,"bit_rate":135541,"analyzed":true}	local	5023985	VFP8E7i/+GtATBuiCVjiQg==	2022-09-20 19:13:36.629933
+1099	qo60svy81ybd5v3oq5d17gmpnm0x	https://img.youtube.com/vi/wVRF3SqLUi0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10579	JiaF0tx/j4/8HCB7eJtEjQ==	2022-08-16 18:53:33.516154
+1810	yic1al941vuea6edd2a6j0vffanl	Deja Vu.mp3	audio/mpeg	{"identified":true,"duration":269.453493,"bit_rate":132624,"analyzed":true}	local	4509023	dVO/t1CgXdvcYvVu2wZZyw==	2022-09-20 19:13:38.411957
+1101	rjy302kwmr8qu54e6l4e8r1hstka	https://img.youtube.com/vi/fMjasXiIhiQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	1314	vTAR7DjlwLkMTnm4Uo/kTA==	2022-08-16 18:53:34.757118
+1811	lnki8mftgfb5ibbzithk9vuseblf	Going Through Changes.mp3	audio/mpeg	{"identified":true,"duration":336.220552,"bit_rate":117741,"analyzed":true}	local	4962407	yef/7wRBTi0Am+Fj9QLvVA==	2022-09-20 19:13:40.464474
+1103	pr1xqgw6ftrglq1nqfrsef1jcd08	https://img.youtube.com/vi/IxGvm6btP1A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18390	kEFhlF23StLVOwwzIlmskg==	2022-08-16 18:53:37.26018
+1105	aof1iuqfun8yp5hsjigxmur5lgnw	https://img.youtube.com/vi/ek_T6atbfe0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8466	5PBVhdThFwDTU72rq7nGmg==	2022-08-16 18:53:39.566152
+1812	y0pfx823en1zednu5hkgava0tfdu	Tequila Shots.mp3	audio/mpeg	{"identified":true,"duration":389.433511,"bit_rate":72298,"analyzed":true}	local	3540454	UHKd/HpkgvYERXfjf8K96A==	2022-09-20 19:13:41.843906
+1813	ig9708p01jxi95tz3i7g3si916wk	Dangerous.mp3	audio/mpeg	{"identified":true,"duration":239.917384,"bit_rate":80759,"analyzed":true}	local	2446813	KoipmreLGIwnwp17w1noDw==	2022-09-20 19:13:42.886049
+1814	921p7eouzofswevf5wxhy5gvd5d3	Almost Famous.mp3	audio/mpeg	{"identified":true,"duration":213.093202,"bit_rate":170662,"analyzed":true}	local	4559887	pu2djMQ8oEdlYccQwBoqVg==	2022-09-20 19:13:44.764776
+1815	h1duyumt1yg5jogqtr8jn7dcvorc	Ganjaman.mp3	audio/mpeg	{"identified":true,"duration":278.87933,"bit_rate":87362,"analyzed":true}	local	3077177	jNREdYGfYPby/l4khNqT8g==	2022-09-20 19:13:46.032766
+1816	wyh4yh0thf4q9n5enr7jv490ntnd	Mr. Rager.mp3	audio/mpeg	{"identified":true,"duration":391.896191,"bit_rate":110125,"analyzed":true}	local	5426158	PVtp9mZ1Ch7CAg8KZhPNmQ==	2022-09-20 19:13:48.267614
+1817	u78ig1xos0227tkkktyu9w7c55jg	Just What I Am.mp3	audio/mpeg	{"identified":true,"duration":923.436,"bit_rate":32000,"analyzed":true}	local	3724949	J5jkGHYzom1h7TdTPcWJCA==	2022-09-20 19:13:49.856333
+1818	aixp5t7v6hh2scxhh4rzcp3wze8t	Man on the Moon (The Anthem).mp3	audio/mpeg	{"identified":true,"duration":370.230281,"bit_rate":71252,"analyzed":true}	local	3316383	7dO662B15zZBOWATss9B6w==	2022-09-20 19:13:51.214469
+1819	2scxw919qa9v5j2xo0ytgfjakezt	Basta Boi.mp3	audio/mpeg	{"identified":true,"duration":175.942808,"bit_rate":110784,"analyzed":true}	local	2452541	gD+cEtohlszRwfcpheLBPA==	2022-09-20 19:13:52.274291
+1820	v5md9kz79zbjcbf6ixk7uwoo9p7q	So Bad.mp3	audio/mpeg	{"identified":true,"duration":303.104111,"bit_rate":129266,"analyzed":true}	local	4911597	EXOp2G+qkHOIcHDFEt2/kA==	2022-09-20 19:13:54.27126
+1821	cjlc82bj53linzp4rjb7y0xu6l4m	Space Bound.mp3	audio/mpeg	{"identified":true,"duration":313.519321,"bit_rate":116531,"analyzed":true}	local	4580066	dFcb/t+zW+LaLSLWQ7jJcw==	2022-09-20 19:13:56.24764
+1822	qyi7vh4zxofwn85c3b8mnuwaahn9	Won't Back Down.mp3	audio/mpeg	{"identified":true,"duration":239.780989,"bit_rate":136760,"analyzed":true}	local	4113039	NrmNm4v1p1qx50YA52vX5A==	2022-09-20 19:13:57.932011
+1823	oj1laro8bxaqjnky2pyo2qx2mhzj	Untitled.mp3	audio/mpeg	{"identified":true,"duration":211.734435,"bit_rate":113238,"analyzed":true}	local	3011017	WP44SG5BIsClv7a3xh0d+A==	2022-09-20 19:13:59.225686
+1824	odta1q0xqchzv5606en8f88thyi3	Seduction.mp3	audio/mpeg	{"identified":true,"duration":249.172419,"bit_rate":141806,"analyzed":true}	local	4430739	uiervGYw9cdF6NQ/iDcHGQ==	2022-09-20 19:14:01.341328
+1825	mvfklgocsfvvjky1c5vj9yk9sq6f	Fall.mp3	audio/mpeg	{"identified":true,"duration":307.892296,"bit_rate":119699,"analyzed":true}	local	4616009	ERGMKiHDe6U6xQgFYszdkw==	2022-09-20 19:14:03.311647
+1826	5a0b2f9bq1v2rc7ts2zprq6mertw	 Stepping Stone.mp3	audio/mpeg	{"identified":true,"duration":308.789862,"bit_rate":127673,"analyzed":true}	local	4937659	T6NZy28uPmB2UE3Y6jGuig==	2022-09-20 19:14:05.384565
+1827	huc5wptogjc9am3s6z59e5jqerez	Greatest.mp3	audio/mpeg	{"identified":true,"duration":230.04,"bit_rate":125810,"analyzed":true}	local	3632778	lQDOQj4HizB9/qXOKLFJvQ==	2022-09-20 19:14:06.932784
+1828	9ncnjzlub7ssc5imz01ht4reofw4	Not Afraid.mp3	audio/mpeg	{"identified":true,"duration":236.578202,"bit_rate":136167,"analyzed":true}	local	4039982	DQYFaz4Gec23GXFYNRt46A==	2022-09-20 19:14:08.511524
+1829	m7vifhgoh5cld5tj6r2vwcrse856	Clueless.mp3	audio/mpeg	{"identified":true,"duration":291.457035,"bit_rate":73839,"analyzed":true}	local	2712701	LFCF5tpjc6njDK0boyiMgQ==	2022-09-20 19:14:09.633244
+1830	l304mh1ks45nqxm0gifqh3pav7eo	I Know.mp3	audio/mpeg	{"identified":true,"duration":272.097032,"bit_rate":90857,"analyzed":true}	local	3110420	ycUh7aGDAaFMi8qy+RY+4Q==	2022-09-20 19:14:10.915995
+1831	b9s80f4b54igg0r1s32q3rdcjair	21.mp3	audio/mpeg	{"identified":true,"duration":354.016648,"bit_rate":67756,"analyzed":true}	local	3018516	vyoHzLILw0wJ8oiA+TOiRQ==	2022-09-20 19:14:12.10668
+1832	h07vqlpzcu7w9xlma852isxars80	Love Hate Letter to Alcohol.mp3	audio/mpeg	{"identified":true,"duration":201.677051,"bit_rate":114501,"analyzed":true}	local	2898805	6SrTvXsB7S12kVQcFcj6Pw==	2022-09-20 19:14:13.256848
+1833	y1la2m81y37u9ssam2pgvkpk1oe1	 If You Love Her.mp3	audio/mpeg	{"identified":true,"duration":330.434824,"bit_rate":84517,"analyzed":true}	local	3514210	AxNu7eh3HqJ9hOWoKEXYAA==	2022-09-20 19:14:14.733748
+1834	btcx7wmei4rle6feznlb87033gxe	Fortnight.mp3	audio/mpeg	{"identified":true,"duration":235.532616,"bit_rate":65950,"analyzed":true}	local	1964177	AVrpS44Zbr3zQrWlmru8yw==	2022-09-20 19:14:15.643031
+1835	i09v3c8p623x5zee6w1bu3ilouq1	Martin & Gina.mp3	audio/mpeg	{"identified":true,"duration":246.664532,"bit_rate":68069,"analyzed":true}	local	2118970	HXAP3vxxlsq2g2wVcyyOiw==	2022-09-20 19:14:16.598883
+1836	3vnnguigi8l1sg2h7vwsr8k4a579	Toxic.mp3	audio/mpeg	{"identified":true,"duration":286.515553,"bit_rate":60855,"analyzed":true}	local	2201959	wDXdvvnog+Hn22JF4FIP2w==	2022-09-20 19:14:17.553367
+1837	g0uman9ur544u6ptcz2lbjbc2wez	Flex.mp3	audio/mpeg	{"identified":true,"duration":239.960867,"bit_rate":93220,"analyzed":true}	local	2816372	/kgjV0QAT3Z0jXjOChrNcg==	2022-09-20 19:14:18.757322
+1838	p0psx0ui4ibbun2urj1es4nkddww	Unapologetic.mp3	audio/mpeg	{"identified":true,"duration":206.991874,"bit_rate":107066,"analyzed":true}	local	2792787	IGcceLwh47oh4Jtp1ZjcyQ==	2022-09-20 19:14:19.919567
+1839	ddi4v355iwqmr3nm78024rbbvhbw	Partin Ways.mp3	audio/mpeg	{"identified":true,"duration":223.220868,"bit_rate":101323,"analyzed":true}	local	2849685	e6XfKQnC4LpH8T9fRlMSiA==	2022-09-20 19:14:21.143346
+1840	67te0zo96n7gn5uecylo4f7qsrs0	33.mp3	audio/mpeg	{"identified":true,"duration":324.726624,"bit_rate":73375,"analyzed":true}	local	2998524	+hDxB8BzQJVGXRoPGH3fDg==	2022-09-20 19:14:22.383875
+1841	xwzt40u2z8n5c6pmqisvx4jyl6x4	Pop Out Again.mp3	audio/mpeg	{"identified":true,"duration":422.960874,"bit_rate":73531,"analyzed":true}	local	3923063	6GXwVHyRcvNynXdQFUFrrA==	2022-09-20 19:14:24.086907
+1842	0f82y9btq1j4pg4tc2ic1c610vur	Bad Man (Smooth Criminal).mp3	audio/mpeg	{"identified":true,"duration":188.479793,"bit_rate":78759,"analyzed":true}	local	1878341	jJxw/GyF/CUbTD5dr68/xg==	2022-09-20 19:14:24.97339
+1843	bj15qdxyswer73hyxysr1ovanpwu	So Real.mp3	audio/mpeg	{"identified":true,"duration":332.219225,"bit_rate":59683,"analyzed":true}	local	2500955	VgDzLPPZjB65uUXOuZW4vw==	2022-09-20 19:14:26.012198
+1844	7ewz4nuc7aa9e4ow3dxvcqsht2fe	Distraction.mp3	audio/mpeg	{"identified":true,"duration":182.613165,"bit_rate":121416,"analyzed":true}	local	2784553	x3xmYCjHnNkf376e9h17tQ==	2022-09-20 19:14:27.154245
+1846	lehl45shjohgoog3u2df0rvsmq5u	Boom.mp3	audio/mpeg	{"identified":true,"duration":232.791039,"bit_rate":74454,"analyzed":true}	local	2188997	foyYCxoymr0rTVwQyQMqug==	2022-09-20 19:14:29.065457
+1107	vn3edp2he7q2syi49ysdlkn6605h	https://img.youtube.com/vi/SUtf9Ajlno4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7014	kX4Mfp82c+kEw0Gz3hrA+g==	2022-08-16 18:53:45.318404
+1847	zgjd0hzi3ks0gcmz2auij3unsjps	Suicide.mp3	audio/mpeg	{"identified":true,"duration":229.577554,"bit_rate":94734,"analyzed":true}	local	2741145	EXJf3IMELFC+hce3Mlvufg==	2022-09-20 19:14:30.265324
+1109	ga7dqtflm4y4b9qgi7fhnjw9xjkr	https://img.youtube.com/vi/Lq2TmRzg19k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29765	6re3YBxOU6QEwa/v9W29Dw==	2022-08-16 18:53:48.241495
+1848	5zmz8efvdqc4e7kpcld2oet4ra07	Be Something.mp3	audio/mpeg	{"identified":true,"duration":341.59764,"bit_rate":79988,"analyzed":true}	local	3435700	b+Le5jrkOw+pfYcLJOZklA==	2022-09-20 19:14:31.684073
+1111	vm4bjg2dium228nodmtoxt65j48l	https://img.youtube.com/vi/yblfMrUeiP4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	1314	vTAR7DjlwLkMTnm4Uo/kTA==	2022-08-16 18:53:53.12952
+1113	30h3n9xkhp42wsu4fq3p4xj088do	https://img.youtube.com/vi/w8s8_TLp3Mc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5278	PkmK4n7PWnHFkfDklFJaQQ==	2022-08-16 18:53:53.385798
+1849	vbrll04x8u11oqs6o34hk9opgjp4	Alright.mp3	audio/mpeg	{"identified":true,"duration":224.990882,"bit_rate":87518,"analyzed":true}	local	2484631	GhXnwXp/X7x1ZzM1KVWrdA==	2022-09-20 19:14:32.777845
+1115	8kjrz0tsslk8vabndb52yytkyp0v	https://img.youtube.com/vi/pS6HRKZQLFA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10369	Yl38mlvvm9xLGzYKQ/dqow==	2022-08-16 18:53:56.900437
+1850	58jc4wnzrpa2hy8zum44xkhsbve7	Through da Storm.mp3	audio/mpeg	{"identified":true,"duration":526.048404,"bit_rate":53839,"analyzed":true}	local	3575641	wxGZM8Hh2EwvjowLOERUpw==	2022-09-20 19:14:34.246733
+1117	sv4ok7u7uw3uzjdwz42t5x5thfee	https://img.youtube.com/vi/fbFnF-86eYs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15601	cTkRtKKZ/BSsahbfujsecQ==	2022-08-16 18:53:57.645735
+1119	uce7kzftxl5o5i8p7ukkcvg9q8vd	https://img.youtube.com/vi/iD0mNoEYpZw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14646	r2niQahNRbYG5JbLDTVNtw==	2022-08-16 18:56:03.627241
+1851	yzyc3rg14brxmc166q70a3q1ff31	Shotta Flow 5.mp3	audio/mpeg	{"identified":true,"duration":232.815772,"bit_rate":81258,"analyzed":true}	local	2378071	Gat2M00wax9yzDFtH+lxBw==	2022-09-20 19:14:35.293714
+1121	o396v2lkq1bwdqjroqq5hlmmhzti	https://img.youtube.com/vi/XEolg577-DA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29979	wpU2eL9eyppwwWEbA7/ncA==	2022-08-16 18:56:06.219522
+1123	n3ewhqr932pwlfdvth8f91yebmi3	https://img.youtube.com/vi/nnvqfucTs0o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29619	QmesDXaYXEDYz5FMGENowg==	2022-08-16 18:56:07.020643
+1124	70umdut51bozxspg6lr4p29ouxf2	https://img.youtube.com/vi/7xzU9Qqdqww/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23155	E6ZNv38BfoJ0IE1P9bI9VQ==	2022-08-16 18:56:07.682112
+1852	kyzhlwn4k3vlbwo2c7jg4h6kilnd	Don’t Play.mp3	audio/mpeg	{"identified":true,"duration":203.807511,"bit_rate":105045,"analyzed":true}	local	2698671	H8OslZK3CunVtgaMSrq7Tg==	2022-09-20 19:14:36.407627
+1126	84udxcx0ebgrxuy41x0ai7daxnq1	https://img.youtube.com/vi/Dq_uy1qcO-k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17253	ReAGzD1E31YVBKQxKOOuAg==	2022-08-16 18:56:09.30275
+1128	7xds5tv1urvdheppmgsg017do7kd	https://img.youtube.com/vi/w3LJ2bDvDJs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11494	DS5tAVu+swzAhQ8nAArYZw==	2022-08-16 18:56:12.916187
+1853	7bx4tgi4c1e7c9l0x6kjy91wvv9k	Luh Da Raq .mp3	audio/mpeg	{"identified":true,"duration":112.536,"bit_rate":112814,"analyzed":true}	local	1600786	TRsrOjL4h/SUiBAbplI5Dg==	2022-09-20 19:14:37.127079
+1130	tgtp7fb0wzjy19xhhgvpn5urk63u	https://img.youtube.com/vi/ZyDcktys9EU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15472	dfR5VYavG0PsHoMDJCdEVg==	2022-08-16 18:56:13.274841
+1132	7yhqhua00vmkthkcsinveo6cgp18	https://img.youtube.com/vi/lZcRSy0sk5w/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19577	2e4F/+a/TtDLCXGDSAOadQ==	2022-08-16 18:56:15.758069
+1854	cntku1qewooa4sjs2tvwa95vwtul	Leyla.mp3	audio/mpeg	{"identified":true,"duration":219.247125,"bit_rate":96595,"analyzed":true}	local	2673573	GAUqlrIW1n8PUvSFI/payA==	2022-09-20 19:14:38.20274
+1134	5sqnk8ykexgb76d692f3yj42pdu0	https://img.youtube.com/vi/LohX7Vsp9p8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17458	tjiiBm55EpWtWkpnO3kdiQ==	2022-08-16 18:56:16.901443
+1136	7771yw0emgggtkvqfbh4ey6eur4c	https://img.youtube.com/vi/wWxJl6ZBQ40/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23402	nPGnkjp4LwcGo9M8mMY/GQ==	2022-08-16 18:56:18.280267
+1138	fbi85smsuuso7m3k5i4c1c94gvq6	https://img.youtube.com/vi/zx40kMDZaL0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29979	wpU2eL9eyppwwWEbA7/ncA==	2022-08-16 18:56:22.03419
+1140	knsnoa1q1ynfgt4gtdrqawiaa2g2	https://img.youtube.com/vi/hGbP_kTM4CA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29696	hPhgnQsqguMtZ8I5VBSjdg==	2022-08-16 18:56:25.559009
+1142	gfb3gfptrk8fyi9arv67bcwrh1bj	https://img.youtube.com/vi/L0DTpxyyNXA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17458	tjiiBm55EpWtWkpnO3kdiQ==	2022-08-16 18:56:26.769257
+1867	4h8cb8cc761tl8xwedhbw36ux645	Ridaz.mp3	audio/mpeg	{"identified":true,"duration":386.79231,"bit_rate":102109,"analyzed":true}	local	4950813	g/yjzGpA05Q+atlonyCbwg==	2022-09-20 19:14:57.922731
+1146	9grl8ary88d4eqv4d1gh4jt78mu3	https://img.youtube.com/vi/8kUNIXRY9io/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21743	usRGsliV+AA0emx1TlCpCA==	2022-08-16 18:56:31.975662
+1150	76rxbzdr7jme9zbgfokvyz8bx8ry	https://img.youtube.com/vi/02PAOONYxpY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7384	qMagxyywXhHOsUYzQgA7Ug==	2022-08-16 18:56:37.31622
+1868	jx2fkwu1wt5j6z7fdpa6f3lnha0l	25 to Life.mp3	audio/mpeg	{"identified":true,"duration":263.865968,"bit_rate":117285,"analyzed":true}	local	3882457	9L1r+q6N1TwhxdEigd8vrA==	2022-09-20 19:14:59.560092
+1154	agkgrkp5k0rxi16y1betvnro3g4h	https://img.youtube.com/vi/rE5XMSG83uY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10195	HKDvYIKuQ2kON/4RTWoSUA==	2022-08-16 18:57:26.367958
+1158	zg5vyekkkisethfljxig5hlob3kn	https://img.youtube.com/vi/tnpq2YjMr84/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20833	5HKBoQFv/Ovuxnu7P97z1w==	2022-08-16 18:57:33.406133
+1869	h54531mc39fsuzae3p14tgtzbpiq	LONDON.mp3	audio/mpeg	{"identified":true,"duration":582.929388,"bit_rate":53532,"analyzed":true}	local	3933686	rpdaN2E33COF+lHFVMhEbw==	2022-09-20 19:15:01.249268
+1162	okbs0qy0dfya1pls3eueap5uptc5	https://img.youtube.com/vi/PMKC8pa1L7c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12792	ixdy8lgGi+0flae79oYwmg==	2022-08-16 18:57:37.992059
+1855	ze43xwxs1gz6nmiu1fijvfaf6wzu	nineteen.mp3	audio/mpeg	{"identified":true,"duration":177.048,"bit_rate":120929,"analyzed":true}	local	2686574	JDTq/LakppRxZKUVYOEygQ==	2022-09-20 19:14:39.323941
+1856	c2ayjai34s2yt7w57krg3ci3u1zj	Chosen 1.mp3	audio/mpeg	{"identified":true,"duration":319.586042,"bit_rate":61069,"analyzed":true}	local	2474985	9ZltyTzrZJ5x6reCVdHUyQ==	2022-09-20 19:14:40.472088
+1857	xn4uxh2xeiqjgsp7yqjzmgmcdado	Heating Up.mp3	audio/mpeg	{"identified":true,"duration":185.815201,"bit_rate":107598,"analyzed":true}	local	2521715	nG3bpVfwqftdCojLiPRRaw==	2022-09-20 19:14:41.543096
+1858	9zz4o9t8rr580ry880vdpd8syyec	Losses.mp3	audio/mpeg	{"identified":true,"duration":389.541684,"bit_rate":66452,"analyzed":true}	local	3258253	wsv+BqDxIk1/u3SYv4QJ8Q==	2022-09-20 19:14:42.884796
+1859	xkijxif71ogpyypfx56f94kfqzd6	With You.mp3	audio/mpeg	{"identified":true,"duration":280.740759,"bit_rate":80458,"analyzed":true}	local	2845983	eQMKnO6avvk6Th7p8q1TeQ==	2022-09-20 19:14:44.069671
+1860	kin4jzw6drncacpt9ianmub6i1g5	Step.mp3	audio/mpeg	{"identified":true,"duration":233.147028,"bit_rate":95363,"analyzed":true}	local	2798827	X6jSg6Th9z4u7x9Czu2/kA==	2022-09-20 19:14:45.243037
+1861	9g9w2x4pz4aj5tra25s868gwfnfi	The Climb Back.mp3	audio/mpeg	{"identified":true,"duration":304.752,"bit_rate":138585,"analyzed":true}	local	5293688	7USKpBznOAWZV4SMZmFJAw==	2022-09-20 19:14:47.469208
+1862	f0brgx15i66tdqfzgibiipmlmdl1	Top Shotta Flow.mp3	audio/mpeg	{"identified":true,"duration":212.560729,"bit_rate":109593,"analyzed":true}	local	2924260	V4T2CZA7/ugQ0bi2PjX0vw==	2022-09-20 19:14:48.709126
+1863	mxj5six2xxmbm8fhg87tiwglm0p7	Never Recover.mp3	audio/mpeg	{"identified":true,"duration":330.233473,"bit_rate":87068,"analyzed":true}	local	3612544	GsL68p2stKPteyEls6mcyw==	2022-09-20 19:14:50.283733
+1864	awufvk6li5vi46650jd10hwsvam9	Cold Wind Blows.mp3	audio/mpeg	{"identified":true,"duration":310.396469,"bit_rate":122355,"analyzed":true}	local	4761347	Bf7vAnVEhC21F7RLhh/6xw==	2022-09-20 19:14:52.304778
+1865	gvfjptpt9ukdtnmch39zmtspi1si	Moonlight.mp3	audio/mpeg	{"identified":true,"duration":235.705438,"bit_rate":118766,"analyzed":true}	local	3513693	9C86wyiSfgqKzAEG3dASKw==	2022-09-20 19:14:53.753631
+1866	2lo55dqtju6s2yfavxqviossx8ro	You’re Never Over.mp3	audio/mpeg	{"identified":true,"duration":304.313477,"bit_rate":138779,"analyzed":true}	local	5293055	vh8wAJKVhSlr2iUmfI8oUw==	2022-09-20 19:14:55.987044
+1870	vxlyrofcise42msz4248f2n1g33c	Stay Wide Awake.mp3	audio/mpeg	{"identified":true,"duration":300.292011,"bit_rate":139392,"analyzed":true}	local	5274327	mQy4anTM9LVmSzVzQYyX7w==	2022-09-20 19:15:03.316975
+1871	tlgemtpzqt21k2sdq2rydtm4h3kx	Love Yourz.mp3	audio/mpeg	{"identified":true,"duration":193.551339,"bit_rate":134284,"analyzed":true}	local	3267586	13hOrQUbQAIy3l6KSq3C1g==	2022-09-20 19:15:04.718822
+1872	1p0312i18awjb1b5hf52b39v91ai	Music Box.mp3	audio/mpeg	{"identified":true,"duration":336.326889,"bit_rate":113066,"analyzed":true}	local	4799172	pitESbU3FqPwj4ThK5D3xg==	2022-09-20 19:15:06.613675
+1873	3mnifju6kr9vql6ap8c6cz3it4fd	My Darling.mp3	audio/mpeg	{"identified":true,"duration":406.774294,"bit_rate":104893,"analyzed":true}	local	5375501	OeGqTnb2yiJPR9wR2z9Aeg==	2022-09-20 19:15:08.70593
+1874	132gsej2xmksczckesgl8rnxbg3x	Kamikaze.mp3	audio/mpeg	{"identified":true,"duration":186.495022,"bit_rate":145230,"analyzed":true}	local	3394745	35Bj35NcEMhTxSuFdxZlbg==	2022-09-20 19:15:10.097625
+1875	5stzael8loj5k07cv3002rlptp4q	The Ringer.mp3	audio/mpeg	{"identified":true,"duration":486.764201,"bit_rate":88461,"analyzed":true}	local	5392356	Vx+DRY0DejVxOv3L3og7ng==	2022-09-20 19:15:12.223228
+1876	l0op9qqv0lod8opodi4zr4lmnyk8	Lucky You .mp3	audio/mpeg	{"identified":true,"duration":284.933011,"bit_rate":127677,"analyzed":true}	local	4556667	ZE6uJb9/fuaF6UW4PD9/KQ==	2022-09-20 19:15:14.037386
+1877	x602cw6l39q083i4uwj4sa03hzrr	KILLSHOT.mp3	audio/mpeg	{"identified":true,"duration":302.509176,"bit_rate":107452,"analyzed":true}	local	4076551	KVwNHuUA4xseV7CLOtFFig==	2022-09-20 19:15:15.721919
+1878	jp32zj3ymz66mwywuzi8x5quoa94	Good Guy ft. Jessie Reyez.mp3	audio/mpeg	{"identified":true,"duration":343.121133,"bit_rate":77873,"analyzed":true}	local	3360986	Yblern9ZeobzILfmV28nTw==	2022-09-20 19:15:17.077528
+1879	9ckgdb1vtvtudixn2att3ibobkda	Freedom of Speech.mp3	audio/mpeg	{"identified":true,"duration":135.296676,"bit_rate":125541,"analyzed":true}	local	2136545	dzcJid9YUMkkuS5dpwHLhg==	2022-09-20 19:15:18.058524
+1880	ogdqge969g9t6hv9jv0tjtu2lbfg	CAPO.mp3	audio/mpeg	{"identified":true,"duration":193.536,"bit_rate":130054,"analyzed":true}	local	3157542	7WJflDr+lB7KhAspK6Ghqw==	2022-09-20 19:15:19.360732
+1881	s29lcbp7y2ysiytmugh85jn50o4v	Light Prism.mp3	audio/mpeg	{"identified":true,"duration":390.0,"bit_rate":132622,"analyzed":true}	local	6477148	Y1LheMN8zUcJd1+XZ3fT8A==	2022-09-20 19:15:22.087328
+1882	0g54uydqdy7yrmviv5jdq49i7816	Sandman.mp3	audio/mpeg	{"identified":true,"duration":274.478704,"bit_rate":87833,"analyzed":true}	local	3048381	9JMwCT6Erh5rwfxL49bRIQ==	2022-09-20 19:15:23.361577
+1144	gan6mywtf61liilfwjgx7aedanke	https://img.youtube.com/vi/CCPbYJvtywI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17458	tjiiBm55EpWtWkpnO3kdiQ==	2022-08-16 18:56:28.450601
+1148	wje0jx7pvvihm6l8xq7v9vvaskhg	https://img.youtube.com/vi/cXGx3ZF1ya8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17420	zfPMkpDqGADrDx8mpCMxzw==	2022-08-16 18:56:34.918045
+1152	9kmblnp28xbbeiezgp1p1pw1l6p2	https://img.youtube.com/vi/C6Le7luzv2Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30316	hvazEUmkjsp8+f15IgXcjg==	2022-08-16 18:57:24.997133
+1156	1jnqalvqr8p1x6paosirnwltelsb	https://img.youtube.com/vi/ROlOzczJqyc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14654	8siCiHajkxygahfZmfOgcg==	2022-08-16 18:57:28.892227
+1160	2kl9uj6hqyit6u6dx0imvg17xfea	https://img.youtube.com/vi/rNl4tx4G4Rg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14804	ZHSLGZNd/blNlpRAqOdn4w==	2022-08-16 18:57:34.42251
+1164	64wu9w4uugzf7x2dl1kb0owr161o	https://img.youtube.com/vi/MlZwp7YwZyw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17069	Qhwv4bQYaGtLnpWbHTgSNA==	2022-08-16 18:57:39.938068
+1166	v9jpe6bz6nqr79nhvilb5692qey4	https://img.youtube.com/vi/mZaTenQR7U0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24946	hn9lZbwBOwD+ngkQn1jQ+Q==	2022-08-16 19:03:36.095485
+1168	bdki9wlqurr2wt0bt8qufmz1vy9w	https://img.youtube.com/vi/OOmu1Yki-7g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29407	NJ1b6weQsCUIzJKBly1rmw==	2022-08-16 20:14:16.431336
+1170	f475lccb1t2kgjo3f60idtzgivfq	https://img.youtube.com/vi/GCsoFCw9wrQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-16 20:14:19.164043
+1172	nqv2uv0pskn73o4nbp7blekl8une	https://img.youtube.com/vi/jsLL6MTOHG0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-16 20:14:19.188017
+1883	1lkrpg7k6yxem1pcd2oq62soomyv	Work Out.mp3	audio/mpeg	{"identified":true,"duration":287.071668,"bit_rate":103101,"analyzed":true}	local	3717110	JyyHkCejvZMweYD2/iZIlw==	2022-09-20 19:15:24.891669
+1884	xg3b51l9ptgnf8nx92i1gnjr95sf	Psycho.mp3	audio/mpeg	{"identified":true,"duration":319.4428,"bit_rate":74659,"analyzed":true}	local	2996946	szinDPm5MkLKxKtPfdCK/g==	2022-09-20 19:15:26.179515
+1174	909qr0l7notej2n1btoi5ei3jlpy	https://img.youtube.com/vi/c3_Ia2CaO8k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	35598	kLXdSH731P6hczORmNdNtg==	2022-08-16 20:14:22.33659
+1176	zymr8rs15ib158gf2b72elx4ckjz	https://img.youtube.com/vi/GrAchTdepsU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22099	e5uxc5LK7c0oQ0Ujh/VWFA==	2022-08-16 20:14:22.63443
+1885	7e0o2ao83vt53dc6eascgzuchkm7	G.O.M.D..mp3	audio/mpeg	{"identified":true,"duration":328.04825,"bit_rate":112911,"analyzed":true}	local	4642912	VE/tP7qapxCWMf3U3uPwpA==	2022-09-20 19:15:28.191915
+1886	o5zgws5nma14m1avan1mzav4h4ms	Hun43rd.mp3	audio/mpeg	{"identified":true,"duration":600.875196,"bit_rate":54269,"analyzed":true}	local	4103272	tIppWeAKDj8LpH6iaCpnmQ==	2022-09-20 19:15:29.943717
+1178	7a92c4zjz53h2jzwps22645u4cgk	https://img.youtube.com/vi/A4mU4j0n_YE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16116	DO1kaZFhZsc4hHpszusBSw==	2022-08-16 20:14:25.264704
+1180	wb99g64126zs3nazf4s34lxabop4	https://img.youtube.com/vi/yjbiik9Wb5s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-16 20:14:31.926285
+1887	ko8dht5azj0m0qusuny9n4osow9j	D.M.B..mp3	audio/mpeg	{"identified":true,"duration":439.620559,"bit_rate":85726,"analyzed":true}	local	4730796	UJWXm9TAwCHaW1EVmH+Uig==	2022-09-20 19:15:31.959172
+1182	cxptvj2673puzoc09tg35lfxa299	https://img.youtube.com/vi/zAjEQewYA1k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-16 20:14:32.539972
+1184	96tykvq3mzqalb05apa1oiy8bzhe	https://img.youtube.com/vi/zPSTP_EreaA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17234	aFyQ0rLgadhEdgsVPSZPaQ==	2022-08-16 20:14:44.488684
+1186	e0xugwx8tvr6wud1qj3j1nmmiqdr	https://img.youtube.com/vi/f5W_sAIKkJQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-16 20:14:46.345639
+1188	d3x6bkoplrj9uk2g554uddo46lkz	https://img.youtube.com/vi/YDCmn_F7vbY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19928	yKdui+F5f0UGHBNQdZWyYw==	2022-08-16 20:14:49.189936
+1190	h31l6xt1rdf6l62xhp18asjmudgv	https://img.youtube.com/vi/LGgU5Ihqd8s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32430	MSxJVNxnKZls9P3KxMKT8Q==	2022-08-16 20:20:12.630705
+1888	n4jcw1vbmbsr8m553zofxka295yf	Changes.mp3	audio/mpeg	{"identified":true,"duration":690.591155,"bit_rate":59223,"analyzed":true}	local	5139520	xsXi+4pOC8q4ngf5oZoP7w==	2022-09-20 19:15:34.112348
+1889	zsiv2ldrg8cjxmcs102opd6kqq9m	Tony Tone.mp3	audio/mpeg	{"identified":true,"duration":366.593774,"bit_rate":66106,"analyzed":true}	local	3056420	wruUYxoNTWB7nh+P7Dc4VA==	2022-09-20 19:15:35.353501
+1890	7g1g02373p349kt9315mitwc00zs	Spotlight.mp3	audio/mpeg	{"identified":true,"duration":282.609293,"bit_rate":80316,"analyzed":true}	local	2842005	pgBknCyh0NGh2XWWvvV/5w==	2022-09-20 19:15:36.552203
+1891	esd19bfkz1oh0y9nygk7bjisi4ya	Save That Shit.mp3	audio/mpeg	{"identified":true,"duration":265.762712,"bit_rate":111687,"analyzed":true}	local	3728020	8w1BAwG0IKQZRo/LkW/yWg==	2022-09-20 19:15:38.021502
+1892	rrslyyszo2j3u0z1mchvfwkvzodl	Problems.mp3	audio/mpeg	{"identified":true,"duration":253.716053,"bit_rate":104745,"analyzed":true}	local	3339623	ZZWYtjmWqcJwweopLvGuiQ==	2022-09-20 19:15:39.352763
+1192	upn0my0ropk2lv070x3q1wlb95mc	https://img.youtube.com/vi/ZwopqMSoN2s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32430	MSxJVNxnKZls9P3KxMKT8Q==	2022-08-16 20:20:17.616362
+1893	wj36tdmeuw0kt0yumd0mvwkcaud9	Rubber Band Man.mp3	audio/mpeg	{"identified":true,"duration":438.392812,"bit_rate":61434,"analyzed":true}	local	3388115	wwasFtCq15PN5c2/T5NvOw==	2022-09-20 19:15:40.80197
+1194	fs7b04eu2jdgloh0k0139djw5at8	https://img.youtube.com/vi/M31wpVvlws8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23583	plBez7w21GF5txI1enweZA==	2022-08-17 11:42:12.284563
+1894	rx0pz2120pr4un6p7roidmgmjhjq	Jumpin.mp3	audio/mpeg	{"identified":true,"duration":190.296368,"bit_rate":133550,"analyzed":true}	local	3189921	MbBezuKNXIFJN/RIgc+VJg==	2022-09-20 19:15:42.181696
+1196	u1feij9ay1ntjqvizpz5leu6ai0e	https://img.youtube.com/vi/kKPZqkcWeTM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 11:36:08.306857
+1895	ek7et7wtv82t8bnhehbiwh6rpk3k	Feline.mp3	audio/mpeg	{"identified":true,"duration":306.350051,"bit_rate":93792,"analyzed":true}	local	3605587	pBdV1wbtpzSxpfd0XQ50Zw==	2022-09-20 19:15:43.68535
+1198	hgmqx44d5iatlpty7vy5q52lnztq	https://img.youtube.com/vi/NMj0NnKVMwo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11831	sT+ovDdLH6ZF+kO6yty2IQ==	2022-08-18 12:07:21.079936
+1200	yupswt71d5fenrim9ra4a12vnn4r	https://img.youtube.com/vi/Hsy4UEBSO44/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16937	ycUYjpI0Rl1V8hS7Y4ifGA==	2022-08-18 12:07:46.478736
+1896	dab6sasn724vynftvir995m0pr57	RAPSTAR.mp3	audio/mpeg	{"identified":true,"duration":218.447829,"bit_rate":107282,"analyzed":true}	local	2954800	NLLQwpe9axwIOv3QUjgRlw==	2022-09-20 19:15:45.038636
+1202	er3mwrz20mj46wt56hlauj3b6095	https://img.youtube.com/vi/LG369AbsWfI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:08.835567
+1204	zt4e50mwc2g0hfgc3juwigouy5ao	https://img.youtube.com/vi/c4Yz9o5UtN8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:09.965179
+1897	gpxhh7jlnx94bkqf98fy13bkhqfw	On Go.mp3	audio/mpeg	{"identified":true,"duration":565.376164,"bit_rate":45326,"analyzed":true}	local	3229664	tP2bMGwzRnunVGLo7Hl7TQ==	2022-09-20 19:15:46.414084
+1206	mtt3vn4u7mh3jcofj2hyqb9w8kj0	https://img.youtube.com/vi/T6T_94qjp5g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:11.546867
+1208	xvrtsx8bj1et77f8ppw62ld24kwk	https://img.youtube.com/vi/lKum7GDQxOY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:13.148892
+1898	d71vj4bnnpz8rszqodc6y11wujab	Fashion Drunk.mp3	audio/mpeg	{"identified":true,"duration":352.953611,"bit_rate":77885,"analyzed":true}	local	3455756	1HP4cmWlVTr3twgYIiPFsw==	2022-09-20 19:15:47.868511
+1210	f8j662x37x4bfsnh9mb4pgj3jcgo	https://img.youtube.com/vi/37-4H5wwrqc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:14.222015
+1212	ufwvp71393rsg0pec3z08hy9lmjc	https://img.youtube.com/vi/_nixVAe1Mks/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12586	aXQvPyJygpwTJmR7255msw==	2022-08-18 12:08:15.040901
+1899	m7jvv6074zot584vs9l1ujf90xdt	Yes.mp3	audio/mpeg	{"identified":true,"duration":229.320172,"bit_rate":129265,"analyzed":true}	local	3726134	ucAxxolkWhkmxFhhOivXBw==	2022-09-20 19:15:49.479568
+1214	mjf3tr7th0if92sx6fq89xiqn6em	https://img.youtube.com/vi/f3ISSTTJrU8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:18.874215
+1216	tvx1qrrcx23gg48ekqpx4j0l6jd3	https://img.youtube.com/vi/Ngng8UyyaGQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:19.93953
+1900	o2l5tn4zx1ph75zbhzudxbyau674	Love Sosa.mp3	audio/mpeg	{"identified":true,"duration":374.322625,"bit_rate":86602,"analyzed":true}	local	4064856	jWXdyZeX+ZWbPTx77iUWxA==	2022-09-20 19:15:51.1681
+1218	852a84co58jhfpj5mzs775zgbc8n	https://img.youtube.com/vi/QlU69Z4Hu7A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11831	sT+ovDdLH6ZF+kO6yty2IQ==	2022-08-18 12:08:23.328237
+1220	c9jjl2ji3k6p8w5coq3rvp60y4w5	https://img.youtube.com/vi/F6E3GkaYdHs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	40664	+M+jVijAqdLdXrV9SbTing==	2022-08-18 12:08:25.691201
+1901	qs619g1nny8q8cqnokxyeaj142ys	Bouncin.mp3	audio/mpeg	{"identified":true,"duration":188.960919,"bit_rate":144928,"analyzed":true}	local	3444069	mOSs2uiWafz6m/DXdb738g==	2022-09-20 19:15:52.5863
+1222	3y6bj3x61np7fm7iycy9mjzup1fq	https://img.youtube.com/vi/NxkSEJ6Mv3M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	40664	+M+jVijAqdLdXrV9SbTing==	2022-08-18 12:08:26.633596
+1224	gkc9i6lmibts4rlhszbz5lwkl2d1	https://img.youtube.com/vi/rLvbigobrRk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:26.842937
+1902	zgl2lukf7gp2pjq6l5njsad958st	I Don't Like.mp3	audio/mpeg	{"identified":true,"duration":329.708055,"bit_rate":136464,"analyzed":true}	local	5647847	vLD5L9dnnlrV4AVNa6nVcg==	2022-09-20 19:15:55.02542
+1903	dzn1h23nggsv5snnwc46ttb0zx3u	Headshot.mp3	audio/mpeg	{"identified":true,"duration":159.174085,"bit_rate":119683,"analyzed":true}	local	2391937	Wk/rPtrbsay84/DBMoOMoQ==	2022-09-20 19:15:56.226867
+1904	vots3pl5cbdboyu5zvykk3s4cpds	Company.mp3	audio/mpeg	{"identified":true,"duration":458.008622,"bit_rate":60543,"analyzed":true}	local	3496991	JBL+4CbbMNATR7cAueiuHg==	2022-09-20 19:15:57.697008
+1905	qea9uov7w6jc7iptc9a2ngobemkb	VALENTINO.mp3	audio/mpeg	{"identified":true,"duration":464.110761,"bit_rate":52437,"analyzed":true}	local	3079111	u13jqfra8Xq9fJpUEv/gJg==	2022-09-20 19:15:59.023921
+1906	g6kblkrcro3boiweb22x9vc5shy7	BANG BANG.mp3	audio/mpeg	{"identified":true,"duration":246.937567,"bit_rate":160635,"analyzed":true}	local	4971117	QgH+5AOBijdnj7OMkrTQdA==	2022-09-20 19:16:01.076129
+1907	kz2c74itirajt240m6vbyhk461a5	Narrow Road.mp3	audio/mpeg	{"identified":true,"duration":299.061567,"bit_rate":105073,"analyzed":true}	local	3949708	BNkG+GG7yMwXRIGil0Otgg==	2022-09-20 19:16:02.768699
+1908	suio75qxyifxtkmh0vj4memv5zc1	Venom.mp3	audio/mpeg	{"identified":true,"duration":447.796066,"bit_rate":81909,"analyzed":true}	local	4601714	LnvWkyifLi0bSIOi/DGNzg==	2022-09-20 19:16:04.876934
+1909	88a9pyb9bjqunnbnw9z46inladpz	Learn to Lose.mp3	audio/mpeg	{"identified":true,"duration":277.68694,"bit_rate":89772,"analyzed":true}	local	3150749	OtsHNnGZhQbyXQ5sBrulUA==	2022-09-20 19:16:06.220947
+1226	ay52gp10kmwrxis1efcyotuuv92e	https://img.youtube.com/vi/ZWUDia4JXBE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	44417	lmQ1x+wINtH4d+eyl1LGgQ==	2022-08-18 12:08:30.606473
+1228	hnj5kvovseb14vfrgoclu89ic0d1	https://img.youtube.com/vi/hOFkhNijQeY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:31.197212
+1921	3p845wscl30b7l63n7ukjheixqtg	Pop Out.mp3	audio/mpeg	{"identified":true,"duration":160.986897,"bit_rate":130121,"analyzed":true}	local	2657861	UxqNl8z102MBfrAZPZjAhg==	2022-09-20 19:16:21.466923
+1232	s7raigjciekjdjh6f6ucazqgw59k	https://img.youtube.com/vi/rJYKtt9eg4o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12608	UQ8F0cQ7tJmEK4kC0h09Iw==	2022-08-18 12:08:35.344429
+1236	wd3xuxbf7it1ngdbluz2f6x86l5w	https://img.youtube.com/vi/jsur8561_1A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7800	TWdqWZU9YdoYXxtl9KP5rw==	2022-08-18 12:08:46.911754
+1922	z2ahtnda5m21l71wb3uxvpd6gree	Flashed Junk Mind.mp3	audio/mpeg	{"identified":true,"duration":260.496,"bit_rate":128883,"analyzed":true}	local	4211372	3hmnSbFetu6cN5h2vBqVTA==	2022-09-20 19:16:23.223932
+1240	kam7onrbou9a1duu7t5nrusk6p53	https://img.youtube.com/vi/8N1119H1uaI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8242	T3mIwxMe4Sme/ztbGZ3vZg==	2022-08-18 12:08:54.150808
+1244	rxzkh453dhwlhm2iuy49grdc9x8c	https://img.youtube.com/vi/LwBnFu-BEdU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13927	fZcHxTbW1fiY2eZDzWO1BA==	2022-08-18 12:08:56.54699
+1923	x0wr2310auyne6vba2avflf8ia2s	Bloody Canvas.mp3	audio/mpeg	{"identified":true,"duration":562.820952,"bit_rate":59163,"analyzed":true}	local	4184759	h44b34hgYQMW62LsyOxtCw==	2022-09-20 19:16:25.048042
+1248	hl6bq9z3sr55wi8t8naj77shknsg	https://img.youtube.com/vi/8CdcCD5V-d8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15543	pxN2hrsi9ZOFAlnKubzNtQ==	2022-08-18 12:09:11.185965
+1252	p886kgmws97b7jlbwrknevl9f4n0	https://img.youtube.com/vi/SlCXgj2bS_A/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14283	3yl2BO7/3t2gzW0nCGOczw==	2022-08-18 12:09:43.243133
+1910	rr0vorsdyp6b6bd14fv5q3a28weu	Yak Flow.mp3	audio/mpeg	{"identified":true,"duration":183.923971,"bit_rate":108695,"analyzed":true}	local	2512118	rnNG8A1oKLXoQRZ5G2fEDQ==	2022-09-20 19:16:07.271493
+1911	m5710r24spkq33hlttwjp3e9n6ud	Pretty Little Jaguar.mp3	audio/mpeg	{"identified":true,"duration":174.863886,"bit_rate":106778,"analyzed":true}	local	2351599	WQInae3qP0A4ZEDOod3nyg==	2022-09-20 19:16:08.265727
+1912	yg3jcjecmfjys1iq5zpqfys1fjw4	Tainted Love.mp3	audio/mpeg	{"identified":true,"duration":189.247607,"bit_rate":119076,"analyzed":true}	local	2828029	FegETc9MFwLDpQhAegGczA==	2022-09-20 19:16:09.515399
+1913	25n475mi3cixg00x3khzltvct1d2	Walk That Walk.mp3	audio/mpeg	{"identified":true,"duration":164.52,"bit_rate":130828,"analyzed":true}	local	2704832	nAGMlPx8QdTRiVURNctVuA==	2022-09-20 19:16:10.590403
+1914	mjxoizwg3761lno8t2n9kcre1bf9	Stolen dance.mp3	audio/mpeg	{"identified":true,"duration":784.507792,"bit_rate":49280,"analyzed":true}	local	4854140	DCC6jRsAi4gLBCKyrdpUOw==	2022-09-20 19:16:12.496394
+1915	y4h40ru4r4qa38nm310aoleu6r1b	Coco.mp3	audio/mpeg	{"identified":true,"duration":198.650674,"bit_rate":92295,"analyzed":true}	local	2309357	KcFvkJWevgEeyPxp4UcWng==	2022-09-20 19:16:13.587843
+1916	dpjxpk9yh9t5b0xalseafu3yv2v0	Final Warning.mp3	audio/mpeg	{"identified":true,"duration":219.105956,"bit_rate":91991,"analyzed":true}	local	2533417	E2pKILVY19zfTbCl5CaV9A==	2022-09-20 19:16:14.629517
+1917	p9k0enat3fwrgfncbx1wrcvccvy0	BST.mp3	audio/mpeg	{"identified":true,"duration":539.783416,"bit_rate":61168,"analyzed":true}	local	4162559	K4SHY31cffAT9CTeCVpDyw==	2022-09-20 19:16:16.381694
+1918	l8brb3t390vmhfseau8cadtia1vw	Final Warning.mp3	audio/mpeg	{"identified":true,"duration":143.617886,"bit_rate":148605,"analyzed":true}	local	2695784	ISgp594Xkk7mGNfoFJmKug==	2022-09-20 19:16:17.516819
+1919	gijpyws9y8zjsw4emvy6wqediv9m	Luigi .mp3	audio/mpeg	{"identified":true,"duration":232.911324,"bit_rate":112601,"analyzed":true}	local	3297624	fPDxhEhQXB0Y/a+ZdSuJSw==	2022-09-20 19:16:18.987169
+1920	pfuh0utmrv4r11eow0upxn9wwvdt	The Top.mp3	audio/mpeg	{"identified":true,"duration":361.997049,"bit_rate":71842,"analyzed":true}	local	3281627	Wvvo8/TckGis13owLBEI/g==	2022-09-20 19:16:20.374539
+1924	nbfzl56r71r2blbbuygbe8sbo2aa	Chief So.mp3	audio/mpeg	{"identified":true,"duration":277.92,"bit_rate":132753,"analyzed":true}	local	4627728	vodg0B9jXojqAfq6zKBwaQ==	2022-09-20 19:16:26.993708
+1925	sodmq3ynfih38upzcbcbs88lsmxq	Malibu.mp3	audio/mpeg	{"identified":true,"duration":248.712,"bit_rate":131798,"analyzed":true}	local	4108090	EJHPEL42mHZh7PPxKn+r9w==	2022-09-20 19:16:28.78056
+1926	d8wm97le1247mjbdqisic8rwnhnt	Breath Away.mp3	audio/mpeg	{"identified":true,"duration":379.889769,"bit_rate":58858,"analyzed":true}	local	2825755	GMza+X9MJ5kR12gB3bLI3Q==	2022-09-20 19:16:30.037316
+1927	rxgds2fxcfio57ybdpfbj2s08kwk	CITY OF ANGELS.mp3	audio/mpeg	{"identified":true,"duration":243.765437,"bit_rate":61800,"analyzed":true}	local	1913946	O1/qHQJItvS9R6ghoDWC9w==	2022-09-20 19:16:30.833185
+1928	zm6p0jhn9ocmc6osx7vhccqsak3y	WATERBOYZ.mp3	audio/mpeg	{"identified":true,"duration":344.228973,"bit_rate":116066,"analyzed":true}	local	5016064	EX02wNBzwQaY/dB74AcLiA==	2022-09-20 19:16:32.835362
+1929	sdstjivpqim7xze2z0nclvz30c78	Heaven’s EP.mp3	audio/mpeg	{"identified":true,"duration":218.597434,"bit_rate":107386,"analyzed":true}	local	2947769	1/9+zFBp+IelEqi/LwCDdg==	2022-09-20 19:16:34.160178
+1930	5mt6qm16vq8h64avmc5h7q40yu7c	9 5 . s o u t h.mp3	audio/mpeg	{"identified":true,"duration":269.715876,"bit_rate":91988,"analyzed":true}	local	3111023	8FZroDRQ/Cl5Mh3p+DdttQ==	2022-09-20 19:16:35.606228
+1931	2m8z08oxqc83dyabq2yno4uhn0cz	KOD.mp3	audio/mpeg	{"identified":true,"duration":273.689388,"bit_rate":89784,"analyzed":true}	local	3095060	tHIzJzgm5CHAfjGNXlVUvA==	2022-09-20 19:16:36.984554
+1932	n4v1v4go9e1ylng0ow9myqi4pnxu	p r i d e . i s . t h e . d e v i l.mp3	audio/mpeg	{"identified":true,"duration":302.238409,"bit_rate":86767,"analyzed":true}	local	3287819	NYQuunxa1ksAHH5k21IcjA==	2022-09-20 19:16:38.367314
+1230	2ef22kh9eowiar6thdkko4s4jnyo	https://img.youtube.com/vi/J1bklziBkJg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	40664	+M+jVijAqdLdXrV9SbTing==	2022-08-18 12:08:33.978772
+1935	dxbpeqxx4c8w1njt1lj7aezyufdc	Awful Things.mp3	audio/mpeg	{"identified":true,"duration":287.084894,"bit_rate":93681,"analyzed":true}	local	3379371	ibVRSsUmuSqRkPJA+iXFPQ==	2022-09-20 19:16:43.423179
+1234	pgbj53in65pybh28t79zq2wp031d	https://img.youtube.com/vi/FhF9RwkHAJw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7800	TWdqWZU9YdoYXxtl9KP5rw==	2022-08-18 12:08:45.14977
+1238	u2cb04ezf615gum3eysbg3gqojsi	https://img.youtube.com/vi/c2AhsySa-8E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8531	hoOTqr7EQDM/C/MOZ66foA==	2022-08-18 12:08:51.126275
+1936	mmfap423csocdsmbx4p79ekqfa63	nuts.mp3	audio/mpeg	{"identified":true,"duration":168.970249,"bit_rate":61444,"analyzed":true}	local	1314445	XcVS7SImcCoHlc3HAfGAew==	2022-09-20 19:16:44.103795
+1242	w86ywxpqp8mxuyhmblyb7p75fq73	https://img.youtube.com/vi/1arz9Q9qBas/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7800	TWdqWZU9YdoYXxtl9KP5rw==	2022-08-18 12:08:54.719243
+1246	rvieqc5rzeu706ur5kq71w95qjmy	https://img.youtube.com/vi/FxQTY-W6GIo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12038	MmP/LmaCp3Ryk4XpXBOHoQ==	2022-08-18 12:09:00.889718
+1937	c7svs6wum79b67mm6nmz1iybcxsk	Camelot.mp3	audio/mpeg	{"identified":true,"duration":187.768084,"bit_rate":102399,"analyzed":true}	local	2429126	mabPq3DlqHWsWWQYNl/VXA==	2022-09-20 19:16:45.230909
+1250	lzjlas6qvmu1yh568x0xjz9vnjmd	https://img.youtube.com/vi/X-TkrWpO75k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19607	URz+pK6av1I3Qn8q4pErsg==	2022-08-18 12:09:12.692063
+1254	6ll64hhqza01037lo368pql19qsg	https://img.youtube.com/vi/3BXDsVD6O10/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	44005	g76ukDIJ1HY4oiWYxA59Zw==	2022-08-18 13:48:12.597534
+1933	d91kswtcjwp0i2p43lkak3dxz3hq	G.O.M.D..mp3	audio/mpeg	{"identified":true,"duration":791.61561,"bit_rate":46765,"analyzed":true}	local	4649856	Bo9f98AYnSlpy7l+uz7o3Q==	2022-09-20 19:16:40.489952
+1256	nzhpfqrxhac1enjq87k3c08h3czw	https://img.youtube.com/vi/pffbkwr927Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	35659	I+UDafBvuy104G2dahbXzw==	2022-08-19 07:15:04.791966
+1945	lagl353py3gs4qaafiimlldhdml2	Empty.mp3	audio/mpeg	{"identified":true,"duration":355.738076,"bit_rate":59376,"analyzed":true}	local	2671131	Lg0wEmSJaCwKU1O4IPpwyQ==	2022-09-20 19:16:55.98389
+1258	ekyc3bgy8iqs49ovow96feepu7gc	https://img.youtube.com/vi/v7YmaJvML70/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11414	iT3FgFlxaX64NzYLSRmtAg==	2022-08-19 07:15:49.254751
+1938	489kawz6qtk7hhjx9psabnm1k5t5	Californication.mp3	audio/mpeg	{"identified":true,"duration":515.236341,"bit_rate":73525,"analyzed":true}	local	4748021	sO9vWnXp/U8pHGevjKbFYg==	2022-09-20 19:16:47.224336
+1260	wmcdapwhqbgxrjbq6cqg94asocjj	https://img.youtube.com/vi/H7sSdzfjnBw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11414	iT3FgFlxaX64NzYLSRmtAg==	2022-08-19 07:16:29.275153
+1934	zekdwxtjoumngje5in0k4qc6cdle	ATM.mp3	audio/mpeg	{"identified":true,"duration":565.253702,"bit_rate":49294,"analyzed":true}	local	3509598	18ZJq1ILQHfEYu9Gabx+Tg==	2022-09-20 19:16:42.001579
+1262	83qgknrupxrlr4qh39ifnbk45fv0	https://img.youtube.com/vi/kibgXqJuKCM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13506	u3j36TSRaweXGtxYFeJL2w==	2022-08-19 07:17:53.76308
+1264	5pfcdw6baxqrk1puywlomuks9tya	https://img.youtube.com/vi/vkvrbbtnp6s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18815	7Xjk7ZPun6qVBnJ4Uo3bOA==	2022-08-19 07:17:55.003974
+1939	gburvawssp256wj7vx71m89dahoq	Push Off.mp3	audio/mpeg	{"identified":true,"duration":237.758058,"bit_rate":71852,"analyzed":true}	local	2161622	GnvIIK3VH7n2CZG4Ta5xcQ==	2022-09-20 19:16:48.199933
+1266	6l31tp1fcbqtd5ku33tt1a1klvcq	https://img.youtube.com/vi/HO6CX495-m8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26286	32j/OBud61O1XVFTV32bkQ==	2022-08-19 07:17:56.714956
+1268	o667q0adk5mqp3nw7t3ac96pkkgl	https://img.youtube.com/vi/8fJ_Uenj-lk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26286	32j/OBud61O1XVFTV32bkQ==	2022-08-19 07:17:59.897614
+1940	0ewg613r0wm1deetukefvjmkrvkn	The Drive.mp3	audio/mpeg	{"identified":true,"duration":272.015799,"bit_rate":111398,"analyzed":true}	local	3813914	izUPEwqCbm0+JIm7QyqHxA==	2022-09-20 19:16:49.811258
+1270	e463714fhtpqpejwfde8jznsvc8p	https://img.youtube.com/vi/Ep0aCotj_7M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13054	nPZMD9senKdlg7D60kZRhw==	2022-08-19 07:18:00.196345
+1941	x9t6smkdv8nv5ydgpopm6nxzdu6m	Funky Friday.mp3	audio/mpeg	{"identified":true,"duration":181.128,"bit_rate":128635,"analyzed":true}	local	2925264	SBqoa6afEF0TO2cyF8JtJw==	2022-09-20 19:16:51.060922
+1272	kpj5q24mkc2smbxygx2n2oz5osbu	https://img.youtube.com/vi/Om021bkiWrg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13054	nPZMD9senKdlg7D60kZRhw==	2022-08-19 07:18:02.772372
+1942	p277z2t72xkvz6axec57afgawb1e	His & Hers.mp3	audio/mpeg	{"identified":true,"duration":263.739357,"bit_rate":110496,"analyzed":true}	local	3680020	E4I8aFcegufpc13yxg5OvQ==	2022-09-20 19:16:52.601056
+1274	vlose2houv8shdm17xxx0gzlwjty	https://img.youtube.com/vi/ULwIM6Za0QA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26286	32j/OBud61O1XVFTV32bkQ==	2022-08-19 07:18:05.884058
+1943	d4vxb5at23rmxhxzq6ccegtm33ki	Star Shopping.mp3	audio/mpeg	{"identified":true,"duration":162.148933,"bit_rate":108854,"analyzed":true}	local	2226452	tiym99uq7ceGgP7AInf6Hg==	2022-09-20 19:16:53.626893
+1944	zb00t5y2dcsd88v3pl7mmeudyj9j	Love or Lust.mp3	audio/mpeg	{"identified":true,"duration":412.765368,"bit_rate":55994,"analyzed":true}	local	2919861	AqGGOayJ4WWK+ZZ20kYM0w==	2022-09-20 19:16:54.855011
+1946	6upsw4mvhrq6upmn1f4dwz32fl6k	Cut It Off.mp3	audio/mpeg	{"identified":true,"duration":328.775423,"bit_rate":62108,"analyzed":true}	local	2583257	O73BnQwovOnSpxJ5AyH9dQ==	2022-09-20 19:16:57.066206
+1947	j2zen63meob8s4xcazo0kq0aiqjs	Butterflies.mp3	audio/mpeg	{"identified":true,"duration":436.650076,"bit_rate":64897,"analyzed":true}	local	3572971	tNpNIy995olkhTt6vmxkHQ==	2022-09-20 19:16:58.544164
+1948	iafelw6uxcpbnkbgyg3uzcar4n0z	Don’t Sleep.mp3	audio/mpeg	{"identified":true,"duration":358.550189,"bit_rate":74658,"analyzed":true}	local	3376891	SQOQas+SZFRk5uBRkm5zrg==	2022-09-20 19:16:59.904368
+1949	6z6cabzwigiq6ru516o1vcha5dpl	Black And Yellow.mp3	audio/mpeg	{"identified":true,"duration":255.77554,"bit_rate":112911,"analyzed":true}	local	3622563	OFrfF3KqDQX39SIOcDGpDQ==	2022-09-20 19:17:01.341176
+1276	ckcwnsk7jgn3mgop1w4gpwj91m05	https://img.youtube.com/vi/UIVGED32qsE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26286	32j/OBud61O1XVFTV32bkQ==	2022-08-19 07:18:06.23966
+1277	dcpqorzqi22slntlj78be2sdr8rx	https://img.youtube.com/vi/0fZyNUikfEM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20233	qwiMs4iJMXSYE7JmhxI1/A==	2022-08-19 07:18:06.274574
+1967	59sfesrx5xkhg7kncuqafylm8oqx	Hall of Fame.mp3	audio/mpeg	{"identified":true,"duration":314.33494,"bit_rate":79680,"analyzed":true}	local	3145041	SXJ3cQkKroLKk6ZDMVTxpA==	2022-09-20 19:17:29.051577
+1950	pc6vo5wh4pr2rsrdaj9lsiwzfv2w	Hot N*gga.mp3	audio/mpeg	{"identified":true,"duration":268.332628,"bit_rate":67126,"analyzed":true}	local	2288729	96YZhJVF/elzibcLAbtQ+Q==	2022-09-20 19:17:02.38152
+1951	enz11t8tj10ryt116u8kr40724lc	Post Malone - Allergic (Audio).mp3	audio/mpeg	{"identified":true,"duration":207.795319,"bit_rate":97244,"analyzed":true}	local	2539824	bw57DmnSnGZoikLxyLUvag==	2022-09-20 19:17:03.402046
+1952	v0uvy9sdigz83m05mxuqvrrblge5	Leave.mp3	audio/mpeg	{"identified":true,"duration":369.006097,"bit_rate":111687,"analyzed":true}	local	5160236	yFx82QN52awuiaXD6XphFg==	2022-09-20 19:17:05.436938
+1953	tkr0dcyu0x826n3vvuso9e0fqgik	Cocoon.mp3	audio/mpeg	{"identified":true,"duration":314.93702,"bit_rate":110177,"analyzed":true}	local	4360695	NfVx/co/jet+8Cqytg0Odw==	2022-09-20 19:17:07.258787
+1954	vp7f3r5yqv58d8q4zn1xyrgzak37	Spirits.mp3	audio/mpeg	{"identified":true,"duration":215.530713,"bit_rate":124376,"analyzed":true}	local	3362051	HXARuTTlzjNiZ3oS6VQwLQ==	2022-09-20 19:17:08.610488
+1955	qtt0g4skjmyop6qfvv3yv9gctx3r	Hey There Delilah.mp3	audio/mpeg	{"identified":true,"duration":291.013783,"bit_rate":70524,"analyzed":true}	local	2582877	/45MDn1wT+Hff6orwnizHA==	2022-09-20 19:17:09.689823
+1956	1zff6jh2j8ilwnr2irk5shxv9pjq	Pour Some Sugar On Me.mp3	audio/mpeg	{"identified":true,"duration":282.004395,"bit_rate":122874,"analyzed":true}	local	4368859	0S6/QEA9dHyPxYV2g9ZLPg==	2022-09-20 19:17:11.553974
+1957	75lclh9antg54c3nyqoifuokmnxi	Dark Necessities.mp3	audio/mpeg	{"identified":true,"duration":393.587067,"bit_rate":93526,"analyzed":true}	local	4631927	a15LRa9L8QGXEU8DZubehA==	2022-09-20 19:17:13.624189
+1958	6xvalowsris6rq4f2qc4xh43gkyk	Vanic x K.Flay - Make Me Fade.mp3	audio/mpeg	{"identified":true,"duration":277.632,"bit_rate":132002,"analyzed":true}	local	4595650	ZWH12gI/6vxj0tyih1htBQ==	2022-09-20 19:17:15.456519
+1959	1mmc38axpprdcxxy69z9ferkmdg0	Electric Love.mp3	audio/mpeg	{"identified":true,"duration":385.048922,"bit_rate":73218,"analyzed":true}	local	3538024	UCgt6PxcMVIk10T9CMaJAQ==	2022-09-20 19:17:17.00711
+1960	s0uhgzadhhxhjugd91fqm4y5hla2	U laughed at me.mp3	audio/mpeg	{"identified":true,"duration":206.305383,"bit_rate":102527,"analyzed":true}	local	2677144	H8gAzgw9yeqbIaEsc4Skpw==	2022-09-20 19:17:18.142983
+1961	p2ks7tg3aclltmyk1ukbjwb2a90r	Ham.mp3	audio/mpeg	{"identified":true,"duration":238.349395,"bit_rate":95674,"analyzed":true}	local	2871303	ieYj07r0JNvHm7gIPYcfjA==	2022-09-20 19:17:19.35048
+1962	q5bxhm8xamqhw9mymmmu4trlx1r1	Jewish Flow.mp3	audio/mpeg	{"identified":true,"duration":1302.915971,"bit_rate":34036,"analyzed":true}	local	5560099	szwHr23X5U08U+bQlYGslg==	2022-09-20 19:17:21.609799
+1963	n22uqlpndaubxc5uelidksk46pqx	White Dude.mp3	audio/mpeg	{"identified":true,"duration":1037.964,"bit_rate":32000,"analyzed":true}	local	4165603	kNUbm9cNCZhDKxfnEVboAA==	2022-09-20 19:17:23.310288
+1964	7cfnlf602nhpr1akhaxgdidbcco7	Tuesday.mp3	audio/mpeg	{"identified":true,"duration":260.449852,"bit_rate":103554,"analyzed":true}	local	3386177	wF2tDkCvPzHLFYODf00Pyg==	2022-09-20 19:17:24.804183
+1965	soapfwpcxq163isonmcbv3i1uhwx	More Than You Know.mp3	audio/mpeg	{"identified":true,"duration":191.351781,"bit_rate":143359,"analyzed":true}	local	3454821	V2ZchdYRIPt5Y+RnTst5wg==	2022-09-20 19:17:26.343175
+1966	cmpz9kol6j3xd41pylwgi3ui7q1u	I Like Tuh.mp3	audio/mpeg	{"identified":true,"duration":187.68,"bit_rate":128576,"analyzed":true}	local	3023350	9QQmbDn+nZPYTyhYhUbvZg==	2022-09-20 19:17:27.687767
+1968	e1tn1p74k1alixwi5fovdk00hsx6	Replay.mp3	audio/mpeg	{"identified":true,"duration":725.61,"bit_rate":32000,"analyzed":true}	local	2921338	pZnLvdYoYds8GrLbw16U/w==	2022-09-20 19:17:30.332704
+1969	pygdmcf8k7kd9cijwesb4qnjirja	Russell Westbrook On a Farm.mp3	audio/mpeg	{"identified":true,"duration":403.8,"bit_rate":134417,"analyzed":true}	local	6798784	2iibvy2B2Tqc+sq97qxAbg==	2022-09-20 19:17:33.231964
+1970	qkffx0vd6cdv17iuxmodldhms9zv	Lalala.mp3	audio/mpeg	{"identified":true,"duration":378.153677,"bit_rate":63679,"analyzed":true}	local	3033916	j/cbotSz5hjnejCX30CncA==	2022-09-20 19:17:34.547779
+1971	oal2t1oalttyudmmb4yy4r9cif5t	La La La.mp3	audio/mpeg	{"identified":true,"duration":227.680577,"bit_rate":123598,"analyzed":true}	local	3532312	xT2XwZvRM26+PFrMYc+s3g==	2022-09-20 19:17:36.052321
+1972	eljgsolllqnqng6dtrsd42nh7eg1	Mine.mp3	audio/mpeg	{"identified":true,"duration":178.503441,"bit_rate":99837,"analyzed":true}	local	2238717	9ZaV97rHg40JkkqsTA+Gpg==	2022-09-20 19:17:37.113089
+1973	hoka0k6tal1jiq1t3maofxrzq4bw	All Around the World (La La La).mp3	audio/mpeg	{"identified":true,"duration":211.408467,"bit_rate":92377,"analyzed":true}	local	2479403	bgE47IiR0T71g4mNuFO4Mg==	2022-09-20 19:17:38.157425
+1974	b89s2h63c1k883ozib6h1fdtz9jz	Cigarette Daydreams.mp3	audio/mpeg	{"identified":true,"duration":302.017159,"bit_rate":88931,"analyzed":true}	local	3384958	8ACgZEZ5is6pX9X1A8t/xA==	2022-09-20 19:17:39.560202
+1975	o21a9rdvgvbezg5j5o25s0kt3jny	Anybody.mp3	audio/mpeg	{"identified":true,"duration":246.651907,"bit_rate":139391,"analyzed":true}	local	4323365	RCL1aylyWbzl71fFknHjLQ==	2022-09-20 19:17:41.361557
+1976	mv15u53bl35u9uiw98r21h0qivn3	Dreamcatcher.mp3	audio/mpeg	{"identified":true,"duration":220.213357,"bit_rate":120474,"analyzed":true}	local	3330674	PCr/B5opm3315biyJCzFjQ==	2022-09-20 19:17:42.807184
+1977	puk88kr44wfkgzh5t4ftdni0cq5b	Feeling Whitney.mp3	audio/mpeg	{"identified":true,"duration":267.668114,"bit_rate":101336,"analyzed":true}	local	3413526	HuyrijnHwcUb6JEaGc3A0w==	2022-09-20 19:17:44.247932
+1978	ighvcg2h71wn0na0p7cqv9dsmbxr	Kids.mp3	audio/mpeg	{"identified":true,"duration":554.879242,"bit_rate":78479,"analyzed":true}	local	5493174	SGbwHQ9EDN1akApVmiMBUA==	2022-09-20 19:17:46.429111
+1979	dv6gw6q9y0ai91ytrz5qow9cw0wj	All’s Well That Ends.mp3	audio/mpeg	{"identified":true,"duration":308.193212,"bit_rate":79374,"analyzed":true}	local	3071233	t3McZJ7kg07ad7c6Z5k7aQ==	2022-09-20 19:17:47.752035
+1980	79o321w7r5bamya1cc9ve8jfutoq	Mo Bamba.mp3	audio/mpeg	{"identified":true,"duration":180.888,"bit_rate":126399,"analyzed":true}	local	2867076	VPJEDpc+3KIr2xOSC3HblA==	2022-09-20 19:17:48.954863
+1981	0mrjh9hyvsvevbcdxdiabs9suy9e	Colorado.mp3	audio/mpeg	{"identified":true,"duration":201.904713,"bit_rate":108535,"analyzed":true}	local	2772896	Ru12PQRfbPtbAHTHf6yTqg==	2022-09-20 19:17:50.111462
+1280	bktjk3s0n7rqnlldi6jcnzi96aq4	https://img.youtube.com/vi/jkRJ0lKz2do/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15996	68Xy6Xjigpno3NdRubbrRg==	2022-08-19 07:18:41.485468
+1982	7nvvd1y206rkik32ejtsefl0p3og	11 Minutes.mp3	audio/mpeg	{"identified":true,"duration":397.855644,"bit_rate":75286,"analyzed":true}	local	3761585	nk0r9M91UkdIVPUXvtbIGg==	2022-09-20 19:17:51.686255
+1282	nsa2dsazxo11m5omiwpypxvode7e	https://img.youtube.com/vi/65qkgUhJZHk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11712	shyfb6lVRaHrkrCkolTKqg==	2022-08-19 08:19:51.376873
+1984	vcu0a3mm48s4no1eqkkmkz7xaysf	All The Stars.mp3	audio/mpeg	{"identified":true,"duration":224.337738,"bit_rate":137669,"analyzed":true}	local	3868995	pn7hTZvDtMJFvHQsxReu6w==	2022-09-20 19:17:54.370755
+1284	wsbj6s7i6weuwp9zpfcmtj3n96iv	https://img.youtube.com/vi/sXzuVnqLWR0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24301	UjBsVmLavZ+hTQvfVSzzEA==	2022-08-19 08:19:54.241596
+1286	1n17pybrw90tfdzk4ajeldwg6hkl	https://img.youtube.com/vi/Uicx21zbygc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10073	gC5/dQy/Q85HpRJfMbBPjQ==	2022-08-19 08:19:56.379641
+1985	0sk867pxd05k8iijezviuv6hpewf	Look Alive.mp3	audio/mpeg	{"identified":true,"duration":227.182306,"bit_rate":112311,"analyzed":true}	local	3216181	kYa/u1tgHIH8UcsIPcZGMw==	2022-09-20 19:17:55.658219
+1288	uf88zdi8slt3xwr8c6x7z7p3bl19	https://img.youtube.com/vi/xbE7WraMI04/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11745	fi8LIz1ChlHg/WXdIrKxUg==	2022-08-19 08:19:59.637484
+1290	p82wtoa4d1jngfpdn5xnr8s5pd5z	https://img.youtube.com/vi/NV_bjJzNkxk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11868	czJiIrPNSgANmHjEIuDz3g==	2022-08-19 08:20:00.578189
+1986	h3hcsf8f36q3v6sm3f1fkrumtzp1	Far Alone.mp3	audio/mpeg	{"identified":true,"duration":270.888,"bit_rate":138468,"analyzed":true}	local	4703040	tPTCiHJpEcUV+DkcQ+vnrw==	2022-09-20 19:17:57.536638
+1292	czjyie6gumtvkbb7okjyvk1p8ih5	https://img.youtube.com/vi/pD4yIMlU_lI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12504	RavSe1x30csIcl/bBI5FyA==	2022-08-19 08:20:05.170311
+1294	5kcxtouqsmeiky5gekv55nq1l084	https://img.youtube.com/vi/Bvrbh92vp1I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18210	Qas2LEALbmt1Dt1b8iDLdQ==	2022-08-19 08:20:15.418858
+1296	guq6wrg4ogt08k81k90z1pua58we	https://img.youtube.com/vi/s4Mn4rc0YPg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20321	KNZCJlPfNHsyjXhBTUd0JQ==	2022-08-19 08:20:19.672284
+1298	u39za7a2brrgcywbi8py0bqrx3f0	https://img.youtube.com/vi/k1rGtLNuJ3Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10925	KZ1+lbptfuqQMviwxj/0Xw==	2022-08-19 08:20:25.073623
+1300	38xj41s7m0o3x2g42ga0q8od83qt	https://img.youtube.com/vi/ih6vI5SAkjc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26551	1QM38xeslTx+skD/MQEtGQ==	2022-08-19 08:20:27.974835
+1302	0uu6md4w50ucqicsumstd8vav612	https://img.youtube.com/vi/IR9FJSmvF_s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12982	G7lGYJ514AJInT7urUApTA==	2022-08-19 08:20:29.327397
+1304	5dgiw7evf3crt1vlmed1jgyd7zsf	https://img.youtube.com/vi/KTIJz6m750k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8797	FLpWGSoe696zYD4A99lXrQ==	2022-08-19 08:20:34.088682
+1983	wg0oy9rhdn80bss88o15e2v6m9e8	SAD!.mp3	audio/mpeg	{"identified":true,"duration":166.584,"bit_rate":117011,"analyzed":true}	local	2450426	Q4T8h1EoE0LzvWYuRnNFJQ==	2022-09-20 19:17:52.797166
+1306	ldbs62me0u4lazsm6u6bavyj2mw0	https://img.youtube.com/vi/ujMZ97uej8Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14176	k5jNf1CiVYU7eSoWFG8Z1A==	2022-08-19 08:20:40.922045
+1308	1e1xgqrglhs2t386iferifufu5xy	https://img.youtube.com/vi/1wJZTGgF34w/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19247	P2KOQyvmL/nkD5RaFtrNbw==	2022-08-19 08:21:02.425096
+1310	u6drvhhz2lrvb5rcfo84lvkxi3gk	https://img.youtube.com/vi/pWyvH9Ydg30/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	4587	a67MhASNy6SkW5iO4qwP7w==	2022-08-19 08:21:06.64437
+1312	7zehk3pxhqhd2xvlw5wmetdey85a	https://img.youtube.com/vi/YNB4yOfTp9o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18210	Qas2LEALbmt1Dt1b8iDLdQ==	2022-08-19 08:21:07.529329
+1314	kevn0ms46n6hv7p9sxlympynoqd8	https://img.youtube.com/vi/tOr2wgvL4SI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15447	S8+SVMdOfOwmHURER7Y4wg==	2022-08-19 08:21:14.151326
+1316	8y1b2vqnvwab76vwrzyzgjtlewf4	https://img.youtube.com/vi/682exNpOxdw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9555	7OXoAF54qNNRp541hD7uxw==	2022-08-19 08:21:18.989785
+1320	3n0qvez4liv3y3f5vlz0sygl12vo	https://img.youtube.com/vi/6_861Wduu9g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13200	RGsTBeQQ8cH8Slzfp8lSrg==	2022-08-19 08:21:31.030529
+1318	gx0n0ekykiofp9quaoeuxqpwqobl	https://img.youtube.com/vi/6CWmxz1x0E0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18210	Qas2LEALbmt1Dt1b8iDLdQ==	2022-08-19 08:21:27.174884
+1322	ii9qhqityjuso1g1ghtqlxb7mg8b	https://img.youtube.com/vi/bef4RsRDPtM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18210	Qas2LEALbmt1Dt1b8iDLdQ==	2022-08-19 08:21:31.554086
+1324	do48r2zzbcbor7vi55mkf2no8q2i	https://img.youtube.com/vi/yu27cgo_rvc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9929	VfeVqYGVIMNWSnZqfPTS2Q==	2022-08-19 08:21:34.76965
+1326	gk6w1usf2cuk9dpeg4vum035a9p9	https://img.youtube.com/vi/m6veiHllVXc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16670	C0xHuz8IqAoVUXjcdIuIgQ==	2022-08-19 08:21:42.344733
+1328	g3qxli5uv8xuo36465xbudqd4vcm	https://img.youtube.com/vi/FF-ig03BZbs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13428	UG7OwpCcHHvpPeQQXNxBeQ==	2022-08-19 08:23:24.506672
+1330	n0dbg81v4cq68x7x1918kl8gqkl7	https://img.youtube.com/vi/G8SQbvEzN4g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16048	+b9WkmsZzY9B+gcGE0SVeA==	2022-08-19 08:23:38.261365
+1332	hgv41ct9xahzg0s0sbwenpsozzx1	https://img.youtube.com/vi/iikd1Tl44G0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13838	+KUDED4IvizPYajkUZ4ckQ==	2022-08-19 08:23:42.096773
+1334	iut27h7eb6muzva1ej2vpwx3jk46	https://img.youtube.com/vi/Gac8DOSRVko/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13385	7DYApnNspHGFFFavamyz5Q==	2022-08-19 08:23:50.327702
+1336	yuoimmth95ttjtrc8jyu2ilq9gds	https://img.youtube.com/vi/E2XtOP03ewE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6590	mGolxrwl7hBKWbpj+oDmXg==	2022-08-19 08:23:52.724444
+1338	3t1h0fbuj6cwo6fb5taq2b8m6hsg	https://img.youtube.com/vi/zU0pbYmcPQE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23150	sEldlDtjRhfgFKWjBnsfmw==	2022-08-19 08:23:58.305466
+1340	2bd9bzss61zhcvl2jjqpn0i3y17c	https://img.youtube.com/vi/BdD3T3w6qd8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	23226	y8YOkv3sE9JxetrFzaulaA==	2022-08-19 08:23:59.821719
+1342	9988boehih0a9mg8any3vtecd0aa	https://img.youtube.com/vi/Keg31bCrXYg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	35258	wEz/8k5nD3XLrleEaxOuUA==	2022-08-19 08:24:40.574027
+1344	arfhlvqvun905h7d0tkj0l7k29q3	https://img.youtube.com/vi/s6sJTnwmEDc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8549	RgMd9GZ1/3DLGTane9BEcA==	2022-08-19 10:06:47.321024
+1346	txet345jclps1z1mma4au2vprpbi	https://img.youtube.com/vi/BAbvgvlMRUI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	28821	3dzUJkufNJF3AJVlxXTwtw==	2022-08-19 10:07:05.201458
+1348	mpuw4lcqfw3f2z7bid5bhl4htdcm	https://img.youtube.com/vi/KnLBB-H5-7Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21344	gm824FguFq9fSDYGMdl2Lw==	2022-08-19 10:07:06.736367
+1350	fem6n9xo56q2tqocirbj1cdgwcbt	https://img.youtube.com/vi/TyylUeaTT10/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21145	Q/rPeQo/yaVgfZ6xIHCiLw==	2022-08-19 10:07:11.437325
+1352	lvq6vl5ib1sf8s8mgg8l8jwpk8ch	https://img.youtube.com/vi/gepSWOCGvkI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26741	1t9yAnCz6x3714hKHRXx1w==	2022-08-19 10:07:13.390043
+1354	cm7fkw8q0ve11v7ides22347px5s	https://img.youtube.com/vi/Ny0vmeyIpRQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18726	HZnoTm6eoYDnKqO6ccCm0A==	2022-08-19 10:07:15.681327
+1356	xgroho3pqc7f1v8bts7j4rgc1ess	https://img.youtube.com/vi/DadpfhFfSkw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26627	qyaSDnMGEzzDFikxTV+Tvw==	2022-08-19 10:07:18.84456
+1360	s6xo3ylqjtut01upbnj8rl8k3qkl	https://img.youtube.com/vi/l2DmxYMla1E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12365	bsmnYYTZnAFq8W+ZKiV+Jw==	2022-08-19 10:07:23.373666
+1364	5g77dhx1m0jx9vrw89fgzwzl2tlo	https://img.youtube.com/vi/2j3xMFbo4yA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	39573	SgFUSGnnNVfhWrKVREWo2Q==	2022-08-19 10:07:36.04169
+1368	snt826yh97zqdbm30xf94tp7b2tw	https://img.youtube.com/vi/WN1i_c-5oVs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14377	CpuF7cDPs0qlPiLgNmJ6xQ==	2022-08-19 10:07:42.318266
+1372	j68x6wc66o4nwgs9rw2m5kxzd706	https://img.youtube.com/vi/9VY8Be0TSsc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	39334	XzQaekqL3AshFJEWeuFKeA==	2022-08-19 10:07:48.244281
+1376	orq6e1ektrsxex5im75b3bmw1kwt	https://img.youtube.com/vi/lTgvsJY4aYE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16659	4mUlv5ff6E8YVzN27mnVAA==	2022-08-19 10:08:17.334222
+1380	bez13i4nbok0tlt86mxcpjc3cn5r	https://img.youtube.com/vi/0EnRK5YvBwU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16659	4mUlv5ff6E8YVzN27mnVAA==	2022-08-19 10:08:19.336286
+1384	w4218ml7iobyj4qo23hyl3jte1tr	https://img.youtube.com/vi/98j39T5mrAk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16659	4mUlv5ff6E8YVzN27mnVAA==	2022-08-19 10:08:26.927918
+1388	eo59rqcwd8gdckwlz4vk79vwwq4s	https://img.youtube.com/vi/gmYVxU6ouF4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31589	4gP+zq2Y+8XoIdO2E8q6Pg==	2022-08-19 10:08:33.600554
+1392	86dthj7nnweb6t74n3cp98ryd9wq	https://img.youtube.com/vi/yy9hmPkIihg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11860	AmOczcrhUBTehB7FsB6Pcg==	2022-08-19 10:08:41.003689
+1396	irigzu7zjivtj2g2xr2fbjjumkjx	https://img.youtube.com/vi/AgdbdI3lM4s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10525	nMey+SSbuTUoFnbQZ/NzVQ==	2022-08-19 10:08:53.329771
+1400	r6ngupfz3mbodh28l725ayhj9u6u	https://img.youtube.com/vi/oVaBgcJwkI4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13195	rRLXgMPk3Ccu1As1UYjz/Q==	2022-08-19 10:08:58.2454
+1404	jh4obex12in49ifwpcylebvog0up	https://img.youtube.com/vi/6tjlU4w4fSo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17313	zffmzxW4zFpWEgkxE6WOFg==	2022-08-19 10:09:00.126866
+1408	akuis96o4nnjieckkh5dqep9t1pn	https://img.youtube.com/vi/99f94NP_DJ4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15985	lptJ155XoEu/cZdl1tOezg==	2022-08-19 10:09:06.334962
+1412	6p0rkriugtt9u0wruvo50caw0k3k	https://img.youtube.com/vi/M1VhkCOHbRw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11441	ueNBaJp2YQ1q7Tet2egALg==	2022-08-19 10:09:10.834686
+1358	gkjhezybcp3zb74ygpm1j9fwgvkm	https://img.youtube.com/vi/99pkzpAEYrk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20958	wh8FvATmvBchZtP+6CDaFA==	2022-08-19 10:07:22.798493
+1362	c817jlkdan8ybn6r4vvde93co3dv	https://img.youtube.com/vi/e2QKlmMT8II/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25079	k4a/PBz2gPXW3Yt7gVuwGA==	2022-08-19 10:07:32.213177
+1366	vikpkxto6yv5mpeklcd621mnxti8	https://img.youtube.com/vi/XPWlQMdt7LE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	39427	+FyVU6082G/7C0Z4Mh8Ung==	2022-08-19 10:07:38.391373
+1370	mp2c69p96w9bkja9biwf0qpqhf9s	https://img.youtube.com/vi/CK3COY6UU_M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20036	Z3pO6AIZAoW2/D9p+uudkQ==	2022-08-19 10:07:45.230565
+1374	5hs7s5qvqe17ns65okvneld2alv6	https://img.youtube.com/vi/e8CLsYzE5wk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5856	XW6GsqwXKTfO6Ys00Txpzw==	2022-08-19 10:08:16.122745
+1378	n9lv496ime5sz1ptfr3pmzab5414	https://img.youtube.com/vi/gK07p6RGbtg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8499	lHyF5jj1cUXKw3X+mLSmhQ==	2022-08-19 10:08:18.854761
+1382	9asfvoex0sjj5h64jeegsk8mrm6w	https://img.youtube.com/vi/wLQ8u3xRZd8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8260	f9CVmbyvWhzpfhOzHfTYeQ==	2022-08-19 10:08:21.574653
+1386	t1hk9rjgr0d8zm8nm2c61udzqdcn	https://img.youtube.com/vi/ULcGTvL8A_g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	30009	t1eY8qLVpgsvqDxE3hczEQ==	2022-08-19 10:08:32.578748
+1390	wfx04pipaps58zkq8ilmhe8oee66	https://img.youtube.com/vi/8JDPQfvz4FU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11968	NHaceGM+dzVdKkxe6yKkqw==	2022-08-19 10:08:34.895758
+1394	dgtoqmdpx0gawkrjcdxs68wn9t63	https://img.youtube.com/vi/BPNNuiPIYnI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20415	T2hsHNLBys+UJzdnbLL6AQ==	2022-08-19 10:08:48.97454
+1398	foiwae7sx3yrnjhyp5lb9kcbl8sw	https://img.youtube.com/vi/g3mVwt0B6G4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8260	f9CVmbyvWhzpfhOzHfTYeQ==	2022-08-19 10:08:54.433251
+1402	4kxv041utae6dtd1dz21yg3182cv	https://img.youtube.com/vi/ciya_AQu25o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22055	xU4gbsmfzdEEdz4vA02iIw==	2022-08-19 10:08:58.885961
+1406	myrip8zfhwn0p189zdhz45ccw9s3	https://img.youtube.com/vi/ZLX-GY0dJgc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8260	f9CVmbyvWhzpfhOzHfTYeQ==	2022-08-19 10:09:02.31624
+1410	s4zxsp8557kmcj5x61jhfiwf9gxu	https://img.youtube.com/vi/vHU6ZRQJ50Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20929	5FWYc6tzRWqGODTtA10Qaw==	2022-08-19 10:09:08.605556
+1413	tejgafi9pmv34f9bo2egp63qw046	https://img.youtube.com/vi/ew7qhDBQcU4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25257	ic8R/taWpyPWxfwgJGgZ0Q==	2022-08-19 10:09:10.863697
+1416	lqzygl8f3uj72nih9gb845j45dmn	https://img.youtube.com/vi/xAnKFdI0uyk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8260	f9CVmbyvWhzpfhOzHfTYeQ==	2022-08-19 10:09:23.31072
+1418	46kyzzwy3qgjcsr6mtx9tdozvwks	https://img.youtube.com/vi/2KK_Mxbc91I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18114	5vMKXocr55gtKodlwe2jaw==	2022-08-19 10:09:26.873698
+1420	omaqv0qydsalmc9sf4acbhkldfvq	https://img.youtube.com/vi/-p9Gy4hkwhY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5817	W1rl3aig1sA06iBQSyVvCw==	2022-08-19 10:09:27.834886
+1422	3ypa3vl6mg06ko3nvl0iou5tu5v3	https://img.youtube.com/vi/WKW5XRRDH00/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12835	+g/DYDKoZHON36y766HHBQ==	2022-08-19 10:09:30.622562
+1424	7icv89z2m3mwzsvl2n0w93ablxtm	https://img.youtube.com/vi/j_ouj5asrE4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8501	Jz+mvJPhcVuA7cSt9Yhimg==	2022-08-19 10:09:35.840391
+1426	dh82ld295mgayykwnabrn0wqszmp	https://img.youtube.com/vi/cZ0BEJricd8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8256	gV40UKi8js+9t6mOsyZCQQ==	2022-08-19 10:09:43.840674
+1428	54qmu8cn21gu1gfwmjgihoy9m2al	https://img.youtube.com/vi/BwmuvqFzfLI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20104	PKYmA0HdA7uGQPOXpgiZFg==	2022-08-19 10:10:04.761134
+1430	f5dx52ze2bfd9irh6f2j7rwoo0a5	https://img.youtube.com/vi/keD38A9OQfA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15215	32iIUnPmLjbvbeaI3fKJbQ==	2022-08-19 10:10:07.979271
+1432	tmxfg7y4a1s3pmi4svv142q2tjor	https://img.youtube.com/vi/3ViV6aBkddw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27416	DVEos9iUWtnxIZySXpLpDw==	2022-08-19 10:10:12.173477
+1434	h253183hfxulceam03io4usjx9de	https://img.youtube.com/vi/1MiXzkKBmwI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20270	47kQQeixWOzkhJWOvu3vzA==	2022-08-19 10:10:18.917723
+1436	5le5zrr3saozr5weiart8sbwzkf2	https://img.youtube.com/vi/kuvsXF8s4Rk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21662	76gvVd7vpbkfjhZ2c/8c2g==	2022-08-19 10:10:20.787217
+1438	6umuqp5179byslks17aabnoyw8mh	https://img.youtube.com/vi/ouSf2HlEMJk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11839	27nyPvFybJBgg7T6b+nxpg==	2022-08-19 10:10:22.378641
+1440	5ckzdmuuxf6jbcmd1gpadkmsrenn	https://img.youtube.com/vi/ZUvBThTJstU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25584	BQQ9Gi1HKJjF7emzMHn6wA==	2022-08-19 10:10:24.661721
+1442	p3aatob75sa2lridc3wqnn7lmoek	https://img.youtube.com/vi/exjgZ-a399o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12104	LQzRsalk9dv/k2bs89+FTA==	2022-08-19 10:10:25.303096
+1444	vulknl23esca1nsarhx892h82k2r	https://img.youtube.com/vi/MWNBlGy707g/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8911	wC0PNlyo02WUrwZ+ajmfIg==	2022-08-19 10:10:26.421164
+1446	mr6o3838ubx1xy7rrm12agvwum1f	https://img.youtube.com/vi/GtNqtgL754I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20084	pS/SY8rwOaxf3mwWMjvuNQ==	2022-08-19 10:10:30.468117
+1448	a4ax8prtlyrdovwzcv1unri7s3w4	https://img.youtube.com/vi/Pl81UP8bUp4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27416	DVEos9iUWtnxIZySXpLpDw==	2022-08-19 10:10:32.659908
+1450	gxfltvqv4q1wao6pwkx57wf15rwp	https://img.youtube.com/vi/_HZI3b_F3M4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16467	Dsj0tWPs9I3NBf+gqDNr6Q==	2022-08-19 10:10:32.741141
+1452	rzgf6xfr3n8g9qz0k2liuys0c41x	https://img.youtube.com/vi/2P7mvQQZK3Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20104	PKYmA0HdA7uGQPOXpgiZFg==	2022-08-19 10:10:35.672283
+1454	0rqttvf7vm6ygxiklba06iuw5kok	https://img.youtube.com/vi/QaW5KDqRcYg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25584	BQQ9Gi1HKJjF7emzMHn6wA==	2022-08-19 10:10:37.465031
+1456	2j667rvywqg9db8ttw7drdjrks54	https://img.youtube.com/vi/ImE7i6cFj54/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14339	hm7CNorB9GMNeW9ogK/pog==	2022-08-19 10:10:39.271956
+1460	vzm0kutz8kxtx7thtaru1tnnu03s	https://img.youtube.com/vi/6BS8L3APhs0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18519	v1pubEZd8Pko13M7MwVA3w==	2022-08-19 10:10:55.203001
+1464	2ig129dnm70n0xp1xiev1bu0trit	https://img.youtube.com/vi/0_3HVeHinDg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33414	rHo4esbOpbldXlFl8UklfA==	2022-08-19 10:11:00.387262
+1468	83yk1zjw23c1obmj9pefthqque5d	https://img.youtube.com/vi/1aaS5jt6xR4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25743	ofOUQXnmchSeT7EW/GPmHw==	2022-08-19 10:11:03.270261
+1472	23bgyzemhao37ius8l4kykmlt3d8	https://img.youtube.com/vi/cp8sSx06Bds/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25743	ofOUQXnmchSeT7EW/GPmHw==	2022-08-19 10:11:07.629195
+1476	r1ny3kq286j5i2im7inkqkh96zv4	https://img.youtube.com/vi/Z6z6oiTirFQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25743	ofOUQXnmchSeT7EW/GPmHw==	2022-08-19 10:11:24.147047
+1458	q1e7ptr88c7odyazwrz1tv9e4gcu	https://img.youtube.com/vi/_eDpH4hMW1o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25743	ofOUQXnmchSeT7EW/GPmHw==	2022-08-19 10:10:52.568748
+1462	em1ezpwuh8dboc9praciunvvj14s	https://img.youtube.com/vi/wctnQQ-RLek/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	33920	dz6I54FU1s1HXaPKi7UaJg==	2022-08-19 10:10:57.234413
+1466	x9i02vevgepsm611znlu9g9ili82	https://img.youtube.com/vi/Q8XhuFs5ZXs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20236	zBDgLoHdA8/fAX+8l9kNZg==	2022-08-19 10:11:02.930544
+1470	airy4n0ow2w68bi4xbadsnywplso	https://img.youtube.com/vi/snY-MhPcPg0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21169	DvV9fWYncSiOx5SsU7FM2w==	2022-08-19 10:11:05.722251
+1474	f6crsqctd3usei6770p6w39c7mo5	https://img.youtube.com/vi/WZFruzCRsek/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20877	R70Q/4NMpnQAi3N5fPwXFA==	2022-08-19 10:11:20.947734
+1478	xuqiwdy7asqfuqlu058gtwlnwu0f	https://img.youtube.com/vi/KyIA0NeeFkU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15860	OxFe3bD0CXzNsajN2dIOLA==	2022-08-19 12:44:41.196909
+1480	dk88c1wf4x4mxh791hlla37d0vkq	https://img.youtube.com/vi/XGGWhOUYObc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12439	nxG4PGMvlhnp8qnZuZr23w==	2022-08-19 12:48:04.671642
+1482	p6qiu8r7kfzvukey5g4f32gubtc6	https://img.youtube.com/vi/1pc7GQRUMyQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6283	6TPXv47SzF7QRY+jesPNWA==	2022-08-19 12:48:19.396572
+1484	ifhz4pnuey7cy7hle04f5bgpw19a	https://img.youtube.com/vi/RfZrtx49KbY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13576	Xa17RVyOxXMC+dqQinguag==	2022-08-19 12:48:31.343516
+1486	e315klhypqo4jsz8usp6x9awoofp	https://img.youtube.com/vi/yMP65mVENSQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15167	jQ8PXQEj+ZRa8xtzTAuwtQ==	2022-08-19 12:48:31.670501
+1488	8h0q8yy8dsmn475milyex75x3vgk	https://img.youtube.com/vi/b7K_lbglfI4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	3196	Ps7TbNflOdCo7q4+PKCkjA==	2022-08-19 12:48:48.285248
+1490	5iggxd89shyowgnaf260zw2kp0hb	https://img.youtube.com/vi/xLnhtTlwjak/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11039	gnLQPQtGXIEysw1j4GGz8g==	2022-08-19 12:49:02.874156
+1492	ekp37yuhb8i3f1w2mjs0dux76mcm	https://img.youtube.com/vi/V0r0CLhm23M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16263	tTW3CoZFWfNv98E0HyIymw==	2022-08-19 12:49:05.216685
+1494	jdfluu8tqgrvzsk4ujktjz6v03rz	https://img.youtube.com/vi/nMJIBrcBgCc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	18623	U+rokVuFZeWUqxNqWtcKwA==	2022-08-19 12:49:05.516601
+1496	gzsezqgsrvgymka47r0f07b6nka9	https://img.youtube.com/vi/YkvekRdhIgg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8979	GwFfaasWvdE0S50J+ArHFA==	2022-08-19 12:49:08.721694
+1498	d6qp2t98cm0jk021804mc7pgrch8	https://img.youtube.com/vi/zHLC2PWJtvU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16064	4P8xGgdLaIum4HGwp4Hz+A==	2022-08-19 12:49:10.492106
+1500	2p8x3siboivy73bfv53v461bz1rj	https://img.youtube.com/vi/KQBRM1GK3T4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16222	YjG3aYihsrXyciFA2hdQqw==	2022-08-19 12:49:11.298068
+1502	niiyti34xy9qqm6pzs66gibr0a6b	https://img.youtube.com/vi/osPq9Yb8xm8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15212	DT0HY3+xSBUMjwf83vF4hQ==	2022-08-19 12:49:13.464531
+1504	3v0ka3xl0iw2mlqnmaj9gynz3bx8	https://img.youtube.com/vi/L3vjm1gybU4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8979	GwFfaasWvdE0S50J+ArHFA==	2022-08-19 12:49:16.92762
+1508	ngy9gb8e1u8nioxyagyxs1rij9rb	https://img.youtube.com/vi/8pGbGjSD9kA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	16102	jXBcQi+Dd7KajWhVQy45kg==	2022-08-19 12:49:25.197247
+1506	kem2sw5ncrp4egbrjhs00nnfukax	https://img.youtube.com/vi/m-44PIocS_4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13735	81ky1dgaJIfOIc9LLr5bzQ==	2022-08-19 12:49:19.631093
+1510	ud3ipdny7fh3qyr7b7wlex371612	https://img.youtube.com/vi/As1bpICMhzs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	10787	1+BcygEBL2SnDmNmSIrV3w==	2022-08-19 12:49:25.256997
+1512	0rccj4dda5xhwfvlo8z53lrnrk05	https://img.youtube.com/vi/KI1Qpuv_z_U/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11039	gnLQPQtGXIEysw1j4GGz8g==	2022-08-19 12:49:27.269412
+1514	6bzawjao0c1eo0uuppav4x2ei9qf	https://img.youtube.com/vi/E7sP6t1QyrI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8525	OqM2tUE/08bVMiE2N76cHA==	2022-08-19 12:49:29.066807
+1516	f5smwboy3k62zenb7y1orp8gh61p	https://img.youtube.com/vi/6ViiarPAoYY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8967	m1vVpvrIKx/unexHAjyW0A==	2022-08-19 12:49:35.25972
+1518	fqf8oaxk4q7oitljrx2p0bj1xueq	https://img.youtube.com/vi/dQYPimscA20/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12623	oqsYk4WJV3lNpZptI8ZYHA==	2022-08-19 12:50:58.73313
+1520	z0vorb6wrmitvnswp3ou99t05pd2	https://img.youtube.com/vi/ns8BC9r1YzI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22238	nXzxp0QV3GIooCpR5r88TA==	2022-08-19 12:51:28.012879
+1522	akevyxqt9uug965xiu6b2kgp27em	https://img.youtube.com/vi/DxNt7xV5aII/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22723	Yv7x6MAll/4vwwhjbAazgw==	2022-08-19 12:53:15.121681
+1524	7mxew7qd3msucn9tdo4t3y6umkk6	https://img.youtube.com/vi/fqUYKkYGQEw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7716	juFyT19g9mupm1l2K8CaXg==	2022-08-19 12:54:03.686126
+1526	by9w6rofumm7oa9p4lfnff9na3au	https://img.youtube.com/vi/2ORsrbQa94M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	20432	EwYHnctKO403poNEJ9xodw==	2022-08-19 12:54:08.616735
+1528	3qc1jb0ejwa87iof80a8i9epr3wn	https://img.youtube.com/vi/TFVK1jnXl_Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8897	3lIKv2Dm5lRkEtbQVGT31w==	2022-08-19 12:54:14.197196
+1530	m700b0fqv7qeb22s3gxw2ke38j4f	https://img.youtube.com/vi/4ncAL0RRy8k/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7716	juFyT19g9mupm1l2K8CaXg==	2022-08-19 12:54:14.868655
+1532	ejy45vf2jh46cx0pylaageau3rre	https://img.youtube.com/vi/rV0UwlwYTh0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11039	gnLQPQtGXIEysw1j4GGz8g==	2022-08-19 12:54:17.409964
+1534	5kf3uaersov8f3b2bnlvrkrnuhcm	https://img.youtube.com/vi/-jRKsiAOAA8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9340	/HGw9ZmKEh2VNF0b7iasgw==	2022-08-19 12:54:19.632189
+1536	podhso41fl5jwunclz2ao8is37l6	https://img.youtube.com/vi/Fzs_6XufkI0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14888	uJurJoDZG3Ckr0rv+S82TA==	2022-08-19 12:54:20.007576
+1538	rybzm6i92tzj2h1jstccrpcy46is	https://img.youtube.com/vi/NiWFVHbB_Eo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8897	3lIKv2Dm5lRkEtbQVGT31w==	2022-08-19 12:54:31.05424
+1539	zv7lokrma7qz81t3l6qvh5bdi151	https://img.youtube.com/vi/2JOQLAZpKo8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	8872	AnuNOlPGubs3hEtY7BeRcA==	2022-08-19 12:54:31.070645
+1542	maqmigpclpcz1mu8e8m59t7g5i57	https://img.youtube.com/vi/GSgN0Jhv6cw/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-19 13:31:10.986129
+1544	sdm13casszk23iq1vb8cvif4wn3z	https://img.youtube.com/vi/qeOTtix-WYc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-19 13:31:12.072917
+1548	oshavo9w1kicblpp5co6z1i0sl98	https://img.youtube.com/vi/_2FWcW4dqqE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-19 13:31:20.761108
+1546	1awg4tbapb7oim8jr3gutz60xiim	https://img.youtube.com/vi/wZvlvO5WSHY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-19 13:31:15.947606
+1550	1rxfx5clrgrs1z8306at14hm8fkm	https://img.youtube.com/vi/f9kWMpMDeV4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29390	u1lAJyLRMz8/nJEYRA5LGg==	2022-08-19 13:31:26.187639
+1552	aht4i3hwqppo93a9hhyslkqlmwmz	https://img.youtube.com/vi/F4yb0CBd4I4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	40664	+M+jVijAqdLdXrV9SbTing==	2022-08-22 15:29:48.342293
+1554	ddsjjcfpxv7ppbuq0th1qck9nam9	https://img.youtube.com/vi/JdttvuGdlvs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12543	xs3YAxGD1V9JxzeGb0kpOw==	2022-08-22 15:42:54.763545
+1556	pr8fheqgrfjnu721lggunu2t888x	https://img.youtube.com/vi/WGxcIU8OWw4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7173	frasRIgPeoLhoVG3+t1xcA==	2022-08-22 15:44:33.09267
+1558	mb5b7e2lw5bar5ltrqcm23j4v95f	https://img.youtube.com/vi/nnvqfucTs0o/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29619	QmesDXaYXEDYz5FMGENowg==	2022-08-24 02:18:05.940933
+1559	m10t8codi33yio0wnt9mwqzbcu6j	https://img.youtube.com/vi/iJUX6hqHwnc/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21902	EaQPlOoDploMquBCvoqIyQ==	2022-08-24 14:33:41.034237
+1561	6s1wiucis1nhbc8stmccpts0qb51	https://img.youtube.com/vi/OHCW8XMRivQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9736	TmR4rQGsEOZrwKWIbSyfXw==	2022-08-24 14:34:04.287582
+1563	o6andkdp4bxdm784i2kq3jfxobqt	https://img.youtube.com/vi/SrIxz9wHUX8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15960	9dkE0/y3w+Jd8P9KK6aBTg==	2022-08-24 14:35:43.298484
+1565	dhjo94b56uxr3qbhwrcsaq8n3srl	https://img.youtube.com/vi/e7asuFT32Es/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	36024	Deve1dQSrwFALlnoMT4cVA==	2022-08-24 14:36:14.935625
+1567	l3n2a0a1r7fzo8mfwg3bwztquxvo	https://img.youtube.com/vi/qJ_Tw0w3lLA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29024	JYvctmkipCf2G6p2X/Gq9A==	2022-08-24 14:36:35.744004
+1569	r91aspw3x2efhnpwda6knguot6o6	https://img.youtube.com/vi/6L0LIo35sF4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11178	jO7QJ1schYff7lPZZr5dFw==	2022-08-24 14:36:38.833113
+1571	ywzjsmp8v8m1z4v4xjr9gr09q5jk	https://img.youtube.com/vi/bMZOhFV7zBA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24711	9ERzqEcpaeO8Q8IYos+BCQ==	2022-08-24 14:58:51.564133
+1573	3gv41nvzgcyobz0io5ht238vb29o	https://img.youtube.com/vi/ndrCUdUi6lU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19299	IY2S0QPBY/kS1NufKudpHQ==	2022-08-24 22:19:28.785662
+1574	3m9tikl1z1cgz441h0w0n2qp95xg	https://img.youtube.com/vi/hDoP19goV_E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24671	CaRr4tM/vCDiY5+hrVGomg==	2022-08-25 08:33:35.13487
+1576	e5mdngpbf2tv3qp8udyy176hh1yn	https://img.youtube.com/vi/QokgDU_naxg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11545	5G25+khiAVOeT+V+B4L6wA==	2022-08-25 08:35:05.715464
+1578	td37fruslqff05jltfm6mrikug08	https://img.youtube.com/vi/hSkGpq2AeGo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	35764	F3lvk4dd2brorzQgHbkwCg==	2022-08-25 10:51:02.22962
+1580	d5upo5x0yoay5xegv6yseukd7ski	https://img.youtube.com/vi/p5RpT7SxTuk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	41672	n0um8PpLeyP8lJ9MNvu8wg==	2022-08-25 21:32:23.507145
+1582	2n4dm4y6yzxg0bvo7p6xfoxr3esy	https://img.youtube.com/vi/YRdRhn1xZ20/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11106	2jzcHtZmOXh5hzYG6t5RyA==	2022-08-26 10:53:16.948461
+1584	xusi4tnwuk7g4m68acva1gl5lapf	https://img.youtube.com/vi/8Er6l7UOnbI/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13407	5Tx150VYmkkjMSAHpk65mA==	2022-08-26 13:45:18.914068
+1586	hebip48eas7kl20f0m91wy1npgb0	https://img.youtube.com/vi/-wiBRhX_QTU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12555	rSxhDoJymjXaoeIJPqpUOw==	2022-08-26 13:54:39.711145
+1588	hivhr5wclzkw3gt1x7haujr0sztb	https://img.youtube.com/vi/AKGxr5rdXn4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	31705	xxbSGkiLwuYOKXsTGcUmAA==	2022-08-26 13:58:40.357663
+1590	nbcjevdvd0xgc5o22izy2gmdllr2	https://img.youtube.com/vi/7SHAKi8l7Ls/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	14352	QoVrO1CRCAkJuI4o5CZkoQ==	2022-08-28 07:33:51.641203
+1591	jyid8wmmmel31bsb7zhq13bstfu8	https://img.youtube.com/vi/ndrCUdUi6lU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19299	IY2S0QPBY/kS1NufKudpHQ==	2022-08-28 19:46:10.895068
+1592	4hhdfr8kzlen6h9h37x0jmfn7qkm	https://img.youtube.com/vi/poYUzSVlNEE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17248	2ztEUKk+zoOUAFxhFIguYg==	2022-08-29 02:48:41.449192
+1593	be0kv8v6hzbiilb0nlqe350ezpt1	https://img.youtube.com/vi/ZSC7gfoA21M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27872	TQvCLmXA2kZmD7R6wuCu8g==	2022-08-29 18:09:35.991285
+1594	aqpde9qv31dnej2u11764gbnujvd	https://img.youtube.com/vi/padY-pMdMiE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	29198	RzDoSIxDlf5MBVbCPp2Ziw==	2022-08-29 20:48:05.943747
+1595	vsdwdnuhb0fntosdwuu8gpreddq9	https://img.youtube.com/vi/y-2vaNadPDE/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13328	mstb4BwK4D/ZzTedGd9DSw==	2022-08-31 08:10:18.39597
+1597	8j3leaexcwaiimuzdjlq34838flu	https://img.youtube.com/vi/2Nx-sH0kn6E/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	5661	X7rU8v6WfByUXOAiLjdj9A==	2022-08-31 08:12:02.400684
+1599	rydz37njd30asotz3bqgt1zjoj5l	https://img.youtube.com/vi/AOgBg2up7Jg/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12765	mpyPBN5WT3pqhpxmaosbOw==	2022-09-03 10:02:37.352703
+1601	umkqiwgtarhrsu8irebwrn2z0ucw	https://img.youtube.com/vi/pm41xt3Y3z0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	19418	M3av5uN09nl4Y4G07G5tMQ==	2022-09-03 10:04:03.365033
+1603	dw84uvchdhcunk5ndr7bjwbdvgs6	https://img.youtube.com/vi/BFVtamh2dNU/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15422	SYJXbL0rsBAHkKNEHFxrUw==	2022-09-03 10:04:49.269749
+1605	fensvoi3ny0opoa6qtzzug7atkem	https://img.youtube.com/vi/0goHiRAiNDo/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12328	B3ocIZm+aJF4XrvkgtPhCQ==	2022-09-03 10:05:19.595193
+1607	lo7qwtuc3rxzq5iocgc2kteuah5s	https://img.youtube.com/vi/ycq5eYpvwds/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24316	vSvMfzes6Gut6sLuMV9GMA==	2022-09-04 20:00:57.089069
+1609	bin9rwuhc9ix4sm6lm6nju36mp0i	https://img.youtube.com/vi/5Xn6xX6u_Nk/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12766	x7t5KHrfZ2b/oR1iXZQJHQ==	2022-09-04 20:01:05.298588
+1611	h383qfby2zamz6b886y5x0zcigyq	https://img.youtube.com/vi/Kh7VDUxxEHs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	17471	3s6am9m8U9ibfaIErLYR+A==	2022-09-04 20:01:16.723016
+1613	f6apuhmkeos6d9e444pxa37rsri2	https://img.youtube.com/vi/0Qd2paEPfh4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22425	KryiwSh2kzsGGH7XHCnlrw==	2022-09-04 20:01:51.835288
+1615	igkxhish7urmank1m7owgd0jxhj4	https://img.youtube.com/vi/pZA-3tACjpY/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13175	Hqshnj914FylLX5PIpSc1w==	2022-09-04 20:02:47.60394
+1617	dtr88vrw9lg26njqbfhipvze7zs6	https://img.youtube.com/vi/LQ7R9zHeDy8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	36692	ttgVX1jyaw63VQs2V8lEgg==	2022-09-04 20:03:44.899816
+1619	rxutkconboqykfgyvtguksym4pdj	https://img.youtube.com/vi/HedLfd1e-Po/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	7835	yGZArRmHWSPcKJMpRZxQRA==	2022-09-04 20:13:02.795105
+1621	8sqa6ytpbw46ny27n92g5nx3kw9o	https://img.youtube.com/vi/pgN-vvVVxMA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12643	1LZM7l/oDi21HBeKxFhiaw==	2022-09-04 20:13:33.444145
+1623	bsa2hljcyudh6jzvmjay5lhv2cf1	https://img.youtube.com/vi/ju4KQT0wL0I/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	6962	6ncbkxd0Qpk7r72w6kUANA==	2022-09-04 20:13:47.656703
+1625	h6kusjc8ktniy586gomtj66gnvtv	https://img.youtube.com/vi/YWBohgkedIM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22273	UxOR6M5dJXSILDshH4Iphw==	2022-09-04 20:14:11.079676
+1626	xl551g4wyzwcctb5ant5wt74o8yr	https://img.youtube.com/vi/GuMc90Ei4x0/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	25336	Ys9SK1dfdeodJGDGLLBN2g==	2022-09-04 20:14:25.025424
+1628	ny67auuljykg92nt287517yhojhj	https://img.youtube.com/vi/yzNAGy_EdI8/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	9604	HQ7E82VggGuoLxttTBg23g==	2022-09-04 20:14:37.973005
+1630	3088g89u5571nw770qm1sywmu9pq	https://img.youtube.com/vi/Jt0w1XUzM2Q/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	26117	kFlaBTcLpJU8L6GD3DydiA==	2022-09-05 16:03:43.858965
+1632	amjfv5me8r88iyun31yj6s6pp13b	https://img.youtube.com/vi/95enODgGQ4s/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	48443	GBsu6iq6dTcIq+t8o5PWdg==	2022-09-05 16:11:40.497103
+1634	wzau2bm05pjfsrfg30zm3u7n5c77	https://img.youtube.com/vi/fSOl7lYSE3c/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	11930	1uoJ1LQ5j/nId5/UD2nWAA==	2022-09-05 19:58:12.849767
+1636	g0rxqp1ka2ctuwhyy12sz143jusl	https://img.youtube.com/vi/ZSC7gfoA21M/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	27872	TQvCLmXA2kZmD7R6wuCu8g==	2022-09-06 03:58:01.243768
+1637	vhuefwnfmr3rpw7dgbfy59gshvaq	https://img.youtube.com/vi/vDHw6_1JYbs/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	32233	yM4+acWdd5EEOGm7h1X5vw==	2022-09-06 16:03:46.594156
+1639	u9tywkxnj5ewjkrkvy9ifdb4wseh	https://img.youtube.com/vi/a1RMiMLDsvQ/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	15944	w5ZJtu2pHEo1xMzqMwM/ag==	2022-09-06 16:37:02.702717
+1641	ycswq5xt0eus3r8car4ey0rqa3ms	https://img.youtube.com/vi/HyanRY9EKj4/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	13071	MVpepGCt9dIDmQ/ikF9Tqg==	2022-09-09 15:17:50.361163
+1643	xie4x2p1efvnpoktix3dkzrxa2y5	https://img.youtube.com/vi/-swdgNJ-P2Y/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	24260	PRwA1FurwT34vAheskgHyw==	2022-09-09 15:37:33.284303
+1645	tn7ife8526emcyxeb229ktw1c9ky	https://img.youtube.com/vi/iddW_jt07fA/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	12851	hEN1E33Hp44hUwBiHzJYZg==	2022-09-09 17:08:28.009757
+1647	j4kpc7ybdiohqjyu5h75ozlsaqb5	https://img.youtube.com/vi/YWBohgkedIM/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	22273	UxOR6M5dJXSILDshH4Iphw==	2022-09-17 19:30:42.797916
+1648	2j7olsbsetph1i4zhkg67szzgv6z	https://img.youtube.com/vi/_KsJrCcZo74/hqdefault.jpg.jpg	image/jpeg	{"identified":true,"analyzed":true}	local	21539	i3iOA87eYHtgNz0h/K6Q7g==	2022-09-20 16:53:19.730798
+1650	26jr1v6fmyno0e0hrrsvwqrxl2cv	Stunner.mp3	audio/mpeg	{"identified":true,"duration":320.306082,"bit_rate":112911,"analyzed":true}	local	4542179	jKRV1b8uKJh2bxC7zs6xIw==	2022-09-20 19:09:46.656517
+1651	abhk68q3i10536prrngz3j6fsf4u	Right From Here.mp3	audio/mpeg	{"identified":true,"duration":392.573286,"bit_rate":87677,"analyzed":true}	local	4329433	G9Wh3F0XNUi/UKeRzjtdFQ==	2022-09-20 19:09:48.415731
+1652	do3mfqo3tefbhijqa119amkaracs	Outta Pocket.mp3	audio/mpeg	{"identified":true,"duration":305.522309,"bit_rate":61433,"analyzed":true}	local	2376957	A44P+AUOqJ1qRN7udTeqwA==	2022-09-20 19:09:49.408061
+1653	mum66ddi7wmufw3igz5qiekjrhyz	 Birdboy.mp3	audio/mpeg	{"identified":true,"duration":154.603876,"bit_rate":98613,"analyzed":true}	local	1920549	vJxrmCllw1XHOizu2BDZXQ==	2022-09-20 19:09:50.201436
+1654	llu1slo255hdodn0zl82e1doreug	Fallen.mp3	audio/mpeg	{"identified":true,"duration":238.034923,"bit_rate":102396,"analyzed":true}	local	3073282	ENY+ZKvt5oTrSSSLu6L3PQ==	2022-09-20 19:09:51.445032
+1655	6gq7kjqczftz7ytr1ur3oivtn0op	Sweet Sun.mp3	audio/mpeg	{"identified":true,"duration":737.435659,"bit_rate":47365,"analyzed":true}	local	4387511	fXfJsX98ZcwmvlBYGTUdMg==	2022-09-20 19:09:53.188473
+1656	ir0dvsnahctgtmumf6d7nb98g548	Dreams, Fairytales, Fantasies.mp3	audio/mpeg	{"identified":true,"duration":480.856931,"bit_rate":60607,"analyzed":true}	local	3671909	pPSBSEOyaOaEK1okNEdN7w==	2022-09-20 19:09:54.687689
+1657	wkfnfd7631gnl6xxh0qv1e7n731a	Twin Flame.mp3	audio/mpeg	{"identified":true,"duration":219.718332,"bit_rate":122868,"analyzed":true}	local	3389827	ZHNV6lRuBpjc0tZ/P1aNcg==	2022-09-20 19:09:56.012088
+1658	eepmttxysl288zqebcvc445igdxg	Depression.mp3	audio/mpeg	{"identified":true,"duration":319.025957,"bit_rate":98624,"analyzed":true}	local	3940971	qOHgQiRdIhcWWNwH84rNdw==	2022-09-20 19:09:57.625616
+1659	hs4f6iixmubcw6lnxh2jxxdpnbb4	Mood.mp3	audio/mpeg	{"identified":true,"duration":174.723758,"bit_rate":104745,"analyzed":true}	local	2311246	8EOKbxkvRu/MKbnVEd1yQg==	2022-09-20 19:09:58.623917
+1660	lq0h0lfqm860c2xarwe0mu2vjbmh	Yellow Lights.mp3	audio/mpeg	{"identified":true,"duration":295.329172,"bit_rate":67129,"analyzed":true}	local	2508959	wMJfEx75ewcQM6LNqhC1fg==	2022-09-20 19:09:59.629585
+1661	go73l9yi5bbv9c57lhodqfa9ugaf	3, 2, 1.mp3	audio/mpeg	{"identified":true,"duration":181.605638,"bit_rate":90252,"analyzed":true}	local	2067427	RdATlzQygoFg0eMrBXPX5Q==	2022-09-20 19:10:00.511369
+1662	ykz4rkwy6e8ag78m177me9l9ut6c	Shotta Flow.mp3	audio/mpeg	{"identified":true,"duration":163.032,"bit_rate":111507,"analyzed":true}	local	2282430	6ZnBdbkZg3HVKMv4jbICjw==	2022-09-20 19:10:01.427871
+1663	4z4pf8xx156ra1j4xccz0fqtncwx	 We Are Young.mp3	audio/mpeg	{"identified":true,"duration":250.056,"bit_rate":114346,"analyzed":true}	local	3589578	TKIr3g+kxTSXKTtjlgENLQ==	2022-09-20 19:10:02.891679
+1664	gyrd8p4po5aacn1q7tcwj48juvfp	Jiggin.mp3	audio/mpeg	{"identified":true,"duration":225.107562,"bit_rate":123919,"analyzed":true}	local	3507508	25GwMDMShTC48ez32tWnIg==	2022-09-20 19:10:04.338784
+1665	gmnp9k09f87g77u4zqi0vjtqdpjg	Done.mp3	audio/mpeg	{"identified":true,"duration":229.165236,"bit_rate":100450,"analyzed":true}	local	2902115	MfQkAXMFKR+a9bVy0kbiLw==	2022-09-20 19:10:05.495025
+1666	3zqfegdtwhlwkk7w0afkad7wvslh	N.W.A..mp3	audio/mpeg	{"identified":true,"duration":183.24697,"bit_rate":110795,"analyzed":true}	local	2557487	7L8snEJUEKnFOFaBvK0XhQ==	2022-09-20 19:10:06.516815
+1667	e0kpm3nugu0wvmt1svel0ifck7w1	Protect.mp3	audio/mpeg	{"identified":true,"duration":207.96,"bit_rate":143721,"analyzed":true}	local	3746812	paym0+VUsDCZQphQy61hbg==	2022-09-20 19:10:07.999145
+1668	8oyee8oqnj3ctryh0acjlbevjnek	Doe-Active.mp3	audio/mpeg	{"identified":true,"duration":366.645163,"bit_rate":72298,"analyzed":true}	local	3336551	HMxaTA/EmLs51xVKITCfxQ==	2022-09-20 19:10:09.364272
+1669	rg5q7o1etw3a7ptpfh4pjyhoxaje	 Forever.mp3	audio/mpeg	{"identified":true,"duration":243.356714,"bit_rate":108549,"analyzed":true}	local	3316593	Ch6M2SmjaEaDAv7gDw7zFQ==	2022-09-20 19:10:10.697093
+1670	z3ce8dnygpi2509owhpkcbdk8aqv	h u n g e r . o n . h i l l s i d e.mp3	audio/mpeg	{"identified":true,"duration":292.893903,"bit_rate":105045,"analyzed":true}	local	3855639	H6hZC3qEVE9xSyp8IA/5Tg==	2022-09-20 19:10:12.221619
+1671	4k1cdplcawm2bzlxniloqvv2ohdw	Under the Sun.mp3	audio/mpeg	{"identified":true,"duration":201.84,"bit_rate":118826,"analyzed":true}	local	3005182	r0Bm5pO5ykTQNQm3Q36PZQ==	2022-09-20 19:10:13.505731
+1672	p500jsi51thxhcaltqc0biqbvd8a	U Said.mp3	audio/mpeg	{"identified":true,"duration":269.410099,"bit_rate":108069,"analyzed":true}	local	3656923	KudeEjmZAPw36jfGzjzVqw==	2022-09-20 19:10:14.983902
+1673	oct6kijioph2kqhq40wjdkh57jck	c l o s e.mp3	audio/mpeg	{"identified":true,"duration":171.452762,"bit_rate":108852,"analyzed":true}	local	2342796	XRLeCre9NSSUJpGf3NsqKQ==	2022-09-20 19:10:15.944564
+1674	2460en9kif4o4lijonjth0vu9j1w	- In It (Audio) ft. Latto.mp3	audio/mpeg	{"identified":true,"duration":235.196565,"bit_rate":76855,"analyzed":true}	local	2286499	naMf6UKoQ1YLf3ssjRNt6Q==	2022-09-20 19:10:16.913877
+1675	hbi3v45rr2uv0dftkqgiacils68i	Plain Jane.mp3	audio/mpeg	{"identified":true,"duration":362.603397,"bit_rate":66762,"analyzed":true}	local	3047549	astZKpofSYjOGsIbpzj1zg==	2022-09-20 19:10:18.190195
+1676	106hef2pnswuf6vkiift22i3eqa1	Bezerk.mp3	audio/mpeg	{"identified":true,"duration":258.926459,"bit_rate":85422,"analyzed":true}	local	2775156	2QeotJm8hInyMLIAOBAsPw==	2022-09-20 19:10:19.319571
+1677	3s6bdzaqkive6vi1y36cpcjs8m1z	16 Lines.mp3	audio/mpeg	{"identified":true,"duration":399.022011,"bit_rate":74144,"analyzed":true}	local	3722324	vqoH+HL/+SaBcdeNUtwRqA==	2022-09-20 19:10:20.827016
+1678	g1fm3pdzdqsiub8pnu0cz5nr9cs1	Jet Lag.mp3	audio/mpeg	{"identified":true,"duration":500.788856,"bit_rate":60300,"analyzed":true}	local	3803533	WOSMLvya60CnEMNEWwd1rA==	2022-09-20 19:10:22.375356
+1679	g1cm75lhdmkzk2wr4f05irsxffvy	absolute in doubt.mp3	audio/mpeg	{"identified":true,"duration":227.112,"bit_rate":122367,"analyzed":true}	local	3484216	8L4eTk+PJMvf9lnMftSFzQ==	2022-09-20 19:10:23.775485
+1680	fe2dvj9nrqrk58ovojw2hmia4dp8	OMFG.mp3	audio/mpeg	{"identified":true,"duration":210.947277,"bit_rate":124671,"analyzed":true}	local	3299818	cvHl458U6Su8l1WwAXDwOA==	2022-09-20 19:10:25.130097
+1681	u8i5s8sfiovp7pr9a886hczxg918	big city blues.mp3	audio/mpeg	{"identified":true,"duration":158.364256,"bit_rate":126768,"analyzed":true}	local	2519878	yWP/bq06Fi7M+9+EqdMI5g==	2022-09-20 19:10:26.221914
+1682	y8m2fqo3mawai4hfxt4qpwumn39e	Beamer Boy.mp3	audio/mpeg	{"identified":true,"duration":247.110837,"bit_rate":103684,"analyzed":true}	local	3226339	V074PBoD1hozYjKzD/+q1w==	2022-09-20 19:10:27.554117
+1683	wme8yiopybih1o63ygt0ovbkeass	life.mp3	audio/mpeg	{"identified":true,"duration":178.976111,"bit_rate":134581,"analyzed":true}	local	3019963	A5cN3gVS4NJWdT5t8yFWOQ==	2022-09-20 19:10:28.811704
+1684	6q9jubnha8wh1chz5f4s6bib6lo4	Life Is Beautiful.mp3	audio/mpeg	{"identified":true,"duration":266.663654,"bit_rate":102671,"analyzed":true}	local	3444243	dVBvZuHXjIBrT6rEa5BJkA==	2022-09-20 19:10:30.234673
+1685	l1prulxvtdfyg3jqiaey7trr3lyf	Worlds Away.mp3	audio/mpeg	{"identified":true,"duration":142.564067,"bit_rate":109877,"analyzed":true}	local	1970520	1DOPgOCpKq2mUP2SbDCC6Q==	2022-09-20 19:10:31.121461
+1686	c1xuu86w1n4q9wpewcvo8pjji6v5	Live Forever.mp3	audio/mpeg	{"identified":true,"duration":213.422841,"bit_rate":86756,"analyzed":true}	local	2324868	nuTVQUHicTikP0zSUfhmvQ==	2022-09-20 19:10:32.105977
+1687	mv828ub137aq9kil7pq8obhgcfr5	feelz.mp3	audio/mpeg	{"identified":true,"duration":135.530341,"bit_rate":145842,"analyzed":true}	local	2479869	Dl5cehB3qBRBV1iUvsy/ZA==	2022-09-20 19:10:33.136256
+1688	n7hyq5tx3u6fxasqwlsgfmtn5y5b	Falling Down.mp3	audio/mpeg	{"identified":true,"duration":623.724476,"bit_rate":40766,"analyzed":true}	local	3189189	3xaf+NlPaxq2j8EG+KnZuw==	2022-09-20 19:10:34.463355
+1689	bpze1r4pii332sojp199pnuqqasr	shiver.mp3	audio/mpeg	{"identified":true,"duration":201.63053,"bit_rate":85528,"analyzed":true}	local	2171927	shF0hdKBlksFCKqRLluAfA==	2022-09-20 19:10:35.40935
+1690	h7sls558e5llglv6exs9b3opqmz2	Liar.mp3	audio/mpeg	{"identified":true,"duration":291.549576,"bit_rate":78486,"analyzed":true}	local	2870625	e+bEfjovlJ/jUdQX8KyR/Q==	2022-09-20 19:10:36.695927
+1691	sk8jxbq3t1yj37bsm8px6krt6kt7	ghost boy.mp3	audio/mpeg	{"identified":true,"duration":155.218829,"bit_rate":100695,"analyzed":true}	local	1964052	O9iouFG0DlTwwUCn/DBQMA==	2022-09-20 19:10:37.557058
+1712	i17mbupkw94fa2fb5hceh54os7mx	Love Lockdown.mp3	audio/mpeg	{"identified":true,"duration":371.445951,"bit_rate":94822,"analyzed":true}	local	4412509	xDqrPJppK6N3C+G0n78Umw==	2022-09-20 19:11:06.820067
+1713	9jz97803np6sgz59rjv37nouaphj	Untold.mp3	audio/mpeg	{"identified":true,"duration":179.738206,"bit_rate":112302,"analyzed":true}	local	2542751	slMiKPFJBjaoSv0NL+Fp8A==	2022-09-20 19:11:07.899629
+1714	rfxz4ql6z53eu343ac47v9q9dla5	More Than Friends.mp3	audio/mpeg	{"identified":true,"duration":268.921482,"bit_rate":82185,"analyzed":true}	local	2784041	AqudbDzwc7OgBGk+t3mUNA==	2022-09-20 19:11:09.009138
+1715	29gohx7u26bnnp2muitbh91ib9cc	Man Down.mp3	audio/mpeg	{"identified":true,"duration":217.920281,"bit_rate":119695,"analyzed":true}	local	3278607	7J+u6A6mW4MMSS8gzXIZng==	2022-09-20 19:11:10.324066
+1716	19nu9q9j7waz3rdk301xw11gf7w6	Shotta Flow 6.mp3	audio/mpeg	{"identified":true,"duration":293.274994,"bit_rate":86300,"analyzed":true}	local	3181185	E2GSJ+3vQ1lLRnOnwfMbJg==	2022-09-20 19:11:11.768654
+1717	ayjuc3z8tj7a6g44dp6mb70xk60b	Crooked Smile.mp3	audio/mpeg	{"identified":true,"duration":278.616,"bit_rate":132706,"analyzed":true}	local	4635848	4L1UxRpBKrs34EkWNC8eVQ==	2022-09-20 19:11:13.71541
+1718	hjmc28mj7hhfa9dx4xbvc00m4x5i	LOAD IT UP.mp3	audio/mpeg	{"identified":true,"duration":179.544,"bit_rate":128832,"analyzed":true}	local	2906038	oV1qhoiOlS+qv8Dij+Ehlw==	2022-09-20 19:11:14.993224
+1719	2tb7nujrl10k8pihzddno2qmmui5	Mask.mp3	audio/mpeg	{"identified":true,"duration":619.678595,"bit_rate":51250,"analyzed":true}	local	3996853	Ku8ytEY8DJB6MY2O1bqaWA==	2022-09-20 19:11:16.723974
+1720	vdpo6ay7ylg1gffzb51ikgazgn2s	Change.mp3	audio/mpeg	{"identified":true,"duration":307.103021,"bit_rate":129876,"analyzed":true}	local	4995341	NLIWvDsFVnm/AYdh/+icUg==	2022-09-20 19:11:18.834059
+1721	guoa1cg2bek2ltu7wwqwd6hwgvaa	New Level.mp3	audio/mpeg	{"identified":true,"duration":1050.440049,"bit_rate":35137,"analyzed":true}	local	4627257	0kybdm6M0sadJaXPmkDKeg==	2022-09-20 19:11:20.703979
+1722	d0o14v0bbad1ns3w68m4cs64stun	Shabba.mp3	audio/mpeg	{"identified":true,"duration":368.381752,"bit_rate":110480,"analyzed":true}	local	5104042	fVI2hy13Gems6pUPSQQLzA==	2022-09-20 19:11:22.85562
+1723	ug5ef4xocqcclpkt1n6pyeumuegh	Work (remix).mp3	audio/mpeg	{"identified":true,"duration":319.33338,"bit_rate":128457,"analyzed":true}	local	5149523	favTNbAnW57yvwvbu65kBg==	2022-09-20 19:11:25.049125
+1724	mn0ebkeuy7mjs4f4x07cbsje5hyz	Hood Pope.mp3	audio/mpeg	{"identified":true,"duration":259.873011,"bit_rate":114813,"analyzed":true}	local	3751105	wzUF7uRDR5dOwNRfOzpClA==	2022-09-20 19:11:26.631785
+1725	gybgu6plgp0ajkcsgeg5ldynwqqk	Floor Seats.mp3	audio/mpeg	{"identified":true,"duration":179.835046,"bit_rate":122871,"analyzed":true}	local	2779960	kl6wH+xJqNm0PZQ323X2IA==	2022-09-20 19:11:27.771828
+1726	4glqxh7wfe0twyp1ykuhutsh7vn1	Praise the Lord (Da Shine).mp3	audio/mpeg	{"identified":true,"duration":421.630247,"bit_rate":69641,"analyzed":true}	local	3697578	/3jdxNXRfCGpR9z2jnoLdQ==	2022-09-20 19:11:29.358637
+1727	gjgv0q0jr958zr5tmhc8g9lsv0er	Goldie.mp3	audio/mpeg	{"identified":true,"duration":428.314973,"bit_rate":60856,"analyzed":true}	local	3279851	ddOrq5PpmCv+TEeJivZIQg==	2022-09-20 19:11:30.774707
+1728	3e8r63oypvblmjg1f25f7fc4ee6v	Wassup.mp3	audio/mpeg	{"identified":true,"duration":197.600863,"bit_rate":101950,"analyzed":true}	local	2553529	fcF8Afx9vT17DRvHvH2I+A==	2022-09-20 19:11:31.831067
+1729	l78uaij41v8zebjgb4trzk40k9b4	castles.mp3	audio/mpeg	{"identified":true,"duration":162.602766,"bit_rate":113885,"analyzed":true}	local	2326954	ms4MKnC9S/mCf0bGs+MvsA==	2022-09-20 19:11:32.808867
+1730	9y7t64yd6go4yuw46l33iyaaa129	Fashion Killa.mp3	audio/mpeg	{"identified":true,"duration":557.666198,"bit_rate":61222,"analyzed":true}	local	4290314	8RCrjdOaFa8H8Z9wLMDpVw==	2022-09-20 19:11:34.519228
+1731	kt1y09bui7gw9eyerl9r4v8z85eg	Babushka Boi.mp3	audio/mpeg	{"identified":true,"duration":225.007626,"bit_rate":119989,"analyzed":true}	local	3374826	wtDzq1D6Wc75TIP/r3rnDg==	2022-09-20 19:11:35.956652
+1732	u4f0chcocve9wcoeou4tmjiip6xr	right here ft. Horse Head.mp3	audio/mpeg	{"identified":true,"duration":176.928,"bit_rate":134278,"analyzed":true}	local	2984634	c4rHuAnL7yFGUi1tAJyz7w==	2022-09-20 19:11:37.191448
+1733	qxfddsz7fzmisdqomfl6yz771yj0	witchblades.mp3	audio/mpeg	{"identified":true,"duration":162.132127,"bit_rate":127377,"analyzed":true}	local	2591566	UfJSx5YCKNim696gpBG2AQ==	2022-09-20 19:11:38.382407
+1734	xluka8jd6qs6nazggeaczebd69wt	I’ve Been Waiting.mp3	audio/mpeg	{"identified":true,"duration":278.922799,"bit_rate":111682,"analyzed":true}	local	3908030	StEokVHySinQDg8Oq6NxZA==	2022-09-20 19:11:39.972041
+1735	trakl1gj4w2rk0pmzl49xpm8aqov	Picture Me Grapin’.mp3	audio/mpeg	{"identified":true,"duration":344.003447,"bit_rate":78914,"analyzed":true}	local	3408973	JleHp4yQ7mmKpnJ9JGFu3Q==	2022-09-20 19:11:41.544642
+1736	qjdglg5y560oxgskig12crpvedsf	679 Remy Boyz.mp3	audio/mpeg	{"identified":true,"duration":198.081828,"bit_rate":141810,"analyzed":true}	local	3534121	uoCsQtmjBZV1QNB7uj9Tvw==	2022-09-20 19:11:43.137046
+1737	ao3kls6pw51nifjjmcu7rr8f4fiq	Stronger.mp3	audio/mpeg	{"identified":true,"duration":304.19271,"bit_rate":132925,"analyzed":true}	local	5081580	HFxtFcckve3V5LFN6qsbuA==	2022-09-20 19:11:45.411421
+1738	e3n5s7h2vn4ab1x1x452iizahevf	Hurricane.mp3	audio/mpeg	{"identified":true,"duration":460.28582,"bit_rate":65048,"analyzed":true}	local	3745339	U6YwEX+vcy8zV43X7eyslQ==	2022-09-20 19:11:47.01109
+1739	ooeu3c0bjb3t3rdjf2ppgwu786k0	Get Out the Bed.mp3	audio/mpeg	{"identified":true,"duration":187.809801,"bit_rate":119685,"analyzed":true}	local	2850784	xZK5GkqgAKEwjHHqDBgaTA==	2022-09-20 19:11:48.236899
+1740	phxwvi5axlo7exksoflhmq1lvwbt	Someday.mp3	audio/mpeg	{"identified":true,"duration":308.767569,"bit_rate":91911,"analyzed":true}	local	3575135	Nj3XtR1TObpTMfZ1GU5COw==	2022-09-20 19:11:49.725751
+1741	72qq3312ahmnheok4ezm0aq8prqd	K.O..mp3	audio/mpeg	{"identified":true,"duration":296.873526,"bit_rate":118151,"analyzed":true}	local	4412718	N7D6Tx424t9hhMdL+u1mpg==	2022-09-20 19:11:51.602167
+1742	4dzke2h32xi0ilqua2q3uy6w4s9p	Gotta Be Somebody.mp3	audio/mpeg	{"identified":true,"duration":382.83956,"bit_rate":87360,"analyzed":true}	local	4195105	aCrzX6vzz5fYfj+0tFt69Q==	2022-09-20 19:11:53.326834
+1743	1spt2y4rptb2cqn4y2pyqxb4d0f1	Runaway.mp3	audio/mpeg	{"identified":true,"duration":547.704,"bit_rate":128174,"analyzed":true}	local	8785932	odDiunR2q05mQKixO3n4GA==	2022-09-20 19:11:57.035723
+1744	07nv76x3i8p1raywxmmblvazk8bo	Bound 2.mp3	audio/mpeg	{"identified":true,"duration":229.368,"bit_rate":124167,"analyzed":true}	local	3571822	1SXNoKfS+WkB05dNxFwXRg==	2022-09-20 19:11:58.57228
+1745	ow6gfi362jsztovkjm3brz2pwunt	Fade.mp3	audio/mpeg	{"identified":true,"duration":350.087851,"bit_rate":74672,"analyzed":true}	local	3287661	6eLtVlM88HzjjqzI5Q20rw==	2022-09-20 19:11:59.943965
+1746	mlse2j6d2nmr21zrlcv3xtng4kwm	Power .mp3	audio/mpeg	{"identified":true,"duration":400.601272,"bit_rate":55988,"analyzed":true}	local	2811995	CvJFrP4cJely9Tgi3Pi3/Q==	2022-09-20 19:12:01.223676
+1765	fbmzwgi5ya1vj6knkt47frt1tejf	Beautiful.mp3	audio/mpeg	{"identified":true,"duration":478.587438,"bit_rate":104457,"analyzed":true}	local	6291059	8zeqbiLRwKCC2jY+L64C2g==	2022-09-20 19:12:29.399365
+1766	19hvsgcaxd9yz6nwbvyf56l8nxtb	Love Lockdown.mp3	audio/mpeg	{"identified":true,"duration":816.939742,"bit_rate":39381,"analyzed":true}	local	4028153	QciuYElcGpCMYrKzrA1cOA==	2022-09-20 19:12:31.119211
+1767	vyodv87pzzzhk3vhtf3mdifl7zqb	Famous.mp3	audio/mpeg	{"identified":true,"duration":230.252758,"bit_rate":108230,"analyzed":true}	local	3146288	ZvKMpEZbllltEj7XF/g8Bw==	2022-09-20 19:12:32.346155
+1768	o0vbfqx9n1b2f3ivmgh314exsg1c	Bandit.mp3	audio/mpeg	{"identified":true,"duration":200.01772,"bit_rate":122345,"analyzed":true}	local	3084008	FcxsyiTuvWMXJUzaigTZMw==	2022-09-20 19:12:33.555014
+1769	dn008rwn3e52zpaoq9r2fs6fgfla	It’s a Vibe.mp3	audio/mpeg	{"identified":true,"duration":253.524172,"bit_rate":112318,"analyzed":true}	local	3581079	AFQKYHzN1EwWJS1r62lzcg==	2022-09-20 19:12:34.989302
+1770	6t6jqxlpihl6qpa483e73lba0jg8	Cinderella Man.mp3	audio/mpeg	{"identified":true,"duration":260.619255,"bit_rate":137068,"analyzed":true}	local	4479357	noEm9oBeiaGNvOBdMBSKAA==	2022-09-20 19:12:36.733282
+\.
+
+
+--
+-- Data for Name: active_storage_variant_records; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.active_storage_variant_records (id, blob_id, variation_digest) FROM stdin;
+\.
+
+
+--
+-- Data for Name: ar_internal_metadata; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.ar_internal_metadata (key, value, created_at, updated_at) FROM stdin;
+environment	production	2022-08-15 17:52:11.210502	2022-08-15 17:52:11.210502
+\.
+
+
+--
+-- Data for Name: device_songs; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.device_songs (id, song_id, device_id, created_at, updated_at) FROM stdin;
+490	27	4	2022-09-20 19:17:57.582388	2022-09-20 19:17:57.582388
+491	15	4	2022-09-20 19:17:57.583918	2022-09-20 19:17:57.583918
+492	23	4	2022-09-20 19:17:57.584918	2022-09-20 19:17:57.584918
+493	29	4	2022-09-20 19:17:57.585807	2022-09-20 19:17:57.585807
+494	16	4	2022-09-20 19:17:57.586573	2022-09-20 19:17:57.586573
+495	8	4	2022-09-20 19:17:57.587427	2022-09-20 19:17:57.587427
+496	9	4	2022-09-20 19:17:57.588268	2022-09-20 19:17:57.588268
+497	17	4	2022-09-20 19:17:57.589133	2022-09-20 19:17:57.589133
+498	10	4	2022-09-20 19:17:57.589904	2022-09-20 19:17:57.589904
+499	11	4	2022-09-20 19:17:57.590665	2022-09-20 19:17:57.590665
+500	12	4	2022-09-20 19:17:57.591537	2022-09-20 19:17:57.591537
+501	18	4	2022-09-20 19:17:57.592425	2022-09-20 19:17:57.592425
+502	13	4	2022-09-20 19:17:57.593143	2022-09-20 19:17:57.593143
+503	14	4	2022-09-20 19:17:57.59383	2022-09-20 19:17:57.59383
+504	24	4	2022-09-20 19:17:57.594668	2022-09-20 19:17:57.594668
+505	19	4	2022-09-20 19:17:57.595688	2022-09-20 19:17:57.595688
+506	20	4	2022-09-20 19:17:57.596852	2022-09-20 19:17:57.596852
+507	2	4	2022-09-20 19:17:57.597777	2022-09-20 19:17:57.597777
+508	21	4	2022-09-20 19:17:57.598629	2022-09-20 19:17:57.598629
+509	3	4	2022-09-20 19:17:57.599391	2022-09-20 19:17:57.599391
+510	22	4	2022-09-20 19:17:57.600254	2022-09-20 19:17:57.600254
+511	4	4	2022-09-20 19:17:57.601124	2022-09-20 19:17:57.601124
+512	37	4	2022-09-20 19:17:57.602008	2022-09-20 19:17:57.602008
+513	5	4	2022-09-20 19:17:57.602848	2022-09-20 19:17:57.602848
+514	6	4	2022-09-20 19:17:57.603592	2022-09-20 19:17:57.603592
+515	7	4	2022-09-20 19:17:57.604473	2022-09-20 19:17:57.604473
+516	25	4	2022-09-20 19:17:57.605405	2022-09-20 19:17:57.605405
+517	32	4	2022-09-20 19:17:57.60638	2022-09-20 19:17:57.60638
+518	26	4	2022-09-20 19:17:57.607431	2022-09-20 19:17:57.607431
+519	28	4	2022-09-20 19:17:57.608896	2022-09-20 19:17:57.608896
+520	30	4	2022-09-20 19:17:57.609779	2022-09-20 19:17:57.609779
+521	35	4	2022-09-20 19:17:57.610747	2022-09-20 19:17:57.610747
+522	36	4	2022-09-20 19:17:57.611948	2022-09-20 19:17:57.611948
+523	34	4	2022-09-20 19:17:57.612962	2022-09-20 19:17:57.612962
+524	38	4	2022-09-20 19:17:57.613966	2022-09-20 19:17:57.613966
+525	39	4	2022-09-20 19:17:57.614634	2022-09-20 19:17:57.614634
+526	40	4	2022-09-20 19:17:57.615338	2022-09-20 19:17:57.615338
+527	41	4	2022-09-20 19:17:57.615965	2022-09-20 19:17:57.615965
+528	351	4	2022-09-20 19:17:57.616646	2022-09-20 19:17:57.616646
+529	31	4	2022-09-20 19:17:57.617289	2022-09-20 19:17:57.617289
+530	406	4	2022-09-20 19:17:57.617907	2022-09-20 19:17:57.617907
+531	355	4	2022-09-20 19:17:57.618595	2022-09-20 19:17:57.618595
+532	352	4	2022-09-20 19:17:57.619254	2022-09-20 19:17:57.619254
+533	354	4	2022-09-20 19:17:57.619967	2022-09-20 19:17:57.619967
+534	537	4	2022-09-20 19:17:57.620615	2022-09-20 19:17:57.620615
+535	487	4	2022-09-20 19:17:57.621252	2022-09-20 19:17:57.621252
+536	489	4	2022-09-20 19:17:57.621952	2022-09-20 19:17:57.621952
+537	409	4	2022-09-20 19:17:57.622588	2022-09-20 19:17:57.622588
+538	42	4	2022-09-20 19:17:57.623228	2022-09-20 19:17:57.623228
+539	44	4	2022-09-20 19:17:57.623842	2022-09-20 19:17:57.623842
+540	411	4	2022-09-20 19:17:57.624625	2022-09-20 19:17:57.624625
+541	413	4	2022-09-20 19:17:57.625348	2022-09-20 19:17:57.625348
+542	473	4	2022-09-20 19:17:57.625988	2022-09-20 19:17:57.625988
+543	447	4	2022-09-20 19:17:57.626618	2022-09-20 19:17:57.626618
+544	475	4	2022-09-20 19:17:57.627228	2022-09-20 19:17:57.627228
+545	491	4	2022-09-20 19:17:57.627853	2022-09-20 19:17:57.627853
+546	477	4	2022-09-20 19:17:57.628546	2022-09-20 19:17:57.628546
+547	479	4	2022-09-20 19:17:57.629487	2022-09-20 19:17:57.629487
+548	539	4	2022-09-20 19:17:57.630472	2022-09-20 19:17:57.630472
+549	481	4	2022-09-20 19:17:57.631192	2022-09-20 19:17:57.631192
+550	529	4	2022-09-20 19:17:57.631919	2022-09-20 19:17:57.631919
+551	531	4	2022-09-20 19:17:57.632577	2022-09-20 19:17:57.632577
+552	575	4	2022-09-20 19:17:57.63321	2022-09-20 19:17:57.63321
+553	533	4	2022-09-20 19:17:57.633834	2022-09-20 19:17:57.633834
+554	541	4	2022-09-20 19:17:57.634456	2022-09-20 19:17:57.634456
+555	535	4	2022-09-20 19:17:57.635075	2022-09-20 19:17:57.635075
+556	543	4	2022-09-20 19:17:57.635777	2022-09-20 19:17:57.635777
+557	582	4	2022-09-20 19:17:57.636441	2022-09-20 19:17:57.636441
+558	545	4	2022-09-20 19:17:57.63706	2022-09-20 19:17:57.63706
+559	573	4	2022-09-20 19:17:57.637666	2022-09-20 19:17:57.637666
+560	577	4	2022-09-20 19:17:57.638292	2022-09-20 19:17:57.638292
+561	579	4	2022-09-20 19:17:57.639014	2022-09-20 19:17:57.639014
+562	581	4	2022-09-20 19:17:57.639655	2022-09-20 19:17:57.639655
+563	583	4	2022-09-20 19:17:57.640271	2022-09-20 19:17:57.640271
+564	584	4	2022-09-20 19:17:57.640889	2022-09-20 19:17:57.640889
+565	587	4	2022-09-20 19:17:57.641508	2022-09-20 19:17:57.641508
+566	585	4	2022-09-20 19:17:57.642215	2022-09-20 19:17:57.642215
+567	586	4	2022-09-20 19:17:57.642863	2022-09-20 19:17:57.642863
+568	588	4	2022-09-20 19:17:57.643488	2022-09-20 19:17:57.643488
+569	589	4	2022-09-20 19:17:57.644101	2022-09-20 19:17:57.644101
+570	590	4	2022-09-20 19:17:57.644742	2022-09-20 19:17:57.644742
+571	591	4	2022-09-20 19:17:57.645471	2022-09-20 19:17:57.645471
+572	483	4	2022-09-20 19:17:57.646389	2022-09-20 19:17:57.646389
+573	485	4	2022-09-20 19:17:57.64735	2022-09-20 19:17:57.64735
+574	46	4	2022-09-20 19:17:57.648269	2022-09-20 19:17:57.648269
+575	47	4	2022-09-20 19:17:57.648987	2022-09-20 19:17:57.648987
+576	59	4	2022-09-20 19:17:57.649615	2022-09-20 19:17:57.649615
+577	48	4	2022-09-20 19:17:57.650253	2022-09-20 19:17:57.650253
+578	49	4	2022-09-20 19:17:57.650924	2022-09-20 19:17:57.650924
+579	66	4	2022-09-20 19:17:57.651735	2022-09-20 19:17:57.651735
+580	50	4	2022-09-20 19:17:57.652431	2022-09-20 19:17:57.652431
+581	60	4	2022-09-20 19:17:57.653089	2022-09-20 19:17:57.653089
+582	51	4	2022-09-20 19:17:57.653733	2022-09-20 19:17:57.653733
+583	53	4	2022-09-20 19:17:57.654372	2022-09-20 19:17:57.654372
+584	71	4	2022-09-20 19:17:57.654998	2022-09-20 19:17:57.654998
+585	62	4	2022-09-20 19:17:57.655646	2022-09-20 19:17:57.655646
+586	54	4	2022-09-20 19:17:57.656285	2022-09-20 19:17:57.656285
+587	67	4	2022-09-20 19:17:57.656914	2022-09-20 19:17:57.656914
+588	55	4	2022-09-20 19:17:57.657544	2022-09-20 19:17:57.657544
+589	56	4	2022-09-20 19:17:57.658164	2022-09-20 19:17:57.658164
+590	57	4	2022-09-20 19:17:57.65886	2022-09-20 19:17:57.65886
+591	58	4	2022-09-20 19:17:57.659499	2022-09-20 19:17:57.659499
+592	63	4	2022-09-20 19:17:57.660127	2022-09-20 19:17:57.660127
+593	68	4	2022-09-20 19:17:57.660749	2022-09-20 19:17:57.660749
+594	61	4	2022-09-20 19:17:57.661405	2022-09-20 19:17:57.661405
+595	78	4	2022-09-20 19:17:57.662186	2022-09-20 19:17:57.662186
+596	64	4	2022-09-20 19:17:57.663083	2022-09-20 19:17:57.663083
+597	65	4	2022-09-20 19:17:57.663927	2022-09-20 19:17:57.663927
+598	72	4	2022-09-20 19:17:57.664694	2022-09-20 19:17:57.664694
+599	69	4	2022-09-20 19:17:57.6654	2022-09-20 19:17:57.6654
+600	70	4	2022-09-20 19:17:57.66605	2022-09-20 19:17:57.66605
+601	75	4	2022-09-20 19:17:57.666711	2022-09-20 19:17:57.666711
+602	73	4	2022-09-20 19:17:57.667333	2022-09-20 19:17:57.667333
+603	74	4	2022-09-20 19:17:57.667956	2022-09-20 19:17:57.667956
+604	77	4	2022-09-20 19:17:57.668597	2022-09-20 19:17:57.668597
+605	76	4	2022-09-20 19:17:57.669244	2022-09-20 19:17:57.669244
+606	79	4	2022-09-20 19:17:57.669907	2022-09-20 19:17:57.669907
+607	80	4	2022-09-20 19:17:57.670543	2022-09-20 19:17:57.670543
+608	81	4	2022-09-20 19:17:57.671156	2022-09-20 19:17:57.671156
+609	82	4	2022-09-20 19:17:57.671795	2022-09-20 19:17:57.671795
+610	83	4	2022-09-20 19:17:57.672422	2022-09-20 19:17:57.672422
+611	84	4	2022-09-20 19:17:57.673169	2022-09-20 19:17:57.673169
+612	356	4	2022-09-20 19:17:57.673799	2022-09-20 19:17:57.673799
+613	43	4	2022-09-20 19:17:57.674426	2022-09-20 19:17:57.674426
+614	358	4	2022-09-20 19:17:57.675043	2022-09-20 19:17:57.675043
+615	417	4	2022-09-20 19:17:57.675696	2022-09-20 19:17:57.675696
+616	85	4	2022-09-20 19:17:57.67632	2022-09-20 19:17:57.67632
+617	448	4	2022-09-20 19:17:57.676931	2022-09-20 19:17:57.676931
+618	492	4	2022-09-20 19:17:57.677552	2022-09-20 19:17:57.677552
+619	476	4	2022-09-20 19:17:57.678185	2022-09-20 19:17:57.678185
+620	478	4	2022-09-20 19:17:57.678838	2022-09-20 19:17:57.678838
+621	540	4	2022-09-20 19:17:57.679592	2022-09-20 19:17:57.679592
+622	480	4	2022-09-20 19:17:57.680492	2022-09-20 19:17:57.680492
+623	530	4	2022-09-20 19:17:57.681366	2022-09-20 19:17:57.681366
+624	357	4	2022-09-20 19:17:57.682039	2022-09-20 19:17:57.682039
+625	359	4	2022-09-20 19:17:57.682665	2022-09-20 19:17:57.682665
+626	361	4	2022-09-20 19:17:57.683285	2022-09-20 19:17:57.683285
+627	363	4	2022-09-20 19:17:57.683894	2022-09-20 19:17:57.683894
+628	365	4	2022-09-20 19:17:57.684497	2022-09-20 19:17:57.684497
+629	367	4	2022-09-20 19:17:57.685113	2022-09-20 19:17:57.685113
+630	369	4	2022-09-20 19:17:57.685775	2022-09-20 19:17:57.685775
+631	371	4	2022-09-20 19:17:57.6864	2022-09-20 19:17:57.6864
+632	373	4	2022-09-20 19:17:57.687032	2022-09-20 19:17:57.687032
+633	482	4	2022-09-20 19:17:57.687661	2022-09-20 19:17:57.687661
+634	415	4	2022-09-20 19:17:57.688283	2022-09-20 19:17:57.688283
+635	484	4	2022-09-20 19:17:57.688962	2022-09-20 19:17:57.688962
+636	486	4	2022-09-20 19:17:57.689592	2022-09-20 19:17:57.689592
+637	532	4	2022-09-20 19:17:57.6902	2022-09-20 19:17:57.6902
+638	488	4	2022-09-20 19:17:57.690884	2022-09-20 19:17:57.690884
+639	548	4	2022-09-20 19:17:57.691572	2022-09-20 19:17:57.691572
+640	534	4	2022-09-20 19:17:57.692236	2022-09-20 19:17:57.692236
+641	542	4	2022-09-20 19:17:57.692859	2022-09-20 19:17:57.692859
+642	536	4	2022-09-20 19:17:57.693466	2022-09-20 19:17:57.693466
+643	538	4	2022-09-20 19:17:57.694101	2022-09-20 19:17:57.694101
+644	544	4	2022-09-20 19:17:57.694726	2022-09-20 19:17:57.694726
+645	546	4	2022-09-20 19:17:57.695723	2022-09-20 19:17:57.695723
+646	550	4	2022-09-20 19:17:57.696698	2022-09-20 19:17:57.696698
+647	554	4	2022-09-20 19:17:57.697446	2022-09-20 19:17:57.697446
+648	552	4	2022-09-20 19:17:57.698072	2022-09-20 19:17:57.698072
+649	576	4	2022-09-20 19:17:57.698769	2022-09-20 19:17:57.698769
+650	556	4	2022-09-20 19:17:57.699411	2022-09-20 19:17:57.699411
+651	558	4	2022-09-20 19:17:57.700043	2022-09-20 19:17:57.700043
+652	574	4	2022-09-20 19:17:57.70066	2022-09-20 19:17:57.70066
+653	578	4	2022-09-20 19:17:57.701268	2022-09-20 19:17:57.701268
+654	580	4	2022-09-20 19:17:57.701955	2022-09-20 19:17:57.701955
+655	474	4	2022-09-20 19:17:57.70263	2022-09-20 19:17:57.70263
+656	490	4	2022-09-20 19:17:57.703254	2022-09-20 19:17:57.703254
+657	114	4	2022-09-20 19:17:57.703957	2022-09-20 19:17:57.703957
+658	110	4	2022-09-20 19:17:57.704661	2022-09-20 19:17:57.704661
+659	120	4	2022-09-20 19:17:57.705375	2022-09-20 19:17:57.705375
+660	86	4	2022-09-20 19:17:57.706015	2022-09-20 19:17:57.706015
+661	111	4	2022-09-20 19:17:57.706641	2022-09-20 19:17:57.706641
+662	115	4	2022-09-20 19:17:57.707268	2022-09-20 19:17:57.707268
+663	112	4	2022-09-20 19:17:57.707887	2022-09-20 19:17:57.707887
+664	87	4	2022-09-20 19:17:57.708601	2022-09-20 19:17:57.708601
+665	96	4	2022-09-20 19:17:57.709257	2022-09-20 19:17:57.709257
+666	97	4	2022-09-20 19:17:57.709879	2022-09-20 19:17:57.709879
+667	88	4	2022-09-20 19:17:57.710505	2022-09-20 19:17:57.710505
+668	103	4	2022-09-20 19:17:57.71112	2022-09-20 19:17:57.71112
+669	100	4	2022-09-20 19:17:57.711794	2022-09-20 19:17:57.711794
+670	98	4	2022-09-20 19:17:57.712573	2022-09-20 19:17:57.712573
+671	99	4	2022-09-20 19:17:57.713491	2022-09-20 19:17:57.713491
+672	104	4	2022-09-20 19:17:57.714219	2022-09-20 19:17:57.714219
+673	89	4	2022-09-20 19:17:57.714843	2022-09-20 19:17:57.714843
+674	105	4	2022-09-20 19:17:57.71548	2022-09-20 19:17:57.71548
+675	91	4	2022-09-20 19:17:57.716116	2022-09-20 19:17:57.716116
+676	106	4	2022-09-20 19:17:57.716723	2022-09-20 19:17:57.716723
+677	92	4	2022-09-20 19:17:57.717325	2022-09-20 19:17:57.717325
+678	107	4	2022-09-20 19:17:57.717945	2022-09-20 19:17:57.717945
+679	101	4	2022-09-20 19:17:57.718566	2022-09-20 19:17:57.718566
+680	113	4	2022-09-20 19:17:57.719229	2022-09-20 19:17:57.719229
+681	108	4	2022-09-20 19:17:57.719994	2022-09-20 19:17:57.719994
+682	93	4	2022-09-20 19:17:57.720796	2022-09-20 19:17:57.720796
+683	94	4	2022-09-20 19:17:57.721425	2022-09-20 19:17:57.721425
+684	95	4	2022-09-20 19:17:57.72207	2022-09-20 19:17:57.72207
+685	102	4	2022-09-20 19:17:57.722721	2022-09-20 19:17:57.722721
+686	109	4	2022-09-20 19:17:57.723344	2022-09-20 19:17:57.723344
+687	118	4	2022-09-20 19:17:57.724035	2022-09-20 19:17:57.724035
+688	116	4	2022-09-20 19:17:57.724809	2022-09-20 19:17:57.724809
+689	117	4	2022-09-20 19:17:57.725515	2022-09-20 19:17:57.725515
+690	119	4	2022-09-20 19:17:57.726163	2022-09-20 19:17:57.726163
+691	122	4	2022-09-20 19:17:57.726792	2022-09-20 19:17:57.726792
+692	121	4	2022-09-20 19:17:57.727409	2022-09-20 19:17:57.727409
+693	123	4	2022-09-20 19:17:57.728025	2022-09-20 19:17:57.728025
+694	124	4	2022-09-20 19:17:57.728755	2022-09-20 19:17:57.728755
+695	125	4	2022-09-20 19:17:57.729385	2022-09-20 19:17:57.729385
+696	126	4	2022-09-20 19:17:57.730263	2022-09-20 19:17:57.730263
+697	360	4	2022-09-20 19:17:57.731005	2022-09-20 19:17:57.731005
+698	52	4	2022-09-20 19:17:57.731672	2022-09-20 19:17:57.731672
+699	163	4	2022-09-20 19:17:57.732316	2022-09-20 19:17:57.732316
+700	134	4	2022-09-20 19:17:57.73294	2022-09-20 19:17:57.73294
+701	137	4	2022-09-20 19:17:57.733557	2022-09-20 19:17:57.733557
+702	146	4	2022-09-20 19:17:57.734272	2022-09-20 19:17:57.734272
+703	153	4	2022-09-20 19:17:57.734917	2022-09-20 19:17:57.734917
+704	139	4	2022-09-20 19:17:57.735632	2022-09-20 19:17:57.735632
+705	90	4	2022-09-20 19:17:57.736334	2022-09-20 19:17:57.736334
+706	138	4	2022-09-20 19:17:57.736992	2022-09-20 19:17:57.736992
+707	127	4	2022-09-20 19:17:57.737688	2022-09-20 19:17:57.737688
+708	140	4	2022-09-20 19:17:57.738336	2022-09-20 19:17:57.738336
+709	128	4	2022-09-20 19:17:57.738985	2022-09-20 19:17:57.738985
+710	147	4	2022-09-20 19:17:57.741546	2022-09-20 19:17:57.741546
+711	131	4	2022-09-20 19:17:57.742588	2022-09-20 19:17:57.742588
+712	144	4	2022-09-20 19:17:57.744355	2022-09-20 19:17:57.744355
+713	141	4	2022-09-20 19:17:57.745805	2022-09-20 19:17:57.745805
+714	165	4	2022-09-20 19:17:57.746782	2022-09-20 19:17:57.746782
+715	142	4	2022-09-20 19:17:57.748864	2022-09-20 19:17:57.748864
+716	148	4	2022-09-20 19:17:57.752502	2022-09-20 19:17:57.752502
+717	143	4	2022-09-20 19:17:57.754538	2022-09-20 19:17:57.754538
+718	157	4	2022-09-20 19:17:57.755438	2022-09-20 19:17:57.755438
+719	156	4	2022-09-20 19:17:57.757322	2022-09-20 19:17:57.757322
+720	145	4	2022-09-20 19:17:57.759651	2022-09-20 19:17:57.759651
+721	149	4	2022-09-20 19:17:57.763419	2022-09-20 19:17:57.763419
+722	151	4	2022-09-20 19:17:57.764403	2022-09-20 19:17:57.764403
+723	152	4	2022-09-20 19:17:57.766446	2022-09-20 19:17:57.766446
+724	158	4	2022-09-20 19:17:57.768062	2022-09-20 19:17:57.768062
+725	155	4	2022-09-20 19:17:57.771294	2022-09-20 19:17:57.771294
+726	161	4	2022-09-20 19:17:57.77245	2022-09-20 19:17:57.77245
+727	160	4	2022-09-20 19:17:57.774771	2022-09-20 19:17:57.774771
+728	162	4	2022-09-20 19:17:57.777325	2022-09-20 19:17:57.777325
+729	164	4	2022-09-20 19:17:57.779725	2022-09-20 19:17:57.779725
+730	166	4	2022-09-20 19:17:57.782412	2022-09-20 19:17:57.782412
+731	136	4	2022-09-20 19:17:57.784606	2022-09-20 19:17:57.784606
+732	159	4	2022-09-20 19:17:57.785781	2022-09-20 19:17:57.785781
+733	150	4	2022-09-20 19:17:57.787815	2022-09-20 19:17:57.787815
+734	132	4	2022-09-20 19:17:57.790034	2022-09-20 19:17:57.790034
+735	364	4	2022-09-20 19:17:57.792185	2022-09-20 19:17:57.792185
+736	366	4	2022-09-20 19:17:57.794279	2022-09-20 19:17:57.794279
+737	455	4	2022-09-20 19:17:57.795876	2022-09-20 19:17:57.795876
+738	171	4	2022-09-20 19:17:57.797525	2022-09-20 19:17:57.797525
+739	185	4	2022-09-20 19:17:57.798464	2022-09-20 19:17:57.798464
+740	173	4	2022-09-20 19:17:57.799865	2022-09-20 19:17:57.799865
+741	497	4	2022-09-20 19:17:57.800653	2022-09-20 19:17:57.800653
+742	187	4	2022-09-20 19:17:57.802061	2022-09-20 19:17:57.802061
+743	189	4	2022-09-20 19:17:57.803376	2022-09-20 19:17:57.803376
+744	175	4	2022-09-20 19:17:57.804822	2022-09-20 19:17:57.804822
+745	457	4	2022-09-20 19:17:57.806318	2022-09-20 19:17:57.806318
+746	368	4	2022-09-20 19:17:57.80712	2022-09-20 19:17:57.80712
+747	192	4	2022-09-20 19:17:57.808539	2022-09-20 19:17:57.808539
+748	196	4	2022-09-20 19:17:57.809865	2022-09-20 19:17:57.809865
+749	370	4	2022-09-20 19:17:57.811267	2022-09-20 19:17:57.811267
+750	372	4	2022-09-20 19:17:57.81268	2022-09-20 19:17:57.81268
+751	177	4	2022-09-20 19:17:57.813663	2022-09-20 19:17:57.813663
+752	374	4	2022-09-20 19:17:57.815319	2022-09-20 19:17:57.815319
+753	459	4	2022-09-20 19:17:57.816724	2022-09-20 19:17:57.816724
+754	416	4	2022-09-20 19:17:57.818125	2022-09-20 19:17:57.818125
+755	179	4	2022-09-20 19:17:57.840991	2022-09-20 19:17:57.840991
+756	451	4	2022-09-20 19:17:57.841862	2022-09-20 19:17:57.841862
+757	181	4	2022-09-20 19:17:57.842576	2022-09-20 19:17:57.842576
+758	461	4	2022-09-20 19:17:57.84323	2022-09-20 19:17:57.84323
+759	167	4	2022-09-20 19:17:57.844243	2022-09-20 19:17:57.844243
+760	183	4	2022-09-20 19:17:57.844985	2022-09-20 19:17:57.844985
+761	453	4	2022-09-20 19:17:57.84572	2022-09-20 19:17:57.84572
+762	169	4	2022-09-20 19:17:57.846557	2022-09-20 19:17:57.846557
+763	194	4	2022-09-20 19:17:57.847785	2022-09-20 19:17:57.847785
+764	499	4	2022-09-20 19:17:57.848578	2022-09-20 19:17:57.848578
+765	493	4	2022-09-20 19:17:57.849235	2022-09-20 19:17:57.849235
+766	495	4	2022-09-20 19:17:57.84988	2022-09-20 19:17:57.84988
+767	501	4	2022-09-20 19:17:57.851143	2022-09-20 19:17:57.851143
+768	505	4	2022-09-20 19:17:57.851886	2022-09-20 19:17:57.851886
+769	509	4	2022-09-20 19:17:57.852638	2022-09-20 19:17:57.852638
+770	507	4	2022-09-20 19:17:57.853319	2022-09-20 19:17:57.853319
+771	511	4	2022-09-20 19:17:57.854106	2022-09-20 19:17:57.854106
+772	513	4	2022-09-20 19:17:57.854828	2022-09-20 19:17:57.854828
+773	560	4	2022-09-20 19:17:57.855497	2022-09-20 19:17:57.855497
+774	562	4	2022-09-20 19:17:57.85614	2022-09-20 19:17:57.85614
+775	564	4	2022-09-20 19:17:57.856767	2022-09-20 19:17:57.856767
+776	566	4	2022-09-20 19:17:57.857532	2022-09-20 19:17:57.857532
+777	597	4	2022-09-20 19:17:57.858242	2022-09-20 19:17:57.858242
+778	207	4	2022-09-20 19:17:57.858963	2022-09-20 19:17:57.858963
+779	176	4	2022-09-20 19:17:57.859654	2022-09-20 19:17:57.859654
+780	182	4	2022-09-20 19:17:57.860276	2022-09-20 19:17:57.860276
+781	203	4	2022-09-20 19:17:57.861157	2022-09-20 19:17:57.861157
+782	188	4	2022-09-20 19:17:57.861947	2022-09-20 19:17:57.861947
+783	198	4	2022-09-20 19:17:57.862843	2022-09-20 19:17:57.862843
+784	197	4	2022-09-20 19:17:57.863666	2022-09-20 19:17:57.863666
+785	184	4	2022-09-20 19:17:57.864433	2022-09-20 19:17:57.864433
+786	204	4	2022-09-20 19:17:57.865133	2022-09-20 19:17:57.865133
+787	193	4	2022-09-20 19:17:57.865778	2022-09-20 19:17:57.865778
+788	168	4	2022-09-20 19:17:57.866396	2022-09-20 19:17:57.866396
+789	210	4	2022-09-20 19:17:57.867007	2022-09-20 19:17:57.867007
+790	201	4	2022-09-20 19:17:57.867768	2022-09-20 19:17:57.867768
+791	170	4	2022-09-20 19:17:57.868407	2022-09-20 19:17:57.868407
+792	205	4	2022-09-20 19:17:57.869054	2022-09-20 19:17:57.869054
+793	195	4	2022-09-20 19:17:57.869674	2022-09-20 19:17:57.869674
+794	190	4	2022-09-20 19:17:57.87031	2022-09-20 19:17:57.87031
+795	154	4	2022-09-20 19:17:57.871112	2022-09-20 19:17:57.871112
+796	178	4	2022-09-20 19:17:57.871957	2022-09-20 19:17:57.871957
+797	191	4	2022-09-20 19:17:57.872678	2022-09-20 19:17:57.872678
+798	208	4	2022-09-20 19:17:57.873315	2022-09-20 19:17:57.873315
+799	133	4	2022-09-20 19:17:57.87407	2022-09-20 19:17:57.87407
+800	199	4	2022-09-20 19:17:57.874762	2022-09-20 19:17:57.874762
+801	202	4	2022-09-20 19:17:57.875415	2022-09-20 19:17:57.875415
+802	186	4	2022-09-20 19:17:57.876057	2022-09-20 19:17:57.876057
+803	172	4	2022-09-20 19:17:57.87668	2022-09-20 19:17:57.87668
+804	180	4	2022-09-20 19:17:57.877362	2022-09-20 19:17:57.877362
+805	206	4	2022-09-20 19:17:57.877997	2022-09-20 19:17:57.877997
+806	174	4	2022-09-20 19:17:57.878635	2022-09-20 19:17:57.878635
+807	212	4	2022-09-20 19:17:57.879265	2022-09-20 19:17:57.879265
+808	209	4	2022-09-20 19:17:57.880276	2022-09-20 19:17:57.880276
+809	211	4	2022-09-20 19:17:57.881237	2022-09-20 19:17:57.881237
+810	213	4	2022-09-20 19:17:57.882023	2022-09-20 19:17:57.882023
+811	214	4	2022-09-20 19:17:57.882721	2022-09-20 19:17:57.882721
+812	215	4	2022-09-20 19:17:57.883409	2022-09-20 19:17:57.883409
+813	217	4	2022-09-20 19:17:57.884108	2022-09-20 19:17:57.884108
+814	135	4	2022-09-20 19:17:57.884733	2022-09-20 19:17:57.884733
+815	200	4	2022-09-20 19:17:57.885423	2022-09-20 19:17:57.885423
+816	418	4	2022-09-20 19:17:57.88606	2022-09-20 19:17:57.88606
+817	377	4	2022-09-20 19:17:57.886754	2022-09-20 19:17:57.886754
+818	226	4	2022-09-20 19:17:57.88742	2022-09-20 19:17:57.88742
+819	419	4	2022-09-20 19:17:57.888047	2022-09-20 19:17:57.888047
+820	228	4	2022-09-20 19:17:57.888676	2022-09-20 19:17:57.888676
+821	230	4	2022-09-20 19:17:57.889394	2022-09-20 19:17:57.889394
+822	494	4	2022-09-20 19:17:57.890082	2022-09-20 19:17:57.890082
+823	452	4	2022-09-20 19:17:57.890771	2022-09-20 19:17:57.890771
+824	454	4	2022-09-20 19:17:57.891387	2022-09-20 19:17:57.891387
+825	502	4	2022-09-20 19:17:57.892017	2022-09-20 19:17:57.892017
+826	218	4	2022-09-20 19:17:57.892742	2022-09-20 19:17:57.892742
+827	456	4	2022-09-20 19:17:57.893381	2022-09-20 19:17:57.893381
+828	220	4	2022-09-20 19:17:57.894004	2022-09-20 19:17:57.894004
+829	398	4	2022-09-20 19:17:57.894697	2022-09-20 19:17:57.894697
+830	222	4	2022-09-20 19:17:57.895419	2022-09-20 19:17:57.895419
+831	496	4	2022-09-20 19:17:57.896077	2022-09-20 19:17:57.896077
+832	224	4	2022-09-20 19:17:57.896932	2022-09-20 19:17:57.896932
+833	376	4	2022-09-20 19:17:57.897843	2022-09-20 19:17:57.897843
+834	458	4	2022-09-20 19:17:57.898642	2022-09-20 19:17:57.898642
+835	378	4	2022-09-20 19:17:57.899372	2022-09-20 19:17:57.899372
+836	380	4	2022-09-20 19:17:57.89999	2022-09-20 19:17:57.89999
+837	400	4	2022-09-20 19:17:57.900597	2022-09-20 19:17:57.900597
+838	506	4	2022-09-20 19:17:57.901216	2022-09-20 19:17:57.901216
+839	384	4	2022-09-20 19:17:57.901977	2022-09-20 19:17:57.901977
+840	386	4	2022-09-20 19:17:57.902687	2022-09-20 19:17:57.902687
+841	388	4	2022-09-20 19:17:57.903326	2022-09-20 19:17:57.903326
+842	402	4	2022-09-20 19:17:57.903962	2022-09-20 19:17:57.903962
+843	390	4	2022-09-20 19:17:57.904582	2022-09-20 19:17:57.904582
+844	392	4	2022-09-20 19:17:57.905293	2022-09-20 19:17:57.905293
+845	394	4	2022-09-20 19:17:57.905924	2022-09-20 19:17:57.905924
+846	396	4	2022-09-20 19:17:57.906543	2022-09-20 19:17:57.906543
+847	460	4	2022-09-20 19:17:57.90717	2022-09-20 19:17:57.90717
+848	498	4	2022-09-20 19:17:57.907927	2022-09-20 19:17:57.907927
+849	500	4	2022-09-20 19:17:57.908703	2022-09-20 19:17:57.908703
+850	504	4	2022-09-20 19:17:57.90933	2022-09-20 19:17:57.90933
+851	510	4	2022-09-20 19:17:57.910014	2022-09-20 19:17:57.910014
+852	508	4	2022-09-20 19:17:57.910657	2022-09-20 19:17:57.910657
+853	512	4	2022-09-20 19:17:57.911344	2022-09-20 19:17:57.911344
+854	514	4	2022-09-20 19:17:57.911989	2022-09-20 19:17:57.911989
+855	561	4	2022-09-20 19:17:57.912811	2022-09-20 19:17:57.912811
+856	563	4	2022-09-20 19:17:57.913761	2022-09-20 19:17:57.913761
+857	450	4	2022-09-20 19:17:57.914544	2022-09-20 19:17:57.914544
+858	252	4	2022-09-20 19:17:57.915196	2022-09-20 19:17:57.915196
+859	223	4	2022-09-20 19:17:57.915811	2022-09-20 19:17:57.915811
+860	239	4	2022-09-20 19:17:57.916433	2022-09-20 19:17:57.916433
+861	225	4	2022-09-20 19:17:57.917051	2022-09-20 19:17:57.917051
+862	227	4	2022-09-20 19:17:57.917766	2022-09-20 19:17:57.917766
+863	247	4	2022-09-20 19:17:57.918458	2022-09-20 19:17:57.918458
+864	229	4	2022-09-20 19:17:57.919194	2022-09-20 19:17:57.919194
+865	240	4	2022-09-20 19:17:57.920046	2022-09-20 19:17:57.920046
+866	231	4	2022-09-20 19:17:57.920763	2022-09-20 19:17:57.920763
+867	232	4	2022-09-20 19:17:57.921419	2022-09-20 19:17:57.921419
+868	236	4	2022-09-20 19:17:57.922145	2022-09-20 19:17:57.922145
+869	241	4	2022-09-20 19:17:57.922779	2022-09-20 19:17:57.922779
+870	235	4	2022-09-20 19:17:57.923455	2022-09-20 19:17:57.923455
+871	233	4	2022-09-20 19:17:57.924816	2022-09-20 19:17:57.924816
+872	237	4	2022-09-20 19:17:57.925731	2022-09-20 19:17:57.925731
+873	242	4	2022-09-20 19:17:57.926419	2022-09-20 19:17:57.926419
+874	234	4	2022-09-20 19:17:57.927081	2022-09-20 19:17:57.927081
+875	238	4	2022-09-20 19:17:57.927785	2022-09-20 19:17:57.927785
+876	248	4	2022-09-20 19:17:57.928503	2022-09-20 19:17:57.928503
+877	243	4	2022-09-20 19:17:57.929171	2022-09-20 19:17:57.929171
+878	244	4	2022-09-20 19:17:57.929836	2022-09-20 19:17:57.929836
+879	258	4	2022-09-20 19:17:57.930737	2022-09-20 19:17:57.930737
+880	245	4	2022-09-20 19:17:57.93153	2022-09-20 19:17:57.93153
+881	249	4	2022-09-20 19:17:57.932786	2022-09-20 19:17:57.932786
+882	246	4	2022-09-20 19:17:57.933647	2022-09-20 19:17:57.933647
+883	253	4	2022-09-20 19:17:57.934369	2022-09-20 19:17:57.934369
+884	250	4	2022-09-20 19:17:57.93513	2022-09-20 19:17:57.93513
+885	251	4	2022-09-20 19:17:57.935841	2022-09-20 19:17:57.935841
+886	256	4	2022-09-20 19:17:57.936532	2022-09-20 19:17:57.936532
+887	254	4	2022-09-20 19:17:57.937208	2022-09-20 19:17:57.937208
+888	255	4	2022-09-20 19:17:57.937939	2022-09-20 19:17:57.937939
+889	257	4	2022-09-20 19:17:57.93865	2022-09-20 19:17:57.93865
+890	260	4	2022-09-20 19:17:57.939307	2022-09-20 19:17:57.939307
+891	259	4	2022-09-20 19:17:57.939928	2022-09-20 19:17:57.939928
+892	261	4	2022-09-20 19:17:57.940604	2022-09-20 19:17:57.940604
+893	262	4	2022-09-20 19:17:57.94134	2022-09-20 19:17:57.94134
+894	263	4	2022-09-20 19:17:57.94199	2022-09-20 19:17:57.94199
+895	264	4	2022-09-20 19:17:57.942618	2022-09-20 19:17:57.942618
+896	219	4	2022-09-20 19:17:57.94325	2022-09-20 19:17:57.94325
+897	221	4	2022-09-20 19:17:57.943931	2022-09-20 19:17:57.943931
+898	379	4	2022-09-20 19:17:57.944764	2022-09-20 19:17:57.944764
+899	295	4	2022-09-20 19:17:57.945519	2022-09-20 19:17:57.945519
+900	273	4	2022-09-20 19:17:57.946319	2022-09-20 19:17:57.946319
+901	297	4	2022-09-20 19:17:57.947252	2022-09-20 19:17:57.947252
+902	395	4	2022-09-20 19:17:57.947975	2022-09-20 19:17:57.947975
+903	275	4	2022-09-20 19:17:57.948631	2022-09-20 19:17:57.948631
+904	401	4	2022-09-20 19:17:57.94925	2022-09-20 19:17:57.94925
+905	299	4	2022-09-20 19:17:57.949854	2022-09-20 19:17:57.949854
+906	277	4	2022-09-20 19:17:57.950542	2022-09-20 19:17:57.950542
+907	403	4	2022-09-20 19:17:57.951172	2022-09-20 19:17:57.951172
+908	287	4	2022-09-20 19:17:57.951877	2022-09-20 19:17:57.951877
+909	265	4	2022-09-20 19:17:57.952606	2022-09-20 19:17:57.952606
+910	279	4	2022-09-20 19:17:57.953393	2022-09-20 19:17:57.953393
+911	289	4	2022-09-20 19:17:57.954113	2022-09-20 19:17:57.954113
+912	267	4	2022-09-20 19:17:57.954794	2022-09-20 19:17:57.954794
+913	281	4	2022-09-20 19:17:57.955497	2022-09-20 19:17:57.955497
+914	269	4	2022-09-20 19:17:57.956201	2022-09-20 19:17:57.956201
+915	291	4	2022-09-20 19:17:57.956865	2022-09-20 19:17:57.956865
+916	283	4	2022-09-20 19:17:57.957484	2022-09-20 19:17:57.957484
+917	285	4	2022-09-20 19:17:57.958093	2022-09-20 19:17:57.958093
+918	385	4	2022-09-20 19:17:57.958794	2022-09-20 19:17:57.958794
+919	422	4	2022-09-20 19:17:57.959486	2022-09-20 19:17:57.959486
+920	432	4	2022-09-20 19:17:57.960122	2022-09-20 19:17:57.960122
+921	424	4	2022-09-20 19:17:57.96074	2022-09-20 19:17:57.96074
+922	271	4	2022-09-20 19:17:57.961367	2022-09-20 19:17:57.961367
+923	293	4	2022-09-20 19:17:57.962056	2022-09-20 19:17:57.962056
+924	387	4	2022-09-20 19:17:57.962696	2022-09-20 19:17:57.962696
+925	389	4	2022-09-20 19:17:57.963611	2022-09-20 19:17:57.963611
+926	428	4	2022-09-20 19:17:57.9645	2022-09-20 19:17:57.9645
+927	397	4	2022-09-20 19:17:57.965159	2022-09-20 19:17:57.965159
+928	381	4	2022-09-20 19:17:57.965832	2022-09-20 19:17:57.965832
+929	391	4	2022-09-20 19:17:57.966436	2022-09-20 19:17:57.966436
+930	393	4	2022-09-20 19:17:57.967055	2022-09-20 19:17:57.967055
+931	399	4	2022-09-20 19:17:57.96767	2022-09-20 19:17:57.96767
+932	426	4	2022-09-20 19:17:57.968412	2022-09-20 19:17:57.968412
+933	430	4	2022-09-20 19:17:57.969087	2022-09-20 19:17:57.969087
+934	435	4	2022-09-20 19:17:57.969786	2022-09-20 19:17:57.969786
+935	433	4	2022-09-20 19:17:57.970407	2022-09-20 19:17:57.970407
+936	437	4	2022-09-20 19:17:57.971081	2022-09-20 19:17:57.971081
+937	439	4	2022-09-20 19:17:57.971732	2022-09-20 19:17:57.971732
+938	441	4	2022-09-20 19:17:57.972384	2022-09-20 19:17:57.972384
+939	443	4	2022-09-20 19:17:57.973254	2022-09-20 19:17:57.973254
+940	420	4	2022-09-20 19:17:57.973929	2022-09-20 19:17:57.973929
+941	383	4	2022-09-20 19:17:57.974628	2022-09-20 19:17:57.974628
+942	294	4	2022-09-20 19:17:57.975281	2022-09-20 19:17:57.975281
+943	272	4	2022-09-20 19:17:57.975914	2022-09-20 19:17:57.975914
+944	298	4	2022-09-20 19:17:57.976602	2022-09-20 19:17:57.976602
+945	317	4	2022-09-20 19:17:57.977283	2022-09-20 19:17:57.977283
+946	274	4	2022-09-20 19:17:57.97805	2022-09-20 19:17:57.97805
+947	286	4	2022-09-20 19:17:57.978842	2022-09-20 19:17:57.978842
+948	300	4	2022-09-20 19:17:57.979465	2022-09-20 19:17:57.979465
+949	276	4	2022-09-20 19:17:57.980156	2022-09-20 19:17:57.980156
+950	307	4	2022-09-20 19:17:57.981261	2022-09-20 19:17:57.981261
+951	288	4	2022-09-20 19:17:57.982137	2022-09-20 19:17:57.982137
+952	216	4	2022-09-20 19:17:57.982853	2022-09-20 19:17:57.982853
+953	290	4	2022-09-20 19:17:57.983562	2022-09-20 19:17:57.983562
+954	278	4	2022-09-20 19:17:57.984256	2022-09-20 19:17:57.984256
+955	266	4	2022-09-20 19:17:57.984888	2022-09-20 19:17:57.984888
+956	303	4	2022-09-20 19:17:57.985606	2022-09-20 19:17:57.985606
+957	268	4	2022-09-20 19:17:57.98631	2022-09-20 19:17:57.98631
+958	280	4	2022-09-20 19:17:57.986988	2022-09-20 19:17:57.986988
+959	301	4	2022-09-20 19:17:57.987649	2022-09-20 19:17:57.987649
+960	302	4	2022-09-20 19:17:57.988271	2022-09-20 19:17:57.988271
+961	282	4	2022-09-20 19:17:57.988923	2022-09-20 19:17:57.988923
+962	311	4	2022-09-20 19:17:57.989542	2022-09-20 19:17:57.989542
+963	304	4	2022-09-20 19:17:57.990228	2022-09-20 19:17:57.990228
+964	308	4	2022-09-20 19:17:57.990841	2022-09-20 19:17:57.990841
+965	305	4	2022-09-20 19:17:57.991533	2022-09-20 19:17:57.991533
+966	309	4	2022-09-20 19:17:57.992173	2022-09-20 19:17:57.992173
+967	292	4	2022-09-20 19:17:57.992915	2022-09-20 19:17:57.992915
+968	284	4	2022-09-20 19:17:57.993627	2022-09-20 19:17:57.993627
+969	270	4	2022-09-20 19:17:57.99425	2022-09-20 19:17:57.99425
+970	310	4	2022-09-20 19:17:57.994934	2022-09-20 19:17:57.994934
+971	314	4	2022-09-20 19:17:57.995637	2022-09-20 19:17:57.995637
+972	313	4	2022-09-20 19:17:57.996508	2022-09-20 19:17:57.996508
+973	312	4	2022-09-20 19:17:57.997438	2022-09-20 19:17:57.997438
+974	316	4	2022-09-20 19:17:57.998213	2022-09-20 19:17:57.998213
+975	315	4	2022-09-20 19:17:57.9989	2022-09-20 19:17:57.9989
+976	318	4	2022-09-20 19:17:57.999581	2022-09-20 19:17:57.999581
+977	319	4	2022-09-20 19:17:58.000206	2022-09-20 19:17:58.000206
+978	320	4	2022-09-20 19:17:58.000826	2022-09-20 19:17:58.000826
+979	321	4	2022-09-20 19:17:58.001446	2022-09-20 19:17:58.001446
+980	322	4	2022-09-20 19:17:58.002192	2022-09-20 19:17:58.002192
+981	306	4	2022-09-20 19:17:58.002834	2022-09-20 19:17:58.002834
+982	323	4	2022-09-20 19:17:58.003467	2022-09-20 19:17:58.003467
+983	325	4	2022-09-20 19:17:58.004092	2022-09-20 19:17:58.004092
+984	404	4	2022-09-20 19:17:58.004775	2022-09-20 19:17:58.004775
+985	569	4	2022-09-20 19:17:58.005615	2022-09-20 19:17:58.005615
+986	327	4	2022-09-20 19:17:58.006253	2022-09-20 19:17:58.006253
+987	329	4	2022-09-20 19:17:58.006885	2022-09-20 19:17:58.006885
+988	331	4	2022-09-20 19:17:58.007504	2022-09-20 19:17:58.007504
+989	333	4	2022-09-20 19:17:58.008182	2022-09-20 19:17:58.008182
+990	468	4	2022-09-20 19:17:58.008948	2022-09-20 19:17:58.008948
+991	521	4	2022-09-20 19:17:58.009743	2022-09-20 19:17:58.009743
+992	470	4	2022-09-20 19:17:58.01042	2022-09-20 19:17:58.01042
+993	421	4	2022-09-20 19:17:58.011086	2022-09-20 19:17:58.011086
+994	423	4	2022-09-20 19:17:58.011916	2022-09-20 19:17:58.011916
+995	472	4	2022-09-20 19:17:58.012652	2022-09-20 19:17:58.012652
+996	425	4	2022-09-20 19:17:58.013408	2022-09-20 19:17:58.013408
+997	427	4	2022-09-20 19:17:58.014261	2022-09-20 19:17:58.014261
+998	429	4	2022-09-20 19:17:58.015395	2022-09-20 19:17:58.015395
+999	515	4	2022-09-20 19:17:58.016068	2022-09-20 19:17:58.016068
+1000	431	4	2022-09-20 19:17:58.016684	2022-09-20 19:17:58.016684
+1001	523	4	2022-09-20 19:17:58.017286	2022-09-20 19:17:58.017286
+1002	434	4	2022-09-20 19:17:58.017974	2022-09-20 19:17:58.017974
+1003	436	4	2022-09-20 19:17:58.018614	2022-09-20 19:17:58.018614
+1004	438	4	2022-09-20 19:17:58.019237	2022-09-20 19:17:58.019237
+1005	440	4	2022-09-20 19:17:58.019845	2022-09-20 19:17:58.019845
+1006	442	4	2022-09-20 19:17:58.020489	2022-09-20 19:17:58.020489
+1007	444	4	2022-09-20 19:17:58.021176	2022-09-20 19:17:58.021176
+1008	446	4	2022-09-20 19:17:58.021799	2022-09-20 19:17:58.021799
+1009	517	4	2022-09-20 19:17:58.022458	2022-09-20 19:17:58.022458
+1010	464	4	2022-09-20 19:17:58.023178	2022-09-20 19:17:58.023178
+1011	519	4	2022-09-20 19:17:58.024195	2022-09-20 19:17:58.024195
+1012	553	4	2022-09-20 19:17:58.024958	2022-09-20 19:17:58.024958
+1013	525	4	2022-09-20 19:17:58.025658	2022-09-20 19:17:58.025658
+1014	549	4	2022-09-20 19:17:58.026281	2022-09-20 19:17:58.026281
+1015	527	4	2022-09-20 19:17:58.026919	2022-09-20 19:17:58.026919
+1016	557	4	2022-09-20 19:17:58.027622	2022-09-20 19:17:58.027622
+1017	551	4	2022-09-20 19:17:58.028243	2022-09-20 19:17:58.028243
+1018	555	4	2022-09-20 19:17:58.028935	2022-09-20 19:17:58.028935
+1019	559	4	2022-09-20 19:17:58.029739	2022-09-20 19:17:58.029739
+1020	565	4	2022-09-20 19:17:58.030788	2022-09-20 19:17:58.030788
+1021	567	4	2022-09-20 19:17:58.031843	2022-09-20 19:17:58.031843
+1022	571	4	2022-09-20 19:17:58.032504	2022-09-20 19:17:58.032504
+1023	547	4	2022-09-20 19:17:58.033118	2022-09-20 19:17:58.033118
+1024	462	4	2022-09-20 19:17:58.033737	2022-09-20 19:17:58.033737
+1025	466	4	2022-09-20 19:17:58.034412	2022-09-20 19:17:58.034412
+1026	335	4	2022-09-20 19:17:58.035033	2022-09-20 19:17:58.035033
+1027	336	4	2022-09-20 19:17:58.035713	2022-09-20 19:17:58.035713
+1028	344	4	2022-09-20 19:17:58.036356	2022-09-20 19:17:58.036356
+1029	340	4	2022-09-20 19:17:58.037063	2022-09-20 19:17:58.037063
+1030	337	4	2022-09-20 19:17:58.037752	2022-09-20 19:17:58.037752
+1031	338	4	2022-09-20 19:17:58.038399	2022-09-20 19:17:58.038399
+1032	339	4	2022-09-20 19:17:58.039034	2022-09-20 19:17:58.039034
+1033	328	4	2022-09-20 19:17:58.039713	2022-09-20 19:17:58.039713
+1034	407	4	2022-09-20 19:17:58.040379	2022-09-20 19:17:58.040379
+1035	408	4	2022-09-20 19:17:58.046096	2022-09-20 19:17:58.046096
+1036	341	4	2022-09-20 19:17:58.047373	2022-09-20 19:17:58.047373
+1037	469	4	2022-09-20 19:17:58.048449	2022-09-20 19:17:58.048449
+1038	445	4	2022-09-20 19:17:58.049225	2022-09-20 19:17:58.049225
+1039	346	4	2022-09-20 19:17:58.049883	2022-09-20 19:17:58.049883
+1040	465	4	2022-09-20 19:17:58.050702	2022-09-20 19:17:58.050702
+1041	347	4	2022-09-20 19:17:58.051344	2022-09-20 19:17:58.051344
+1042	348	4	2022-09-20 19:17:58.052058	2022-09-20 19:17:58.052058
+1043	345	4	2022-09-20 19:17:58.052698	2022-09-20 19:17:58.052698
+1044	349	4	2022-09-20 19:17:58.053578	2022-09-20 19:17:58.053578
+1045	410	4	2022-09-20 19:17:58.054252	2022-09-20 19:17:58.054252
+1046	467	4	2022-09-20 19:17:58.054886	2022-09-20 19:17:58.054886
+1047	324	4	2022-09-20 19:17:58.055548	2022-09-20 19:17:58.055548
+1048	471	4	2022-09-20 19:17:58.056289	2022-09-20 19:17:58.056289
+1049	342	4	2022-09-20 19:17:58.056951	2022-09-20 19:17:58.056951
+1050	412	4	2022-09-20 19:17:58.057596	2022-09-20 19:17:58.057596
+1051	326	4	2022-09-20 19:17:58.058213	2022-09-20 19:17:58.058213
+1052	350	4	2022-09-20 19:17:58.058945	2022-09-20 19:17:58.058945
+1053	330	4	2022-09-20 19:17:58.059597	2022-09-20 19:17:58.059597
+1054	343	4	2022-09-20 19:17:58.060221	2022-09-20 19:17:58.060221
+1055	332	4	2022-09-20 19:17:58.060856	2022-09-20 19:17:58.060856
+1056	414	4	2022-09-20 19:17:58.061484	2022-09-20 19:17:58.061484
+1057	405	4	2022-09-20 19:17:58.06221	2022-09-20 19:17:58.06221
+1058	518	4	2022-09-20 19:17:58.062879	2022-09-20 19:17:58.062879
+1059	516	4	2022-09-20 19:17:58.063751	2022-09-20 19:17:58.063751
+1060	520	4	2022-09-20 19:17:58.064659	2022-09-20 19:17:58.064659
+1061	522	4	2022-09-20 19:17:58.065498	2022-09-20 19:17:58.065498
+1062	524	4	2022-09-20 19:17:58.06619	2022-09-20 19:17:58.06619
+1063	526	4	2022-09-20 19:17:58.066813	2022-09-20 19:17:58.066813
+1064	528	4	2022-09-20 19:17:58.067429	2022-09-20 19:17:58.067429
+1065	570	4	2022-09-20 19:17:58.068055	2022-09-20 19:17:58.068055
+1066	572	4	2022-09-20 19:17:58.068759	2022-09-20 19:17:58.068759
+1067	463	4	2022-09-20 19:17:58.069401	2022-09-20 19:17:58.069401
+1068	334	4	2022-09-20 19:17:58.070027	2022-09-20 19:17:58.070027
+1069	601	4	2022-09-20 19:17:58.070662	2022-09-20 19:17:58.070662
+1070	568	4	2022-09-20 19:17:58.071365	2022-09-20 19:17:58.071365
+1071	605	4	2022-09-20 19:17:58.072031	2022-09-20 19:17:58.072031
+1072	610	4	2022-09-20 19:17:58.072663	2022-09-20 19:17:58.072663
+1073	592	4	2022-09-20 19:17:58.073402	2022-09-20 19:17:58.073402
+1074	602	4	2022-09-20 19:17:58.074123	2022-09-20 19:17:58.074123
+1075	609	4	2022-09-20 19:17:58.074839	2022-09-20 19:17:58.074839
+1076	613	4	2022-09-20 19:17:58.075535	2022-09-20 19:17:58.075535
+1077	598	4	2022-09-20 19:17:58.076159	2022-09-20 19:17:58.076159
+1078	606	4	2022-09-20 19:17:58.07678	2022-09-20 19:17:58.07678
+1079	603	4	2022-09-20 19:17:58.077467	2022-09-20 19:17:58.077467
+1080	593	4	2022-09-20 19:17:58.078194	2022-09-20 19:17:58.078194
+1081	607	4	2022-09-20 19:17:58.078894	2022-09-20 19:17:58.078894
+1082	599	4	2022-09-20 19:17:58.079596	2022-09-20 19:17:58.079596
+1083	608	4	2022-09-20 19:17:58.080489	2022-09-20 19:17:58.080489
+1084	604	4	2022-09-20 19:17:58.081495	2022-09-20 19:17:58.081495
+1085	611	4	2022-09-20 19:17:58.082344	2022-09-20 19:17:58.082344
+1086	594	4	2022-09-20 19:17:58.082974	2022-09-20 19:17:58.082974
+1087	612	4	2022-09-20 19:17:58.083599	2022-09-20 19:17:58.083599
+1088	449	4	2022-09-20 19:17:58.084303	2022-09-20 19:17:58.084303
+1089	600	4	2022-09-20 19:17:58.084941	2022-09-20 19:17:58.084941
+1090	595	4	2022-09-20 19:17:58.085572	2022-09-20 19:17:58.085572
+1091	596	4	2022-09-20 19:17:58.086225	2022-09-20 19:17:58.086225
+1092	617	4	2022-09-20 19:17:58.08685	2022-09-20 19:17:58.08685
+1093	627	4	2022-09-20 19:17:58.087571	2022-09-20 19:17:58.087571
+1094	626	4	2022-09-20 19:17:58.088204	2022-09-20 19:17:58.088204
+1095	620	4	2022-09-20 19:17:58.08885	2022-09-20 19:17:58.08885
+1096	622	4	2022-09-20 19:17:58.089478	2022-09-20 19:17:58.089478
+1097	624	4	2022-09-20 19:17:58.090162	2022-09-20 19:17:58.090162
+1098	632	4	2022-09-20 19:17:58.090816	2022-09-20 19:17:58.090816
+1099	640	4	2022-09-20 19:17:58.091506	2022-09-20 19:17:58.091506
+1100	631	4	2022-09-20 19:17:58.092317	2022-09-20 19:17:58.092317
+1101	637	4	2022-09-20 19:17:58.093213	2022-09-20 19:17:58.093213
+1102	638	4	2022-09-20 19:17:58.093932	2022-09-20 19:17:58.093932
+1103	633	4	2022-09-20 19:17:58.094573	2022-09-20 19:17:58.094573
+1104	635	4	2022-09-20 19:17:58.095246	2022-09-20 19:17:58.095246
+1105	628	4	2022-09-20 19:17:58.095956	2022-09-20 19:17:58.095956
+1106	634	4	2022-09-20 19:17:58.096785	2022-09-20 19:17:58.096785
+1107	616	4	2022-09-20 19:17:58.097862	2022-09-20 19:17:58.097862
+1108	639	4	2022-09-20 19:17:58.098807	2022-09-20 19:17:58.098807
+1109	636	4	2022-09-20 19:17:58.099481	2022-09-20 19:17:58.099481
+1110	618	4	2022-09-20 19:17:58.100104	2022-09-20 19:17:58.100104
+1111	503	4	2022-09-20 19:17:58.10079	2022-09-20 19:17:58.10079
+1112	630	4	2022-09-20 19:17:58.10142	2022-09-20 19:17:58.10142
+1113	615	4	2022-09-20 19:17:58.102104	2022-09-20 19:17:58.102104
+1114	625	4	2022-09-20 19:17:58.102719	2022-09-20 19:17:58.102719
+1115	375	4	2022-09-20 19:17:58.103395	2022-09-20 19:17:58.103395
+1116	619	4	2022-09-20 19:17:58.104054	2022-09-20 19:17:58.104054
+1117	623	4	2022-09-20 19:17:58.104679	2022-09-20 19:17:58.104679
+1118	621	4	2022-09-20 19:17:58.105375	2022-09-20 19:17:58.105375
+1119	614	4	2022-09-20 19:17:58.105992	2022-09-20 19:17:58.105992
+\.
+
+
+--
+-- Data for Name: devices; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.devices (id, device_name, user_agent, user_id, created_at, updated_at) FROM stdin;
+1	\N	Mozilla/5.0 (X11; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0	1	2022-08-15 19:48:49.601706	2022-08-15 19:48:49.601706
+2	\N	Mozilla/5.0 (Android 10; Mobile; rv:103.0) Gecko/103.0 Firefox/103.0	1	2022-08-16 15:45:58.484533	2022-08-16 15:45:58.484533
+3	\N	Mozilla/5.0 (Android 10; Mobile; rv:104.0) Gecko/104.0 Firefox/104.0	1	2022-09-09 15:53:09.904026	2022-09-09 15:53:09.904026
+4	\N	Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0	1	2022-09-20 19:17:57.564107	2022-09-20 19:17:57.564107
+\.
+
+
+--
+-- Data for Name: notifications; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.notifications (id, user_id, text, read, created_at, updated_at) FROM stdin;
+1	1	Your download is ready, <a href='/mapp_06ffa9e7.zip'>here you go</a>	f	2022-08-15 19:49:08.017846	2022-08-15 19:49:08.017846
+2	1	All songs have been downloaded, wipe device?	f	2022-08-15 19:59:00.620432	2022-08-15 19:59:00.620432
+3	1	Your download is ready, <a href='/mapp_5fea1849.zip'>here you go</a>	f	2022-08-16 09:18:42.046654	2022-08-16 09:18:42.046654
+4	1	Your download is ready, <a href='/mapp_156455ef.zip'>here you go</a>	f	2022-08-16 15:46:36.616906	2022-08-16 15:46:36.616906
+5	1	test notification	f	2022-08-17 07:25:51.854494	2022-08-17 07:25:51.854494
+6	1	test notification	f	2022-08-17 07:26:07.379955	2022-08-17 07:26:07.379955
+7	1	test notification	f	2022-08-17 07:26:24.547765	2022-08-17 07:26:24.547765
+8	1	test notification	f	2022-08-17 07:27:47.09612	2022-08-17 07:27:47.09612
+9	1	Your download is ready, <a href='/mapp_0a8792c4.zip'>here you go</a>	f	2022-09-20 19:19:15.890555	2022-09-20 19:19:15.890555
+\.
+
+
+--
+-- Data for Name: profiles; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.profiles (id, user_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.schema_migrations (version) FROM stdin;
+20220501094118
+20220503163330
+20220503170628
+20220504032810
+20220607134809
+20220607142825
+20220608004251
+20220608194908
+20220608211609
+20220621155408
+20220628221644
+\.
+
+
+--
+-- Data for Name: songs; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.songs (id, title, artist, year, album, genre, video_id, updated, created_at, updated_at, image_url) FROM stdin;
+27	3:15 (Breathe)	Russ				Y6-n3JRwmsE	2	2022-08-15 18:26:11.217578	2022-08-15 19:44:49.39748	https://img.youtube.com/vi/Y6-n3JRwmsE/hqdefault.jpg
+15	Nigga Shit (Swoosh)	SAINt JHN	2018	Collection One	hip hop, trap	yHN9bHKtBl4	2	2022-08-15 18:22:07.04868	2022-08-15 19:44:32.699512	https://img.youtube.com/vi/yHN9bHKtBl4/hqdefault.jpg
+23	High School Reunion	SAINt JHN	2019	Ghetto Lenny’s Love Songs	unknown	UDP-h_1Ok3I	2	2022-08-15 18:22:58.975112	2022-08-15 19:44:44.042412	https://img.youtube.com/vi/UDP-h_1Ok3I/hqdefault.jpg
+29	Prosper	Russ				MABiyJzhKp4	2	2022-08-15 18:26:15.356199	2022-08-15 19:44:51.114882	https://img.youtube.com/vi/MABiyJzhKp4/hqdefault.jpg
+16	I Can Fvcking Tell	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	OAcZ01d8ZVY	2	2022-08-15 18:22:08.550718	2022-08-15 19:44:34.083125	https://img.youtube.com/vi/OAcZ01d8ZVY/hqdefault.jpg
+8	Selfish	SAINt JHN	2018	Collection One	hip hop, trap	LtVnLCzCHeI	2	2022-08-15 18:21:49.854535	2022-08-15 19:44:23.655606	https://img.youtube.com/vi/LtVnLCzCHeI/hqdefault.jpg
+9	5 Thousand Singles	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	eQLPYKiH_B8	2	2022-08-15 18:21:50.063422	2022-08-15 19:44:24.839631	https://img.youtube.com/vi/eQLPYKiH_B8/hqdefault.jpg
+17	Roses (Imanbek remix)	SAINt JHN	2020	NRJ12 Snow Hits 2020	pop	ele2DMU49Jk	2	2022-08-15 18:22:12.06937	2022-08-15 19:44:35.299576	https://img.youtube.com/vi/ele2DMU49Jk/hqdefault.jpg
+10	Who Do You Blame	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	kReS0_2gtpg	2	2022-08-15 18:21:51.590047	2022-08-15 19:44:26.200051	https://img.youtube.com/vi/kReS0_2gtpg/hqdefault.jpg
+11	Cult4ever	SAINt JHN	2019	Ghetto Lenny’s Love Songs	unknown	qDDT01HTq5A	2	2022-08-15 18:21:53.352829	2022-08-15 19:44:27.48128	https://img.youtube.com/vi/qDDT01HTq5A/hqdefault.jpg
+12	Monica Lewinsky	SAINt JHN & A Boogie Wit da Hoodie	2019	Ghetto Lenny’s Love Songs	hip hop	U6SqN0wgpFI	2	2022-08-15 18:21:55.574699	2022-08-15 19:44:28.821777	https://img.youtube.com/vi/U6SqN0wgpFI/hqdefault.jpg
+18	White Parents Are Gonna Hate This	SAINt JHN				ciZLAEQk8wI	2	2022-08-15 18:22:16.412213	2022-08-15 19:44:36.453786	https://img.youtube.com/vi/ciZLAEQk8wI/hqdefault.jpg
+13	Wedding Day	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	4W2RjV0tqqI	2	2022-08-15 18:21:57.388006	2022-08-15 19:44:30.132059	https://img.youtube.com/vi/4W2RjV0tqqI/hqdefault.jpg
+14	All I Want Is a Yacht	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	zDEmHo0Uo5A	2	2022-08-15 18:22:00.829485	2022-08-15 19:44:31.248894	https://img.youtube.com/vi/zDEmHo0Uo5A/hqdefault.jpg
+24	Ride Slow	Russ	2017	There's Really a Wolf	unknown	iCyarMAEUVU	2	2022-08-15 18:26:07.386066	2022-08-15 19:44:45.173878	https://img.youtube.com/vi/iCyarMAEUVU/hqdefault.jpg
+19	Sucks To Be You	SAINt JHN	2020	While the World Was Burning	contemporary r&b, hip hop	OPFgOGpK3b0	2	2022-08-15 18:22:20.226182	2022-08-15 19:44:37.949013	https://img.youtube.com/vi/OPFgOGpK3b0/hqdefault.jpg
+20	Call Me After You Hear This	SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	KiEcHwLED6E	2	2022-08-15 18:22:24.217445	2022-08-15 19:44:39.200566	https://img.youtube.com/vi/KiEcHwLED6E/hqdefault.jpg
+2	SUPERDUPERKYLE	MadeinTYO & KYLE	2018	Light of Mine	unknown	wcCvg7_Fkos	2	2022-08-15 18:21:10.57898	2022-08-15 19:44:14.379215	https://img.youtube.com/vi/wcCvg7_Fkos/hqdefault.jpg
+21	Borders	Lenny Kravitz & SAINt JHN	2019	Ghetto Lenny’s Love Songs	hip hop	cgh-JcYNGuM	2	2022-08-15 18:22:26.990068	2022-08-15 19:44:40.790957	https://img.youtube.com/vi/cgh-JcYNGuM/hqdefault.jpg
+3	iSpy	KYLE & Lil Yachty	2016	iSpy	unknown	whEYfFMtkLs	2	2022-08-15 18:21:25.688115	2022-08-15 19:44:16.080504	https://img.youtube.com/vi/whEYfFMtkLs/hqdefault.jpg
+22	Surf Club	SAINt JHN	2018	Collection One	hip hop, trap	jlSVpplAqkI	2	2022-08-15 18:22:36.132075	2022-08-15 19:44:42.598316	https://img.youtube.com/vi/jlSVpplAqkI/hqdefault.jpg
+4	Reflex	SAINt JHN	2018	Collection One	hip hop, trap	KIiMR84NY9M	2	2022-08-15 18:21:42.789808	2022-08-15 19:44:17.769538	https://img.youtube.com/vi/KIiMR84NY9M/hqdefault.jpg
+37	September 16	Russ	unknown	September 16	unknown	9ftwhlbkudI	2	2022-08-15 18:26:41.050438	2022-08-15 19:45:48.391094	https://img.youtube.com/vi/9ftwhlbkudI/hqdefault.jpg
+5	Trap	SAINt JHN & Lil Baby	2019	Ghetto Lenny’s Love Songs	hip hop	t6eEJMvkZ5c	2	2022-08-15 18:21:43.872143	2022-08-15 19:44:19.112032	https://img.youtube.com/vi/t6eEJMvkZ5c/hqdefault.jpg
+6	94 Bentley	SAINt JHN	2019	Ghetto Lenny’s Love Songs	unknown	ZadUPeKrl9s	2	2022-08-15 18:21:46.387024	2022-08-15 19:44:20.445777	https://img.youtube.com/vi/ZadUPeKrl9s/hqdefault.jpg
+7	Trophies	SAINt JHN	2019	Ghetto Lenny’s Love Songs	unknown	SYjn-JeiOMc	2	2022-08-15 18:21:48.846207	2022-08-15 19:44:22.044581	https://img.youtube.com/vi/SYjn-JeiOMc/hqdefault.jpg
+25	Missin You Crazy	Russ	2018	ZOO	unknown	cuqvuffSKCI	2	2022-08-15 18:26:07.681221	2022-08-15 19:44:46.790712	https://img.youtube.com/vi/cuqvuffSKCI/hqdefault.jpg
+32	Star	Russ	2022	If Not Now, When?	unknown	buCkL0KLKFw	2	2022-08-15 18:26:19.775125	2022-08-15 19:44:55.634855	https://img.youtube.com/vi/buCkL0KLKFw/hqdefault.jpg
+26	Waves	Russ	2022	If Not Now, When?	unknown	u6v4U5vbUrQ	2	2022-08-15 18:26:09.061163	2022-08-15 19:44:48.198232	https://img.youtube.com/vi/u6v4U5vbUrQ/hqdefault.jpg
+28	Utah Freestyle	Russ				TSmuQ1G2GoU	2	2022-08-15 18:26:15.352674	2022-08-15 19:44:52.426687	https://img.youtube.com/vi/TSmuQ1G2GoU/hqdefault.jpg
+30	RENT FREE 	Russ				qU4PghlE2lE	2	2022-08-15 18:26:16.739701	2022-08-15 19:44:53.60452	https://img.youtube.com/vi/qU4PghlE2lE/hqdefault.jpg
+35	Unacceptable	Cordae				HqqJrX-SbnQ	2	2022-08-15 18:26:30.363978	2022-08-15 19:45:45.61551	https://img.youtube.com/vi/HqqJrX-SbnQ/hqdefault.jpg
+36	Fix This	Russ	2018	Just in Case	unknown	vGnuDPEsUds	2	2022-08-15 18:26:37.47886	2022-08-15 19:45:46.771341	https://img.youtube.com/vi/vGnuDPEsUds/hqdefault.jpg
+34	Therapy Music	Logic & Russ	2022	Vinyl Days	hip hop	HE1HXmiAw1o	2	2022-08-15 18:26:25.56008	2022-08-15 19:45:44.241572	https://img.youtube.com/vi/HE1HXmiAw1o/hqdefault.jpg
+38	Cherry Hill	Russ	2017	There's Really a Wolf	unknown	IoOli-fR_cs	2	2022-08-15 18:26:45.041031	2022-08-15 19:45:49.770086	https://img.youtube.com/vi/IoOli-fR_cs/hqdefault.jpg
+39	Are You Entertained (ft. Ed Sheeran)	Russ	2022	Are You Entertained	unknown	NkLe87fNWMo	2	2022-08-15 18:26:51.049968	2022-08-15 19:45:50.992393	https://img.youtube.com/vi/NkLe87fNWMo/hqdefault.jpg
+40	Aw Aw	Russ	2020	Aw Aw	unknown	wy4y3zx7lO4	2	2022-08-15 18:26:52.830351	2022-08-15 19:45:51.961134	https://img.youtube.com/vi/wy4y3zx7lO4/hqdefault.jpg
+41	Some Time	Russ				QOZke5DwV_s	2	2022-08-15 18:26:55.839611	2022-08-15 19:45:53.333634	https://img.youtube.com/vi/QOZke5DwV_s/hqdefault.jpg
+353	Sadnecessary	Milky Chance	2022	Sadnecessary	unknown	ndrCUdUi6lU	1	2022-08-16 18:31:56.80217	2022-08-28 19:46:10.900623	https://img.youtube.com/vi/ndrCUdUi6lU/hqdefault.jpg
+351	Right From Here	Milky Chance	2019	Mind the Moon	unknown	KGQLCCWWauc	2	2022-08-16 18:31:51.330729	2022-09-20 19:09:48.434327	https://img.youtube.com/vi/KGQLCCWWauc/hqdefault.jpg
+31	Never Again	Russ	2022	If Not Now, When?	unknown	2bFhL3AKyxs	2	2022-08-15 18:26:18.315489	2022-08-15 19:44:55.079201	https://img.youtube.com/vi/2bFhL3AKyxs/hqdefault.jpg
+406	Outta Pocket	24kGoldn	2021	El Dorado	unknown	jsLL6MTOHG0	2	2022-08-16 20:14:18.99712	2022-09-20 19:09:49.421238	https://img.youtube.com/vi/jsLL6MTOHG0/hqdefault.jpg
+355	Stunner	Milky Chance	2022	Sadnecessary	unknown	HHPLi3hW0jU	2	2022-08-16 18:32:07.602511	2022-09-20 19:09:46.673943	https://img.youtube.com/vi/HHPLi3hW0jU/hqdefault.jpg
+352	Fallen	Milky Chance	2019	Mind the Moon	unknown	PF_dRZl2Ark	2	2022-08-16 18:31:55.002028	2022-09-20 19:09:51.458719	https://img.youtube.com/vi/PF_dRZl2Ark/hqdefault.jpg
+354	Sweet Sun	Milky Chance	2013	Sadnecessary	unknown	vkIbns5LDow	2	2022-08-16 18:31:59.797812	2022-09-20 19:09:53.205869	https://img.youtube.com/vi/vkIbns5LDow/hqdefault.jpg
+537	Dreams, Fairytales, Fantasies	Brent Faiyaz & A$AP Ferg & Salaam Remi	2019	Floor Seats	hip hop	3ViV6aBkddw	2	2022-08-19 10:10:12.009902	2022-09-20 19:09:54.703372	https://img.youtube.com/vi/3ViV6aBkddw/hqdefault.jpg
+487	Twin Flame	NLE Choppa	2020	From Dark to Light	unknown	iikd1Tl44G0	2	2022-08-19 08:23:41.923436	2022-09-20 19:09:56.026972	https://img.youtube.com/vi/iikd1Tl44G0/hqdefault.jpg
+489	Depression	NLE Choppa	2020	Top Shotta	unknown	E2XtOP03ewE	2	2022-08-19 08:23:52.579805	2022-09-20 19:09:57.641574	https://img.youtube.com/vi/E2XtOP03ewE/hqdefault.jpg
+409	Mood	24kGoldn & iann dior	2021	Much Dance 2021	unknown	GrAchTdepsU	2	2022-08-16 20:14:22.5123	2022-09-20 19:09:58.636627	https://img.youtube.com/vi/GrAchTdepsU/hqdefault.jpg
+42	3AM	Ty Dolla $ign & Russ	2020	SHAKE THE SNOW GLOBE (deluxe)	unknown	IE4tDd-iew8	2	2022-08-15 18:27:02.779246	2022-08-16 15:41:58.234872	https://img.youtube.com/vi/IE4tDd-iew8/hqdefault.jpg
+44	Voicemail	Russ	2018	ZOO	unknown	73-Iko7I_e0	2	2022-08-15 18:27:06.38524	2022-08-16 15:41:59.514452	https://img.youtube.com/vi/73-Iko7I_e0/hqdefault.jpg
+411	Yellow Lights	24kGoldn	2021	El Dorado	unknown	yjbiik9Wb5s	2	2022-08-16 20:14:31.749964	2022-09-20 19:09:59.643749	https://img.youtube.com/vi/yjbiik9Wb5s/hqdefault.jpg
+413	3, 2, 1	24kGoldn	2021	3, 2, 1	unknown	zPSTP_EreaA	2	2022-08-16 20:14:44.330846	2022-09-20 19:10:00.523779	https://img.youtube.com/vi/zPSTP_EreaA/hqdefault.jpg
+473	Shotta Flow	NLE Choppa	2019	Shotta Flow	unknown	KTIJz6m750k	2	2022-08-19 08:20:33.948807	2022-09-20 19:10:01.444496	https://img.youtube.com/vi/KTIJz6m750k/hqdefault.jpg
+447	 We Are Young	Fun				SlCXgj2bS_A	2	2022-08-18 12:09:43.087909	2022-09-20 19:10:02.907571	https://img.youtube.com/vi/SlCXgj2bS_A/hqdefault.jpg
+475	Jiggin	NLE Choppa				1wJZTGgF34w	2	2022-08-19 08:21:02.281733	2022-09-20 19:10:04.354439	https://img.youtube.com/vi/1wJZTGgF34w/hqdefault.jpg
+491	Done	NLE Choppa	2020	From Dark to Light	unknown	BdD3T3w6qd8	2	2022-08-19 08:23:59.644801	2022-09-20 19:10:05.508734	https://img.youtube.com/vi/BdD3T3w6qd8/hqdefault.jpg
+477	N.W.A.	NLE Choppa	2019	Cottonwood	unknown	YNB4yOfTp9o	2	2022-08-19 08:21:07.381771	2022-09-20 19:10:06.530117	https://img.youtube.com/vi/YNB4yOfTp9o/hqdefault.jpg
+479	Protect	NLE Choppa	2020	Protect	unknown	682exNpOxdw	2	2022-08-19 08:21:18.821416	2022-09-20 19:10:08.014747	https://img.youtube.com/vi/682exNpOxdw/hqdefault.jpg
+539	Doe-Active	A$AP Ferg	2014	Doe-Active	unknown	kuvsXF8s4Rk	2	2022-08-19 10:10:20.600864	2022-09-20 19:10:09.381082	https://img.youtube.com/vi/kuvsXF8s4Rk/hqdefault.jpg
+481	 Forever	NLE Choppa				6_861Wduu9g	2	2022-08-19 08:21:30.87198	2022-09-20 19:10:10.711588	https://img.youtube.com/vi/6_861Wduu9g/hqdefault.jpg
+529	h u n g e r . o n . h i l l s i d e	Bas & J. Cole	2021	The Off‐Season	unknown	xAnKFdI0uyk	2	2022-08-19 10:09:23.156512	2022-09-20 19:10:12.237548	https://img.youtube.com/vi/xAnKFdI0uyk/hqdefault.jpg
+531	Under the Sun	J. Cole & DaBaby & Lute & Dreamville	2019	Revenge of the Dreamers III	unknown	-p9Gy4hkwhY	2	2022-08-19 10:09:27.675907	2022-09-20 19:10:13.520497	https://img.youtube.com/vi/-p9Gy4hkwhY/hqdefault.jpg
+575	U Said	Lil Peep	2017	Come Over When You’re Sober, Pt. 1	unknown	8pGbGjSD9kA	2	2022-08-19 12:49:25.106193	2022-09-20 19:10:15.000524	https://img.youtube.com/vi/8pGbGjSD9kA/hqdefault.jpg
+533	c l o s e	J. Cole	2021	The Off‐Season	unknown	j_ouj5asrE4	2	2022-08-19 10:09:35.660875	2022-09-20 19:10:15.957347	https://img.youtube.com/vi/j_ouj5asrE4/hqdefault.jpg
+541	- In It (Audio) ft. Latto	A$AP Ferg 				ZUvBThTJstU	2	2022-08-19 10:10:24.499429	2022-09-20 19:10:16.926178	https://img.youtube.com/vi/ZUvBThTJstU/hqdefault.jpg
+535	Plain Jane	A$AP Ferg	2017	Furious Ferg	unknown	BwmuvqFzfLI	2	2022-08-19 10:10:04.663651	2022-09-20 19:10:18.204427	https://img.youtube.com/vi/BwmuvqFzfLI/hqdefault.jpg
+543	Bezerk	A$AP Ferg & Big Sean & Hit‐Boy	2019	Bezerk	unknown	MWNBlGy707g	2	2022-08-19 10:10:26.282343	2022-09-20 19:10:19.332974	https://img.youtube.com/vi/MWNBlGy707g/hqdefault.jpg
+582	16 Lines	Lil Peep	2019	Come Over When You’re Sober, Pt. 2	unknown	DxNt7xV5aII	2	2022-08-19 12:53:14.956679	2022-09-20 19:10:20.842396	https://img.youtube.com/vi/DxNt7xV5aII/hqdefault.jpg
+545	Jet Lag	A$AP Ferg	2019	Floor Seats	hip hop	Pl81UP8bUp4	2	2022-08-19 10:10:32.514814	2022-09-20 19:10:22.390884	https://img.youtube.com/vi/Pl81UP8bUp4/hqdefault.jpg
+573	absolute in doubt	Wicca Phase Springs Eternal & Lil Peep	2020	crybaby	unknown	L3vjm1gybU4	2	2022-08-19 12:49:16.839785	2022-09-20 19:10:23.790242	https://img.youtube.com/vi/L3vjm1gybU4/hqdefault.jpg
+577	OMFG	Lil Peep	2020	HELLBOY	unknown	KI1Qpuv_z_U	2	2022-08-19 12:49:27.151316	2022-09-20 19:10:25.145422	https://img.youtube.com/vi/KI1Qpuv_z_U/hqdefault.jpg
+579	big city blues	Lil Peep & Cold Hart	2020	crybaby	unknown	6ViiarPAoYY	2	2022-08-19 12:49:35.093942	2022-09-20 19:10:26.234861	https://img.youtube.com/vi/6ViiarPAoYY/hqdefault.jpg
+581	Beamer Boy	Lil Peep	2017	Beamer Boy	unknown	ns8BC9r1YzI	2	2022-08-19 12:51:27.777073	2022-09-20 19:10:27.569065	https://img.youtube.com/vi/ns8BC9r1YzI/hqdefault.jpg
+583	life	Lil Peep	2022	feelz	unknown	fqUYKkYGQEw	2	2022-08-19 12:54:03.549755	2022-09-20 19:10:28.825686	https://img.youtube.com/vi/fqUYKkYGQEw/hqdefault.jpg
+584	Life Is Beautiful	Lil Peep	2019	Come Over When You’re Sober, Pt. 2	unknown	2ORsrbQa94M	2	2022-08-19 12:54:08.509207	2022-09-20 19:10:30.250691	https://img.youtube.com/vi/2ORsrbQa94M/hqdefault.jpg
+587	Worlds Away	Lil Peep	2020	HELLBOY	unknown	rV0UwlwYTh0	2	2022-08-19 12:54:17.319433	2022-09-20 19:10:31.134065	https://img.youtube.com/vi/rV0UwlwYTh0/hqdefault.jpg
+585	Live Forever	Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	TFVK1jnXl_Q	2	2022-08-19 12:54:14.076509	2022-09-20 19:10:32.118969	https://img.youtube.com/vi/TFVK1jnXl_Q/hqdefault.jpg
+586	feelz	Lil Peep	2022	feelz	unknown	4ncAL0RRy8k	2	2022-08-19 12:54:14.739336	2022-09-20 19:10:33.149082	https://img.youtube.com/vi/4ncAL0RRy8k/hqdefault.jpg
+588	Falling Down	XXXTENTACION & Lil Peep	2019	W9 Hits 2019, Vol. 2	unknown	-jRKsiAOAA8	2	2022-08-19 12:54:19.538721	2022-09-20 19:10:34.478121	https://img.youtube.com/vi/-jRKsiAOAA8/hqdefault.jpg
+589	shiver	Lil Peep	2016	VERTIGO	unknown	Fzs_6XufkI0	2	2022-08-19 12:54:19.899044	2022-09-20 19:10:35.421773	https://img.youtube.com/vi/Fzs_6XufkI0/hqdefault.jpg
+590	Liar	Lil Peep	2019	EVERYBODY’S EVERYTHING	unknown	2JOQLAZpKo8	2	2022-08-19 12:54:30.880468	2022-09-20 19:10:36.709734	https://img.youtube.com/vi/2JOQLAZpKo8/hqdefault.jpg
+591	ghost boy	Lil Peep	2017	Lil Peep; Part One	unknown	NiWFVHbB_Eo	2	2022-08-19 12:54:30.881038	2022-09-20 19:10:37.570837	https://img.youtube.com/vi/NiWFVHbB_Eo/hqdefault.jpg
+483	Paranoid	NLE Choppa	2020	Top Shotta	unknown	yu27cgo_rvc	2	2022-08-19 08:21:34.589695	2022-09-20 19:10:38.763626	https://img.youtube.com/vi/yu27cgo_rvc/hqdefault.jpg
+485	 Birdboy	NLE Choppa				FF-ig03BZbs	2	2022-08-19 08:23:24.383215	2022-09-20 19:09:50.213535	https://img.youtube.com/vi/FF-ig03BZbs/hqdefault.jpg
+46	What They Want	Russ	2017	There's Really a Wolf	unknown	oorK4RPgZ8Q	2	2022-08-15 18:27:40.88238	2022-08-15 19:46:23.146928	https://img.youtube.com/vi/oorK4RPgZ8Q/hqdefault.jpg
+47	Fuck the World (Summer in London)	Brent Faiyaz	2020	Fuck the World	r&b	k_Wd87fHX5g	2	2022-08-15 18:27:59.454674	2022-08-15 19:46:24.66375	https://img.youtube.com/vi/k_Wd87fHX5g/hqdefault.jpg
+59	I Ain't Gonna Be the First to Cry	Bob Moses	2015	All In All	electronic	MzKrszohZVY	2	2022-08-15 18:30:09.078622	2022-08-15 19:46:49.519995	https://img.youtube.com/vi/MzKrszohZVY/hqdefault.jpg
+48	King's Rant	Masego				wsLlgcagkUc	2	2022-08-15 18:28:30.140545	2022-08-15 19:46:26.407128	https://img.youtube.com/vi/wsLlgcagkUc/hqdefault.jpg
+49	Tadow	FKJ & Masego	2018	Lady Lady	neo soul	zwf5MpcuKDM	2	2022-08-15 18:28:37.015291	2022-08-15 19:46:28.474335	https://img.youtube.com/vi/zwf5MpcuKDM/hqdefault.jpg
+66	Numb	Elderbrook	2020	Why Do We Shake in the Cold?	unknown	5FVhN8F8qxs	2	2022-08-15 18:30:57.84721	2022-08-15 19:47:04.716072	https://img.youtube.com/vi/5FVhN8F8qxs/hqdefault.jpg
+50	Lady Lady	Masego	2018	Lady Lady	neo soul	UgjmPHCAmR0	2	2022-08-15 18:28:48.075286	2022-08-15 19:46:29.674762	https://img.youtube.com/vi/UgjmPHCAmR0/hqdefault.jpg
+60	Love We Found	Bob Moses	2020	Desire	electronic	St78u4TXqVg	2	2022-08-15 18:30:15.214952	2022-08-15 19:46:52.154051	https://img.youtube.com/vi/St78u4TXqVg/hqdefault.jpg
+51	Mystery Lady	Don Toliver & Masego	2020	Studying Abroad	contemporary r&b	5i6A1IHAQsg	2	2022-08-15 18:28:58.911273	2022-08-15 19:46:31.611431	https://img.youtube.com/vi/5i6A1IHAQsg/hqdefault.jpg
+53	Desire	Bob Moses	2020	Falling into Focus	unknown	S4EKJFgBqDY	2	2022-08-15 18:29:50.418494	2022-08-15 19:46:36.10786	https://img.youtube.com/vi/S4EKJFgBqDY/hqdefault.jpg
+71	Devil Eyes	Hippie Sabotage	2016	Providence	unknown	Ywq6FMLbWH4	2	2022-08-15 18:32:12.053715	2022-08-15 19:47:12.88198	https://img.youtube.com/vi/Ywq6FMLbWH4/hqdefault.jpg
+62	Tearing Me Up	Bob Moses	2016	City Lounge: The Deep Session 02 (The Finest Music Selection : Deep House, Nu Disco, Downtempo, Cool Tempo, Lounge, Electro)	unknown	NAS5Z1GvxrQ	2	2022-08-15 18:30:25.341811	2022-08-15 19:46:55.438609	https://img.youtube.com/vi/NAS5Z1GvxrQ/hqdefault.jpg
+54	Battle Lines	Bob Moses	2018	Battle Lines	unknown	aWTGQ4oa2tE	2	2022-08-15 18:29:52.518446	2022-08-15 19:46:38.01265	https://img.youtube.com/vi/aWTGQ4oa2tE/hqdefault.jpg
+67	Your Soul	Hippie Sabotage	2014	The Sunny Album	unknown	EPAPMJ-tCig	2	2022-08-15 18:31:50.891525	2022-08-15 19:47:06.194489	https://img.youtube.com/vi/EPAPMJ-tCig/hqdefault.jpg
+55	Grace	Bob Moses	2015	All In All	electronic	hyAoQAzwX5g	2	2022-08-15 18:29:54.014753	2022-08-15 19:46:40.791785	https://img.youtube.com/vi/hyAoQAzwX5g/hqdefault.jpg
+56	Heaven Only Knows	Bob Moses	2019	Unplugged	unknown	xjt6tZmuoWM	2	2022-08-15 18:29:56.864308	2022-08-15 19:46:42.833937	https://img.youtube.com/vi/xjt6tZmuoWM/hqdefault.jpg
+57	Outlier	Bob Moses	2020	Desire	electronic	npuDaBH0f6U	2	2022-08-15 18:29:57.365321	2022-08-15 19:46:45.012941	https://img.youtube.com/vi/npuDaBH0f6U/hqdefault.jpg
+45	Russ - It's All In Your Head (Audio Book)	Russ				GEQ_3Lis41s	2	2022-08-15 18:27:32.324281	2022-08-15 19:46:22.343859	https://img.youtube.com/vi/GEQ_3Lis41s/hqdefault.jpg
+58	The Only Thing We Know	Bob Moses	2018	Battle Lines	unknown	RDiKw_Xv1Aw	2	2022-08-15 18:30:07.459623	2022-08-15 19:46:47.045801	https://img.youtube.com/vi/RDiKw_Xv1Aw/hqdefault.jpg
+63	Inner Light	Elderbrook & Bob Moses	2021	Innerlight EP	unknown	xZiSW0rI_9Y	2	2022-08-15 18:30:36.602515	2022-08-15 19:46:57.278413	https://img.youtube.com/vi/xZiSW0rI_9Y/hqdefault.jpg
+68	Whiskey	Hippie Sabotage	2020	Red Moon Rising	unknown	QpgevVPHI-4	2	2022-08-15 18:31:53.744734	2022-08-15 19:47:08.662903	https://img.youtube.com/vi/QpgevVPHI-4/hqdefault.jpg
+61	The Blame	Bob Moses	2020	Desire	electronic	AUzjKBC46zo	2	2022-08-15 18:30:21.864588	2022-08-15 19:47:00.146133	https://img.youtube.com/vi/AUzjKBC46zo/hqdefault.jpg
+78	Better	Khalid	2018	Suncity	unknown	KkOF8UiB7u8	2	2022-08-15 18:32:53.006192	2022-08-15 19:47:25.151483	https://img.youtube.com/vi/KkOF8UiB7u8/hqdefault.jpg
+64	Something About You (Elderbrook VIP)	Elderbrook & Rudimental	2019	Clubfete 2020: 63 Club Dance & Party Hits	unknown	baQ2IbszCRU	2	2022-08-15 18:30:54.470498	2022-08-15 19:47:01.664932	https://img.youtube.com/vi/baQ2IbszCRU/hqdefault.jpg
+65	Talking	Elderbrook	2017	Talking	unknown	apB2G3Y9RXw	2	2022-08-15 18:30:56.291232	2022-08-15 19:47:03.035153	https://img.youtube.com/vi/apB2G3Y9RXw/hqdefault.jpg
+72	Wild One	Hippie Sabotage	2020	Red Moon Rising	unknown	igeBD55Nzs8	2	2022-08-15 18:32:13.981899	2022-08-15 19:47:14.593433	https://img.youtube.com/vi/igeBD55Nzs8/hqdefault.jpg
+69	Floating Palace	Hippie Sabotage	2021	Floating Palace	unknown	31bC0qDQdoQ	2	2022-08-15 18:31:58.470351	2022-08-15 19:47:10.104648	https://img.youtube.com/vi/31bC0qDQdoQ/hqdefault.jpg
+70	Red Moon Rising	Hippie Sabotage	2020	Red Moon Rising	unknown	BKlRemAmsaw	2	2022-08-15 18:32:08.10237	2022-08-15 19:47:11.461976	https://img.youtube.com/vi/BKlRemAmsaw/hqdefault.jpg
+75	Safe Harbor	Hippie Sabotage	2021	Floating Palace	unknown	RZgQD532m-k	2	2022-08-15 18:32:23.880063	2022-08-15 19:47:20.344216	https://img.youtube.com/vi/RZgQD532m-k/hqdefault.jpg
+73	Life Happens	Hippie Sabotage	2021	Floating Palace	unknown	9dIYAN1Idrc	2	2022-08-15 18:32:15.352597	2022-08-15 19:47:16.413199	https://img.youtube.com/vi/9dIYAN1Idrc/hqdefault.jpg
+74	Distress	Hippie Sabotage	2021	Floating Palace	unknown	ONbwHjJLTfs	2	2022-08-15 18:32:22.401593	2022-08-15 19:47:18.295728	https://img.youtube.com/vi/ONbwHjJLTfs/hqdefault.jpg
+77	Enough	Hippie Sabotage	2020	Red Moon Rising	unknown	LgW1-K_Dp3o	2	2022-08-15 18:32:31.771504	2022-08-15 19:47:23.539599	https://img.youtube.com/vi/LgW1-K_Dp3o/hqdefault.jpg
+76	Two Rivers	Hippie Sabotage	2020	Red Moon Rising	unknown	UK71SShzdLA	2	2022-08-15 18:32:24.66418	2022-08-15 19:47:21.729476	https://img.youtube.com/vi/UK71SShzdLA/hqdefault.jpg
+79	Young Dumb & Broke	Khalid	unknown	unknown	unknown	g9Aaf1fWdLQ	2	2022-08-15 18:32:56.235907	2022-08-15 19:47:26.802102	https://img.youtube.com/vi/g9Aaf1fWdLQ/hqdefault.jpg
+80	Coaster	Khalid	2017	American Teen	unknown	vAs7H_OoCeM	2	2022-08-15 18:32:58.667355	2022-08-15 19:47:28.388272	https://img.youtube.com/vi/vAs7H_OoCeM/hqdefault.jpg
+81	Saved	Khalid	2018	So Fresh: The Hits of Autumn 2018	unknown	Dyg32hMf7Fk	2	2022-08-15 18:33:00.183877	2022-08-15 19:47:29.876614	https://img.youtube.com/vi/Dyg32hMf7Fk/hqdefault.jpg
+82	Motion	Khalid	2018	Suncity	unknown	P1tI4VFMRmE	2	2022-08-15 18:33:07.426652	2022-08-15 19:47:31.584811	https://img.youtube.com/vi/P1tI4VFMRmE/hqdefault.jpg
+83	Hundred	Khalid	2019	Free Spirit	unknown	qcGNoZ3r9t8	2	2022-08-15 18:33:09.687628	2022-08-15 19:47:33.635265	https://img.youtube.com/vi/qcGNoZ3r9t8/hqdefault.jpg
+84	Right Back	Khalid & A Boogie Wit da Hoodie	2019	Bravo Hits 107	unknown	IKDxdxwOaJE	2	2022-08-15 18:33:10.566437	2022-08-15 19:47:35.236024	https://img.youtube.com/vi/IKDxdxwOaJE/hqdefault.jpg
+356	State of Elevation	Dillon Cooper	2013	Cozmik	unknown	3rg3RNqN1aM	2	2022-08-16 18:52:15.5982	2022-09-20 19:10:41.435086	https://img.youtube.com/vi/3rg3RNqN1aM/hqdefault.jpg
+43	Psycho Pt.2	Russ	2016	Psycho Pt.2	unknown	28ip6Xavjf4	2	2022-08-15 18:27:03.461953	2022-08-15 19:45:55.913325	https://img.youtube.com/vi/28ip6Xavjf4/hqdefault.jpg
+358	RGF Island	Fetty Wap	2015	Stay in the Loop 6	unknown	bl5egtkC51Y	2	2022-08-16 18:52:37.796862	2022-09-20 19:10:40.021986	https://img.youtube.com/vi/bl5egtkC51Y/hqdefault.jpg
+417	THOT!	ZEDSU & Tokyo’s Revenge	2019	MDNGHT (SIDE B)	unknown	ZwopqMSoN2s	2	2022-08-16 20:20:17.451401	2022-09-20 19:10:43.408158	https://img.youtube.com/vi/ZwopqMSoN2s/hqdefault.jpg
+85	Numb	Khalid & Marshmello	2022	Numb	unknown	LgTDgu2IrqE	2	2022-08-15 18:33:12.288364	2022-08-15 19:47:36.566822	https://img.youtube.com/vi/LgTDgu2IrqE/hqdefault.jpg
+448	River	Eminem & Ed Sheeran				3BXDsVD6O10	2	2022-08-18 13:48:12.480237	2022-09-20 19:10:44.814119	https://img.youtube.com/vi/3BXDsVD6O10/hqdefault.jpg
+492	In the UK	NLE Choppa	2022	In the UK	unknown	Keg31bCrXYg	2	2022-08-19 08:24:40.390602	2022-09-20 19:10:46.145606	https://img.youtube.com/vi/Keg31bCrXYg/hqdefault.jpg
+476	Apart From You	NLE Choppa	2022	Apart From You	unknown	pWyvH9Ydg30	2	2022-08-19 08:21:06.474877	2022-09-20 19:10:47.640072	https://img.youtube.com/vi/pWyvH9Ydg30/hqdefault.jpg
+478	Make Em Say	NLE Choppa & Latto	2020	Top Shotta	unknown	tOr2wgvL4SI	2	2022-08-19 08:21:13.99501	2022-09-20 19:10:49.094038	https://img.youtube.com/vi/tOr2wgvL4SI/hqdefault.jpg
+540	Value	A$AP Ferg	2020	Floor Seats II	unknown	ouSf2HlEMJk	2	2022-08-19 10:10:22.266808	2022-09-20 19:10:50.420395	https://img.youtube.com/vi/ouSf2HlEMJk/hqdefault.jpg
+480	Clicc Clacc	NLE Choppa	2019	Cottonwood	unknown	6CWmxz1x0E0	2	2022-08-19 08:21:27.002198	2022-09-20 19:10:51.233195	https://img.youtube.com/vi/6CWmxz1x0E0/hqdefault.jpg
+530	Crooked Smile	J. Cole & TLC	2014	Clubbing 2014	unknown	2KK_Mxbc91I	2	2022-08-19 10:09:26.722185	2022-09-20 19:10:53.030759	https://img.youtube.com/vi/2KK_Mxbc91I/hqdefault.jpg
+357	Trap Queen	Fetty Wap & Gradur	2015	ShegueyVara 2	unknown	bIR5tBW5hlQ	2	2022-08-16 18:52:28.056947	2022-09-20 19:10:54.712491	https://img.youtube.com/vi/bIR5tBW5hlQ/hqdefault.jpg
+359	Again	Fetty Wap	2015	Stay in the Loop 4: Schools Out	unknown	77suwtdWzpk	2	2022-08-16 18:52:41.421875	2022-09-20 19:10:57.046685	https://img.youtube.com/vi/77suwtdWzpk/hqdefault.jpg
+361	D.A.M.	Fetty Wap	2015	Fetty Wap	unknown	9ooKiXgDol0	2	2022-08-16 18:52:48.258027	2022-09-20 19:10:58.695936	https://img.youtube.com/vi/9ooKiXgDol0/hqdefault.jpg
+363	Praise God	Kanye West				9sJZOGxRxwM	2	2022-08-16 18:53:19.693971	2022-09-20 19:11:00.057407	https://img.youtube.com/vi/9sJZOGxRxwM/hqdefault.jpg
+365	Through The Wire	Kanye West				AE8y25CcE6s	2	2022-08-16 18:53:23.54178	2022-09-20 19:11:01.599246	https://img.youtube.com/vi/AE8y25CcE6s/hqdefault.jpg
+367	Heartless	Kanye West	2015	808s & Heartbreak - Live at Hollywood Bowl	unknown	Co0tTeuUVhU	2	2022-08-16 18:53:28.045236	2022-09-20 19:11:02.860528	https://img.youtube.com/vi/Co0tTeuUVhU/hqdefault.jpg
+369	Heartless	Kanye West	2015	808s & Heartbreak - Live at Hollywood Bowl	unknown	xk9EuEwMKcM	2	2022-08-16 18:53:30.154831	2022-09-20 19:11:04.089941	https://img.youtube.com/vi/xk9EuEwMKcM/hqdefault.jpg
+371	Moon	Kanye West			unknown	fMjasXiIhiQ	2	2022-08-16 18:53:34.628773	2022-09-20 19:11:05.016817	https://img.youtube.com/vi/fMjasXiIhiQ/hqdefault.jpg
+373	Love Lockdown	Kanye West				ek_T6atbfe0	2	2022-08-16 18:53:39.401379	2022-09-20 19:11:06.837655	https://img.youtube.com/vi/ek_T6atbfe0/hqdefault.jpg
+482	Untold	NLE Choppa	2019	Cottonwood	unknown	bef4RsRDPtM	2	2022-08-19 08:21:31.368775	2022-09-20 19:11:07.913009	https://img.youtube.com/vi/bef4RsRDPtM/hqdefault.jpg
+415	More Than Friends	24kGoldn	2021	More Than Friends	unknown	YDCmn_F7vbY	2	2022-08-16 20:14:49.084331	2022-09-20 19:11:09.022517	https://img.youtube.com/vi/YDCmn_F7vbY/hqdefault.jpg
+484	Man Down	NLE Choppa	2020	From Dark to Light	unknown	m6veiHllVXc	2	2022-08-19 08:21:42.171986	2022-09-20 19:11:10.339586	https://img.youtube.com/vi/m6veiHllVXc/hqdefault.jpg
+486	Shotta Flow 6	NLE Choppa	2021	Me vs. Me	unknown	G8SQbvEzN4g	2	2022-08-19 08:23:38.103792	2022-09-20 19:11:11.783154	https://img.youtube.com/vi/G8SQbvEzN4g/hqdefault.jpg
+532	Crooked Smile	J. Cole & TLC	2014	Clubbing 2014	unknown	WKW5XRRDH00	2	2022-08-19 10:09:30.491132	2022-09-20 19:11:13.733578	https://img.youtube.com/vi/WKW5XRRDH00/hqdefault.jpg
+488	LOAD IT UP	NLE Choppa & Juicy J	2020	Load It Up	unknown	Gac8DOSRVko	2	2022-08-19 08:23:50.218512	2022-09-20 19:11:15.008186	https://img.youtube.com/vi/Gac8DOSRVko/hqdefault.jpg
+548	Mask	A$AP Ferg & Antha	2020	Floor Seats II	unknown	QaW5KDqRcYg	2	2022-08-19 10:10:37.332799	2022-09-20 19:11:16.740298	https://img.youtube.com/vi/QaW5KDqRcYg/hqdefault.jpg
+534	Change	J. Cole	2016	4 Your Eyez Only	unknown	cZ0BEJricd8	2	2022-08-19 10:09:43.67188	2022-09-20 19:11:18.852733	https://img.youtube.com/vi/cZ0BEJricd8/hqdefault.jpg
+542	New Level	Future & A$AP Ferg	2016	Always Strive and Prosper	unknown	exjgZ-a399o	2	2022-08-19 10:10:25.148104	2022-09-20 19:11:20.724758	https://img.youtube.com/vi/exjgZ-a399o/hqdefault.jpg
+536	Shabba	A$AP Rocky & A$AP Ferg	2014	Clubbing 2014	unknown	keD38A9OQfA	2	2022-08-19 10:10:07.861006	2022-09-20 19:11:22.875654	https://img.youtube.com/vi/keD38A9OQfA/hqdefault.jpg
+538	Work (remix)	A$AP Rocky & French Montana & Trinidad James & A$AP Ferg & ScHoolboy Q	2013	Work (remix)	unknown	1MiXzkKBmwI	2	2022-08-19 10:10:18.793124	2022-09-20 19:11:25.070666	https://img.youtube.com/vi/1MiXzkKBmwI/hqdefault.jpg
+544	Hood Pope	A$AP Ferg	2013	Trap Lord	unknown	GtNqtgL754I	2	2022-08-19 10:10:30.301354	2022-09-20 19:11:26.648566	https://img.youtube.com/vi/GtNqtgL754I/hqdefault.jpg
+546	Floor Seats	A$AP Ferg	2019	Floor Seats	hip hop	_HZI3b_F3M4	2	2022-08-19 10:10:32.622997	2022-09-20 19:11:27.785845	https://img.youtube.com/vi/_HZI3b_F3M4/hqdefault.jpg
+550	Praise the Lord (Da Shine)	A$AP Rocky & Skepta	2018	TESTING	unknown	_eDpH4hMW1o	2	2022-08-19 10:10:52.460518	2022-09-20 19:11:29.374468	https://img.youtube.com/vi/_eDpH4hMW1o/hqdefault.jpg
+554	Goldie	A$AP Rocky	2012	TRILL BEATZ	unknown	Q8XhuFs5ZXs	2	2022-08-19 10:11:02.765364	2022-09-20 19:11:30.789599	https://img.youtube.com/vi/Q8XhuFs5ZXs/hqdefault.jpg
+552	Wassup	A$AP Rocky	2012	Live Love Purple	unknown	wctnQQ-RLek	2	2022-08-19 10:10:57.122086	2022-09-20 19:11:31.844652	https://img.youtube.com/vi/wctnQQ-RLek/hqdefault.jpg
+576	castles	Lil Peep & Lil Tracy				As1bpICMhzs	2	2022-08-19 12:49:25.152332	2022-09-20 19:11:32.821035	https://img.youtube.com/vi/As1bpICMhzs/hqdefault.jpg
+556	Fashion Killa	A$AP Rocky	2013	Bravo Black Hits, Vol. 28	unknown	snY-MhPcPg0	2	2022-08-19 10:11:05.58529	2022-09-20 19:11:34.536162	https://img.youtube.com/vi/snY-MhPcPg0/hqdefault.jpg
+558	Babushka Boi	A$AP Rocky	2019	Babushka Boi	unknown	WZFruzCRsek	2	2022-08-19 10:11:20.839644	2022-09-20 19:11:35.971072	https://img.youtube.com/vi/WZFruzCRsek/hqdefault.jpg
+574	right here ft. Horse Head	Lil Peep				m-44PIocS_4	2	2022-08-19 12:49:19.497661	2022-09-20 19:11:37.217887	https://img.youtube.com/vi/m-44PIocS_4/hqdefault.jpg
+578	witchblades	Lil Peep & Lil Tracy	2018	Live fast die young and leave a good looking corpse	unknown	E7sP6t1QyrI	2	2022-08-19 12:49:28.94887	2022-09-20 19:11:38.395831	https://img.youtube.com/vi/E7sP6t1QyrI/hqdefault.jpg
+580	I’ve Been Waiting	iLoveMakonnen & Fall Out Boy & Lil Peep	2019	NRJ Just Hits 2019	unknown	dQYPimscA20	2	2022-08-19 12:50:58.62185	2022-09-20 19:11:39.988225	https://img.youtube.com/vi/dQYPimscA20/hqdefault.jpg
+474	Picture Me Grapin’	NLE Choppa	2020	From Dark to Light	unknown	ujMZ97uej8Q	2	2022-08-19 08:20:40.745935	2022-09-20 19:11:41.560074	https://img.youtube.com/vi/ujMZ97uej8Q/hqdefault.jpg
+490	Molly	NLE Choppa	2020	Top Shotta	unknown	zU0pbYmcPQE	2	2022-08-19 08:23:58.069963	2022-09-20 19:10:42.191985	https://img.youtube.com/vi/zU0pbYmcPQE/hqdefault.jpg
+114	I Like You (A Happier Song)	Doja Cat & Post Malone	2022	Twelve Carat Toothache	unknown	_a0T5qwxANg	2	2022-08-15 19:22:00.912069	2022-08-15 19:48:27.859848	https://img.youtube.com/vi/_a0T5qwxANg/hqdefault.jpg
+110	Hollywood’s Bleeding	Post Malone	2019	Hollywood’s Bleeding	hip hop	w5GrxfjuTTI	2	2022-08-15 19:21:50.393442	2022-08-15 19:48:21.59688	https://img.youtube.com/vi/w5GrxfjuTTI/hqdefault.jpg
+120	I Know	Post Malone	2019	Hollywood’s Bleeding	hip hop	k7fiZ_if2Bg	2	2022-08-15 19:22:10.791815	2022-08-15 19:48:36.869436	https://img.youtube.com/vi/k7fiZ_if2Bg/hqdefault.jpg
+86	Skyline	Khalid	2022	Skyline	unknown	Z-0tTi7GaPg	2	2022-08-15 18:33:15.761968	2022-08-15 19:47:38.088472	https://img.youtube.com/vi/Z-0tTi7GaPg/hqdefault.jpg
+111	One Right Now	Post Malone & The Weeknd	2021	One Right Now	unknown	OCogbzIvYg0	2	2022-08-15 19:21:53.923246	2022-08-15 19:48:23.132128	https://img.youtube.com/vi/OCogbzIvYg0/hqdefault.jpg
+115	I’m Gonna Be	Post Malone	2019	Hollywood’s Bleeding	unknown	s1XbPXdgEEA	2	2022-08-15 19:22:02.91486	2022-08-15 19:48:29.265653	https://img.youtube.com/vi/s1XbPXdgEEA/hqdefault.jpg
+112	Take What You Want	Ozzy Osbourne & Post Malone & Travis Scott	2019	Hollywood’s Bleeding	hip hop	LYa_ReqRlcs	2	2022-08-15 19:21:57.209013	2022-08-15 19:48:24.723071	https://img.youtube.com/vi/LYa_ReqRlcs/hqdefault.jpg
+87	Last Call	Khalid	2022	Last Call	unknown	yD_v9Ol38BE	2	2022-08-15 18:33:21.320669	2022-08-15 19:47:40.15026	https://img.youtube.com/vi/yD_v9Ol38BE/hqdefault.jpg
+96	Keep Me	Khalid	2017	American Teen	unknown	fHqL5KO_hUM	2	2022-08-15 18:34:33.600716	2022-08-15 19:47:54.451524	https://img.youtube.com/vi/fHqL5KO_hUM/hqdefault.jpg
+97	Weekend	Miguel & Mac Miller	2015	GO:OD AM	unknown	EAL3PuyulZw	2	2022-08-15 18:42:08.641073	2022-08-15 19:47:55.974229	https://img.youtube.com/vi/EAL3PuyulZw/hqdefault.jpg
+88	Vertigo	Khalid	2018	Suncity	unknown	brq-z2IlfDA	2	2022-08-15 18:33:32.849696	2022-08-15 19:47:42.167062	https://img.youtube.com/vi/brq-z2IlfDA/hqdefault.jpg
+103	White Crime	Lil Dicky	2015	Professional Rapper	unknown	S7j5gtiwBLo	2	2022-08-15 18:44:30.591763	2022-08-15 19:48:06.845533	https://img.youtube.com/vi/S7j5gtiwBLo/hqdefault.jpg
+100	Lemme Freak	Lil Dicky	2015	Professional Rapper	unknown	zbmH7iX9sJE	2	2022-08-15 18:44:18.487058	2022-08-15 19:48:01.929589	https://img.youtube.com/vi/zbmH7iX9sJE/hqdefault.jpg
+98	Sky Walker	Miguel & Travis Scott	2017	War & Leisure	unknown	c5zuHTK4XHc	2	2022-08-15 18:42:54.578752	2022-08-15 19:47:57.75209	https://img.youtube.com/vi/c5zuHTK4XHc/hqdefault.jpg
+99	$ave Dat Money	Lil Dicky & Rich Homie Quan & Fetty Wap	2015	$ave Dat Money	hip hop	C3X_zx8q8_s	2	2022-08-15 18:44:11.0019	2022-08-15 19:47:59.747434	https://img.youtube.com/vi/C3X_zx8q8_s/hqdefault.jpg
+104	Lion King	Lil Dicky	2014	Hump Days	unknown	7_RlH7rnAqg	2	2022-08-15 18:45:00.280493	2022-08-15 19:48:09.095907	https://img.youtube.com/vi/7_RlH7rnAqg/hqdefault.jpg
+89	Love Lies	Khalid & Normani				izIyhdEHSPo	2	2022-08-15 18:33:34.029522	2022-08-15 19:47:43.642916	https://img.youtube.com/vi/izIyhdEHSPo/hqdefault.jpg
+105	Pillow Talking	Lil Dicky & Brain	2015	Professional Rapper	unknown	ZFPT3PMU6co	2	2022-08-15 18:45:03.420627	2022-08-15 19:48:13.722813	https://img.youtube.com/vi/ZFPT3PMU6co/hqdefault.jpg
+91	Suncity	Khalid & Empress Of	2018	Suncity	unknown	iI2f8eA8x4Q	2	2022-08-15 18:33:40.833774	2022-08-15 19:47:46.531074	https://img.youtube.com/vi/iI2f8eA8x4Q/hqdefault.jpg
+106	Professional Rapper	Lil Dicky & Snoop Dogg	2015	Professional Rapper	unknown	LlU4FuIJT2k	2	2022-08-15 18:45:16.31769	2022-08-15 19:48:16.157321	https://img.youtube.com/vi/LlU4FuIJT2k/hqdefault.jpg
+92	Saturday Nights	Khalid	2018	Suncity	unknown	esh8mNoPxGE	2	2022-08-15 18:33:43.02984	2022-08-15 19:47:48.00585	https://img.youtube.com/vi/esh8mNoPxGE/hqdefault.jpg
+107	Let's Get Lost	Devon Baldwin & G‐Eazy	2014	These Things Happen	unknown	tsrl3AVsUlE	2	2022-08-15 19:21:27.061369	2022-08-15 19:48:17.969526	https://img.youtube.com/vi/tsrl3AVsUlE/hqdefault.jpg
+101	Too High	Lil Dicky	2014	So Hard	unknown	fhfJzrO9LUQ	2	2022-08-15 18:44:24.934829	2022-08-15 19:48:03.639302	https://img.youtube.com/vi/fhfJzrO9LUQ/hqdefault.jpg
+113	Stay	Post Malone	2018	beerbongs & bentleys	hip hop	4Ukh9aQBzWc	2	2022-08-15 19:21:59.298009	2022-08-15 19:48:26.321827	https://img.youtube.com/vi/4Ukh9aQBzWc/hqdefault.jpg
+108	Wow.	Post Malone	2019	Hollywood’s Bleeding	unknown	NA4uIFbVCPM	2	2022-08-15 19:21:46.048655	2022-08-15 19:48:19.029803	https://img.youtube.com/vi/NA4uIFbVCPM/hqdefault.jpg
+93	Location	Khalid	2017	Annie Mac Presents 2017	unknown	j0bbRsa-Y9E	2	2022-08-15 18:33:47.169047	2022-08-15 19:47:49.715598	https://img.youtube.com/vi/j0bbRsa-Y9E/hqdefault.jpg
+94	My Bad	Khalid	2019	My Bad	unknown	WzfRhSU9_qA	2	2022-08-15 18:33:49.533679	2022-08-15 19:47:51.059049	https://img.youtube.com/vi/WzfRhSU9_qA/hqdefault.jpg
+95	Free Spirit	Khalid	2019	Free Spirit	unknown	qZvTGV8RM94	2	2022-08-15 18:33:58.784131	2022-08-15 19:47:52.420459	https://img.youtube.com/vi/qZvTGV8RM94/hqdefault.jpg
+102	Freaky Friday	Lil Dicky & Chris Brown	2019	Drippin’ In Sauce	unknown	u8eN7ll73Do	2	2022-08-15 18:44:27.601442	2022-08-15 19:48:05.152874	https://img.youtube.com/vi/u8eN7ll73Do/hqdefault.jpg
+109	Cooped Up	Roddy Ricch & Post Malone	2022	Twelve Carat Toothache	unknown	LUBUchYczsA	2	2022-08-15 19:21:47.849819	2022-08-15 19:48:20.507693	https://img.youtube.com/vi/LUBUchYczsA/hqdefault.jpg
+118	Congratulations	Quavo & Post Malone	2017	TRAPJUMPIN VOL.1	unknown	R8vpQdZErbw	2	2022-08-15 19:22:09.206914	2022-08-15 19:48:34.313934	https://img.youtube.com/vi/R8vpQdZErbw/hqdefault.jpg
+116	Die for Me	Halsey & Future & Post Malone	2019	Hollywood’s Bleeding	unknown	I_QpDE-Uco0	2	2022-08-15 19:22:04.719332	2022-08-15 19:48:30.958727	https://img.youtube.com/vi/I_QpDE-Uco0/hqdefault.jpg
+117	Wasting Angels	The Kid LAROI & Post Malone	2022	Twelve Carat Toothache	unknown	AfwRUj8JDXg	2	2022-08-15 19:22:07.469014	2022-08-15 19:48:32.700325	https://img.youtube.com/vi/AfwRUj8JDXg/hqdefault.jpg
+119	A Thousand Bad Times	Post Malone	2019	Hollywood’s Bleeding	unknown	ul-9U681Y2c	2	2022-08-15 19:22:10.348	2022-08-15 19:48:35.771781	https://img.youtube.com/vi/ul-9U681Y2c/hqdefault.jpg
+122	rockstar	21 Savage & Post Malone	2018	beerbongs & bentleys	hip hop	4GFAZBKZVJY	2	2022-08-15 19:22:17.611567	2022-08-15 19:48:39.605482	https://img.youtube.com/vi/4GFAZBKZVJY/hqdefault.jpg
+121	White Iverson	Post Malone	2015	Stay in the Loop 4: Schools Out	unknown	XhmGfZ1SeuY	2	2022-08-15 19:22:13.498456	2022-08-15 19:48:38.008115	https://img.youtube.com/vi/XhmGfZ1SeuY/hqdefault.jpg
+123	Reputation	Post Malone	2022	Twelve Carat Toothache	unknown	JnzVOgNR_rE	2	2022-08-15 19:22:20.36141	2022-08-15 19:48:41.30616	https://img.youtube.com/vi/JnzVOgNR_rE/hqdefault.jpg
+124	Enemies	DaBaby & Post Malone	2019	Hollywood’s Bleeding	hip hop	qT_y5Yc8jSA	2	2022-08-15 19:22:20.5965	2022-08-15 19:48:42.79999	https://img.youtube.com/vi/qT_y5Yc8jSA/hqdefault.jpg
+125	Internet	Post Malone	2019	Hollywood’s Bleeding	unknown	weXNuvoyEr0	2	2022-08-15 19:22:21.012333	2022-08-15 19:48:43.628649	https://img.youtube.com/vi/weXNuvoyEr0/hqdefault.jpg
+126	Insane	Post Malone	2022	Twelve Carat Toothache	unknown	GrAkPwB-LpE	2	2022-08-15 19:22:24.74386	2022-08-15 19:48:44.901367	https://img.youtube.com/vi/GrAkPwB-LpE/hqdefault.jpg
+360	679 Remy Boyz	Fetty Wap	2015	Never Not Working	unknown	A-1G3UZRoGY	2	2022-08-16 18:52:44.067169	2022-09-20 19:11:43.155398	https://img.youtube.com/vi/A-1G3UZRoGY/hqdefault.jpg
+52	Desire	Bob Moses & ZHU				cRSqM-67EiE	2	2022-08-15 18:29:49.192686	2022-08-15 19:46:33.414474	https://img.youtube.com/vi/cRSqM-67EiE/hqdefault.jpg
+163	Smoke and Drive	Machine Gun Kelly	unknown	unknown	unknown	jqKtxmf8x7A	2	2022-08-16 07:38:37.663773	2022-08-16 09:17:42.655832	https://img.youtube.com/vi/jqKtxmf8x7A/hqdefault.jpg
+134	Noise	Takura	unknown	unknown	unknown	TeSjqG8sCAk	2	2022-08-16 07:13:43.993384	2022-08-16 15:42:01.660105	https://img.youtube.com/vi/TeSjqG8sCAk/hqdefault.jpg
+137	FIRE EMOJI	Brian Jeck & Leo Magozz & Bling 4	unknown	unknown	unknown	W2y5f9Uhxb0	2	2022-08-16 07:22:59.213764	2022-08-16 15:42:03.011641	https://img.youtube.com/vi/W2y5f9Uhxb0/hqdefault.jpg
+146	Book of Rhymes	EminemMusic	unknown	unknown	unknown	0GbkMuRs_UA	2	2022-08-16 07:37:12.232586	2022-08-16 09:17:06.468698	https://img.youtube.com/vi/0GbkMuRs_UA/hqdefault.jpg
+153	drunk face	Machine Gun Kelly	2020	Tickets to My Downfall	unknown	D56V01lqnNQ	2	2022-08-16 07:37:39.711433	2022-08-16 15:42:03.997774	https://img.youtube.com/vi/D56V01lqnNQ/hqdefault.jpg
+130	Drew Barrymore	Bryce Vine	2017	Drew Barrymore	unknown	ZSC7gfoA21M	1	2022-08-15 19:32:17.247311	2022-09-06 03:58:01.248971	https://img.youtube.com/vi/ZSC7gfoA21M/hqdefault.jpg
+129	Drew Barrymore	Bryce Vine	2017	Drew Barrymore	unknown	padY-pMdMiE	1	2022-08-15 19:32:16.052177	2022-08-29 20:48:05.949406	https://img.youtube.com/vi/padY-pMdMiE/hqdefault.jpg
+139	Been On	G-Eazy	unknown	unknown	unknown	Fi2qPtroqgQ	2	2022-08-16 07:24:09.890016	2022-08-16 09:17:09.493761	https://img.youtube.com/vi/Fi2qPtroqgQ/hqdefault.jpg
+90	Stay	Khalid	2018	Uncle Drew: Original Motion Picture Soundtrack	unknown	t7Hq-ag0RzM	2	2022-08-15 18:33:38.773988	2022-08-15 19:47:45.087574	https://img.youtube.com/vi/t7Hq-ag0RzM/hqdefault.jpg
+138	The Plan	G‐Eazy	2017	The Plan	unknown	hl7b8j1oe6w	2	2022-08-16 07:23:21.00826	2022-08-16 15:42:05.748284	https://img.youtube.com/vi/hl7b8j1oe6w/hqdefault.jpg
+127	Your Heart	J. Cole & Joyner Lucas	2021	Your Heart	hip hop, trap	uvvJP-yQBE0	2	2022-08-15 19:30:03.57866	2022-08-15 19:48:46.367056	https://img.youtube.com/vi/uvvJP-yQBE0/hqdefault.jpg
+140	Godzilla (feat. Juice WRLD) [Official Audio]	EminemMusic	unknown	unknown	unknown	9XvXF1LrWgA	2	2022-08-16 07:24:29.376874	2022-08-16 09:17:12.108137	https://img.youtube.com/vi/9XvXF1LrWgA/hqdefault.jpg
+128	Tumblr Girls	Christoph Andersson & G‐Eazy	2014	These Things Happen	unknown	fu7NR1qe_Mk	2	2022-08-15 19:31:32.302711	2022-08-15 19:48:48.206387	https://img.youtube.com/vi/fu7NR1qe_Mk/hqdefault.jpg
+147	Unaccommodating (feat. Young M.A) [Official Audio]	EminemMusic	unknown	unknown	unknown	MHZGOJ1kysc	2	2022-08-16 07:37:13.771018	2022-08-16 09:17:13.552036	https://img.youtube.com/vi/MHZGOJ1kysc/hqdefault.jpg
+131	Drew Barrymore	Bryce Vine	2017	Drew Barrymore	unknown	efXIGmlRz6A	2	2022-08-15 19:32:32.689346	2022-08-15 19:48:49.592466	https://img.youtube.com/vi/efXIGmlRz6A/hqdefault.jpg
+144	Yah Yah	Eminem & Royce Da 5'9" & Black Thought & Q-Tip & Denaun	unknown	unknown	unknown	BZ09A39xECk	2	2022-08-16 07:37:07.743124	2022-08-16 15:42:07.736058	https://img.youtube.com/vi/BZ09A39xECk/hqdefault.jpg
+141	Gnat	EminemMusic	unknown	unknown	unknown	-cjFCjq_GMo	2	2022-08-16 07:36:48.472554	2022-08-16 09:17:16.478664	https://img.youtube.com/vi/-cjFCjq_GMo/hqdefault.jpg
+165	Tommy Lee	Tyla Yaweh & Post Malone	2020	Tommy Lee	unknown	4Do9gZpLnfg	2	2022-08-16 07:41:28.03359	2022-08-16 15:42:09.16171	https://img.youtube.com/vi/4Do9gZpLnfg/hqdefault.jpg
+142	Marsh [Official Audio]	EminemMusic	unknown	unknown	unknown	0WkIZwM5_vc	2	2022-08-16 07:36:56.230737	2022-08-16 09:17:20.26156	https://img.youtube.com/vi/0WkIZwM5_vc/hqdefault.jpg
+148	Guns Blazing	EminemMusic	unknown	unknown	unknown	748ZVZAJ5qM	2	2022-08-16 07:37:16.960601	2022-08-16 09:17:21.628038	https://img.youtube.com/vi/748ZVZAJ5qM/hqdefault.jpg
+143	In Too Deep [Official Audio]	EminemMusic	unknown	unknown	unknown	cmxdavhOg0Q	2	2022-08-16 07:37:02.301303	2022-08-16 09:17:22.922822	https://img.youtube.com/vi/cmxdavhOg0Q/hqdefault.jpg
+157	Love Race	Kellin Quinn & Machine Gun Kelly	2022	MAINSTREAM SELLOUT	unknown	tAztwrYHCWE	2	2022-08-16 07:37:53.281573	2022-08-16 15:42:10.456625	https://img.youtube.com/vi/tAztwrYHCWE/hqdefault.jpg
+156	The Break Up	Machine Gun Kelly	2017	bloom	unknown	KqFQUdMIzqs	2	2022-08-16 07:37:51.966436	2022-08-16 15:42:11.908813	https://img.youtube.com/vi/KqFQUdMIzqs/hqdefault.jpg
+145	Little Engine [Official Audio]	EminemMusic	unknown	unknown	unknown	trmoIfUVctQ	2	2022-08-16 07:37:07.87972	2022-08-16 09:17:27.555084	https://img.youtube.com/vi/trmoIfUVctQ/hqdefault.jpg
+149	I Will (feat. KXNG Crooked, Royce da 5'9" & Joell Ortiz) [Official Audio]	EminemMusic	unknown	unknown	unknown	qZp5gf9xgnE	2	2022-08-16 07:37:19.460936	2022-08-16 09:17:29.467592	https://img.youtube.com/vi/qZp5gf9xgnE/hqdefault.jpg
+151	forget me too	Halsey & Machine Gun Kelly	2020	Tickets to My Downfall	unknown	7gVNNPv8w4Q	2	2022-08-16 07:37:35.783975	2022-08-16 15:42:13.09913	https://img.youtube.com/vi/7gVNNPv8w4Q/hqdefault.jpg
+152	Let You Go	Machine Gun Kelly	2017	bloom	unknown	lk0-yDyLqSE	2	2022-08-16 07:37:37.830907	2022-08-16 15:42:14.332844	https://img.youtube.com/vi/lk0-yDyLqSE/hqdefault.jpg
+158	Why Are You Here	Machine Gun Kelly	2020	Promo Only: Modern Rock Radio, March 2020	unknown	vL41VpNAv6I	2	2022-08-16 07:37:54.597583	2022-08-16 15:42:15.615311	https://img.youtube.com/vi/vL41VpNAv6I/hqdefault.jpg
+155	my ex's best friend	Machine Gun Kelly	unknown	unknown	unknown	cHZb0Sq5KOA	2	2022-08-16 07:37:45.985549	2022-08-16 09:17:35.574373	https://img.youtube.com/vi/cHZb0Sq5KOA/hqdefault.jpg
+161	title track	Machine Gun Kelly	2021	Tickets to My Downfall	unknown	HLTLVVicjEo	2	2022-08-16 07:38:03.12438	2022-08-16 15:42:16.781211	https://img.youtube.com/vi/HLTLVVicjEo/hqdefault.jpg
+160	Hollywood Whore	Machine Gun Kelly	2019	Hotel Diablo	hip hop	IDVBwbizn9E	2	2022-08-16 07:38:02.31544	2022-08-16 15:42:18.281646	https://img.youtube.com/vi/IDVBwbizn9E/hqdefault.jpg
+162	lonely	Machine Gun Kelly	2020	Tickets to My Downfall	unknown	O7vHqm9HcXc	2	2022-08-16 07:38:04.292445	2022-08-16 15:42:19.514526	https://img.youtube.com/vi/O7vHqm9HcXc/hqdefault.jpg
+164	ROCKING A CARDIGAN IN ATLANTA	Lil Shordie Scott	2022	The Twin Society	unknown	Uvrfxy-TDA4	2	2022-08-16 07:40:58.591406	2022-08-16 15:42:20.431679	https://img.youtube.com/vi/Uvrfxy-TDA4/hqdefault.jpg
+166	High Right Now	Tyla Yaweh	2019	Heart Full of Rage	unknown	yE6WU1WLGcw	2	2022-08-16 07:41:28.396165	2022-08-16 15:42:21.672938	https://img.youtube.com/vi/yE6WU1WLGcw/hqdefault.jpg
+136	Zim Zimma	Joyner Lucas	2021	Evolution	unknown	zAJE0yjOAP8	2	2022-08-16 07:22:45.983329	2022-08-16 09:17:47.953211	https://img.youtube.com/vi/zAJE0yjOAP8/hqdefault.jpg
+159	can't look back	Machine Gun Kelly	2020	Tickets to My Downfall	unknown	cjGcwmbyFRA	2	2022-08-16 07:37:58.072793	2022-08-16 15:42:00.394033	https://img.youtube.com/vi/cjGcwmbyFRA/hqdefault.jpg
+150	bloody valentine	Machine Gun Kelly	2020	Bloody Valentine	unknown	jfLpVbu5svQ	2	2022-08-16 07:37:35.227097	2022-08-16 15:42:23.134522	https://img.youtube.com/vi/jfLpVbu5svQ/hqdefault.jpg
+132	Everywhere We Go	SonReal	2013	Everywhere We Go	unknown	voeZfmaEt5c	2	2022-08-16 06:54:10.482384	2022-08-16 15:42:24.39777	https://img.youtube.com/vi/voeZfmaEt5c/hqdefault.jpg
+364	Hurricane	Kanye West	2020	Donda: With Child	unknown	bPjZmQAvk_8	2	2022-08-16 18:53:21.475374	2022-09-20 19:11:47.026979	https://img.youtube.com/vi/bPjZmQAvk_8/hqdefault.jpg
+362	Black And Yellow	Wiz Khalifa	2015	Straight Outta Old Skool	unknown	7SHAKi8l7Ls	1	2022-08-16 18:53:01.386957	2022-08-28 07:33:51.645335	https://img.youtube.com/vi/7SHAKi8l7Ls/hqdefault.jpg
+366	Stronger	Kanye West				3mwiO5st-us	2	2022-08-16 18:53:27.347798	2022-09-20 19:11:45.429868	https://img.youtube.com/vi/3mwiO5st-us/hqdefault.jpg
+455	Someday	Nickelback	unknown	Coca Cola Hits, Volume 3	unknown	8fJ_Uenj-lk	2	2022-08-19 07:17:59.724232	2022-09-20 19:11:49.741425	https://img.youtube.com/vi/8fJ_Uenj-lk/hqdefault.jpg
+171	High Right Now (remix)	Tyla Yaweh & Wiz Khalifa	2019	Heart Full of Rage	unknown	Bw5rcL5MB5g	2	2022-08-16 07:41:36.817046	2022-08-16 15:42:28.332487	https://img.youtube.com/vi/Bw5rcL5MB5g/hqdefault.jpg
+185	Perfect	Logic	2020	No Pressure	hip hop	ehBZXAP-yU8	2	2022-08-16 07:43:35.375789	2022-08-16 15:42:38.490773	https://img.youtube.com/vi/ehBZXAP-yU8/hqdefault.jpg
+173	All the Smoke	Gunna & Tyla Yaweh & Wiz Khalifa	2020	All the Smoke	unknown	J_7qO9SC48s	2	2022-08-16 07:41:42.003985	2022-08-16 15:42:29.902861	https://img.youtube.com/vi/J_7qO9SC48s/hqdefault.jpg
+497	K.O.	Big Sean & 2 Chainz	2015	T.R.U. (The Real University)	unknown	gepSWOCGvkI	2	2022-08-19 10:07:13.21902	2022-09-20 19:11:51.619835	https://img.youtube.com/vi/gepSWOCGvkI/hqdefault.jpg
+187	Quasi	Logic	2022	Vinyl Days	hip hop	JRA7ka37J18	2	2022-08-16 07:43:41.112674	2022-08-16 15:42:39.233747	https://img.youtube.com/vi/JRA7ka37J18/hqdefault.jpg
+189	Orville	Blu & Exile & Logic & Like	2022	Orville	unknown	ZK4qHrudy88	2	2022-08-16 07:43:46.930824	2022-08-16 15:42:40.754235	https://img.youtube.com/vi/ZK4qHrudy88/hqdefault.jpg
+175	Do No Wrong	Tyla Yaweh & Trippie Redd & PnB Rock	2022	Do No Wrong	unknown	kQeth1w-S_c	2	2022-08-16 07:41:45.707216	2022-08-16 15:42:31.255175	https://img.youtube.com/vi/kQeth1w-S_c/hqdefault.jpg
+457	Gotta Be Somebody	Nickelback	2010	Dark Horse	unknown	Om021bkiWrg	2	2022-08-19 07:18:02.649003	2022-09-20 19:11:53.343602	https://img.youtube.com/vi/Om021bkiWrg/hqdefault.jpg
+368	Runaway	Kanye West				EMnQwBTJnMM	2	2022-08-16 18:53:29.45007	2022-09-20 19:11:57.061686	https://img.youtube.com/vi/EMnQwBTJnMM/hqdefault.jpg
+192	Clouds	Langston Bristol & Curren$y & Logic	2022	Vinyl Days	hip hop	dKxtNCWSznk	2	2022-08-16 07:43:51.525598	2022-08-16 15:42:42.069603	https://img.youtube.com/vi/dKxtNCWSznk/hqdefault.jpg
+196	Legacy	Logic	2018	YSIV	unknown	ZlT_uJ3BE-c	2	2022-08-16 07:44:06.547045	2022-08-16 15:42:44.455295	https://img.youtube.com/vi/ZlT_uJ3BE-c/hqdefault.jpg
+370	Bound 2	Kanye West	2015	Remix Anthology	instrumental	wVRF3SqLUi0	2	2022-08-16 18:53:33.394068	2022-09-20 19:11:58.587885	https://img.youtube.com/vi/wVRF3SqLUi0/hqdefault.jpg
+372	Fade	Kanye West & Ty Dolla $ign & Post Malone	2016	The Life of Pablo	unknown	IxGvm6btP1A	2	2022-08-16 18:53:37.145827	2022-09-20 19:11:59.95958	https://img.youtube.com/vi/IxGvm6btP1A/hqdefault.jpg
+177	Salute	French Montana & Tyla Yaweh	2019	Heart Full of Rage	unknown	hqfZMqqFjU4	2	2022-08-16 07:41:52.224502	2022-08-16 15:42:32.575348	https://img.youtube.com/vi/hqfZMqqFjU4/hqdefault.jpg
+374	Power 	Kanye West				SUtf9Ajlno4	2	2022-08-16 18:53:45.205549	2022-09-20 19:12:01.23744	https://img.youtube.com/vi/SUtf9Ajlno4/hqdefault.jpg
+459	Savin' Me	Nickelback	2008	Ultimate Video Collection	unknown	UIVGED32qsE	2	2022-08-19 07:18:06.102357	2022-09-20 19:12:02.765639	https://img.youtube.com/vi/UIVGED32qsE/hqdefault.jpg
+416	GOODMORNINGTOKYO!	Tokyo’s Revenge	2019	MDNGHT (SIDE B)	unknown	LGgU5Ihqd8s	2	2022-08-16 20:20:12.444173	2022-09-20 19:12:03.788336	https://img.youtube.com/vi/LGgU5Ihqd8s/hqdefault.jpg
+179	1-800-273-8255	Khalid & Logic & Juanes & Alessia Cara	2017	Perfect Pop	unknown	cycUHgg0zzU	2	2022-08-16 07:43:25.503734	2022-08-16 15:42:34.179152	https://img.youtube.com/vi/cycUHgg0zzU/hqdefault.jpg
+451	Codeine Cowboy	Internet Money & Lil Yachty	2022	We All We Got	unknown	H7sSdzfjnBw	2	2022-08-19 07:16:29.097982	2022-09-20 19:12:04.551727	https://img.youtube.com/vi/H7sSdzfjnBw/hqdefault.jpg
+181	Everybody	Logic	2019	Drippin’ In Sauce	unknown	sUpu7618KrM	2	2022-08-16 07:43:28.475801	2022-08-16 15:42:35.431394	https://img.youtube.com/vi/sUpu7618KrM/hqdefault.jpg
+461	Into the Night	Santana	2010	Back at Bethel	unknown	jkRJ0lKz2do	2	2022-08-19 07:18:41.310001	2022-09-20 19:12:06.131446	https://img.youtube.com/vi/jkRJ0lKz2do/hqdefault.jpg
+167	They Ain't You	Tyla Yaweh	2019	Heart Full of Rage	unknown	uikR9WLVRhs	2	2022-08-16 07:41:29.599986	2022-08-16 15:42:25.518791	https://img.youtube.com/vi/uikR9WLVRhs/hqdefault.jpg
+183	Breath Control	Logic & Wiz Khalifa	2022	Vinyl Days	hip hop	MMMrZ5PlBOE	2	2022-08-16 07:43:31.385886	2022-08-16 15:42:36.545516	https://img.youtube.com/vi/MMMrZ5PlBOE/hqdefault.jpg
+453	How You Remind Me	Nickelback	2002	Cities 97 Sampler, Volume 14	unknown	vkvrbbtnp6s	2	2022-08-19 07:17:54.869094	2022-09-20 19:12:07.671035	https://img.youtube.com/vi/vkvrbbtnp6s/hqdefault.jpg
+169	Novacane	Tyla Yaweh	2019	Heart Full of Rage	unknown	UlzCADBtRE4	2	2022-08-16 07:41:32.888026	2022-08-16 15:42:27.017454	https://img.youtube.com/vi/UlzCADBtRE4/hqdefault.jpg
+194	44 Bars	Logic	2016	Bobby Tarantino	hip hop	anI5b2PEmdA	2	2022-08-16 07:44:00.014083	2022-08-16 15:42:37.770409	https://img.youtube.com/vi/anI5b2PEmdA/hqdefault.jpg
+499	Good Drank	Gucci Mane & Quavo & 2 Chainz	2017	Def Jam Presents: Direct Deposit (Vol. 2)	unknown	DadpfhFfSkw	2	2022-08-19 10:07:18.644811	2022-09-20 19:12:09.337964	https://img.youtube.com/vi/DadpfhFfSkw/hqdefault.jpg
+493	Chill Bill	Spooks & Rob $tone & J. Davi$	2016	Bravo Black Hits, Vol. 35	unknown	s6sJTnwmEDc	2	2022-08-19 10:06:47.147917	2022-09-20 19:12:10.433652	https://img.youtube.com/vi/s6sJTnwmEDc/hqdefault.jpg
+495	Grey Area	2 Chainz	2020	So Help Me God!	unknown	KnLBB-H5-7Q	2	2022-08-19 10:07:06.5503	2022-09-20 19:12:11.574903	https://img.youtube.com/vi/KnLBB-H5-7Q/hqdefault.jpg
+501	Anyway	Gucci Mane & Lil Baby & 2 Chainz	2018	Street Gossip	unknown	l2DmxYMla1E	2	2022-08-19 10:07:23.206142	2022-09-20 19:12:13.415431	https://img.youtube.com/vi/l2DmxYMla1E/hqdefault.jpg
+505	Bigger Than You	Quavo & Drake & 2 Chainz	2018	Bigger Than You	unknown	WN1i_c-5oVs	2	2022-08-19 10:07:42.214421	2022-09-20 19:12:15.061641	https://img.youtube.com/vi/WN1i_c-5oVs/hqdefault.jpg
+509	Wet Dreamz	J. Cole	2014	Forest Hills Drive	unknown	lTgvsJY4aYE	2	2022-08-19 10:08:17.211243	2022-09-20 19:12:16.734155	https://img.youtube.com/vi/lTgvsJY4aYE/hqdefault.jpg
+507	Big Amount	Drake & 2 Chainz	2017	Pretty Girls Like Trap Music	hip hop	9VY8Be0TSsc	2	2022-08-19 10:07:48.107724	2022-09-20 19:12:18.01886	https://img.youtube.com/vi/9VY8Be0TSsc/hqdefault.jpg
+511	No Role Modelz	J. Cole	2014	Forest Hills Drive	unknown	0EnRK5YvBwU	2	2022-08-19 10:08:19.199771	2022-09-20 19:12:19.860006	https://img.youtube.com/vi/0EnRK5YvBwU/hqdefault.jpg
+513	Apparently	J. Cole	2014	Forest Hills Drive	unknown	98j39T5mrAk	2	2022-08-19 10:08:26.777927	2022-09-20 19:12:21.684586	https://img.youtube.com/vi/98j39T5mrAk/hqdefault.jpg
+560	Leave Me Alone	Flipp Dinero	2018	Leave Me Alone	unknown	KyIA0NeeFkU	2	2022-08-19 12:44:41.102804	2022-09-20 19:12:22.950834	https://img.youtube.com/vi/KyIA0NeeFkU/hqdefault.jpg
+562	Self Care	Mac Miller	2018	Swimming	unknown	1pc7GQRUMyQ	2	2022-08-19 12:48:19.237965	2022-09-20 19:12:24.336976	https://img.youtube.com/vi/1pc7GQRUMyQ/hqdefault.jpg
+564	Happier	Marshmello & Bastille	2020	グッドフィーリング	unknown	yMP65mVENSQ	2	2022-08-19 12:48:31.536268	2022-09-20 19:12:25.741083	https://img.youtube.com/vi/yMP65mVENSQ/hqdefault.jpg
+566	Hellboy	Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	xLnhtTlwjak	2	2022-08-19 12:49:02.79739	2022-09-20 19:12:26.799674	https://img.youtube.com/vi/xLnhtTlwjak/hqdefault.jpg
+597	Beautiful	Eminem	2022	Curtain Call 2	hip hop	F4yb0CBd4I4	2	2022-08-22 15:29:48.213679	2022-09-20 19:12:29.419538	https://img.youtube.com/vi/F4yb0CBd4I4/hqdefault.jpg
+207	PTSD	Pop Smoke	2019	Meet the Woo, v.1 Mixtape	unknown	ELNUK2W0aVs	2	2022-08-16 14:17:15.027074	2022-08-16 15:42:47.283394	https://img.youtube.com/vi/ELNUK2W0aVs/hqdefault.jpg
+176	Stuntin' On You	Tyla Yaweh & DaBaby	unknown	unknown	unknown	ciUdC_xvpt0	2	2022-08-16 07:41:49.277002	2022-08-16 15:42:48.454543	https://img.youtube.com/vi/ciUdC_xvpt0/hqdefault.jpg
+182	Flexicution	Logic	2016	Flexicution	unknown	M2NIMHVmGwk	2	2022-08-16 07:43:31.343011	2022-08-16 15:42:50.07229	https://img.youtube.com/vi/M2NIMHVmGwk/hqdefault.jpg
+203	Hello	Pop Smoke & A Boogie Wit da Hoodie	2020	For The Night	unknown	fazMSCZg-mw	2	2022-08-16 14:16:55.824645	2022-08-16 15:42:51.641859	https://img.youtube.com/vi/fazMSCZg-mw/hqdefault.jpg
+188	Ten Years	Logic & Royce da 5′9″	2022	Vinyl Days	hip hop	sRbEaaX0byA	2	2022-08-16 07:43:43.998922	2022-08-16 15:42:52.903861	https://img.youtube.com/vi/sRbEaaX0byA/hqdefault.jpg
+198	Twelve Carat Toothache 	Post Malone	2022	Twelve Carat Toothache 	unknown	pRWtNfSXLuY	2	2022-08-16 07:44:46.367463	2022-08-16 15:42:54.517804	https://img.youtube.com/vi/pRWtNfSXLuY/hqdefault.jpg
+197	Keanu Reeves	Logic	2020	Bobby Tarantino vs. Young Sinatra	unknown	6-zRqxl5Gkk	2	2022-08-16 07:44:09.991739	2022-08-16 15:42:56.124455	https://img.youtube.com/vi/6-zRqxl5Gkk/hqdefault.jpg
+184	44 More	Logic	2018	Bobby Tarantino II	unknown	4EVFKrmXFmA	2	2022-08-16 07:43:33.861135	2022-08-16 15:42:57.392639	https://img.youtube.com/vi/4EVFKrmXFmA/hqdefault.jpg
+204	For The Night	Pop Smoke & DaBaby & Lil Baby	2020	For The Night	unknown	Q9pjm4cNsfc	2	2022-08-16 14:16:58.922458	2022-08-16 15:42:58.798084	https://img.youtube.com/vi/Q9pjm4cNsfc/hqdefault.jpg
+193	Run It	Logic	2015	Stay in the Loop 14	unknown	baATiZQplUY	2	2022-08-16 07:43:58.050644	2022-08-16 15:42:45.863982	https://img.youtube.com/vi/baATiZQplUY/hqdefault.jpg
+168	Gemini	Tyla Yaweh	2019	Heart Full of Rage	unknown	vJh01O7psQs	2	2022-08-16 07:41:30.654448	2022-08-16 15:43:00.102721	https://img.youtube.com/vi/vJh01O7psQs/hqdefault.jpg
+210	30	Pop Smoke & Bizzy Banks	2021	Faith	unknown	c7KhX0qjn-o	2	2022-08-16 14:17:36.786677	2022-08-16 15:43:01.858534	https://img.youtube.com/vi/c7KhX0qjn-o/hqdefault.jpg
+201	Dior	Pop Smoke	2021	55 Hits été 2021	unknown	goYgHnsQdtY	2	2022-08-16 14:16:51.433578	2022-08-16 15:43:03.391616	https://img.youtube.com/vi/goYgHnsQdtY/hqdefault.jpg
+170	Understand Me	Tyla Yaweh	unknown	unknown	unknown	s5Nt0ceBoLI	2	2022-08-16 07:41:33.829046	2022-08-16 15:43:04.410366	https://img.youtube.com/vi/s5Nt0ceBoLI/hqdefault.jpg
+205	Imperfections (interlude)	Pop Smoke	2020	Shoot for the Stars Aim for the Moon	unknown	cekp15DY8MQ	2	2022-08-16 14:16:59.22469	2022-08-16 15:43:05.245869	https://img.youtube.com/vi/cekp15DY8MQ/hqdefault.jpg
+195	Ballin	Logic	2018	Uncle Drew: Original Motion Picture Soundtrack	unknown	ESDhMCWpJC4	2	2022-08-16 07:44:05.108454	2022-08-16 15:43:06.490249	https://img.youtube.com/vi/ESDhMCWpJC4/hqdefault.jpg
+190	Sayonara	Logic	2022	Vinyl Days	hip hop	TJXsOXVnHFA	2	2022-08-16 07:43:47.884113	2022-08-16 15:43:10.568086	https://img.youtube.com/vi/TJXsOXVnHFA/hqdefault.jpg
+154	I Think I’m OKAY	Travis Barker & YUNGBLUD & Machine Gun Kelly	2019	Hotel Diablo	unknown	ALIN85DsULY	2	2022-08-16 07:37:42.575481	2022-08-16 15:43:11.734567	https://img.youtube.com/vi/ALIN85DsULY/hqdefault.jpg
+178	Back Outside	Tyla Yaweh	unknown	unknown	unknown	663GWSv1Z5w	2	2022-08-16 07:41:54.465611	2022-08-16 15:43:12.920118	https://img.youtube.com/vi/663GWSv1Z5w/hqdefault.jpg
+191	Porta one	RZA & Logic	2022	Vinyl Days	hip hop	Ii5UwyO_Zf0	2	2022-08-16 07:43:48.136202	2022-08-16 15:43:13.983105	https://img.youtube.com/vi/Ii5UwyO_Zf0/hqdefault.jpg
+208	Scenario	Pop Smoke	2019	Meet the Woo, v.1 Mixtape	unknown	gRYbn1_K5s0	2	2022-08-16 14:17:16.540231	2022-08-16 15:43:15.715337	https://img.youtube.com/vi/gRYbn1_K5s0/hqdefault.jpg
+133	Machine Gun Kelly – Candy feat. Trippie Redd (Official Audio)	Machine Gun Kelly	unknown	unknown	unknown	zMr_Uzi807U	2	2022-08-16 07:13:00.473494	2022-08-16 09:17:17.574597	https://img.youtube.com/vi/zMr_Uzi807U/hqdefault.jpg
+199	When I’m Alone	Post Malone	2022	Twelve Carat Toothache	unknown	pqg2mD7o_nU	2	2022-08-16 07:44:56.18597	2022-08-16 15:43:17.172796	https://img.youtube.com/vi/pqg2mD7o_nU/hqdefault.jpg
+202	What You Know Bout Love	Pop Smoke	2021	NRJ Music Awards 2021 Edition Collector Limitée	unknown	7Mzxotj6Gvs	2	2022-08-16 14:16:52.863619	2022-08-16 15:43:18.38498	https://img.youtube.com/vi/7Mzxotj6Gvs/hqdefault.jpg
+186	Everyday	Marshmello & Logic	2018	Promo Only: Mainstream Radio, April 2018	unknown	_qQsPw4CqUI	2	2022-08-16 07:43:36.171773	2022-08-16 15:43:19.805396	https://img.youtube.com/vi/_qQsPw4CqUI/hqdefault.jpg
+172	I Think I Luv Her	Tyla Yaweh & YG	2019	I Think I Luv Her	unknown	FuXotQREOQI	2	2022-08-16 07:41:37.589208	2022-08-16 15:43:21.064706	https://img.youtube.com/vi/FuXotQREOQI/hqdefault.jpg
+180	Homicide	Logic & Eminem	2019	Confessions of a Dangerous Mind	hip hop	mfqsEpjEtrw	2	2022-08-16 07:43:26.202081	2022-08-16 15:43:22.84744	https://img.youtube.com/vi/mfqsEpjEtrw/hqdefault.jpg
+206	Remember	Pop Smoke & NIGO®	2022	I Know NIGO!	unknown	_aGuWajFynM	2	2022-08-16 14:17:12.64817	2022-08-16 15:43:23.914389	https://img.youtube.com/vi/_aGuWajFynM/hqdefault.jpg
+174	Who Shot Johnny	Tyla Yaweh	2019	Heart Full of Rage	unknown	UDCMvznDcJc	2	2022-08-16 07:41:43.03067	2022-08-16 15:43:25.204507	https://img.youtube.com/vi/UDCMvznDcJc/hqdefault.jpg
+212	Demeanor	Pop Smoke & Dua Lipa	2021	Faith	unknown	Fba_CWRb9no	2	2022-08-16 14:17:40.276392	2022-08-16 15:43:26.577958	https://img.youtube.com/vi/Fba_CWRb9no/hqdefault.jpg
+209	Paranoia	Gunna & Pop Smoke & Young Thug	2020	Shoot for the Stars Aim for the Moon	unknown	1BWb0WBQXjw	2	2022-08-16 14:17:19.663782	2022-08-16 15:43:28.167364	https://img.youtube.com/vi/1BWb0WBQXjw/hqdefault.jpg
+211	44 BullDog	Pop Smoke	2020	Shoot for the Stars Aim for the Moon	unknown	pBM5ouqK2tk	2	2022-08-16 14:17:38.116678	2022-08-16 15:43:29.224959	https://img.youtube.com/vi/pBM5ouqK2tk/hqdefault.jpg
+213	GATTI	Pop Smoke & JACKBOYS & Travis Scott	2019	JACKBOYS	hip hop	iUxnuKO-s_k	2	2022-08-16 14:17:42.212058	2022-08-16 15:43:30.587596	https://img.youtube.com/vi/iUxnuKO-s_k/hqdefault.jpg
+214	Mood Swings	Pop Smoke & Lil Tjay	2020	Shoot for the Stars Aim for the Moon	unknown	Bo5hepNudl0	2	2022-08-16 14:17:46.56611	2022-08-16 15:43:32.34526	https://img.youtube.com/vi/Bo5hepNudl0/hqdefault.jpg
+215	Diana	King Combs & Pop Smoke	2020	Shoot for the Stars Aim for the Moon	unknown	wSR2WBBNkXw	2	2022-08-16 14:17:48.165564	2022-08-16 15:43:33.838104	https://img.youtube.com/vi/wSR2WBBNkXw/hqdefault.jpg
+217	Snitching	Pop Smoke & Future & Quavo	2020	Shoot for the Stars Aim for the Moon	unknown	BhbVY3DNYjk	2	2022-08-16 14:17:54.170559	2022-08-16 15:43:35.708297	https://img.youtube.com/vi/BhbVY3DNYjk/hqdefault.jpg
+135	Siki	Enzo Ishall	unknown	unknown	unknown	jzojKysJ_ss	2	2022-08-16 07:13:58.187755	2022-08-16 15:43:37.131003	https://img.youtube.com/vi/jzojKysJ_ss/hqdefault.jpg
+200	The Meaning	FKi 1st & Post Malone				BMwAIndkhps	2	2022-08-16 10:37:25.32576	2022-08-16 15:43:38.653801	https://img.youtube.com/vi/BMwAIndkhps/hqdefault.jpg
+418	Bandit	YoungBoy Never Broke Again & Juice WRLD	2019	Bandit	unknown	M31wpVvlws8	2	2022-08-17 11:42:12.069804	2022-09-20 19:12:33.569103	https://img.youtube.com/vi/M31wpVvlws8/hqdefault.jpg
+377	Love Lockdown	Kanye West				w8s8_TLp3Mc	2	2022-08-16 18:53:53.285401	2022-09-20 19:12:31.135336	https://img.youtube.com/vi/w8s8_TLp3Mc/hqdefault.jpg
+226	ESCAPE PLAN	Travis Scott	2021	ESCAPE PLAN / MAFIA	unknown	ve_iZT4Huuo	2	2022-08-16 14:18:31.151112	2022-08-16 15:43:45.848494	https://img.youtube.com/vi/ve_iZT4Huuo/hqdefault.jpg
+419	Cinderella Man	Eminem	2022	Curtain Call 2	hip hop	kKPZqkcWeTM	2	2022-08-18 11:36:08.161429	2022-09-20 19:12:36.751434	https://img.youtube.com/vi/kKPZqkcWeTM/hqdefault.jpg
+228	goosebumps	Kendrick Lamar & Travis Scott	2016	Birds in the Trap Sing McKnight	hip hop	Dst9gZkq1a8	2	2022-08-16 14:18:36.687775	2022-08-16 15:43:47.963191	https://img.youtube.com/vi/Dst9gZkq1a8/hqdefault.jpg
+230	COFFEE BEAN	Travis Scott	2018	ASTROWORLD	hip hop	Z6d3BofQqN0	2	2022-08-16 14:18:42.520459	2022-08-16 15:43:49.575342	https://img.youtube.com/vi/Z6d3BofQqN0/hqdefault.jpg
+494	Watch Out	2 Chainz	2015	The Feast	unknown	BAbvgvlMRUI	2	2022-08-19 10:07:05.032688	2022-09-20 19:12:38.045776	https://img.youtube.com/vi/BAbvgvlMRUI/hqdefault.jpg
+452	Burn It to the Ground	Nickelback	2011	Here and Now	unknown	kibgXqJuKCM	2	2022-08-19 07:17:53.643432	2022-09-20 19:12:39.481622	https://img.youtube.com/vi/kibgXqJuKCM/hqdefault.jpg
+454	Rockstar	Nickelback	2007	Toggo Music 17	unknown	HO6CX495-m8	2	2022-08-19 07:17:56.575808	2022-09-20 19:12:41.195645	https://img.youtube.com/vi/HO6CX495-m8/hqdefault.jpg
+502	I'm Different	2 Chainz	2012	The Wait Is Over	unknown	e2QKlmMT8II	2	2022-08-19 10:07:32.095542	2022-09-20 19:12:42.469546	https://img.youtube.com/vi/e2QKlmMT8II/hqdefault.jpg
+218	HIGHEST IN THE ROOM	Travis Scott	2020	Triple J: Hottest 100, Volume 27	unknown	OWl9p3oFKgg	2	2022-08-16 14:18:09.004484	2022-08-16 15:43:40.048577	https://img.youtube.com/vi/OWl9p3oFKgg/hqdefault.jpg
+456	This Afternoon	Nickelback	2010	Now That's What I Call Music! 35	unknown	Ep0aCotj_7M	2	2022-08-19 07:18:00.089194	2022-09-20 19:12:44.444281	https://img.youtube.com/vi/Ep0aCotj_7M/hqdefault.jpg
+220	MAFIA	Travis Scott	2021	ESCAPE PLAN / MAFIA	unknown	89hJPNSNlFM	2	2022-08-16 14:18:11.632281	2022-08-16 15:43:41.939933	https://img.youtube.com/vi/89hJPNSNlFM/hqdefault.jpg
+398	Jamrock Land	Alfons				rE5XMSG83uY	2	2022-08-16 18:57:26.227664	2022-09-20 19:12:45.592079	https://img.youtube.com/vi/rE5XMSG83uY/hqdefault.jpg
+222	YOSEMITE	Travis Scott	2018	ASTROWORLD	hip hop	ykMHDKB0-1o	2	2022-08-16 14:18:16.036213	2022-08-16 15:43:43.111251	https://img.youtube.com/vi/ykMHDKB0-1o/hqdefault.jpg
+496	4 AM	2 Chainz & Travis Scott	2017	Pretty Girls Like Trap Music	hip hop	TyylUeaTT10	2	2022-08-19 10:07:11.267617	2022-09-20 19:12:47.364289	https://img.youtube.com/vi/TyylUeaTT10/hqdefault.jpg
+224	CAN’T SAY	Travis Scott	2018	ASTROWORLD	unknown	gpnQhbOMQDA	2	2022-08-16 14:18:18.497389	2022-08-16 15:43:44.58358	https://img.youtube.com/vi/gpnQhbOMQDA/hqdefault.jpg
+376	Come to Life	Kanye West	2022	Donda	unknown	yblfMrUeiP4	2	2022-08-16 18:53:52.989598	2022-09-20 19:12:49.384392	https://img.youtube.com/vi/yblfMrUeiP4/hqdefault.jpg
+458	Photograph	Nickelback	2005	So Fresh: The Hits of Summer 2006 Plus the Best of 2005	unknown	ULwIM6Za0QA	2	2022-08-19 07:18:05.711389	2022-09-20 19:12:51.178007	https://img.youtube.com/vi/ULwIM6Za0QA/hqdefault.jpg
+378	Monster	Kanye West				pS6HRKZQLFA	2	2022-08-16 18:53:56.774004	2022-09-20 19:12:53.541784	https://img.youtube.com/vi/pS6HRKZQLFA/hqdefault.jpg
+380	Day 'N' Nite	Kid Cudi & Crookers	2010	The Annual 2010	unknown	iD0mNoEYpZw	2	2022-08-16 18:56:03.510232	2022-09-20 19:12:54.997482	https://img.youtube.com/vi/iD0mNoEYpZw/hqdefault.jpg
+400	Corona (City Of Wuhan)	Alfons				tnpq2YjMr84	2	2022-08-16 18:57:33.246115	2022-09-20 19:12:56.161587	https://img.youtube.com/vi/tnpq2YjMr84/hqdefault.jpg
+506	It’s a Vibe	Trey Songz & Ty Dolla $ign & Jhené Aiko & 2 Chainz	2017	Pretty Girls Like Trap Music	hip hop	CK3COY6UU_M	2	2022-08-19 10:07:45.091367	2022-09-20 19:12:35.00513	https://img.youtube.com/vi/CK3COY6UU_M/hqdefault.jpg
+384	Pursuit of Happiness	Kid Cudi	2011	Cudderisback	unknown	Dq_uy1qcO-k	2	2022-08-16 18:56:09.185795	2022-09-20 19:12:57.792833	https://img.youtube.com/vi/Dq_uy1qcO-k/hqdefault.jpg
+386	Soundtrack 2 My Life	Kid Cudi	2009	Man on the Moon: The End of Day	alternative hip hop, hip hop	ZyDcktys9EU	2	2022-08-16 18:56:13.200975	2022-09-20 19:12:59.245299	https://img.youtube.com/vi/ZyDcktys9EU/hqdefault.jpg
+388	Heaven at Nite	Kid Cudi	2009	The Anthem: The Best of Kid Cudi	unknown	LohX7Vsp9p8	2	2022-08-16 18:56:16.724216	2022-09-20 19:13:00.465292	https://img.youtube.com/vi/LohX7Vsp9p8/hqdefault.jpg
+402	Snowfall	Alfons	2019			PMKC8pa1L7c	2	2022-08-16 18:57:37.869938	2022-09-20 19:13:01.624199	https://img.youtube.com/vi/PMKC8pa1L7c/hqdefault.jpg
+390	Marijuana	Kid Cudi	2010	Man on the Moon Ⅱ: The Legend of Mr. Rager	unknown	zx40kMDZaL0	2	2022-08-16 18:56:21.871609	2022-09-20 19:13:03.314832	https://img.youtube.com/vi/zx40kMDZaL0/hqdefault.jpg
+392	Embrace the Martian	Kid Cudi & Crookers	2009	The Anthem: The Best of Kid Cudi	unknown	L0DTpxyyNXA	2	2022-08-16 18:56:26.577184	2022-09-20 19:13:04.64618	https://img.youtube.com/vi/L0DTpxyyNXA/hqdefault.jpg
+394	Mr. Solo Dolo III	Kid Cudi	2020	Man on the Moon III: The Chosen	unknown	8kUNIXRY9io	2	2022-08-16 18:56:31.771815	2022-09-20 19:13:06.170754	https://img.youtube.com/vi/8kUNIXRY9io/hqdefault.jpg
+396	Leader of the Delinquents	Kid Cudi	2020	Leader of the Delinquents	unknown	02PAOONYxpY	2	2022-08-16 18:56:37.192529	2022-09-20 19:13:07.456945	https://img.youtube.com/vi/02PAOONYxpY/hqdefault.jpg
+460	Animals	Nickelback	2021	Live From Red Rocks	unknown	0fZyNUikfEM	2	2022-08-19 07:18:06.122964	2022-09-20 19:13:08.729955	https://img.youtube.com/vi/0fZyNUikfEM/hqdefault.jpg
+498	Gotta Lotta	Lil Wayne & 2 Chainz	2016	Collegrove	hip hop	Ny0vmeyIpRQ	2	2022-08-19 10:07:15.562132	2022-09-20 19:13:10.167748	https://img.youtube.com/vi/Ny0vmeyIpRQ/hqdefault.jpg
+500	Too Playa	Migos & 2 Chainz	2018	Culture II	unknown	99pkzpAEYrk	2	2022-08-19 10:07:22.64925	2022-09-20 19:13:12.212765	https://img.youtube.com/vi/99pkzpAEYrk/hqdefault.jpg
+504	Ounces Back	2 Chainz	2016	Daniel Son; Necklace Don	unknown	XPWlQMdt7LE	2	2022-08-19 10:07:38.237357	2022-09-20 19:13:13.302026	https://img.youtube.com/vi/XPWlQMdt7LE/hqdefault.jpg
+510	J. Cole - a m a r i (Official Audio)	J. Cole				gK07p6RGbtg	2	2022-08-19 10:08:18.700736	2022-09-20 19:13:14.241307	https://img.youtube.com/vi/gK07p6RGbtg/hqdefault.jpg
+508	MIDDLE CHILD	J. Cole	2019	Revenge of the Dreamers III	unknown	e8CLsYzE5wk	2	2022-08-19 10:08:15.973965	2022-09-20 19:13:15.652394	https://img.youtube.com/vi/e8CLsYzE5wk/hqdefault.jpg
+512	m y . l i f e	21 Savage & J. Cole & Morray	2021	The Off‐Season	unknown	wLQ8u3xRZd8	2	2022-08-19 10:08:21.422442	2022-09-20 19:13:17.157619	https://img.youtube.com/vi/wLQ8u3xRZd8/hqdefault.jpg
+514	 The Promised Land 	J. Cole &  Andre 3000				ULcGTvL8A_g	2	2022-08-19 10:08:32.452951	2022-09-20 19:13:19.123807	https://img.youtube.com/vi/ULcGTvL8A_g/hqdefault.jpg
+561	NF - Leave Me Alone	NF				XGGWhOUYObc	2	2022-08-19 12:48:04.518152	2022-09-20 19:13:21.604331	https://img.youtube.com/vi/XGGWhOUYObc/hqdefault.jpg
+563	Alone	Marshmello	2016	Monstercat – Best of Trap	unknown	RfZrtx49KbY	2	2022-08-19 12:48:31.183409	2022-09-20 19:13:23.563286	https://img.youtube.com/vi/RfZrtx49KbY/hqdefault.jpg
+450	2k in the Soda	Internet Money & Lucki	2022	We All We Got	unknown	v7YmaJvML70	2	2022-08-19 07:15:49.112107	2022-09-20 19:13:24.47802	https://img.youtube.com/vi/v7YmaJvML70/hqdefault.jpg
+382	Erase Me	Kanye West & Kid Cudi	2010	Man on the Moon Ⅱ: The Legend of Mr. Rager	unknown	nnvqfucTs0o	1	2022-08-16 18:56:06.83996	2022-08-24 02:18:05.945885	https://img.youtube.com/vi/nnvqfucTs0o/hqdefault.jpg
+252	moved to miami	Roddy Ricch & Lil Baby	2021	LIVE LIFE FAST	unknown	DtTj4TODL_U	2	2022-08-16 14:19:59.37837	2022-08-16 15:43:52.916172	https://img.youtube.com/vi/DtTj4TODL_U/hqdefault.jpg
+223	STARGAZING	Travis Scott	2018	ASTROWORLD	hip hop	2a8PgqWrc_4	2	2022-08-16 14:18:16.83468	2022-08-16 15:43:55.031918	https://img.youtube.com/vi/2a8PgqWrc_4/hqdefault.jpg
+239	Ballin’	Mustard & Roddy Ricch	2019	Perfect Ten	unknown	s9FCCiEs84k	2	2022-08-16 14:19:17.301636	2022-08-16 15:43:56.243639	https://img.youtube.com/vi/s9FCCiEs84k/hqdefault.jpg
+225	THE SCOTTS	THE SCOTTS & Kid Cudi & Travis Scott	2020	NOW That’s What I Call Music! 75	unknown	sw4r0k8WWqU	2	2022-08-16 14:18:20.198827	2022-08-16 15:43:57.532541	https://img.youtube.com/vi/sw4r0k8WWqU/hqdefault.jpg
+227	Antidote	Travis Scott	2015	Stay in the Loop 6	unknown	yA6W2pOi3XY	2	2022-08-16 14:18:34.968327	2022-08-16 15:43:59.456775	https://img.youtube.com/vi/yA6W2pOi3XY/hqdefault.jpg
+247	Bacc Seat	Roddy Ricch & Ty Dolla $ign	2019	Please Excuse Me for Being Antisocial	hip hop	yYliDCjxBaI	2	2022-08-16 14:19:44.761764	2022-08-16 15:44:00.665751	https://img.youtube.com/vi/yYliDCjxBaI/hqdefault.jpg
+229	SKELETONS	Travis Scott	2018	ASTROWORLD	hip hop	tAyYYKcySXA	2	2022-08-16 14:18:40.280191	2022-08-16 15:44:01.769255	https://img.youtube.com/vi/tAyYYKcySXA/hqdefault.jpg
+240	Cream	Roddy Ricch	2018	Feed tha Streets II	unknown	adlg71K1YWw	2	2022-08-16 14:19:18.700203	2022-08-16 15:44:03.057928	https://img.youtube.com/vi/adlg71K1YWw/hqdefault.jpg
+231	NC-17	Travis Scott	2	ASTROWORLD	hip hop	K2taklQnVzY	2	2022-08-16 14:18:43.463401	2022-08-16 15:44:04.212351	https://img.youtube.com/vi/K2taklQnVzY/hqdefault.jpg
+232	OUT WEST	JACKBOYS & Young Thug & Travis Scott	2019	JACKBOYS	hip hop	Z4reQmzuB4M	2	2022-08-16 14:18:46.095252	2022-08-16 15:44:05.465734	https://img.youtube.com/vi/Z4reQmzuB4M/hqdefault.jpg
+236	Down Below	Roddy Ricch	2018	Feed tha Streets II	unknown	Eoh_dLPypj4	2	2022-08-16 14:19:09.087422	2022-08-16 15:44:06.96863	https://img.youtube.com/vi/Eoh_dLPypj4/hqdefault.jpg
+241	Moonwalkin	Roddy Ricch & Lil Durk	2019	Please Excuse Me for Being Antisocial	hip hop	HLHAYK_PhSs	2	2022-08-16 14:19:20.67993	2022-08-16 15:44:08.193305	https://img.youtube.com/vi/HLHAYK_PhSs/hqdefault.jpg
+235	The Box	Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	uLHqpjW3aDs	2	2022-08-16 14:19:07.33492	2022-08-16 15:44:09.726504	https://img.youtube.com/vi/uLHqpjW3aDs/hqdefault.jpg
+233	5% TINT	Travis Scott		ASTROWORLD	hip hop	6SLD1ZQZ_4Y	2	2022-08-16 14:18:48.322794	2022-08-16 15:44:11.340942	https://img.youtube.com/vi/6SLD1ZQZ_4Y/hqdefault.jpg
+237	Start Wit Me	Gunna & Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	lPXmGk9dqAM	2	2022-08-16 14:19:10.022672	2022-08-16 15:44:12.359838	https://img.youtube.com/vi/lPXmGk9dqAM/hqdefault.jpg
+242	ROCKSTAR	Roddy Ricch & DaBaby	2020	BLAME IT ON BABY (DELUXE)	unknown	83xBPCw5hh4	2	2022-08-16 14:19:23.844596	2022-08-16 15:44:13.668362	https://img.youtube.com/vi/83xBPCw5hh4/hqdefault.jpg
+234	STOP TRYING TO BE GOD	Travis Scott		ASTROWORLD	hip hop	AcXp7m1g5yE	2	2022-08-16 14:18:52.314321	2022-08-16 15:44:16.396294	https://img.youtube.com/vi/AcXp7m1g5yE/hqdefault.jpg
+238	High Fashion	Mustard & Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	iGU66wsjIPA	2	2022-08-16 14:19:12.620589	2022-08-16 15:44:18.031275	https://img.youtube.com/vi/iGU66wsjIPA/hqdefault.jpg
+248	Peta	Meek Mill & Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	Jd6q69hO6X4	2	2022-08-16 14:19:46.398551	2022-08-16 15:44:19.481967	https://img.youtube.com/vi/Jd6q69hO6X4/hqdefault.jpg
+243	War Baby	Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	YK9UDVBqIBs	2	2022-08-16 14:19:31.833537	2022-08-16 15:44:20.918724	https://img.youtube.com/vi/YK9UDVBqIBs/hqdefault.jpg
+244	hibachi	21 Savage & Roddy Ricch & Kodak Black	2021	LIVE LIFE FAST	unknown	TScsJM4465U	2	2022-08-16 14:19:32.974613	2022-08-16 15:44:22.255669	https://img.youtube.com/vi/TScsJM4465U/hqdefault.jpg
+258	BOGUS	Don Toliver	2021	Life of a DON	unknown	t8sIUEEIxvg	2	2022-08-16 14:20:27.451207	2022-08-16 15:44:23.714585	https://img.youtube.com/vi/t8sIUEEIxvg/hqdefault.jpg
+245	Intro	Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	bnfvsJT2WV0	2	2022-08-16 14:19:39.075287	2022-08-16 15:44:24.763413	https://img.youtube.com/vi/bnfvsJT2WV0/hqdefault.jpg
+249	Boom Boom Room	Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	7MAOfnXRYbk	2	2022-08-16 14:19:52.42507	2022-08-16 15:44:26.134684	https://img.youtube.com/vi/7MAOfnXRYbk/hqdefault.jpg
+246	Every Season	Roddy Ricch	2018	Feed tha Streets II	unknown	he7nqDQlSyA	2	2022-08-16 14:19:39.459935	2022-08-16 15:44:27.711609	https://img.youtube.com/vi/he7nqDQlSyA/hqdefault.jpg
+253	After Party	Don Toliver	2020	Heaven or Hell	unknown	GqCiSYVexPE	2	2022-08-16 14:20:15.351845	2022-08-16 15:44:28.98495	https://img.youtube.com/vi/GqCiSYVexPE/hqdefault.jpg
+250	Real Talk	Roddy Ricch	2022	The Big 3	unknown	ejkkd2AXFFA	2	2022-08-16 14:19:56.183359	2022-08-16 15:44:30.415047	https://img.youtube.com/vi/ejkkd2AXFFA/hqdefault.jpg
+251	Big Stepper	Roddy Ricch	2019	Please Excuse Me for Being Antisocial	hip hop	6L_SVOb9S6E	2	2022-08-16 14:19:57.584165	2022-08-16 15:44:31.906596	https://img.youtube.com/vi/6L_SVOb9S6E/hqdefault.jpg
+256	Situation	Don Toliver	2019	Situation	unknown	8PsqW7ydLGA	2	2022-08-16 14:20:21.338903	2022-08-16 15:44:32.9216	https://img.youtube.com/vi/8PsqW7ydLGA/hqdefault.jpg
+254	You	Don Toliver & Travis Scott	2021	Life of a DON	unknown	XkQ1pltpQnw	2	2022-08-16 14:20:19.024755	2022-08-16 15:44:34.487934	https://img.youtube.com/vi/XkQ1pltpQnw/hqdefault.jpg
+255	Wasted	Don Toliver	2020	Heaven or Hell	unknown	YM6ukDewm-U	2	2022-08-16 14:20:20.126917	2022-08-16 15:44:35.827283	https://img.youtube.com/vi/YM6ukDewm-U/hqdefault.jpg
+257	XSCAPE	Don Toliver	2021	Life of a DON	unknown	pNDB4iy0viM	2	2022-08-16 14:20:22.880716	2022-08-16 15:44:36.872763	https://img.youtube.com/vi/pNDB4iy0viM/hqdefault.jpg
+260	Recap	NAV & Don Toliver	2020	Good Intentions (Brown Boy 2 deluxe version)	unknown	X58oA7kF2q4	2	2022-08-16 14:20:38.386739	2022-08-16 15:44:37.888348	https://img.youtube.com/vi/X58oA7kF2q4/hqdefault.jpg
+259	Best You Had	Don Toliver	2019	Best You Had	unknown	yMmf-UW_OP4	2	2022-08-16 14:20:34.32275	2022-08-16 15:44:38.818682	https://img.youtube.com/vi/yMmf-UW_OP4/hqdefault.jpg
+261	2AM	Don Toliver	2021	Life of a DON	unknown	ZxYa6mZEArM	2	2022-08-16 14:20:40.048131	2022-08-16 15:44:39.895888	https://img.youtube.com/vi/ZxYa6mZEArM/hqdefault.jpg
+262	No Photos	Don Toliver	2020	Heaven or Hell	unknown	atPD98l7jUE	2	2022-08-16 14:20:40.865653	2022-08-16 15:44:41.145205	https://img.youtube.com/vi/atPD98l7jUE/hqdefault.jpg
+263	Clap	Don Toliver	2020	Road to Fast 9 Mixtape	unknown	D3mptowQ-o4	2	2022-08-16 14:20:41.742055	2022-08-16 15:44:42.226813	https://img.youtube.com/vi/D3mptowQ-o4/hqdefault.jpg
+264	Company Pt 2	Don Toliver	2021	Life of a DON	unknown	QUxT-6QsCaQ	2	2022-08-16 14:20:43.798705	2022-08-16 15:44:43.728421	https://img.youtube.com/vi/QUxT-6QsCaQ/hqdefault.jpg
+219	SICKO MODE	Travis Scott	2019	Triple J: Hottest 100, Volume 26	unknown	d-JBBNg8YKs	2	2022-08-16 14:18:09.79356	2022-08-16 15:44:46.025876	https://img.youtube.com/vi/d-JBBNg8YKs/hqdefault.jpg
+221	HOUSTONFORNICATION	Travis Scott	2018	ASTROWORLD	unknown	XzmnM2PLPfs	2	2022-08-16 14:18:14.421285	2022-08-16 15:43:51.231504	https://img.youtube.com/vi/XzmnM2PLPfs/hqdefault.jpg
+379	Niggas in Paris	Jay-Z & Kanye West				fbFnF-86eYs	2	2022-08-16 18:53:57.535795	2022-09-20 19:13:26.000753	https://img.youtube.com/vi/fbFnF-86eYs/hqdefault.jpg
+295	Swang	Rae Sremmurd	2016	SremmLife 2	unknown	yr-udDR8KiE	2	2022-08-16 14:23:18.012038	2022-08-16 15:44:54.119862	https://img.youtube.com/vi/yr-udDR8KiE/hqdefault.jpg
+273	SUVs (Black on Black)	Jack Harlow & Pooh Shiesty	2021	SUVs (Black on Black)	unknown	98JGfgnXE1E	2	2022-08-16 14:21:25.504474	2022-08-16 15:45:02.541521	https://img.youtube.com/vi/98JGfgnXE1E/hqdefault.jpg
+297	Perplexing Pegasus	Rae Sremmurd	2017	This Week's Certified Street Bangers Vol. 13	unknown	gAP47abpRMk	2	2022-08-16 14:23:20.988092	2022-08-16 15:44:55.631607	https://img.youtube.com/vi/gAP47abpRMk/hqdefault.jpg
+395	Maui Wowie	Kid Cudi	2022	A Kid Named Cudi	unknown	cXGx3ZF1ya8	2	2022-08-16 18:56:34.766362	2022-09-20 19:13:29.084739	https://img.youtube.com/vi/cXGx3ZF1ya8/hqdefault.jpg
+275	Lil Secret	Jack Harlow	2022	Come Home the Kids Miss You	unknown	slyzfHqFe6c	2	2022-08-16 14:21:43.789383	2022-08-16 15:45:03.49478	https://img.youtube.com/vi/slyzfHqFe6c/hqdefault.jpg
+401	Don Dada	Alfons	2019	Don Dada	unknown	rNl4tx4G4Rg	2	2022-08-16 18:57:34.266007	2022-09-20 19:13:30.210074	https://img.youtube.com/vi/rNl4tx4G4Rg/hqdefault.jpg
+299	No Type	Rae Sremmurd	2015	VIP, Vol. II	unknown	ocP7b33n43Y	2	2022-08-16 14:23:37.395507	2022-08-16 15:44:56.921399	https://img.youtube.com/vi/ocP7b33n43Y/hqdefault.jpg
+277	Tyler Herro	Jack Harlow	2020	Tyler Herro	unknown	rYYjbIKmAT4	2	2022-08-16 14:21:49.744773	2022-08-16 15:45:04.521999	https://img.youtube.com/vi/rYYjbIKmAT4/hqdefault.jpg
+403	Puglife	Alfons	2016			MlZwp7YwZyw	2	2022-08-16 18:57:39.821358	2022-09-20 19:13:31.24038	https://img.youtube.com/vi/MlZwp7YwZyw/hqdefault.jpg
+287	WHATS POPPIN (remix)	Jack Harlow & Tory Lanez & DaBaby & Lil Wayne	2020	WHATS POPPIN (remix)	unknown	EoxkdcQAZmQ	2	2022-08-16 14:22:11.451966	2022-08-16 15:44:47.885898	https://img.youtube.com/vi/EoxkdcQAZmQ/hqdefault.jpg
+265	Flocky Flocky	Don Toliver & Travis Scott	2021	Life of a DON	unknown	zWma_JNjEls	2	2022-08-16 14:20:45.131962	2022-08-16 15:44:58.227648	https://img.youtube.com/vi/zWma_JNjEls/hqdefault.jpg
+279	Luv Is Dro	Jack Harlow & Static Major & Bryson Tiller	2020	That’s What They All Say	unknown	eASKchQ9Zvk	2	2022-08-16 14:21:55.170559	2022-08-16 15:45:05.866641	https://img.youtube.com/vi/eASKchQ9Zvk/hqdefault.jpg
+289	Look Alive	Rae Sremmurd	2016	SremmLife 2	hip hop	Uk_2Eo0No_k	2	2022-08-16 14:22:59.562877	2022-08-16 15:44:49.445056	https://img.youtube.com/vi/Uk_2Eo0No_k/hqdefault.jpg
+267	Company	Don Toliver	2020	Heaven or Hell	unknown	s788mfFmcW4	2	2022-08-16 14:20:48.535819	2022-08-16 15:44:59.444508	https://img.youtube.com/vi/s788mfFmcW4/hqdefault.jpg
+281	21C Delta	Jack Harlow	2020	That’s What They All Say	unknown	p5RpT7SxTuk	2	2022-08-16 14:21:59.714954	2022-09-20 19:13:32.757387	https://img.youtube.com/vi/p5RpT7SxTuk/hqdefault.jpg
+269	No Idea	Don Toliver	2020	Heaven or Hell	unknown	iCfXgG83Pqs	2	2022-08-16 14:20:52.059427	2022-08-16 15:45:00.387327	https://img.youtube.com/vi/iCfXgG83Pqs/hqdefault.jpg
+291	Throw Sum Mo	Nicki Minaj & Young Thug & Rae Sremmurd	2015	SremmLife	hip hop	2l0BAOqBp08	2	2022-08-16 14:23:06.135081	2022-08-16 15:44:51.16437	https://img.youtube.com/vi/2l0BAOqBp08/hqdefault.jpg
+283	OUT FRONT	Jack Harlow	2020	Sweet Action	unknown	ugNGaL2gXUM	2	2022-08-16 14:22:03.128007	2022-08-16 15:45:32.073416	https://img.youtube.com/vi/ugNGaL2gXUM/hqdefault.jpg
+285	Rain	Jack Harlow	2019	Confetti	unknown	y70y666qeMw	2	2022-08-16 14:22:06.456357	2022-08-16 15:45:33.454093	https://img.youtube.com/vi/y70y666qeMw/hqdefault.jpg
+385	Kitchen	Kid Cudi	2017	Passion, Pain & Demon Slayin’	unknown	w3LJ2bDvDJs	2	2022-08-16 18:56:12.796196	2022-09-20 19:13:34.583228	https://img.youtube.com/vi/w3LJ2bDvDJs/hqdefault.jpg
+422	Talkin’ 2 Myself	Eminem				LG369AbsWfI	2	2022-08-18 12:08:08.715381	2022-09-20 19:13:36.648839	https://img.youtube.com/vi/LG369AbsWfI/hqdefault.jpg
+432	Deja Vu	Eminem				NxkSEJ6Mv3M	2	2022-08-18 12:08:26.501497	2022-09-20 19:13:38.429762	https://img.youtube.com/vi/NxkSEJ6Mv3M/hqdefault.jpg
+424	Going Through Changes	Eminem	2010	Recovery	unknown	T6T_94qjp5g	2	2022-08-18 12:08:11.414548	2022-09-20 19:13:40.483966	https://img.youtube.com/vi/T6T_94qjp5g/hqdefault.jpg
+271	Whats Poppin	Jack Harlow	2020	Sweet Action	unknown	EzrM9RJnAhA	2	2022-08-16 14:21:22.119431	2022-08-16 15:45:01.419931	https://img.youtube.com/vi/EzrM9RJnAhA/hqdefault.jpg
+293	By Chance	Rae Sremmurd	2016	SremmLife 2	unknown	XlYmB9JtCOI	2	2022-08-16 14:23:09.26303	2022-08-16 15:44:52.811631	https://img.youtube.com/vi/XlYmB9JtCOI/hqdefault.jpg
+387	Tequila Shots	Kid Cudi	2020	Man on the Moon III: The Chosen	unknown	lZcRSy0sk5w	2	2022-08-16 18:56:15.598395	2022-09-20 19:13:41.860394	https://img.youtube.com/vi/lZcRSy0sk5w/hqdefault.jpg
+389	Dangerous	ScHoolboy Q & Kid Cudi	2019	CrasH Talk	unknown	wWxJl6ZBQ40	2	2022-08-16 18:56:18.156515	2022-09-20 19:13:42.899128	https://img.youtube.com/vi/wWxJl6ZBQ40/hqdefault.jpg
+428	Almost Famous	Eminem	2010	Recovery	unknown	f3ISSTTJrU8	2	2022-08-18 12:08:18.722	2022-09-20 19:13:44.782014	https://img.youtube.com/vi/f3ISSTTJrU8/hqdefault.jpg
+397	Ganjaman	Alfons	2015	Bravo Hits Lato 2015	unknown	C6Le7luzv2Y	2	2022-08-16 18:57:24.843355	2022-09-20 19:13:46.046722	https://img.youtube.com/vi/C6Le7luzv2Y/hqdefault.jpg
+381	Mr. Rager	Kid Cudi	2010	Man on the Moon Ⅱ: The Legend of Mr. Rager	unknown	XEolg577-DA	2	2022-08-16 18:56:06.040865	2022-09-20 19:13:48.293278	https://img.youtube.com/vi/XEolg577-DA/hqdefault.jpg
+391	Just What I Am	Chip tha Ripper & Kid Cudi	2012	Just What I Am	unknown	hGbP_kTM4CA	2	2022-08-16 18:56:25.436227	2022-09-20 19:13:49.872026	https://img.youtube.com/vi/hGbP_kTM4CA/hqdefault.jpg
+393	Man on the Moon (The Anthem)	Kid Cudi	2022	A Kid Named Cudi	unknown	CCPbYJvtywI	2	2022-08-16 18:56:28.334826	2022-09-20 19:13:51.228428	https://img.youtube.com/vi/CCPbYJvtywI/hqdefault.jpg
+399	Basta Boi	Alfons	2017	Bravo Hits Lato 2017	unknown	ROlOzczJqyc	2	2022-08-16 18:57:28.715238	2022-09-20 19:13:52.288012	https://img.youtube.com/vi/ROlOzczJqyc/hqdefault.jpg
+426	So Bad	Eminem				37-4H5wwrqc	2	2022-08-18 12:08:14.121171	2022-09-20 19:13:54.289573	https://img.youtube.com/vi/37-4H5wwrqc/hqdefault.jpg
+430	Space Bound	Eminem	2010	Recovery		QlU69Z4Hu7A	2	2022-08-18 12:08:23.192736	2022-09-20 19:13:56.265373	https://img.youtube.com/vi/QlU69Z4Hu7A/hqdefault.jpg
+435	Won't Back Down	Eminem				hOFkhNijQeY	2	2022-08-18 12:08:31.092976	2022-09-20 19:13:57.947931	https://img.youtube.com/vi/hOFkhNijQeY/hqdefault.jpg
+433	Untitled	Eminem				rLvbigobrRk	2	2022-08-18 12:08:26.716039	2022-09-20 19:13:59.240796	https://img.youtube.com/vi/rLvbigobrRk/hqdefault.jpg
+437	Seduction	Eminem				rJYKtt9eg4o	2	2022-08-18 12:08:35.184995	2022-09-20 19:14:01.358606	https://img.youtube.com/vi/rJYKtt9eg4o/hqdefault.jpg
+439	Fall	Eminem	2022	Curtain Call 2	hip hop	jsur8561_1A	2	2022-08-18 12:08:46.821292	2022-09-20 19:14:03.333215	https://img.youtube.com/vi/jsur8561_1A/hqdefault.jpg
+441	 Stepping Stone	Eminem -		Kamikaze		8N1119H1uaI	2	2022-08-18 12:08:54.00257	2022-09-20 19:14:05.402818	https://img.youtube.com/vi/8N1119H1uaI/hqdefault.jpg
+443	Greatest	Eminem		Kamikaze		LwBnFu-BEdU	2	2022-08-18 12:08:56.420167	2022-09-20 19:14:06.948281	https://img.youtube.com/vi/LwBnFu-BEdU/hqdefault.jpg
+420	Not Afraid	Eminem		Recovery		NMj0NnKVMwo	2	2022-08-18 12:07:20.950697	2022-09-20 19:14:08.527709	https://img.youtube.com/vi/NMj0NnKVMwo/hqdefault.jpg
+383	Pursuit of Happiness	Kid Cudi	2011	Cudderisback	unknown	7xzU9Qqdqww	2	2022-08-16 18:56:07.559019	2022-09-20 19:13:27.894538	https://img.youtube.com/vi/7xzU9Qqdqww/hqdefault.jpg
+294	Black Beatles	Gucci Mane & Rae Sremmurd	unknown	Rap Club 2017	unknown	7hCdjhQ1_Gc	2	2022-08-16 14:23:17.659165	2022-08-16 15:45:41.113142	https://img.youtube.com/vi/7hCdjhQ1_Gc/hqdefault.jpg
+272	Dua Lipa	Jack Harlow	2022	Come Home the Kids Miss You	unknown	GUqYdsBjZxg	2	2022-08-16 14:21:22.689813	2022-08-16 15:45:49.908555	https://img.youtube.com/vi/GUqYdsBjZxg/hqdefault.jpg
+298	My X	Rae Sremmurd	2015	SremmLife	hip hop	i9QFwTI8rBY	2	2022-08-16 14:23:24.331524	2022-08-16 15:45:42.628759	https://img.youtube.com/vi/i9QFwTI8rBY/hqdefault.jpg
+317	Clueless	Pop Smoke & Fivio Foreign & Polo G	2021	Hall of Fame	unknown	F7tTxeSe_pQ	2	2022-08-16 16:35:48.760657	2022-09-20 19:14:09.646474	https://img.youtube.com/vi/F7tTxeSe_pQ/hqdefault.jpg
+274	Poison	Jack Harlow & Lil Wayne	2022	Come Home the Kids Miss You	unknown	3M6kdVS4DTU	2	2022-08-16 14:21:42.942579	2022-08-16 15:45:51.376761	https://img.youtube.com/vi/3M6kdVS4DTU/hqdefault.jpg
+286	Nail Tech	Jack Harlow	2022	Nail Tech	unknown	WS6i4Ms2jvs	2	2022-08-16 14:22:08.397427	2022-08-16 15:45:58.481935	https://img.youtube.com/vi/WS6i4Ms2jvs/hqdefault.jpg
+300	Dancin With My AK	Montana Of 300				42YPOBIUEsU	2	2022-08-16 14:23:57.584188	2022-08-16 15:45:44.343798	https://img.youtube.com/vi/42YPOBIUEsU/hqdefault.jpg
+276	Creme	Jack Harlow	2020	That’s What They All Say	unknown	ebL7bDmpLGk	2	2022-08-16 14:21:45.42769	2022-08-16 15:45:52.527511	https://img.youtube.com/vi/ebL7bDmpLGk/hqdefault.jpg
+307	I Know	Polo G	2020	THE GOAT	hip hop, trap	UI__tLmwh2g	2	2022-08-16 16:34:52.301516	2022-09-20 19:14:10.930413	https://img.youtube.com/vi/UI__tLmwh2g/hqdefault.jpg
+288	Aries (YuGo) Part 2	Pharrell Williams & Mike WiLL Made‐It & Quavo & Big Sean & Rae Sremmurd	2018	Aries (YuGo), Pt. 2 - Single	unknown	GEBakNV3JFE	2	2022-08-16 14:22:38.084654	2022-08-16 15:45:35.307852	https://img.youtube.com/vi/GEBakNV3JFE/hqdefault.jpg
+216	The Woo	Pop Smoke & Roddy Ricch & 50 Cent	2020	For The Night	unknown	24cbJedcfsc	2	2022-08-16 14:17:51.156242	2022-08-16 15:45:45.716217	https://img.youtube.com/vi/24cbJedcfsc/hqdefault.jpg
+290	No Flex Zone	Rae Sremmurd	2014	Now That’s What I Call Music! 52	unknown	TaCqTsiLMbc	2	2022-08-16 14:23:00.834299	2022-08-16 15:45:36.667485	https://img.youtube.com/vi/TaCqTsiLMbc/hqdefault.jpg
+278	Side Piece	Jack Harlow	2022	Come Home the Kids Miss You	unknown	O2_8GkA3HA8	2	2022-08-16 14:21:52.698639	2022-08-16 15:45:54.094704	https://img.youtube.com/vi/O2_8GkA3HA8/hqdefault.jpg
+266	5X	Don Toliver	2021	Life of a DON	unknown	XyMKAzSVJ_k	2	2022-08-16 14:20:45.440715	2022-08-16 15:45:46.575742	https://img.youtube.com/vi/XyMKAzSVJ_k/hqdefault.jpg
+303	21	Polo G	2020	THE GOAT	hip hop, trap	-sib0AyJuBw	2	2022-08-16 16:34:46.34851	2022-09-20 19:14:12.120253	https://img.youtube.com/vi/-sib0AyJuBw/hqdefault.jpg
+268	Cardigan	Don Toliver	2020	Heaven or Hell	unknown	M8_SHG6roTg	2	2022-08-16 14:20:50.488276	2022-08-16 15:45:47.567458	https://img.youtube.com/vi/M8_SHG6roTg/hqdefault.jpg
+280	Movie Star	Jack Harlow & Pharrell Williams	2022	Come Home the Kids Miss You	unknown	ONMgi06ewgA	2	2022-08-16 14:21:55.714997	2022-08-16 15:45:55.090862	https://img.youtube.com/vi/ONMgi06ewgA/hqdefault.jpg
+301	Love Hate Letter to Alcohol	Post Malone & Fleet Foxes	2022	Twelve Carat Toothache	unknown	Qx8bJb4oQzE	2	2022-08-16 15:46:59.709302	2022-09-20 19:14:13.271702	https://img.youtube.com/vi/Qx8bJb4oQzE/hqdefault.jpg
+302	 If You Love Her	Post Malone & G-Eazy				aeSMHCUS35M	2	2022-08-16 15:47:47.603042	2022-09-20 19:14:14.749165	https://img.youtube.com/vi/aeSMHCUS35M/hqdefault.jpg
+282	I Got a Shot	Jack Harlow	2022	Come Home the Kids Miss You	unknown	YXgleA4fSD4	2	2022-08-16 14:22:00.331079	2022-08-16 15:45:56.000339	https://img.youtube.com/vi/YXgleA4fSD4/hqdefault.jpg
+311	Fortnight	Polo G	2021	Hall of Fame 2.0	unknown	BGyltvvkc-g	2	2022-08-16 16:35:39.218105	2022-09-20 19:14:15.65873	https://img.youtube.com/vi/BGyltvvkc-g/hqdefault.jpg
+304	Martin & Gina	Polo G	2020	THE GOAT	hip hop, trap	qjI6Gru3Tho	2	2022-08-16 16:34:47.090293	2022-09-20 19:14:16.612562	https://img.youtube.com/vi/qjI6Gru3Tho/hqdefault.jpg
+308	Toxic	Polo G	2021	Hall of Fame	unknown	OQvJ7ZmYYmo	2	2022-08-16 16:34:53.068462	2022-09-20 19:14:17.567638	https://img.youtube.com/vi/OQvJ7ZmYYmo/hqdefault.jpg
+305	Flex	Juice WRLD & Polo G	2020	THE GOAT	hip hop, trap	7aS7KStPgNA	2	2022-08-16 16:34:49.037673	2022-09-20 19:14:18.773296	https://img.youtube.com/vi/7aS7KStPgNA/hqdefault.jpg
+309	Unapologetic	NLE Choppa & Polo G	2021	Hall of Fame 2.0	unknown	5Z55ko3q1c0	2	2022-08-16 16:35:36.088658	2022-09-20 19:14:19.932786	https://img.youtube.com/vi/5Z55ko3q1c0/hqdefault.jpg
+292	Powerglide	Juicy J & Rae Sremmurd	2018	Powerglide	unknown	uK7JtrAog3U	2	2022-08-16 14:23:08.932412	2022-08-16 15:45:39.051615	https://img.youtube.com/vi/uK7JtrAog3U/hqdefault.jpg
+284	Funny Seeing You Here	Jack Harlow	2020	That’s What They All Say	unknown	bVX0rT4gkyQ	2	2022-08-16 14:22:03.980641	2022-08-16 15:45:57.058609	https://img.youtube.com/vi/bVX0rT4gkyQ/hqdefault.jpg
+270	First Class	Jack Harlow	2022	First Class	unknown	QKW_EEDt2FE	2	2022-08-16 14:21:21.609464	2022-08-16 15:45:48.847346	https://img.youtube.com/vi/QKW_EEDt2FE/hqdefault.jpg
+310	Partin Ways	Polo G	2021	Hall of Fame 2.0	unknown	g2NVwQriRsk	2	2022-08-16 16:35:38.614186	2022-09-20 19:14:21.159209	https://img.youtube.com/vi/g2NVwQriRsk/hqdefault.jpg
+314	33	Polo G	2020	THE GOAT	hip hop, trap	KqQ49wyZg8A	2	2022-08-16 16:35:44.239819	2022-09-20 19:14:22.40035	https://img.youtube.com/vi/KqQ49wyZg8A/hqdefault.jpg
+313	Pop Out Again	Gunna & Polo G & Lil Baby	2019	Die a Legend	unknown	o70FKH6n8LE	2	2022-08-16 16:35:42.003596	2022-09-20 19:14:24.103708	https://img.youtube.com/vi/o70FKH6n8LE/hqdefault.jpg
+312	Bad Man (Smooth Criminal)	Polo G	2021	Hall of Fame 2.0	unknown	w2_CPSXu1Cs	2	2022-08-16 16:35:41.977419	2022-09-20 19:14:24.987884	https://img.youtube.com/vi/w2_CPSXu1Cs/hqdefault.jpg
+316	So Real	Polo G	2021	Hall of Fame	unknown	4hIc26dKOqc	2	2022-08-16 16:35:46.585901	2022-09-20 19:14:26.025534	https://img.youtube.com/vi/4hIc26dKOqc/hqdefault.jpg
+315	Distraction	Polo G	2022	Distraction	unknown	ktFLtS8GfoU	2	2022-08-16 16:35:45.487836	2022-09-20 19:14:27.16786	https://img.youtube.com/vi/ktFLtS8GfoU/hqdefault.jpg
+318	Painting Pictures	Polo G	2021	Hall of Fame	unknown	5kEQvzJGzAc	2	2022-08-16 16:35:50.241565	2022-09-20 19:14:28.131214	https://img.youtube.com/vi/5kEQvzJGzAc/hqdefault.jpg
+319	Boom	Polo G	2021	Hall of Fame	unknown	-vnStM-iV7M	2	2022-08-16 16:35:51.297095	2022-09-20 19:14:29.079497	https://img.youtube.com/vi/-vnStM-iV7M/hqdefault.jpg
+320	Suicide	Polo G & Lil Tjay	2021	Hall of Fame 2.0	unknown	s4mcIelgjDQ	2	2022-08-16 16:35:53.285598	2022-09-20 19:14:30.278786	https://img.youtube.com/vi/s4mcIelgjDQ/hqdefault.jpg
+321	Be Something	Polo G & Lil Baby	2020	THE GOAT	hip hop, trap	_3LuZx06QhQ	2	2022-08-16 16:35:55.096876	2022-09-20 19:14:31.698854	https://img.youtube.com/vi/_3LuZx06QhQ/hqdefault.jpg
+322	Alright	Polo G	2021	Hall of Fame 2.0	unknown	hklO_R9oiIQ	2	2022-08-16 16:35:55.811542	2022-09-20 19:14:32.791219	https://img.youtube.com/vi/hklO_R9oiIQ/hqdefault.jpg
+306	Through da Storm	Polo G	2019	Die a Legend	unknown	_AcmyFsSm18	2	2022-08-16 16:34:51.593426	2022-09-20 19:14:34.263178	https://img.youtube.com/vi/_AcmyFsSm18/hqdefault.jpg
+296	This Could Be Us	Rae Sremmurd	2015	SremmLife	hip hop	poYUzSVlNEE	1	2022-08-16 14:23:19.594192	2022-08-29 02:48:41.452215	https://img.youtube.com/vi/poYUzSVlNEE/hqdefault.jpg
+323	Don’t Play	Polo G & Lil Baby	2021	Hall of Fame 2.0	unknown	UJR5AR7hIJU	2	2022-08-16 16:36:08.097238	2022-09-20 19:14:36.421366	https://img.youtube.com/vi/UJR5AR7hIJU/hqdefault.jpg
+325	Luh Da Raq 	Polo G				uCBXaWvobdA	2	2022-08-16 16:36:35.935478	2022-09-20 19:14:37.138587	https://img.youtube.com/vi/uCBXaWvobdA/hqdefault.jpg
+404	Leyla	Alfons				mZaTenQR7U0	2	2022-08-16 19:03:35.955965	2022-09-20 19:14:38.216376	https://img.youtube.com/vi/mZaTenQR7U0/hqdefault.jpg
+569	nineteen	Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	YkvekRdhIgg	2	2022-08-19 12:49:08.578467	2022-09-20 19:14:39.337226	https://img.youtube.com/vi/YkvekRdhIgg/hqdefault.jpg
+327	Chosen 1	Polo G	2019	Die a Legend	unknown	7ALoFoQbVrU	2	2022-08-16 16:36:41.079874	2022-09-20 19:14:40.485143	https://img.youtube.com/vi/7ALoFoQbVrU/hqdefault.jpg
+329	Heating Up	YungLiV & Polo G	2021	Hall of Fame 2.0	unknown	mBSo1l5syyk	2	2022-08-16 16:36:50.253124	2022-09-20 19:14:41.556777	https://img.youtube.com/vi/mBSo1l5syyk/hqdefault.jpg
+331	Losses	Polo G & Young Thug	2021	Hall of Fame	unknown	uCi0Ug4R1D4	2	2022-08-16 16:37:32.237357	2022-09-20 19:14:42.90042	https://img.youtube.com/vi/uCi0Ug4R1D4/hqdefault.jpg
+333	With You	Polo G	2021	Hall of Fame 2.0	unknown	dAjIvm5eftY	2	2022-08-16 16:37:36.299841	2022-09-20 19:14:44.083986	https://img.youtube.com/vi/dAjIvm5eftY/hqdefault.jpg
+468	Step	NLE Choppa	2019	Cottonwood	unknown	Bvrbh92vp1I	2	2022-08-19 08:20:15.233014	2022-09-20 19:14:45.256485	https://img.youtube.com/vi/Bvrbh92vp1I/hqdefault.jpg
+521	The Climb Back	J. Cole	2020	Lewis Street	unknown	oVaBgcJwkI4	2	2022-08-19 10:08:58.110679	2022-09-20 19:14:47.488182	https://img.youtube.com/vi/oVaBgcJwkI4/hqdefault.jpg
+470	Top Shotta Flow	NLE Choppa	2020	Top Shotta	unknown	k1rGtLNuJ3Q	2	2022-08-19 08:20:24.923443	2022-09-20 19:14:48.726444	https://img.youtube.com/vi/k1rGtLNuJ3Q/hqdefault.jpg
+421	Never Recover	Gunna & Drake & Lil Baby	2018	Drip Harder	hip hop, pop rap	Hsy4UEBSO44	2	2022-08-18 12:07:46.324608	2022-09-20 19:14:50.299966	https://img.youtube.com/vi/Hsy4UEBSO44/hqdefault.jpg
+423	Cold Wind Blows	Eminem	2010	Recovery	unknown	c4Yz9o5UtN8	2	2022-08-18 12:08:09.877384	2022-09-20 19:14:52.324083	https://img.youtube.com/vi/c4Yz9o5UtN8/hqdefault.jpg
+472	Moonlight	NLE Choppa & Big Sean	2020	From Dark to Light	unknown	IR9FJSmvF_s	2	2022-08-19 08:20:29.169912	2022-09-20 19:14:53.768768	https://img.youtube.com/vi/IR9FJSmvF_s/hqdefault.jpg
+425	You’re Never Over	Eminem	2010	Recovery		lKum7GDQxOY	2	2022-08-18 12:08:12.985114	2022-09-20 19:14:56.007969	https://img.youtube.com/vi/lKum7GDQxOY/hqdefault.jpg
+427	Ridaz	Eminem				_nixVAe1Mks	2	2022-08-18 12:08:14.899573	2022-09-20 19:14:57.940971	https://img.youtube.com/vi/_nixVAe1Mks/hqdefault.jpg
+429	25 to Life	Eminem	2010	Recovery	unknown	Ngng8UyyaGQ	2	2022-08-18 12:08:19.797434	2022-09-20 19:14:59.576587	https://img.youtube.com/vi/Ngng8UyyaGQ/hqdefault.jpg
+515	LONDON	BIA & J. Cole	2022	LONDON	unknown	gmYVxU6ouF4	2	2022-08-19 10:08:33.473808	2022-09-20 19:15:01.269373	https://img.youtube.com/vi/gmYVxU6ouF4/hqdefault.jpg
+431	Stay Wide Awake	Eminem				F6E3GkaYdHs	2	2022-08-18 12:08:25.538783	2022-09-20 19:15:03.33645	https://img.youtube.com/vi/F6E3GkaYdHs/hqdefault.jpg
+523	Love Yourz	J. Cole	unknown	unknown	unknown	6tjlU4w4fSo	2	2022-08-19 10:09:00.030962	2022-09-20 19:15:04.733728	https://img.youtube.com/vi/6tjlU4w4fSo/hqdefault.jpg
+434	Music Box	Eminem				ZWUDia4JXBE	2	2022-08-18 12:08:30.465371	2022-09-20 19:15:06.631952	https://img.youtube.com/vi/ZWUDia4JXBE/hqdefault.jpg
+436	My Darling	Eminem				J1bklziBkJg	2	2022-08-18 12:08:33.832955	2022-09-20 19:15:08.724182	https://img.youtube.com/vi/J1bklziBkJg/hqdefault.jpg
+438	Kamikaze	Eminem				FhF9RwkHAJw	2	2022-08-18 12:08:45.054003	2022-09-20 19:15:10.112311	https://img.youtube.com/vi/FhF9RwkHAJw/hqdefault.jpg
+440	The Ringer	Eminem 				c2AhsySa-8E	2	2022-08-18 12:08:50.997562	2022-09-20 19:15:12.24464	https://img.youtube.com/vi/c2AhsySa-8E/hqdefault.jpg
+442	Lucky You 	Eminem & Joyner Lucas		Kamikaze		1arz9Q9qBas	2	2022-08-18 12:08:54.590848	2022-09-20 19:15:14.05538	https://img.youtube.com/vi/1arz9Q9qBas/hqdefault.jpg
+444	KILLSHOT	Eminem				FxQTY-W6GIo	2	2022-08-18 12:09:00.734798	2022-09-20 19:15:15.738339	https://img.youtube.com/vi/FxQTY-W6GIo/hqdefault.jpg
+446	Good Guy ft. Jessie Reyez	Eminem				X-TkrWpO75k	2	2022-08-18 12:09:12.514783	2022-09-20 19:15:17.094456	https://img.youtube.com/vi/X-TkrWpO75k/hqdefault.jpg
+517	Freedom of Speech	J. Cole & Dreamville	2022	D‐Day: A Gangsta Grillz Mixtape	unknown	yy9hmPkIihg	2	2022-08-19 10:08:40.816177	2022-09-20 19:15:18.0727	https://img.youtube.com/vi/yy9hmPkIihg/hqdefault.jpg
+464	CAPO	NLE Choppa	2019	CAPO	unknown	Uicx21zbygc	2	2022-08-19 08:19:56.275573	2022-09-20 19:15:19.376436	https://img.youtube.com/vi/Uicx21zbygc/hqdefault.jpg
+519	Light Prism	Kendrick Lamar & J Cole	2011	Setbacks	unknown	AgdbdI3lM4s	2	2022-08-19 10:08:53.225358	2022-09-20 19:15:22.114735	https://img.youtube.com/vi/AgdbdI3lM4s/hqdefault.jpg
+553	Sandman	A$AP Rocky	2021	LIVE.LOVE.A$AP	unknown	0_3HVeHinDg	2	2022-08-19 10:11:00.244672	2022-09-20 19:15:23.375966	https://img.youtube.com/vi/0_3HVeHinDg/hqdefault.jpg
+525	Work Out	J. Cole	2011	Cole World: The Sideline Story	hip hop	99f94NP_DJ4	2	2022-08-19 10:09:06.241429	2022-09-20 19:15:24.907875	https://img.youtube.com/vi/99f94NP_DJ4/hqdefault.jpg
+549	Psycho	A$AP Ferg	2016	Always Strive and Prosper	unknown	ImE7i6cFj54	2	2022-08-19 10:10:39.10338	2022-09-20 19:15:26.194059	https://img.youtube.com/vi/ImE7i6cFj54/hqdefault.jpg
+527	G.O.M.D.	J. Cole	2014	2014 Forest Hills Drive	hip hop	M1VhkCOHbRw	2	2022-08-19 10:09:10.653328	2022-09-20 19:15:28.210065	https://img.youtube.com/vi/M1VhkCOHbRw/hqdefault.jpg
+557	Hun43rd	A$AP Rocky	2018	TESTING	unknown	cp8sSx06Bds	2	2022-08-19 10:11:07.461534	2022-09-20 19:15:29.960626	https://img.youtube.com/vi/cp8sSx06Bds/hqdefault.jpg
+551	D.M.B.	A$AP Rocky	2022	D.M.B.	unknown	6BS8L3APhs0	2	2022-08-19 10:10:55.047215	2022-09-20 19:15:31.977655	https://img.youtube.com/vi/6BS8L3APhs0/hqdefault.jpg
+555	Changes	A$AP Rocky	2018	TESTING	unknown	1aaS5jt6xR4	2	2022-08-19 10:11:03.159006	2022-09-20 19:15:34.130998	https://img.youtube.com/vi/1aaS5jt6xR4/hqdefault.jpg
+559	Tony Tone	A$AP Rocky	2018	TESTING	unknown	Z6z6oiTirFQ	2	2022-08-19 10:11:23.974858	2022-09-20 19:15:35.368344	https://img.youtube.com/vi/Z6z6oiTirFQ/hqdefault.jpg
+565	Spotlight	Marshmello & Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	b7K_lbglfI4	2	2022-08-19 12:48:48.135609	2022-09-20 19:15:36.566353	https://img.youtube.com/vi/b7K_lbglfI4/hqdefault.jpg
+567	Save That Shit	Lil Peep	2017	Come Over When You’re Sober, Pt. 1	unknown	V0r0CLhm23M	2	2022-08-19 12:49:05.124129	2022-09-20 19:15:38.037783	https://img.youtube.com/vi/V0r0CLhm23M/hqdefault.jpg
+571	Problems	Lil Peep	2017	Come Over When You’re Sober, Pt. 1	unknown	KQBRM1GK3T4	2	2022-08-19 12:49:11.136588	2022-09-20 19:15:39.369902	https://img.youtube.com/vi/KQBRM1GK3T4/hqdefault.jpg
+547	Rubber Band Man	A$AP Ferg & Cam’ron	2017	Still Striving	unknown	2P7mvQQZK3Y	2	2022-08-19 10:10:35.55796	2022-09-20 19:15:40.817462	https://img.youtube.com/vi/2P7mvQQZK3Y/hqdefault.jpg
+462	Jumpin	NLE Choppa & Polo G	2021	Jumpin	unknown	65qkgUhJZHk	2	2022-08-19 08:19:51.2139	2022-09-20 19:15:42.196786	https://img.youtube.com/vi/65qkgUhJZHk/hqdefault.jpg
+466	Shotta Flow 5	NLE Choppa	2020	Top Shotta	unknown	NV_bjJzNkxk	2	2022-08-19 08:20:00.486952	2022-09-20 19:14:35.30815	https://img.youtube.com/vi/NV_bjJzNkxk/hqdefault.jpg
+335	RAPSTAR	Polo G	2021	Now That's What I Call Music! 80	unknown	w2IhccXakkE	2	2022-08-16 16:37:47.068678	2022-09-20 19:15:45.054878	https://img.youtube.com/vi/w2IhccXakkE/hqdefault.jpg
+336	On Go	Polo G & Sheff G	2022	From The Can	unknown	lQ6m67Q0E4k	2	2022-08-16 16:37:53.811148	2022-09-20 19:15:46.429148	https://img.youtube.com/vi/lQ6m67Q0E4k/hqdefault.jpg
+344	Fashion Drunk	Gift of Gab & Otis Stacks	2016	Otis Stacks	r&b, soul	B_3JVPm96ac	2	2022-08-16 18:10:03.644595	2022-09-20 19:15:47.884177	https://img.youtube.com/vi/B_3JVPm96ac/hqdefault.jpg
+340	Yes	Chief Keef	2015	Bang 3	unknown	fk6LY-MWZnQ	2	2022-08-16 16:49:10.793962	2022-09-20 19:15:49.496129	https://img.youtube.com/vi/fk6LY-MWZnQ/hqdefault.jpg
+337	Love Sosa	Chief Keef	2022	Finally Rich	unknown	mVOnD21VHaE	2	2022-08-16 16:48:44.054993	2022-09-20 19:15:51.18616	https://img.youtube.com/vi/mVOnD21VHaE/hqdefault.jpg
+338	Bouncin	Chief Keef	2015	Juggin Loud	unknown	jp06aZB_uqs	2	2022-08-16 16:49:07.997366	2022-09-20 19:15:52.602343	https://img.youtube.com/vi/jp06aZB_uqs/hqdefault.jpg
+339	I Don't Like	Chief Keef	2022	Finally Rich	unknown	B-e7YCixJaY	2	2022-08-16 16:49:10.33178	2022-09-20 19:15:55.045838	https://img.youtube.com/vi/B-e7YCixJaY/hqdefault.jpg
+328	Headshot	Fivio Foreign & Polo G & Lil Tjay	2021	Destined 2 Win	unknown	aT_nFiTkxy8	2	2022-08-16 16:36:46.831846	2022-09-20 19:15:56.240303	https://img.youtube.com/vi/aT_nFiTkxy8/hqdefault.jpg
+407	Company	24kGoldn & Future	2021	El Dorado	unknown	GCsoFCw9wrQ	2	2022-08-16 20:14:19.051469	2022-09-20 19:15:57.713378	https://img.youtube.com/vi/GCsoFCw9wrQ/hqdefault.jpg
+408	VALENTINO	24kGoldn	2020	DROPPED OUTTA COLLEGE	unknown	c3_Ia2CaO8k	2	2022-08-16 20:14:22.195985	2022-09-20 19:15:59.038733	https://img.youtube.com/vi/c3_Ia2CaO8k/hqdefault.jpg
+341	BANG BANG	Chief Keef & Gradur	2015	L’Homme au bob	unknown	Dsq5wK1JMGM	2	2022-08-16 16:49:29.761472	2022-09-20 19:16:01.094564	https://img.youtube.com/vi/Dsq5wK1JMGM/hqdefault.jpg
+469	Narrow Road	NLE Choppa & Lil Baby	2020	Top Shotta	unknown	s4Mn4rc0YPg	2	2022-08-19 08:20:19.559986	2022-09-20 19:16:02.79321	https://img.youtube.com/vi/s4Mn4rc0YPg/hqdefault.jpg
+445	Venom	Eminem				8CdcCD5V-d8	2	2022-08-18 12:09:11.072642	2022-09-20 19:16:04.90157	https://img.youtube.com/vi/8CdcCD5V-d8/hqdefault.jpg
+346	Learn to Lose	Bakermat & Alex Clare	2019	Serious Beats 92	unknown	GNjStWG2vLU	2	2022-08-16 18:15:03.525589	2022-09-20 19:16:06.235003	https://img.youtube.com/vi/GNjStWG2vLU/hqdefault.jpg
+465	Yak Flow	NLE Choppa	2022	Yak Flow	unknown	xbE7WraMI04	2	2022-08-19 08:19:59.524977	2022-09-20 19:16:07.284639	https://img.youtube.com/vi/xbE7WraMI04/hqdefault.jpg
+347	Pretty Little Jaguar	Bakermat	2020	The Ringmaster	unknown	3EmfvAdyohk	2	2022-08-16 18:15:07.331612	2022-09-20 19:16:08.278218	https://img.youtube.com/vi/3EmfvAdyohk/hqdefault.jpg
+348	Tainted Love	Milky Chance	2021	Trip Tape	unknown	IbzYImxfP0o	2	2022-08-16 18:31:29.549584	2022-09-20 19:16:09.530863	https://img.youtube.com/vi/IbzYImxfP0o/hqdefault.jpg
+345	Walk That Walk	Nic Hanson & Bakermat	2021	The Spirit	unknown	8ZVxoKBxb14	2	2022-08-16 18:14:42.003745	2022-09-20 19:16:10.604617	https://img.youtube.com/vi/8ZVxoKBxb14/hqdefault.jpg
+349	Stolen dance	Milky Chance	2014	Spotify Sessions	unknown	dAuAyA9dBBU	2	2022-08-16 18:31:43.456399	2022-09-20 19:16:12.514451	https://img.youtube.com/vi/dAuAyA9dBBU/hqdefault.jpg
+410	Coco	24kGoldn & DaBaby	2020	Coco	unknown	A4mU4j0n_YE	2	2022-08-16 20:14:25.104926	2022-09-20 19:16:13.60063	https://img.youtube.com/vi/A4mU4j0n_YE/hqdefault.jpg
+467	Final Warning	NLE Choppa	2021	Final Warning	unknown	pD4yIMlU_lI	2	2022-08-19 08:20:04.989682	2022-09-20 19:16:14.642648	https://img.youtube.com/vi/pD4yIMlU_lI/hqdefault.jpg
+324	BST	Polo G	2019	Die a Legend	unknown	t14ej7i8jus	2	2022-08-16 16:36:33.98429	2022-09-20 19:16:16.399061	https://img.youtube.com/vi/t14ej7i8jus/hqdefault.jpg
+471	Final Warning	NLE Choppa	2021	Final Warning	unknown	ih6vI5SAkjc	2	2022-08-19 08:20:27.831374	2022-09-20 19:16:17.530287	https://img.youtube.com/vi/ih6vI5SAkjc/hqdefault.jpg
+342	Luigi 	2KBABY & Chief Keef -				NyXBJ9O5SLs	2	2022-08-16 16:49:37.920122	2022-09-20 19:16:19.002756	https://img.youtube.com/vi/NyXBJ9O5SLs/hqdefault.jpg
+412	The Top	24kGoldn	2021	El Dorado	unknown	zAjEQewYA1k	2	2022-08-16 20:14:32.442972	2022-09-20 19:16:20.389887	https://img.youtube.com/vi/zAjEQewYA1k/hqdefault.jpg
+326	Pop Out	Polo G & Lil Tjay	2019	Die a Legend	unknown	hLw4qUBfhVY	2	2022-08-16 16:36:39.066528	2022-09-20 19:16:21.480858	https://img.youtube.com/vi/hLw4qUBfhVY/hqdefault.jpg
+350	Flashed Junk Mind	Milky Chance	2013	Musikexpress 1213	unknown	2OTPOKaz8o4	2	2022-08-16 18:31:44.044309	2022-09-20 19:16:23.240611	https://img.youtube.com/vi/2OTPOKaz8o4/hqdefault.jpg
+330	Bloody Canvas	Polo G	2021	Hall of Fame	unknown	kXU0OoZgaoA	2	2022-08-16 16:36:58.564845	2022-09-20 19:16:25.065044	https://img.youtube.com/vi/kXU0OoZgaoA/hqdefault.jpg
+343	Chief So	Chief Keef				RmLoNcK_E6k	2	2022-08-16 16:49:42.657861	2022-09-20 19:16:27.011667	https://img.youtube.com/vi/RmLoNcK_E6k/hqdefault.jpg
+332	Malibu	Migos & Polo G	2021	Culture III	unknown	rtqw4C0mOMc	2	2022-08-16 16:37:36.271075	2022-09-20 19:16:28.797763	https://img.youtube.com/vi/rtqw4C0mOMc/hqdefault.jpg
+414	Breath Away	24kGoldn	2021	El Dorado	unknown	f5W_sAIKkJQ	2	2022-08-16 20:14:46.222498	2022-09-20 19:16:30.051309	https://img.youtube.com/vi/f5W_sAIKkJQ/hqdefault.jpg
+405	CITY OF ANGELS	24kGoldn	2020	DROPPED OUTTA COLLEGE	unknown	OOmu1Yki-7g	2	2022-08-16 20:14:16.282337	2022-09-20 19:16:30.846429	https://img.youtube.com/vi/OOmu1Yki-7g/hqdefault.jpg
+518	WATERBOYZ	EARTHGANG & J. Cole & JID	2022	GHETTO GODS	unknown	BPNNuiPIYnI	2	2022-08-19 10:08:48.836375	2022-09-20 19:16:32.854696	https://img.youtube.com/vi/BPNNuiPIYnI/hqdefault.jpg
+516	Heaven’s EP	J. Cole & Dreamville	2022	D‐Day: A Gangsta Grillz Mixtape	unknown	8JDPQfvz4FU	2	2022-08-19 10:08:34.771137	2022-09-20 19:16:34.180935	https://img.youtube.com/vi/8JDPQfvz4FU/hqdefault.jpg
+520	9 5 . s o u t h	J. Cole	2021	The Off‐Season	unknown	g3mVwt0B6G4	2	2022-08-19 10:08:54.306637	2022-09-20 19:16:35.622086	https://img.youtube.com/vi/g3mVwt0B6G4/hqdefault.jpg
+522	KOD	J. Cole	2018	KOD	unknown	ciya_AQu25o	2	2022-08-19 10:08:58.685417	2022-09-20 19:16:36.999297	https://img.youtube.com/vi/ciya_AQu25o/hqdefault.jpg
+524	p r i d e . i s . t h e . d e v i l	J. Cole & Lil Baby	2021	The Off‐Season	unknown	ZLX-GY0dJgc	2	2022-08-19 10:09:02.163646	2022-09-20 19:16:38.382526	https://img.youtube.com/vi/ZLX-GY0dJgc/hqdefault.jpg
+526	G.O.M.D.	J. Cole	2014	2014 Forest Hills Drive	hip hop	vHU6ZRQJ50Q	2	2022-08-19 10:09:08.492479	2022-09-20 19:16:40.510328	https://img.youtube.com/vi/vHU6ZRQJ50Q/hqdefault.jpg
+528	ATM	J. Cole	2018	KOD	unknown	ew7qhDBQcU4	2	2022-08-19 10:09:10.707045	2022-09-20 19:16:42.017075	https://img.youtube.com/vi/ew7qhDBQcU4/hqdefault.jpg
+570	Awful Things	Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	zHLC2PWJtvU	2	2022-08-19 12:49:10.369567	2022-09-20 19:16:43.440526	https://img.youtube.com/vi/zHLC2PWJtvU/hqdefault.jpg
+572	nuts	Lil Peep & lil skil	2015	LIVE FOREVER	unknown	osPq9Yb8xm8	2	2022-08-19 12:49:13.322164	2022-09-20 19:16:44.115468	https://img.youtube.com/vi/osPq9Yb8xm8/hqdefault.jpg
+463	Camelot	NLE Choppa	2019	Camelot	unknown	sXzuVnqLWR0	2	2022-08-19 08:19:54.072924	2022-09-20 19:16:45.244354	https://img.youtube.com/vi/sXzuVnqLWR0/hqdefault.jpg
+334	Feline	Juice WRLD	2021	Fighting Demons (lyric video version)	unknown	DP_Qlt9CSiY	2	2022-08-16 16:37:37.964983	2022-09-20 19:15:43.704518	https://img.youtube.com/vi/DP_Qlt9CSiY/hqdefault.jpg
+601	Spirits	The Strumbellas	2016	Broadcasts Vol. 24	unknown	OHCW8XMRivQ	2	2022-08-24 14:34:04.114945	2022-09-20 19:17:08.625741	https://img.youtube.com/vi/OHCW8XMRivQ/hqdefault.jpg
+568	Star Shopping	Lil Peep	2018	Live fast die young and leave a good looking corpse	unknown	nMJIBrcBgCc	2	2022-08-19 12:49:05.414617	2022-09-20 19:16:53.639577	https://img.youtube.com/vi/nMJIBrcBgCc/hqdefault.jpg
+605	Californication	Red Hot Chili Peppers	unknown	californication	unknown	6L0LIo35sF4	2	2022-08-24 14:36:38.684279	2022-09-20 19:16:47.242711	https://img.youtube.com/vi/6L0LIo35sF4/hqdefault.jpg
+610	Black And Yellow	Wiz Khalifa	2015	Straight Outta Old Skool	unknown	YRdRhn1xZ20	2	2022-08-26 10:53:16.820752	2022-09-20 19:17:01.357063	https://img.youtube.com/vi/YRdRhn1xZ20/hqdefault.jpg
+592	Love or Lust	24kGoldn	2021	El Dorado	unknown	GSgN0Jhv6cw	2	2022-08-19 13:31:10.874392	2022-09-20 19:16:54.868839	https://img.youtube.com/vi/GSgN0Jhv6cw/hqdefault.jpg
+602	Hey There Delilah	Plain White T’s	2009	The Love Junkie Album	unknown	SrIxz9wHUX8	2	2022-08-24 14:35:43.162567	2022-09-20 19:17:09.703994	https://img.youtube.com/vi/SrIxz9wHUX8/hqdefault.jpg
+609	Hot N*gga	Bobby Shmurda	2014	Shmurda She Wrote	unknown	hSkGpq2AeGo	2	2022-08-25 10:51:02.079838	2022-09-20 19:17:02.394467	https://img.youtube.com/vi/hSkGpq2AeGo/hqdefault.jpg
+613	U laughed at me	SAINt JHN	2022	U laughed at me	trap hip hop	AKGxr5rdXn4	2	2022-08-26 13:58:40.244921	2022-09-20 19:17:18.15624	https://img.youtube.com/vi/AKGxr5rdXn4/hqdefault.jpg
+598	Post Malone - Allergic (Audio)	Post Malone				JdttvuGdlvs	2	2022-08-22 15:42:54.6097	2022-09-20 19:17:03.414877	https://img.youtube.com/vi/JdttvuGdlvs/hqdefault.jpg
+606	Push Off	The Palms	2016	Sway	dream pop, hip hop, indie folk, indie pop, pop	bMZOhFV7zBA	2	2022-08-24 14:58:51.327307	2022-09-20 19:16:48.213777	https://img.youtube.com/vi/bMZOhFV7zBA/hqdefault.jpg
+603	Pour Some Sugar On Me	Def Leppard	1999	Live Archive	unknown	e7asuFT32Es	2	2022-08-24 14:36:14.80843	2022-09-20 19:17:11.571821	https://img.youtube.com/vi/e7asuFT32Es/hqdefault.jpg
+593	Empty	24kGoldn & Swae Lee	2021	El Dorado	unknown	qeOTtix-WYc	2	2022-08-19 13:31:11.939997	2022-09-20 19:16:55.997497	https://img.youtube.com/vi/qeOTtix-WYc/hqdefault.jpg
+607	The Drive	Everyone You Know	2019	Look After Your Pennies - EP	unknown	hDoP19goV_E	2	2022-08-25 08:33:34.925572	2022-09-20 19:16:49.827357	https://img.youtube.com/vi/hDoP19goV_E/hqdefault.jpg
+599	Leave	Post Malone	2016	Stoney	hip hop	WGxcIU8OWw4	2	2022-08-22 15:44:32.95493	2022-09-20 19:17:05.457696	https://img.youtube.com/vi/WGxcIU8OWw4/hqdefault.jpg
+608	Funky Friday	Fredo & Dave	2018	Now That’s What I Call Music! 101	unknown	QokgDU_naxg	2	2022-08-25 08:35:05.508669	2022-09-20 19:16:51.075996	https://img.youtube.com/vi/QokgDU_naxg/hqdefault.jpg
+604	Dark Necessities	Red Hot Chili Peppers	2016	2016-09-01: Papp Laszlo Sports Arena, Budapest, Hungary	unknown	qJ_Tw0w3lLA	2	2022-08-24 14:36:35.605565	2022-09-20 19:17:13.642674	https://img.youtube.com/vi/qJ_Tw0w3lLA/hqdefault.jpg
+611	Vanic x K.Flay - Make Me Fade	Vanic x K.Flay				8Er6l7UOnbI	2	2022-08-26 13:45:18.750339	2022-09-20 19:17:15.475095	https://img.youtube.com/vi/8Er6l7UOnbI/hqdefault.jpg
+594	Cut It Off	24kGoldn	2021	El Dorado	unknown	wZvlvO5WSHY	2	2022-08-19 13:31:15.814951	2022-09-20 19:16:57.080102	https://img.youtube.com/vi/wZvlvO5WSHY/hqdefault.jpg
+612	Electric Love	BØRNS	2014	Candy	unknown	-wiBRhX_QTU	2	2022-08-26 13:54:39.545127	2022-09-20 19:17:17.022505	https://img.youtube.com/vi/-wiBRhX_QTU/hqdefault.jpg
+449	His & Hers	Gunna & Internet Money & Lil Uzi Vert & Don Toliver	2021	His & Hers	unknown	pffbkwr927Y	2	2022-08-19 07:15:04.658599	2022-09-20 19:16:52.617039	https://img.youtube.com/vi/pffbkwr927Y/hqdefault.jpg
+600	Cocoon	Milky Chance	2017	Chartboxx 3/2017	unknown	iJUX6hqHwnc	2	2022-08-24 14:33:40.917279	2022-09-20 19:17:07.276509	https://img.youtube.com/vi/iJUX6hqHwnc/hqdefault.jpg
+595	Butterflies	24kGoldn	2021	El Dorado	unknown	_2FWcW4dqqE	2	2022-08-19 13:31:20.583267	2022-09-20 19:16:58.561151	https://img.youtube.com/vi/_2FWcW4dqqE/hqdefault.jpg
+596	Don’t Sleep	24kGoldn	2021	El Dorado	unknown	f9kWMpMDeV4	2	2022-08-19 13:31:26.045691	2022-09-20 19:16:59.920166	https://img.youtube.com/vi/f9kWMpMDeV4/hqdefault.jpg
+617	Ham	Lil Dicky	2014	So Hard	unknown	pm41xt3Y3z0	2	2022-09-03 10:04:03.160469	2022-09-20 19:17:19.364297	https://img.youtube.com/vi/pm41xt3Y3z0/hqdefault.jpg
+627	SAD!	XXXTENTACION	2022	LOOK AT ME: THE ALBUM	unknown	pgN-vvVVxMA	2	2022-09-04 20:13:33.294475	2022-09-20 19:17:52.81049	https://img.youtube.com/vi/pgN-vvVVxMA/hqdefault.jpg
+626	Mo Bamba	Sheck Wes	2018	Mo Bamba	unknown	HedLfd1e-Po	2	2022-09-04 20:13:02.614349	2022-09-20 19:17:48.970409	https://img.youtube.com/vi/HedLfd1e-Po/hqdefault.jpg
+620	More Than You Know	Axwell Λ Ingrosso	2017	Fetenhits: Dance 2017|2018	unknown	ycq5eYpvwds	2	2022-09-04 20:00:56.890929	2022-09-20 19:17:26.36023	https://img.youtube.com/vi/ycq5eYpvwds/hqdefault.jpg
+622	Replay	Iyaz	2010	Booom: Party Randale 2010	unknown	Kh7VDUxxEHs	2	2022-09-04 20:01:16.544381	2022-09-20 19:17:30.348473	https://img.youtube.com/vi/Kh7VDUxxEHs/hqdefault.jpg
+624	La La La	Naughty Boy & Sam Smith	2018	House Party: The Ultimate Collection	unknown	pZA-3tACjpY	2	2022-09-04 20:02:47.416095	2022-09-20 19:17:36.069195	https://img.youtube.com/vi/pZA-3tACjpY/hqdefault.jpg
+632	Cigarette Daydreams	Cage the Elephant	2013	Melophobia	alternative rock, rock	Jt0w1XUzM2Q	2	2022-09-05 16:03:43.681308	2022-09-20 19:17:39.57656	https://img.youtube.com/vi/Jt0w1XUzM2Q/hqdefault.jpg
+640	Feeling Whitney	Post Malone	2016	Stoney	hip hop	_KsJrCcZo74	2	2022-09-20 16:53:19.61305	2022-09-20 19:17:44.263587	https://img.youtube.com/vi/_KsJrCcZo74/hqdefault.jpg
+631	Mine	Bazzi	2018	Promo Only: Mainstream Radio, April 2018	unknown	yzNAGy_EdI8	2	2022-09-04 20:14:37.797004	2022-09-20 19:17:37.126391	https://img.youtube.com/vi/yzNAGy_EdI8/hqdefault.jpg
+637	Far Alone	E‐40 & Jay Ant & G‐Eazy	2014	These Things Happen	unknown	HyanRY9EKj4	2	2022-09-09 15:17:50.253158	2022-09-20 19:17:57.555796	https://img.youtube.com/vi/HyanRY9EKj4/hqdefault.jpg
+638	Anybody	Nicki Minaj & Young Thug	2018	Anybody	unknown	-swdgNJ-P2Y	2	2022-09-09 15:37:33.080818	2022-09-20 19:17:41.378707	https://img.youtube.com/vi/-swdgNJ-P2Y/hqdefault.jpg
+633	Kids	MGMT	2009	Now That's What I Call Music 29	unknown	95enODgGQ4s	2	2022-09-05 16:11:40.314888	2022-09-20 19:17:46.448578	https://img.youtube.com/vi/95enODgGQ4s/hqdefault.jpg
+635	Colorado	Milky Chance	2021	The Dome, Vol. 99	unknown	vDHw6_1JYbs	2	2022-09-06 16:03:46.372927	2022-09-20 19:17:50.126466	https://img.youtube.com/vi/vDHw6_1JYbs/hqdefault.jpg
+628	All The Stars	SZA & Kendrick Lamar	2019	Drippin’ In Sauce	unknown	ju4KQT0wL0I	2	2022-09-04 20:13:47.546648	2022-09-20 19:17:54.388237	https://img.youtube.com/vi/ju4KQT0wL0I/hqdefault.jpg
+634	All’s Well That Ends	Rainbow Kitten Surprise	2015	RKS	unknown	fSOl7lYSE3c	2	2022-09-05 19:58:12.748007	2022-09-20 19:17:47.766812	https://img.youtube.com/vi/fSOl7lYSE3c/hqdefault.jpg
+616	Russell Westbrook On a Farm	Lil Dicky	2013	Nothing was quite the way it used to be before	unknown	AOgBg2up7Jg	2	2022-09-03 10:02:37.164558	2022-09-20 19:17:33.254831	https://img.youtube.com/vi/AOgBg2up7Jg/hqdefault.jpg
+639	Dreamcatcher	Metro Boomin & Swae Lee & Travis Scott	2018	NOT ALL HEROES WEAR CAPES	unknown	iddW_jt07fA	2	2022-09-09 17:08:27.821999	2022-09-20 19:17:42.822126	https://img.youtube.com/vi/iddW_jt07fA/hqdefault.jpg
+629	Lucid Dreams	Juice WRLD	2019	NRJ Just Hits 2019	unknown	YWBohgkedIM	1	2022-09-04 20:14:10.930886	2022-09-17 19:30:42.802172	https://img.youtube.com/vi/YWBohgkedIM/hqdefault.jpg
+636	11 Minutes	Halsey & Travis Barker & YUNGBLUD	2019	11 Minutes	unknown	a1RMiMLDsvQ	2	2022-09-06 16:37:02.54427	2022-09-20 19:17:51.702902	https://img.youtube.com/vi/a1RMiMLDsvQ/hqdefault.jpg
+618	Jewish Flow	Lil Dicky	2014	So Hard	unknown	BFVtamh2dNU	2	2022-09-03 10:04:49.114769	2022-09-20 19:17:21.630544	https://img.youtube.com/vi/BFVtamh2dNU/hqdefault.jpg
+503	Get Out the Bed	2 Chainz	2016	Daniel Son; Necklace Don	unknown	2j3xMFbo4yA	2	2022-08-19 10:07:35.869052	2022-09-20 19:11:48.251045	https://img.youtube.com/vi/2j3xMFbo4yA/hqdefault.jpg
+630	Look Alive	Drake & BlocBoy JB	2018	Look Alive	unknown	GuMc90Ei4x0	2	2022-09-04 20:14:24.855989	2022-09-20 19:17:55.673775	https://img.youtube.com/vi/GuMc90Ei4x0/hqdefault.jpg
+615	I Like Tuh	iLoveMakonnen & Carnage	2016	Ultra Dance 17	unknown	2Nx-sH0kn6E	2	2022-08-31 08:12:02.249411	2022-09-20 19:17:27.701586	https://img.youtube.com/vi/2Nx-sH0kn6E/hqdefault.jpg
+625	All Around the World (La La La)	A Touch of Class & R3HAB	2019	MnM Party 2019, Vol. 2	unknown	LQ7R9zHeDy8	2	2022-09-04 20:03:44.726189	2022-09-20 19:17:38.170802	https://img.youtube.com/vi/LQ7R9zHeDy8/hqdefault.jpg
+375	Famous	Kanye West	2016	Tracks of the Month (February Edition) (2016)	unknown	Lq2TmRzg19k	2	2022-08-16 18:53:48.089838	2022-09-20 19:12:32.360324	https://img.youtube.com/vi/Lq2TmRzg19k/hqdefault.jpg
+619	White Dude	Lil Dicky	2014	So Hard	unknown	0goHiRAiNDo	2	2022-09-03 10:05:19.475021	2022-09-20 19:17:23.328108	https://img.youtube.com/vi/0goHiRAiNDo/hqdefault.jpg
+623	Lalala	bbno$ & Y2K	2019	Much Dance 2020	unknown	0Qd2paEPfh4	2	2022-09-04 20:01:51.700804	2022-09-20 19:17:34.561828	https://img.youtube.com/vi/0Qd2paEPfh4/hqdefault.jpg
+621	Hall of Fame	The Script & will.i.am	2013	Ö3 Greatest Hits 61	unknown	5Xn6xX6u_Nk	2	2022-09-04 20:01:05.129888	2022-09-20 19:17:29.066064	https://img.youtube.com/vi/5Xn6xX6u_Nk/hqdefault.jpg
+614	Tuesday	iLoveMakonnen & Drake	2015	SXSW 2015 Showcasing Artists - Part 2	unknown	y-2vaNadPDE	2	2022-08-31 08:10:18.215935	2022-09-20 19:17:24.819935	https://img.youtube.com/vi/y-2vaNadPDE/hqdefault.jpg
+\.
+
+
+--
+-- Data for Name: user_songs; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.user_songs (id, song_id, user_id, created_at, updated_at) FROM stdin;
+1	1	1	2022-08-15 18:20:58.170804	2022-08-15 18:20:58.170804
+2	2	1	2022-08-15 18:21:10.802237	2022-08-15 18:21:10.802237
+3	3	1	2022-08-15 18:21:25.904572	2022-08-15 18:21:25.904572
+4	4	1	2022-08-15 18:21:42.933545	2022-08-15 18:21:42.933545
+5	5	1	2022-08-15 18:21:44.045335	2022-08-15 18:21:44.045335
+6	6	1	2022-08-15 18:21:46.587505	2022-08-15 18:21:46.587505
+7	7	1	2022-08-15 18:21:49.024933	2022-08-15 18:21:49.024933
+8	8	1	2022-08-15 18:21:50.040282	2022-08-15 18:21:50.040282
+9	9	1	2022-08-15 18:21:50.221823	2022-08-15 18:21:50.221823
+10	10	1	2022-08-15 18:21:51.79404	2022-08-15 18:21:51.79404
+11	11	1	2022-08-15 18:21:53.481001	2022-08-15 18:21:53.481001
+12	12	1	2022-08-15 18:21:55.722263	2022-08-15 18:21:55.722263
+13	13	1	2022-08-15 18:21:57.538623	2022-08-15 18:21:57.538623
+14	14	1	2022-08-15 18:22:01.010574	2022-08-15 18:22:01.010574
+15	15	1	2022-08-15 18:22:07.224518	2022-08-15 18:22:07.224518
+16	16	1	2022-08-15 18:22:08.707977	2022-08-15 18:22:08.707977
+17	17	1	2022-08-15 18:22:12.228715	2022-08-15 18:22:12.228715
+18	18	1	2022-08-15 18:22:16.594379	2022-08-15 18:22:16.594379
+19	19	1	2022-08-15 18:22:20.385189	2022-08-15 18:22:20.385189
+20	20	1	2022-08-15 18:22:24.422883	2022-08-15 18:22:24.422883
+21	21	1	2022-08-15 18:22:27.169763	2022-08-15 18:22:27.169763
+22	22	1	2022-08-15 18:22:36.324012	2022-08-15 18:22:36.324012
+23	23	1	2022-08-15 18:22:59.17861	2022-08-15 18:22:59.17861
+24	24	1	2022-08-15 18:26:07.543498	2022-08-15 18:26:07.543498
+25	25	1	2022-08-15 18:26:07.857604	2022-08-15 18:26:07.857604
+26	26	1	2022-08-15 18:26:09.205157	2022-08-15 18:26:09.205157
+27	27	1	2022-08-15 18:26:11.343196	2022-08-15 18:26:11.343196
+28	29	1	2022-08-15 18:26:15.587946	2022-08-15 18:26:15.587946
+29	28	1	2022-08-15 18:26:15.59555	2022-08-15 18:26:15.59555
+30	30	1	2022-08-15 18:26:16.863723	2022-08-15 18:26:16.863723
+31	31	1	2022-08-15 18:26:18.457722	2022-08-15 18:26:18.457722
+32	32	1	2022-08-15 18:26:19.959733	2022-08-15 18:26:19.959733
+33	33	1	2022-08-15 18:26:24.370488	2022-08-15 18:26:24.370488
+34	34	1	2022-08-15 18:26:25.78792	2022-08-15 18:26:25.78792
+35	35	1	2022-08-15 18:26:30.537487	2022-08-15 18:26:30.537487
+36	36	1	2022-08-15 18:26:37.688822	2022-08-15 18:26:37.688822
+37	37	1	2022-08-15 18:26:41.202382	2022-08-15 18:26:41.202382
+38	38	1	2022-08-15 18:26:45.24461	2022-08-15 18:26:45.24461
+39	39	1	2022-08-15 18:26:51.234014	2022-08-15 18:26:51.234014
+40	40	1	2022-08-15 18:26:53.028484	2022-08-15 18:26:53.028484
+41	41	1	2022-08-15 18:26:56.041324	2022-08-15 18:26:56.041324
+42	42	1	2022-08-15 18:27:02.988738	2022-08-15 18:27:02.988738
+43	43	1	2022-08-15 18:27:03.632405	2022-08-15 18:27:03.632405
+44	44	1	2022-08-15 18:27:06.574472	2022-08-15 18:27:06.574472
+46	46	1	2022-08-15 18:27:41.07633	2022-08-15 18:27:41.07633
+47	47	1	2022-08-15 18:27:59.636182	2022-08-15 18:27:59.636182
+48	48	1	2022-08-15 18:28:30.377629	2022-08-15 18:28:30.377629
+49	49	1	2022-08-15 18:28:37.155738	2022-08-15 18:28:37.155738
+50	50	1	2022-08-15 18:28:48.275322	2022-08-15 18:28:48.275322
+51	51	1	2022-08-15 18:28:59.083575	2022-08-15 18:28:59.083575
+52	52	1	2022-08-15 18:29:49.340768	2022-08-15 18:29:49.340768
+53	53	1	2022-08-15 18:29:50.606564	2022-08-15 18:29:50.606564
+54	54	1	2022-08-15 18:29:52.72657	2022-08-15 18:29:52.72657
+56	55	1	2022-08-15 18:29:54.185152	2022-08-15 18:29:54.185152
+57	56	1	2022-08-15 18:29:57.057202	2022-08-15 18:29:57.057202
+58	57	1	2022-08-15 18:29:57.532116	2022-08-15 18:29:57.532116
+59	58	1	2022-08-15 18:30:07.629471	2022-08-15 18:30:07.629471
+60	59	1	2022-08-15 18:30:09.265328	2022-08-15 18:30:09.265328
+61	60	1	2022-08-15 18:30:15.40665	2022-08-15 18:30:15.40665
+63	62	1	2022-08-15 18:30:25.603636	2022-08-15 18:30:25.603636
+64	63	1	2022-08-15 18:30:36.811914	2022-08-15 18:30:36.811914
+66	61	1	2022-08-15 18:30:46.241429	2022-08-15 18:30:46.241429
+67	64	1	2022-08-15 18:30:54.600069	2022-08-15 18:30:54.600069
+68	65	1	2022-08-15 18:30:56.431961	2022-08-15 18:30:56.431961
+69	66	1	2022-08-15 18:30:57.98118	2022-08-15 18:30:57.98118
+71	67	1	2022-08-15 18:31:51.077089	2022-08-15 18:31:51.077089
+72	68	1	2022-08-15 18:31:53.92959	2022-08-15 18:31:53.92959
+73	69	1	2022-08-15 18:31:58.674224	2022-08-15 18:31:58.674224
+74	70	1	2022-08-15 18:32:08.325801	2022-08-15 18:32:08.325801
+75	71	1	2022-08-15 18:32:12.192	2022-08-15 18:32:12.192
+76	72	1	2022-08-15 18:32:14.152558	2022-08-15 18:32:14.152558
+77	73	1	2022-08-15 18:32:15.498655	2022-08-15 18:32:15.498655
+78	74	1	2022-08-15 18:32:22.581475	2022-08-15 18:32:22.581475
+79	75	1	2022-08-15 18:32:24.055035	2022-08-15 18:32:24.055035
+80	76	1	2022-08-15 18:32:24.823726	2022-08-15 18:32:24.823726
+81	77	1	2022-08-15 18:32:31.923762	2022-08-15 18:32:31.923762
+82	78	1	2022-08-15 18:32:53.156287	2022-08-15 18:32:53.156287
+83	79	1	2022-08-15 18:32:56.369278	2022-08-15 18:32:56.369278
+84	80	1	2022-08-15 18:32:58.848994	2022-08-15 18:32:58.848994
+85	81	1	2022-08-15 18:33:00.396511	2022-08-15 18:33:00.396511
+86	82	1	2022-08-15 18:33:07.650972	2022-08-15 18:33:07.650972
+87	83	1	2022-08-15 18:33:09.832295	2022-08-15 18:33:09.832295
+88	84	1	2022-08-15 18:33:10.765802	2022-08-15 18:33:10.765802
+89	85	1	2022-08-15 18:33:12.511092	2022-08-15 18:33:12.511092
+90	86	1	2022-08-15 18:33:15.968865	2022-08-15 18:33:15.968865
+91	87	1	2022-08-15 18:33:21.525909	2022-08-15 18:33:21.525909
+93	88	1	2022-08-15 18:33:33.021499	2022-08-15 18:33:33.021499
+94	89	1	2022-08-15 18:33:34.216897	2022-08-15 18:33:34.216897
+95	90	1	2022-08-15 18:33:38.994863	2022-08-15 18:33:38.994863
+96	91	1	2022-08-15 18:33:40.97901	2022-08-15 18:33:40.97901
+97	92	1	2022-08-15 18:33:43.269398	2022-08-15 18:33:43.269398
+98	93	1	2022-08-15 18:33:47.367343	2022-08-15 18:33:47.367343
+99	94	1	2022-08-15 18:33:49.735246	2022-08-15 18:33:49.735246
+100	95	1	2022-08-15 18:33:58.97944	2022-08-15 18:33:58.97944
+101	96	1	2022-08-15 18:34:33.819081	2022-08-15 18:34:33.819081
+103	97	1	2022-08-15 18:42:08.858663	2022-08-15 18:42:08.858663
+104	98	1	2022-08-15 18:42:54.794497	2022-08-15 18:42:54.794497
+105	99	1	2022-08-15 18:44:11.228218	2022-08-15 18:44:11.228218
+106	100	1	2022-08-15 18:44:18.632999	2022-08-15 18:44:18.632999
+107	101	1	2022-08-15 18:44:25.126064	2022-08-15 18:44:25.126064
+108	102	1	2022-08-15 18:44:27.746079	2022-08-15 18:44:27.746079
+109	103	1	2022-08-15 18:44:30.810092	2022-08-15 18:44:30.810092
+110	104	1	2022-08-15 18:45:00.424912	2022-08-15 18:45:00.424912
+111	105	1	2022-08-15 18:45:03.662003	2022-08-15 18:45:03.662003
+112	106	1	2022-08-15 18:45:16.472455	2022-08-15 18:45:16.472455
+115	107	1	2022-08-15 19:21:27.287363	2022-08-15 19:21:27.287363
+116	108	1	2022-08-15 19:21:46.182258	2022-08-15 19:21:46.182258
+117	109	1	2022-08-15 19:21:48.054256	2022-08-15 19:21:48.054256
+118	110	1	2022-08-15 19:21:50.552429	2022-08-15 19:21:50.552429
+119	111	1	2022-08-15 19:21:54.083858	2022-08-15 19:21:54.083858
+120	112	1	2022-08-15 19:21:57.369685	2022-08-15 19:21:57.369685
+121	113	1	2022-08-15 19:21:59.523496	2022-08-15 19:21:59.523496
+122	114	1	2022-08-15 19:22:01.062593	2022-08-15 19:22:01.062593
+123	115	1	2022-08-15 19:22:03.069227	2022-08-15 19:22:03.069227
+124	116	1	2022-08-15 19:22:04.87991	2022-08-15 19:22:04.87991
+125	117	1	2022-08-15 19:22:07.628251	2022-08-15 19:22:07.628251
+126	118	1	2022-08-15 19:22:09.334605	2022-08-15 19:22:09.334605
+127	119	1	2022-08-15 19:22:10.472675	2022-08-15 19:22:10.472675
+128	120	1	2022-08-15 19:22:10.934036	2022-08-15 19:22:10.934036
+129	121	1	2022-08-15 19:22:13.686016	2022-08-15 19:22:13.686016
+130	122	1	2022-08-15 19:22:17.773401	2022-08-15 19:22:17.773401
+131	123	1	2022-08-15 19:22:20.549421	2022-08-15 19:22:20.549421
+132	124	1	2022-08-15 19:22:20.788009	2022-08-15 19:22:20.788009
+133	125	1	2022-08-15 19:22:21.140856	2022-08-15 19:22:21.140856
+134	126	1	2022-08-15 19:22:24.933108	2022-08-15 19:22:24.933108
+135	127	1	2022-08-15 19:30:03.80529	2022-08-15 19:30:03.80529
+136	128	1	2022-08-15 19:31:32.500129	2022-08-15 19:31:32.500129
+137	129	1	2022-08-15 19:32:16.241033	2022-08-15 19:32:16.241033
+139	131	1	2022-08-15 19:32:32.934313	2022-08-15 19:32:32.934313
+138	130	1	2022-08-15 19:32:17.490495	2022-08-15 19:32:17.490495
+140	132	1	2022-08-16 06:54:10.70847	2022-08-16 06:54:10.70847
+141	133	1	2022-08-16 07:13:00.682185	2022-08-16 07:13:00.682185
+142	134	1	2022-08-16 07:13:44.254147	2022-08-16 07:13:44.254147
+143	135	1	2022-08-16 07:13:58.394147	2022-08-16 07:13:58.394147
+144	136	1	2022-08-16 07:22:46.223996	2022-08-16 07:22:46.223996
+145	137	1	2022-08-16 07:22:59.44867	2022-08-16 07:22:59.44867
+146	138	1	2022-08-16 07:23:21.19715	2022-08-16 07:23:21.19715
+147	139	1	2022-08-16 07:24:10.10365	2022-08-16 07:24:10.10365
+148	140	1	2022-08-16 07:24:29.518108	2022-08-16 07:24:29.518108
+149	141	1	2022-08-16 07:36:48.707577	2022-08-16 07:36:48.707577
+150	142	1	2022-08-16 07:36:56.435877	2022-08-16 07:36:56.435877
+151	143	1	2022-08-16 07:37:02.472086	2022-08-16 07:37:02.472086
+152	144	1	2022-08-16 07:37:07.860099	2022-08-16 07:37:07.860099
+153	145	1	2022-08-16 07:37:08.039692	2022-08-16 07:37:08.039692
+154	146	1	2022-08-16 07:37:12.400542	2022-08-16 07:37:12.400542
+155	147	1	2022-08-16 07:37:13.929379	2022-08-16 07:37:13.929379
+156	148	1	2022-08-16 07:37:17.162609	2022-08-16 07:37:17.162609
+157	149	1	2022-08-16 07:37:19.606647	2022-08-16 07:37:19.606647
+158	150	1	2022-08-16 07:37:35.387012	2022-08-16 07:37:35.387012
+159	151	1	2022-08-16 07:37:35.954352	2022-08-16 07:37:35.954352
+160	152	1	2022-08-16 07:37:37.95731	2022-08-16 07:37:37.95731
+161	153	1	2022-08-16 07:37:39.883738	2022-08-16 07:37:39.883738
+162	154	1	2022-08-16 07:37:42.747318	2022-08-16 07:37:42.747318
+163	155	1	2022-08-16 07:37:46.157323	2022-08-16 07:37:46.157323
+164	156	1	2022-08-16 07:37:52.119416	2022-08-16 07:37:52.119416
+165	157	1	2022-08-16 07:37:53.462326	2022-08-16 07:37:53.462326
+166	158	1	2022-08-16 07:37:54.756178	2022-08-16 07:37:54.756178
+167	159	1	2022-08-16 07:37:58.27723	2022-08-16 07:37:58.27723
+168	160	1	2022-08-16 07:38:02.45666	2022-08-16 07:38:02.45666
+169	161	1	2022-08-16 07:38:03.25828	2022-08-16 07:38:03.25828
+170	162	1	2022-08-16 07:38:04.484555	2022-08-16 07:38:04.484555
+171	163	1	2022-08-16 07:38:37.860214	2022-08-16 07:38:37.860214
+172	164	1	2022-08-16 07:40:58.801065	2022-08-16 07:40:58.801065
+173	165	1	2022-08-16 07:41:28.192824	2022-08-16 07:41:28.192824
+174	166	1	2022-08-16 07:41:28.539215	2022-08-16 07:41:28.539215
+175	167	1	2022-08-16 07:41:29.789162	2022-08-16 07:41:29.789162
+176	168	1	2022-08-16 07:41:30.839828	2022-08-16 07:41:30.839828
+177	169	1	2022-08-16 07:41:33.056438	2022-08-16 07:41:33.056438
+178	170	1	2022-08-16 07:41:34.037327	2022-08-16 07:41:34.037327
+179	171	1	2022-08-16 07:41:37.02822	2022-08-16 07:41:37.02822
+180	172	1	2022-08-16 07:41:37.81473	2022-08-16 07:41:37.81473
+181	173	1	2022-08-16 07:41:42.203628	2022-08-16 07:41:42.203628
+182	174	1	2022-08-16 07:41:43.182895	2022-08-16 07:41:43.182895
+183	175	1	2022-08-16 07:41:45.850534	2022-08-16 07:41:45.850534
+184	176	1	2022-08-16 07:41:49.53076	2022-08-16 07:41:49.53076
+185	177	1	2022-08-16 07:41:52.38205	2022-08-16 07:41:52.38205
+186	178	1	2022-08-16 07:41:54.657468	2022-08-16 07:41:54.657468
+187	179	1	2022-08-16 07:43:25.669215	2022-08-16 07:43:25.669215
+188	180	1	2022-08-16 07:43:26.338758	2022-08-16 07:43:26.338758
+189	181	1	2022-08-16 07:43:28.659735	2022-08-16 07:43:28.659735
+190	182	1	2022-08-16 07:43:31.476627	2022-08-16 07:43:31.476627
+191	183	1	2022-08-16 07:43:31.527083	2022-08-16 07:43:31.527083
+192	184	1	2022-08-16 07:43:34.027024	2022-08-16 07:43:34.027024
+193	185	1	2022-08-16 07:43:35.539077	2022-08-16 07:43:35.539077
+194	186	1	2022-08-16 07:43:36.376498	2022-08-16 07:43:36.376498
+195	187	1	2022-08-16 07:43:41.308833	2022-08-16 07:43:41.308833
+196	188	1	2022-08-16 07:43:44.158164	2022-08-16 07:43:44.158164
+197	189	1	2022-08-16 07:43:47.11162	2022-08-16 07:43:47.11162
+198	190	1	2022-08-16 07:43:48.123009	2022-08-16 07:43:48.123009
+199	191	1	2022-08-16 07:43:48.320516	2022-08-16 07:43:48.320516
+200	192	1	2022-08-16 07:43:51.709974	2022-08-16 07:43:51.709974
+201	193	1	2022-08-16 07:43:58.242106	2022-08-16 07:43:58.242106
+202	194	1	2022-08-16 07:44:00.196262	2022-08-16 07:44:00.196262
+203	195	1	2022-08-16 07:44:05.265439	2022-08-16 07:44:05.265439
+204	196	1	2022-08-16 07:44:06.76649	2022-08-16 07:44:06.76649
+205	197	1	2022-08-16 07:44:10.186294	2022-08-16 07:44:10.186294
+206	198	1	2022-08-16 07:44:46.536942	2022-08-16 07:44:46.536942
+207	199	1	2022-08-16 07:44:56.406935	2022-08-16 07:44:56.406935
+208	200	1	2022-08-16 10:37:25.506036	2022-08-16 10:37:25.506036
+209	201	1	2022-08-16 14:16:51.601666	2022-08-16 14:16:51.601666
+210	202	1	2022-08-16 14:16:53.066926	2022-08-16 14:16:53.066926
+211	203	1	2022-08-16 14:16:56.033928	2022-08-16 14:16:56.033928
+212	204	1	2022-08-16 14:16:59.102853	2022-08-16 14:16:59.102853
+213	205	1	2022-08-16 14:16:59.372059	2022-08-16 14:16:59.372059
+214	206	1	2022-08-16 14:17:12.804227	2022-08-16 14:17:12.804227
+215	207	1	2022-08-16 14:17:15.210884	2022-08-16 14:17:15.210884
+216	208	1	2022-08-16 14:17:16.661903	2022-08-16 14:17:16.661903
+217	209	1	2022-08-16 14:17:19.861149	2022-08-16 14:17:19.861149
+218	210	1	2022-08-16 14:17:36.964962	2022-08-16 14:17:36.964962
+219	211	1	2022-08-16 14:17:38.260249	2022-08-16 14:17:38.260249
+220	212	1	2022-08-16 14:17:40.42775	2022-08-16 14:17:40.42775
+221	213	1	2022-08-16 14:17:42.36075	2022-08-16 14:17:42.36075
+222	214	1	2022-08-16 14:17:46.728512	2022-08-16 14:17:46.728512
+223	215	1	2022-08-16 14:17:48.293124	2022-08-16 14:17:48.293124
+224	216	1	2022-08-16 14:17:51.337312	2022-08-16 14:17:51.337312
+225	217	1	2022-08-16 14:17:54.340036	2022-08-16 14:17:54.340036
+226	218	1	2022-08-16 14:18:09.187022	2022-08-16 14:18:09.187022
+227	219	1	2022-08-16 14:18:09.992008	2022-08-16 14:18:09.992008
+228	220	1	2022-08-16 14:18:11.798073	2022-08-16 14:18:11.798073
+229	221	1	2022-08-16 14:18:14.577675	2022-08-16 14:18:14.577675
+230	222	1	2022-08-16 14:18:16.228874	2022-08-16 14:18:16.228874
+231	223	1	2022-08-16 14:18:16.991182	2022-08-16 14:18:16.991182
+232	224	1	2022-08-16 14:18:18.622117	2022-08-16 14:18:18.622117
+233	225	1	2022-08-16 14:18:20.376113	2022-08-16 14:18:20.376113
+234	226	1	2022-08-16 14:18:31.335381	2022-08-16 14:18:31.335381
+235	227	1	2022-08-16 14:18:35.124641	2022-08-16 14:18:35.124641
+236	228	1	2022-08-16 14:18:36.888214	2022-08-16 14:18:36.888214
+237	229	1	2022-08-16 14:18:40.421057	2022-08-16 14:18:40.421057
+238	230	1	2022-08-16 14:18:42.661988	2022-08-16 14:18:42.661988
+239	231	1	2022-08-16 14:18:43.614344	2022-08-16 14:18:43.614344
+240	232	1	2022-08-16 14:18:46.283284	2022-08-16 14:18:46.283284
+241	233	1	2022-08-16 14:18:48.463843	2022-08-16 14:18:48.463843
+242	234	1	2022-08-16 14:18:52.495916	2022-08-16 14:18:52.495916
+243	235	1	2022-08-16 14:19:07.443942	2022-08-16 14:19:07.443942
+244	236	1	2022-08-16 14:19:09.226236	2022-08-16 14:19:09.226236
+245	237	1	2022-08-16 14:19:10.16629	2022-08-16 14:19:10.16629
+246	238	1	2022-08-16 14:19:12.757437	2022-08-16 14:19:12.757437
+247	239	1	2022-08-16 14:19:17.460484	2022-08-16 14:19:17.460484
+248	240	1	2022-08-16 14:19:18.832512	2022-08-16 14:19:18.832512
+249	241	1	2022-08-16 14:19:20.876105	2022-08-16 14:19:20.876105
+250	242	1	2022-08-16 14:19:24.030664	2022-08-16 14:19:24.030664
+251	243	1	2022-08-16 14:19:31.988123	2022-08-16 14:19:31.988123
+252	244	1	2022-08-16 14:19:33.168756	2022-08-16 14:19:33.168756
+253	245	1	2022-08-16 14:19:39.22286	2022-08-16 14:19:39.22286
+254	246	1	2022-08-16 14:19:39.772205	2022-08-16 14:19:39.772205
+255	247	1	2022-08-16 14:19:44.900271	2022-08-16 14:19:44.900271
+256	248	1	2022-08-16 14:19:46.572639	2022-08-16 14:19:46.572639
+257	249	1	2022-08-16 14:19:52.597481	2022-08-16 14:19:52.597481
+258	250	1	2022-08-16 14:19:56.342216	2022-08-16 14:19:56.342216
+259	251	1	2022-08-16 14:19:57.762372	2022-08-16 14:19:57.762372
+260	252	1	2022-08-16 14:19:59.544088	2022-08-16 14:19:59.544088
+261	253	1	2022-08-16 14:20:15.509818	2022-08-16 14:20:15.509818
+262	254	1	2022-08-16 14:20:19.185744	2022-08-16 14:20:19.185744
+263	255	1	2022-08-16 14:20:20.29319	2022-08-16 14:20:20.29319
+264	256	1	2022-08-16 14:20:21.498906	2022-08-16 14:20:21.498906
+265	257	1	2022-08-16 14:20:23.009459	2022-08-16 14:20:23.009459
+266	258	1	2022-08-16 14:20:27.632856	2022-08-16 14:20:27.632856
+267	259	1	2022-08-16 14:20:34.527085	2022-08-16 14:20:34.527085
+268	260	1	2022-08-16 14:20:38.576284	2022-08-16 14:20:38.576284
+269	261	1	2022-08-16 14:20:40.228026	2022-08-16 14:20:40.228026
+270	262	1	2022-08-16 14:20:41.032022	2022-08-16 14:20:41.032022
+271	263	1	2022-08-16 14:20:41.928057	2022-08-16 14:20:41.928057
+272	264	1	2022-08-16 14:20:43.957099	2022-08-16 14:20:43.957099
+273	265	1	2022-08-16 14:20:45.313057	2022-08-16 14:20:45.313057
+274	266	1	2022-08-16 14:20:45.558008	2022-08-16 14:20:45.558008
+275	267	1	2022-08-16 14:20:48.73907	2022-08-16 14:20:48.73907
+277	269	1	2022-08-16 14:20:52.263473	2022-08-16 14:20:52.263473
+278	271	1	2022-08-16 14:21:22.270146	2022-08-16 14:21:22.270146
+281	273	1	2022-08-16 14:21:25.691331	2022-08-16 14:21:25.691331
+276	268	1	2022-08-16 14:20:50.662441	2022-08-16 14:20:50.662441
+279	270	1	2022-08-16 14:21:22.769112	2022-08-16 14:21:22.769112
+280	272	1	2022-08-16 14:21:22.881678	2022-08-16 14:21:22.881678
+282	274	1	2022-08-16 14:21:43.083294	2022-08-16 14:21:43.083294
+283	275	1	2022-08-16 14:21:43.972094	2022-08-16 14:21:43.972094
+284	276	1	2022-08-16 14:21:45.601003	2022-08-16 14:21:45.601003
+285	277	1	2022-08-16 14:21:49.931526	2022-08-16 14:21:49.931526
+286	278	1	2022-08-16 14:21:52.891314	2022-08-16 14:21:52.891314
+287	279	1	2022-08-16 14:21:55.315599	2022-08-16 14:21:55.315599
+288	280	1	2022-08-16 14:21:55.899965	2022-08-16 14:21:55.899965
+289	281	1	2022-08-16 14:21:59.85853	2022-08-16 14:21:59.85853
+290	282	1	2022-08-16 14:22:00.475096	2022-08-16 14:22:00.475096
+291	283	1	2022-08-16 14:22:03.273267	2022-08-16 14:22:03.273267
+292	284	1	2022-08-16 14:22:04.17515	2022-08-16 14:22:04.17515
+293	285	1	2022-08-16 14:22:06.623215	2022-08-16 14:22:06.623215
+294	286	1	2022-08-16 14:22:08.594403	2022-08-16 14:22:08.594403
+295	287	1	2022-08-16 14:22:11.665955	2022-08-16 14:22:11.665955
+296	288	1	2022-08-16 14:22:38.223901	2022-08-16 14:22:38.223901
+297	289	1	2022-08-16 14:22:59.73666	2022-08-16 14:22:59.73666
+298	290	1	2022-08-16 14:23:01.036746	2022-08-16 14:23:01.036746
+299	291	1	2022-08-16 14:23:06.275876	2022-08-16 14:23:06.275876
+300	292	1	2022-08-16 14:23:09.142386	2022-08-16 14:23:09.142386
+301	293	1	2022-08-16 14:23:09.441291	2022-08-16 14:23:09.441291
+302	294	1	2022-08-16 14:23:17.821943	2022-08-16 14:23:17.821943
+303	295	1	2022-08-16 14:23:18.135488	2022-08-16 14:23:18.135488
+304	296	1	2022-08-16 14:23:19.714415	2022-08-16 14:23:19.714415
+305	297	1	2022-08-16 14:23:21.187034	2022-08-16 14:23:21.187034
+306	298	1	2022-08-16 14:23:24.535865	2022-08-16 14:23:24.535865
+307	299	1	2022-08-16 14:23:37.656757	2022-08-16 14:23:37.656757
+308	300	1	2022-08-16 14:23:57.887326	2022-08-16 14:23:57.887326
+309	301	1	2022-08-16 15:47:01.39079	2022-08-16 15:47:01.39079
+310	302	1	2022-08-16 15:47:47.834778	2022-08-16 15:47:47.834778
+311	303	1	2022-08-16 16:34:46.532937	2022-08-16 16:34:46.532937
+312	304	1	2022-08-16 16:34:47.211029	2022-08-16 16:34:47.211029
+313	305	1	2022-08-16 16:34:49.21074	2022-08-16 16:34:49.21074
+314	306	1	2022-08-16 16:34:51.753892	2022-08-16 16:34:51.753892
+315	307	1	2022-08-16 16:34:52.458731	2022-08-16 16:34:52.458731
+316	308	1	2022-08-16 16:34:53.248559	2022-08-16 16:34:53.248559
+317	309	1	2022-08-16 16:35:36.222461	2022-08-16 16:35:36.222461
+318	310	1	2022-08-16 16:35:38.792491	2022-08-16 16:35:38.792491
+319	311	1	2022-08-16 16:35:39.405195	2022-08-16 16:35:39.405195
+320	313	1	2022-08-16 16:35:42.196209	2022-08-16 16:35:42.196209
+321	312	1	2022-08-16 16:35:42.205225	2022-08-16 16:35:42.205225
+322	314	1	2022-08-16 16:35:44.43736	2022-08-16 16:35:44.43736
+323	315	1	2022-08-16 16:35:45.651229	2022-08-16 16:35:45.651229
+324	316	1	2022-08-16 16:35:46.755605	2022-08-16 16:35:46.755605
+325	317	1	2022-08-16 16:35:48.924514	2022-08-16 16:35:48.924514
+326	318	1	2022-08-16 16:35:50.423328	2022-08-16 16:35:50.423328
+327	319	1	2022-08-16 16:35:51.479925	2022-08-16 16:35:51.479925
+328	320	1	2022-08-16 16:35:53.459394	2022-08-16 16:35:53.459394
+329	321	1	2022-08-16 16:35:55.264223	2022-08-16 16:35:55.264223
+330	322	1	2022-08-16 16:35:56.022969	2022-08-16 16:35:56.022969
+331	323	1	2022-08-16 16:36:08.296368	2022-08-16 16:36:08.296368
+332	324	1	2022-08-16 16:36:34.221217	2022-08-16 16:36:34.221217
+333	325	1	2022-08-16 16:36:36.093789	2022-08-16 16:36:36.093789
+334	326	1	2022-08-16 16:36:39.234279	2022-08-16 16:36:39.234279
+335	327	1	2022-08-16 16:36:41.289368	2022-08-16 16:36:41.289368
+336	328	1	2022-08-16 16:36:47.012405	2022-08-16 16:36:47.012405
+337	329	1	2022-08-16 16:36:50.480316	2022-08-16 16:36:50.480316
+338	330	1	2022-08-16 16:36:58.739956	2022-08-16 16:36:58.739956
+339	331	1	2022-08-16 16:37:32.404271	2022-08-16 16:37:32.404271
+340	332	1	2022-08-16 16:37:36.472772	2022-08-16 16:37:36.472772
+341	333	1	2022-08-16 16:37:36.490299	2022-08-16 16:37:36.490299
+342	334	1	2022-08-16 16:37:38.104167	2022-08-16 16:37:38.104167
+343	335	1	2022-08-16 16:37:47.294505	2022-08-16 16:37:47.294505
+344	336	1	2022-08-16 16:37:54.041	2022-08-16 16:37:54.041
+345	337	1	2022-08-16 16:48:44.213839	2022-08-16 16:48:44.213839
+346	338	1	2022-08-16 16:49:08.123406	2022-08-16 16:49:08.123406
+347	339	1	2022-08-16 16:49:10.520803	2022-08-16 16:49:10.520803
+348	340	1	2022-08-16 16:49:10.980351	2022-08-16 16:49:10.980351
+349	341	1	2022-08-16 16:49:29.931521	2022-08-16 16:49:29.931521
+350	342	1	2022-08-16 16:49:38.153939	2022-08-16 16:49:38.153939
+351	343	1	2022-08-16 16:49:42.836289	2022-08-16 16:49:42.836289
+352	344	1	2022-08-16 18:10:03.887657	2022-08-16 18:10:03.887657
+353	345	1	2022-08-16 18:14:42.236548	2022-08-16 18:14:42.236548
+354	346	1	2022-08-16 18:15:03.715427	2022-08-16 18:15:03.715427
+355	347	1	2022-08-16 18:15:07.483896	2022-08-16 18:15:07.483896
+356	348	1	2022-08-16 18:31:29.842045	2022-08-16 18:31:29.842045
+357	349	1	2022-08-16 18:31:43.662778	2022-08-16 18:31:43.662778
+358	350	1	2022-08-16 18:31:44.235277	2022-08-16 18:31:44.235277
+359	351	1	2022-08-16 18:31:51.558104	2022-08-16 18:31:51.558104
+360	352	1	2022-08-16 18:31:55.146829	2022-08-16 18:31:55.146829
+361	353	1	2022-08-16 18:31:56.96691	2022-08-16 18:31:56.96691
+362	354	1	2022-08-16 18:31:59.993274	2022-08-16 18:31:59.993274
+363	355	1	2022-08-16 18:32:07.764234	2022-08-16 18:32:07.764234
+364	356	1	2022-08-16 18:52:15.858021	2022-08-16 18:52:15.858021
+365	357	1	2022-08-16 18:52:28.223777	2022-08-16 18:52:28.223777
+366	358	1	2022-08-16 18:52:37.949671	2022-08-16 18:52:37.949671
+367	359	1	2022-08-16 18:52:41.614643	2022-08-16 18:52:41.614643
+368	360	1	2022-08-16 18:52:44.27071	2022-08-16 18:52:44.27071
+369	361	1	2022-08-16 18:52:48.490876	2022-08-16 18:52:48.490876
+370	362	1	2022-08-16 18:53:01.586528	2022-08-16 18:53:01.586528
+371	363	1	2022-08-16 18:53:19.818598	2022-08-16 18:53:19.818598
+372	364	1	2022-08-16 18:53:21.606934	2022-08-16 18:53:21.606934
+373	365	1	2022-08-16 18:53:23.691122	2022-08-16 18:53:23.691122
+374	366	1	2022-08-16 18:53:27.53489	2022-08-16 18:53:27.53489
+375	367	1	2022-08-16 18:53:28.232118	2022-08-16 18:53:28.232118
+376	368	1	2022-08-16 18:53:29.616127	2022-08-16 18:53:29.616127
+377	369	1	2022-08-16 18:53:30.312791	2022-08-16 18:53:30.312791
+378	370	1	2022-08-16 18:53:33.550819	2022-08-16 18:53:33.550819
+379	371	1	2022-08-16 18:53:34.782918	2022-08-16 18:53:34.782918
+380	372	1	2022-08-16 18:53:37.29137	2022-08-16 18:53:37.29137
+381	373	1	2022-08-16 18:53:39.606446	2022-08-16 18:53:39.606446
+382	374	1	2022-08-16 18:53:45.348298	2022-08-16 18:53:45.348298
+383	375	1	2022-08-16 18:53:48.276835	2022-08-16 18:53:48.276835
+384	376	1	2022-08-16 18:53:53.180121	2022-08-16 18:53:53.180121
+385	377	1	2022-08-16 18:53:53.418846	2022-08-16 18:53:53.418846
+386	378	1	2022-08-16 18:53:56.941871	2022-08-16 18:53:56.941871
+387	379	1	2022-08-16 18:53:57.682293	2022-08-16 18:53:57.682293
+388	380	1	2022-08-16 18:56:03.666973	2022-08-16 18:56:03.666973
+389	381	1	2022-08-16 18:56:06.261704	2022-08-16 18:56:06.261704
+390	382	1	2022-08-16 18:56:07.032343	2022-08-16 18:56:07.032343
+391	383	1	2022-08-16 18:56:07.722239	2022-08-16 18:56:07.722239
+392	384	1	2022-08-16 18:56:09.341841	2022-08-16 18:56:09.341841
+393	385	1	2022-08-16 18:56:12.952533	2022-08-16 18:56:12.952533
+394	386	1	2022-08-16 18:56:13.307666	2022-08-16 18:56:13.307666
+395	387	1	2022-08-16 18:56:15.7894	2022-08-16 18:56:15.7894
+396	388	1	2022-08-16 18:56:16.93296	2022-08-16 18:56:16.93296
+397	389	1	2022-08-16 18:56:18.310383	2022-08-16 18:56:18.310383
+398	390	1	2022-08-16 18:56:22.068623	2022-08-16 18:56:22.068623
+399	391	1	2022-08-16 18:56:25.596564	2022-08-16 18:56:25.596564
+400	392	1	2022-08-16 18:56:26.801568	2022-08-16 18:56:26.801568
+401	393	1	2022-08-16 18:56:28.481949	2022-08-16 18:56:28.481949
+402	394	1	2022-08-16 18:56:32.013122	2022-08-16 18:56:32.013122
+403	395	1	2022-08-16 18:56:34.946106	2022-08-16 18:56:34.946106
+404	396	1	2022-08-16 18:56:37.359365	2022-08-16 18:56:37.359365
+405	397	1	2022-08-16 18:57:25.03023	2022-08-16 18:57:25.03023
+406	398	1	2022-08-16 18:57:26.40858	2022-08-16 18:57:26.40858
+407	399	1	2022-08-16 18:57:28.920632	2022-08-16 18:57:28.920632
+408	400	1	2022-08-16 18:57:33.435622	2022-08-16 18:57:33.435622
+409	401	1	2022-08-16 18:57:34.460959	2022-08-16 18:57:34.460959
+410	402	1	2022-08-16 18:57:38.025067	2022-08-16 18:57:38.025067
+411	403	1	2022-08-16 18:57:39.978665	2022-08-16 18:57:39.978665
+412	404	1	2022-08-16 19:03:36.133602	2022-08-16 19:03:36.133602
+413	405	1	2022-08-16 20:14:16.461705	2022-08-16 20:14:16.461705
+414	407	1	2022-08-16 20:14:19.215436	2022-08-16 20:14:19.215436
+415	406	1	2022-08-16 20:14:19.228445	2022-08-16 20:14:19.228445
+416	408	1	2022-08-16 20:14:22.368196	2022-08-16 20:14:22.368196
+417	409	1	2022-08-16 20:14:22.668618	2022-08-16 20:14:22.668618
+418	410	1	2022-08-16 20:14:25.309928	2022-08-16 20:14:25.309928
+419	411	1	2022-08-16 20:14:31.95453	2022-08-16 20:14:31.95453
+420	412	1	2022-08-16 20:14:32.578241	2022-08-16 20:14:32.578241
+421	413	1	2022-08-16 20:14:44.518485	2022-08-16 20:14:44.518485
+422	414	1	2022-08-16 20:14:46.383678	2022-08-16 20:14:46.383678
+423	415	1	2022-08-16 20:14:49.229853	2022-08-16 20:14:49.229853
+424	416	1	2022-08-16 20:20:12.666951	2022-08-16 20:20:12.666951
+425	417	1	2022-08-16 20:20:17.65134	2022-08-16 20:20:17.65134
+426	418	1	2022-08-17 11:42:12.329449	2022-08-17 11:42:12.329449
+427	419	1	2022-08-18 11:36:08.352843	2022-08-18 11:36:08.352843
+428	420	1	2022-08-18 12:07:21.12314	2022-08-18 12:07:21.12314
+429	421	1	2022-08-18 12:07:46.519785	2022-08-18 12:07:46.519785
+430	422	1	2022-08-18 12:08:08.888059	2022-08-18 12:08:08.888059
+431	423	1	2022-08-18 12:08:10.010716	2022-08-18 12:08:10.010716
+432	424	1	2022-08-18 12:08:11.586769	2022-08-18 12:08:11.586769
+433	425	1	2022-08-18 12:08:13.200964	2022-08-18 12:08:13.200964
+434	426	1	2022-08-18 12:08:14.262987	2022-08-18 12:08:14.262987
+435	427	1	2022-08-18 12:08:15.079057	2022-08-18 12:08:15.079057
+436	428	1	2022-08-18 12:08:18.922906	2022-08-18 12:08:18.922906
+437	429	1	2022-08-18 12:08:19.975954	2022-08-18 12:08:19.975954
+438	430	1	2022-08-18 12:08:23.379437	2022-08-18 12:08:23.379437
+439	431	1	2022-08-18 12:08:25.739691	2022-08-18 12:08:25.739691
+440	432	1	2022-08-18 12:08:26.692309	2022-08-18 12:08:26.692309
+441	433	1	2022-08-18 12:08:26.88114	2022-08-18 12:08:26.88114
+442	434	1	2022-08-18 12:08:30.661562	2022-08-18 12:08:30.661562
+443	435	1	2022-08-18 12:08:31.245798	2022-08-18 12:08:31.245798
+444	436	1	2022-08-18 12:08:34.022403	2022-08-18 12:08:34.022403
+445	437	1	2022-08-18 12:08:35.384026	2022-08-18 12:08:35.384026
+446	438	1	2022-08-18 12:08:45.18642	2022-08-18 12:08:45.18642
+447	439	1	2022-08-18 12:08:46.949331	2022-08-18 12:08:46.949331
+448	440	1	2022-08-18 12:08:51.17511	2022-08-18 12:08:51.17511
+449	441	1	2022-08-18 12:08:54.198321	2022-08-18 12:08:54.198321
+450	442	1	2022-08-18 12:08:54.761253	2022-08-18 12:08:54.761253
+451	443	1	2022-08-18 12:08:56.586338	2022-08-18 12:08:56.586338
+452	444	1	2022-08-18 12:09:00.932713	2022-08-18 12:09:00.932713
+453	445	1	2022-08-18 12:09:11.221774	2022-08-18 12:09:11.221774
+454	446	1	2022-08-18 12:09:12.735561	2022-08-18 12:09:12.735561
+455	447	1	2022-08-18 12:09:43.28176	2022-08-18 12:09:43.28176
+456	448	1	2022-08-18 13:48:12.64109	2022-08-18 13:48:12.64109
+457	449	1	2022-08-19 07:15:04.837346	2022-08-19 07:15:04.837346
+458	450	1	2022-08-19 07:15:49.29174	2022-08-19 07:15:49.29174
+459	451	1	2022-08-19 07:16:29.312286	2022-08-19 07:16:29.312286
+460	452	1	2022-08-19 07:17:53.803063	2022-08-19 07:17:53.803063
+461	453	1	2022-08-19 07:17:55.036524	2022-08-19 07:17:55.036524
+462	454	1	2022-08-19 07:17:56.750145	2022-08-19 07:17:56.750145
+463	455	1	2022-08-19 07:17:59.930455	2022-08-19 07:17:59.930455
+464	456	1	2022-08-19 07:18:00.241783	2022-08-19 07:18:00.241783
+465	457	1	2022-08-19 07:18:02.812267	2022-08-19 07:18:02.812267
+466	458	1	2022-08-19 07:18:05.923916	2022-08-19 07:18:05.923916
+467	459	1	2022-08-19 07:18:06.318513	2022-08-19 07:18:06.318513
+468	460	1	2022-08-19 07:18:06.326614	2022-08-19 07:18:06.326614
+469	461	1	2022-08-19 07:18:41.525953	2022-08-19 07:18:41.525953
+470	462	1	2022-08-19 08:19:51.421449	2022-08-19 08:19:51.421449
+471	463	1	2022-08-19 08:19:54.270383	2022-08-19 08:19:54.270383
+472	464	1	2022-08-19 08:19:56.417959	2022-08-19 08:19:56.417959
+473	465	1	2022-08-19 08:19:59.669598	2022-08-19 08:19:59.669598
+474	466	1	2022-08-19 08:20:00.609986	2022-08-19 08:20:00.609986
+475	467	1	2022-08-19 08:20:05.211788	2022-08-19 08:20:05.211788
+476	468	1	2022-08-19 08:20:15.458463	2022-08-19 08:20:15.458463
+477	469	1	2022-08-19 08:20:19.711862	2022-08-19 08:20:19.711862
+478	470	1	2022-08-19 08:20:25.10736	2022-08-19 08:20:25.10736
+479	471	1	2022-08-19 08:20:28.002991	2022-08-19 08:20:28.002991
+480	472	1	2022-08-19 08:20:29.35883	2022-08-19 08:20:29.35883
+481	473	1	2022-08-19 08:20:34.135964	2022-08-19 08:20:34.135964
+482	474	1	2022-08-19 08:20:40.960669	2022-08-19 08:20:40.960669
+483	475	1	2022-08-19 08:21:02.469107	2022-08-19 08:21:02.469107
+484	476	1	2022-08-19 08:21:06.676862	2022-08-19 08:21:06.676862
+485	477	1	2022-08-19 08:21:07.585822	2022-08-19 08:21:07.585822
+486	478	1	2022-08-19 08:21:14.18237	2022-08-19 08:21:14.18237
+487	479	1	2022-08-19 08:21:19.035725	2022-08-19 08:21:19.035725
+488	480	1	2022-08-19 08:21:27.201561	2022-08-19 08:21:27.201561
+489	481	1	2022-08-19 08:21:31.06426	2022-08-19 08:21:31.06426
+490	482	1	2022-08-19 08:21:31.605844	2022-08-19 08:21:31.605844
+491	483	1	2022-08-19 08:21:34.804284	2022-08-19 08:21:34.804284
+492	484	1	2022-08-19 08:21:42.383232	2022-08-19 08:21:42.383232
+493	485	1	2022-08-19 08:23:24.541706	2022-08-19 08:23:24.541706
+494	486	1	2022-08-19 08:23:38.299507	2022-08-19 08:23:38.299507
+495	487	1	2022-08-19 08:23:42.137241	2022-08-19 08:23:42.137241
+496	488	1	2022-08-19 08:23:50.35817	2022-08-19 08:23:50.35817
+497	489	1	2022-08-19 08:23:52.761435	2022-08-19 08:23:52.761435
+498	490	1	2022-08-19 08:23:58.329436	2022-08-19 08:23:58.329436
+499	491	1	2022-08-19 08:23:59.862481	2022-08-19 08:23:59.862481
+500	492	1	2022-08-19 08:24:40.622088	2022-08-19 08:24:40.622088
+501	493	1	2022-08-19 10:06:47.357211	2022-08-19 10:06:47.357211
+502	494	1	2022-08-19 10:07:05.233225	2022-08-19 10:07:05.233225
+503	495	1	2022-08-19 10:07:06.778364	2022-08-19 10:07:06.778364
+504	496	1	2022-08-19 10:07:11.474204	2022-08-19 10:07:11.474204
+505	497	1	2022-08-19 10:07:13.430791	2022-08-19 10:07:13.430791
+506	498	1	2022-08-19 10:07:15.715691	2022-08-19 10:07:15.715691
+507	499	1	2022-08-19 10:07:18.879104	2022-08-19 10:07:18.879104
+508	500	1	2022-08-19 10:07:22.838394	2022-08-19 10:07:22.838394
+509	501	1	2022-08-19 10:07:23.42462	2022-08-19 10:07:23.42462
+510	502	1	2022-08-19 10:07:32.253273	2022-08-19 10:07:32.253273
+511	503	1	2022-08-19 10:07:36.073092	2022-08-19 10:07:36.073092
+512	504	1	2022-08-19 10:07:38.429753	2022-08-19 10:07:38.429753
+513	505	1	2022-08-19 10:07:42.353393	2022-08-19 10:07:42.353393
+514	506	1	2022-08-19 10:07:45.263166	2022-08-19 10:07:45.263166
+515	507	1	2022-08-19 10:07:48.277587	2022-08-19 10:07:48.277587
+516	508	1	2022-08-19 10:08:16.159027	2022-08-19 10:08:16.159027
+517	509	1	2022-08-19 10:08:17.370963	2022-08-19 10:08:17.370963
+518	510	1	2022-08-19 10:08:18.88293	2022-08-19 10:08:18.88293
+519	511	1	2022-08-19 10:08:19.37178	2022-08-19 10:08:19.37178
+520	512	1	2022-08-19 10:08:21.617995	2022-08-19 10:08:21.617995
+521	513	1	2022-08-19 10:08:26.973494	2022-08-19 10:08:26.973494
+522	514	1	2022-08-19 10:08:32.630821	2022-08-19 10:08:32.630821
+523	515	1	2022-08-19 10:08:33.639094	2022-08-19 10:08:33.639094
+524	516	1	2022-08-19 10:08:34.947079	2022-08-19 10:08:34.947079
+525	517	1	2022-08-19 10:08:41.040971	2022-08-19 10:08:41.040971
+526	518	1	2022-08-19 10:08:49.012298	2022-08-19 10:08:49.012298
+527	519	1	2022-08-19 10:08:53.374843	2022-08-19 10:08:53.374843
+528	520	1	2022-08-19 10:08:54.466854	2022-08-19 10:08:54.466854
+529	521	1	2022-08-19 10:08:58.287749	2022-08-19 10:08:58.287749
+530	522	1	2022-08-19 10:08:58.925796	2022-08-19 10:08:58.925796
+531	523	1	2022-08-19 10:09:00.160405	2022-08-19 10:09:00.160405
+532	524	1	2022-08-19 10:09:02.350295	2022-08-19 10:09:02.350295
+533	525	1	2022-08-19 10:09:06.384743	2022-08-19 10:09:06.384743
+534	526	1	2022-08-19 10:09:08.656508	2022-08-19 10:09:08.656508
+535	528	1	2022-08-19 10:09:10.913871	2022-08-19 10:09:10.913871
+536	527	1	2022-08-19 10:09:10.918984	2022-08-19 10:09:10.918984
+537	529	1	2022-08-19 10:09:23.343493	2022-08-19 10:09:23.343493
+538	530	1	2022-08-19 10:09:26.915108	2022-08-19 10:09:26.915108
+539	531	1	2022-08-19 10:09:27.866158	2022-08-19 10:09:27.866158
+540	532	1	2022-08-19 10:09:30.673332	2022-08-19 10:09:30.673332
+541	533	1	2022-08-19 10:09:35.87061	2022-08-19 10:09:35.87061
+542	534	1	2022-08-19 10:09:43.887612	2022-08-19 10:09:43.887612
+543	535	1	2022-08-19 10:10:04.792273	2022-08-19 10:10:04.792273
+544	536	1	2022-08-19 10:10:08.023289	2022-08-19 10:10:08.023289
+545	537	1	2022-08-19 10:10:12.213787	2022-08-19 10:10:12.213787
+546	538	1	2022-08-19 10:10:18.958912	2022-08-19 10:10:18.958912
+547	539	1	2022-08-19 10:10:20.83396	2022-08-19 10:10:20.83396
+548	540	1	2022-08-19 10:10:22.416699	2022-08-19 10:10:22.416699
+549	541	1	2022-08-19 10:10:24.699559	2022-08-19 10:10:24.699559
+550	542	1	2022-08-19 10:10:25.348603	2022-08-19 10:10:25.348603
+551	543	1	2022-08-19 10:10:26.459735	2022-08-19 10:10:26.459735
+552	544	1	2022-08-19 10:10:30.51122	2022-08-19 10:10:30.51122
+553	545	1	2022-08-19 10:10:32.701151	2022-08-19 10:10:32.701151
+554	546	1	2022-08-19 10:10:32.774409	2022-08-19 10:10:32.774409
+555	547	1	2022-08-19 10:10:35.710459	2022-08-19 10:10:35.710459
+556	548	1	2022-08-19 10:10:37.504786	2022-08-19 10:10:37.504786
+557	549	1	2022-08-19 10:10:39.322173	2022-08-19 10:10:39.322173
+558	550	1	2022-08-19 10:10:52.601809	2022-08-19 10:10:52.601809
+559	551	1	2022-08-19 10:10:55.250399	2022-08-19 10:10:55.250399
+560	552	1	2022-08-19 10:10:57.262897	2022-08-19 10:10:57.262897
+561	553	1	2022-08-19 10:11:00.419905	2022-08-19 10:11:00.419905
+562	554	1	2022-08-19 10:11:02.968616	2022-08-19 10:11:02.968616
+563	555	1	2022-08-19 10:11:03.30989	2022-08-19 10:11:03.30989
+564	556	1	2022-08-19 10:11:05.758042	2022-08-19 10:11:05.758042
+565	557	1	2022-08-19 10:11:07.67224	2022-08-19 10:11:07.67224
+566	558	1	2022-08-19 10:11:20.979624	2022-08-19 10:11:20.979624
+567	559	1	2022-08-19 10:11:24.186523	2022-08-19 10:11:24.186523
+568	560	1	2022-08-19 12:44:41.236876	2022-08-19 12:44:41.236876
+569	561	1	2022-08-19 12:48:04.719014	2022-08-19 12:48:04.719014
+570	562	1	2022-08-19 12:48:19.438106	2022-08-19 12:48:19.438106
+571	563	1	2022-08-19 12:48:31.383176	2022-08-19 12:48:31.383176
+572	564	1	2022-08-19 12:48:31.711909	2022-08-19 12:48:31.711909
+573	565	1	2022-08-19 12:48:48.333102	2022-08-19 12:48:48.333102
+574	566	1	2022-08-19 12:49:02.90286	2022-08-19 12:49:02.90286
+575	567	1	2022-08-19 12:49:05.254103	2022-08-19 12:49:05.254103
+576	568	1	2022-08-19 12:49:05.545732	2022-08-19 12:49:05.545732
+577	569	1	2022-08-19 12:49:08.753684	2022-08-19 12:49:08.753684
+578	570	1	2022-08-19 12:49:10.529921	2022-08-19 12:49:10.529921
+579	571	1	2022-08-19 12:49:11.352835	2022-08-19 12:49:11.352835
+580	572	1	2022-08-19 12:49:13.488218	2022-08-19 12:49:13.488218
+581	573	1	2022-08-19 12:49:16.960227	2022-08-19 12:49:16.960227
+582	574	1	2022-08-19 12:49:19.663415	2022-08-19 12:49:19.663415
+583	575	1	2022-08-19 12:49:25.238693	2022-08-19 12:49:25.238693
+584	576	1	2022-08-19 12:49:25.289387	2022-08-19 12:49:25.289387
+585	577	1	2022-08-19 12:49:27.306138	2022-08-19 12:49:27.306138
+586	578	1	2022-08-19 12:49:29.111385	2022-08-19 12:49:29.111385
+587	579	1	2022-08-19 12:49:35.313118	2022-08-19 12:49:35.313118
+588	580	1	2022-08-19 12:50:58.767726	2022-08-19 12:50:58.767726
+589	581	1	2022-08-19 12:51:28.049931	2022-08-19 12:51:28.049931
+590	582	1	2022-08-19 12:53:15.164514	2022-08-19 12:53:15.164514
+591	583	1	2022-08-19 12:54:03.717743	2022-08-19 12:54:03.717743
+592	584	1	2022-08-19 12:54:08.653338	2022-08-19 12:54:08.653338
+593	585	1	2022-08-19 12:54:14.224077	2022-08-19 12:54:14.224077
+594	586	1	2022-08-19 12:54:14.898146	2022-08-19 12:54:14.898146
+595	587	1	2022-08-19 12:54:17.435161	2022-08-19 12:54:17.435161
+596	588	1	2022-08-19 12:54:19.66505	2022-08-19 12:54:19.66505
+597	589	1	2022-08-19 12:54:20.040789	2022-08-19 12:54:20.040789
+598	591	1	2022-08-19 12:54:31.129665	2022-08-19 12:54:31.129665
+599	590	1	2022-08-19 12:54:31.138626	2022-08-19 12:54:31.138626
+600	592	1	2022-08-19 13:31:11.018351	2022-08-19 13:31:11.018351
+601	593	1	2022-08-19 13:31:12.114963	2022-08-19 13:31:12.114963
+602	594	1	2022-08-19 13:31:15.982927	2022-08-19 13:31:15.982927
+603	595	1	2022-08-19 13:31:20.81013	2022-08-19 13:31:20.81013
+604	596	1	2022-08-19 13:31:26.232426	2022-08-19 13:31:26.232426
+605	597	1	2022-08-22 15:29:48.394336	2022-08-22 15:29:48.394336
+606	598	1	2022-08-22 15:42:54.805554	2022-08-22 15:42:54.805554
+607	599	1	2022-08-22 15:44:33.137746	2022-08-22 15:44:33.137746
+608	600	1	2022-08-24 14:33:41.083877	2022-08-24 14:33:41.083877
+609	601	1	2022-08-24 14:34:04.324419	2022-08-24 14:34:04.324419
+610	602	1	2022-08-24 14:35:43.338869	2022-08-24 14:35:43.338869
+611	603	1	2022-08-24 14:36:14.982553	2022-08-24 14:36:14.982553
+612	604	1	2022-08-24 14:36:35.781458	2022-08-24 14:36:35.781458
+613	605	1	2022-08-24 14:36:38.888755	2022-08-24 14:36:38.888755
+614	606	1	2022-08-24 14:58:51.597307	2022-08-24 14:58:51.597307
+615	607	1	2022-08-25 08:33:35.181707	2022-08-25 08:33:35.181707
+616	608	1	2022-08-25 08:35:05.758105	2022-08-25 08:35:05.758105
+617	609	1	2022-08-25 10:51:02.278349	2022-08-25 10:51:02.278349
+618	610	1	2022-08-26 10:53:16.994443	2022-08-26 10:53:16.994443
+619	611	1	2022-08-26 13:45:18.962085	2022-08-26 13:45:18.962085
+620	612	1	2022-08-26 13:54:39.749876	2022-08-26 13:54:39.749876
+621	613	1	2022-08-26 13:58:40.402233	2022-08-26 13:58:40.402233
+622	614	1	2022-08-31 08:10:18.441776	2022-08-31 08:10:18.441776
+623	615	1	2022-08-31 08:12:02.440415	2022-08-31 08:12:02.440415
+624	616	1	2022-09-03 10:02:37.410947	2022-09-03 10:02:37.410947
+625	617	1	2022-09-03 10:04:03.412511	2022-09-03 10:04:03.412511
+626	618	1	2022-09-03 10:04:49.324369	2022-09-03 10:04:49.324369
+627	619	1	2022-09-03 10:05:19.638563	2022-09-03 10:05:19.638563
+628	620	1	2022-09-04 20:00:57.149406	2022-09-04 20:00:57.149406
+629	621	1	2022-09-04 20:01:05.343839	2022-09-04 20:01:05.343839
+630	622	1	2022-09-04 20:01:16.763125	2022-09-04 20:01:16.763125
+631	623	1	2022-09-04 20:01:51.877169	2022-09-04 20:01:51.877169
+632	624	1	2022-09-04 20:02:47.646316	2022-09-04 20:02:47.646316
+633	625	1	2022-09-04 20:03:44.939638	2022-09-04 20:03:44.939638
+634	626	1	2022-09-04 20:13:02.83641	2022-09-04 20:13:02.83641
+635	627	1	2022-09-04 20:13:33.491858	2022-09-04 20:13:33.491858
+636	628	1	2022-09-04 20:13:47.697794	2022-09-04 20:13:47.697794
+637	629	1	2022-09-04 20:14:11.092673	2022-09-04 20:14:11.092673
+638	630	1	2022-09-04 20:14:25.060401	2022-09-04 20:14:25.060401
+639	631	1	2022-09-04 20:14:38.005155	2022-09-04 20:14:38.005155
+640	632	1	2022-09-05 16:03:43.907141	2022-09-05 16:03:43.907141
+641	633	1	2022-09-05 16:11:40.550885	2022-09-05 16:11:40.550885
+642	634	1	2022-09-05 19:58:12.894687	2022-09-05 19:58:12.894687
+643	635	1	2022-09-06 16:03:46.643827	2022-09-06 16:03:46.643827
+644	636	1	2022-09-06 16:37:02.737461	2022-09-06 16:37:02.737461
+645	637	1	2022-09-09 15:17:50.414284	2022-09-09 15:17:50.414284
+646	638	1	2022-09-09 15:37:33.331752	2022-09-09 15:37:33.331752
+647	639	1	2022-09-09 17:08:28.054076	2022-09-09 17:08:28.054076
+648	640	1	2022-09-20 16:53:19.775804	2022-09-20 16:53:19.775804
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: david
+--
+
+COPY public.users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, created_at, updated_at, uuid) FROM stdin;
+1	test@test.com	$2a$12$M7U5ui2LSZm3uyDshvM.w.ApJzUk6D8ehSIEpC4EivAoNrm0045Wa	\N	\N	\N	2022-08-15 18:20:28.185688	2022-09-20 19:13:50.936272	b13d7bc1-48e9-4165-8452-f2d281e9ce60
+\.
+
+
+--
+-- Name: active_storage_attachments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.active_storage_attachments_id_seq', 1986, true);
+
+
+--
+-- Name: active_storage_blobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.active_storage_blobs_id_seq', 1986, true);
+
+
+--
+-- Name: active_storage_variant_records_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.active_storage_variant_records_id_seq', 1, false);
+
+
+--
+-- Name: device_songs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.device_songs_id_seq', 1119, true);
+
+
+--
+-- Name: devices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.devices_id_seq', 4, true);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.notifications_id_seq', 9, true);
+
+
+--
+-- Name: profiles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.profiles_id_seq', 1, false);
+
+
+--
+-- Name: songs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.songs_id_seq', 640, true);
+
+
+--
+-- Name: user_songs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.user_songs_id_seq', 648, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: david
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: active_storage_attachments active_storage_attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT active_storage_attachments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_blobs active_storage_blobs_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_blobs
+    ADD CONSTRAINT active_storage_blobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: active_storage_variant_records active_storage_variant_records_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT active_storage_variant_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: device_songs device_songs_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.device_songs
+    ADD CONSTRAINT device_songs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: devices devices_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.devices
+    ADD CONSTRAINT devices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: profiles profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.profiles
+    ADD CONSTRAINT profiles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.songs
+    ADD CONSTRAINT songs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_songs user_songs_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.user_songs
+    ADD CONSTRAINT user_songs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_active_storage_attachments_on_blob_id ON public.active_storage_attachments USING btree (blob_id);
+
+
+--
+-- Name: index_active_storage_attachments_uniqueness; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_active_storage_attachments_uniqueness ON public.active_storage_attachments USING btree (record_type, record_id, name, blob_id);
+
+
+--
+-- Name: index_active_storage_blobs_on_key; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_active_storage_blobs_on_key ON public.active_storage_blobs USING btree (key);
+
+
+--
+-- Name: index_active_storage_variant_records_uniqueness; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.active_storage_variant_records USING btree (blob_id, variation_digest);
+
+
+--
+-- Name: index_device_songs_on_device_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_device_songs_on_device_id ON public.device_songs USING btree (device_id);
+
+
+--
+-- Name: index_device_songs_on_device_id_and_song_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_device_songs_on_device_id_and_song_id ON public.device_songs USING btree (device_id, song_id);
+
+
+--
+-- Name: index_device_songs_on_song_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_device_songs_on_song_id ON public.device_songs USING btree (song_id);
+
+
+--
+-- Name: index_devices_on_user_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_devices_on_user_id ON public.devices USING btree (user_id);
+
+
+--
+-- Name: index_notifications_on_user_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_notifications_on_user_id ON public.notifications USING btree (user_id);
+
+
+--
+-- Name: index_profiles_on_user_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_profiles_on_user_id ON public.profiles USING btree (user_id);
+
+
+--
+-- Name: index_songs_on_video_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE INDEX index_songs_on_video_id ON public.songs USING btree (video_id);
+
+
+--
+-- Name: index_user_songs_on_song_id_and_user_id; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_user_songs_on_song_id_and_user_id ON public.user_songs USING btree (song_id, user_id);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: david
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING btree (reset_password_token);
+
+
+--
+-- Name: active_storage_variant_records fk_rails_993965df05; Type: FK CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_variant_records
+    ADD CONSTRAINT fk_rails_993965df05 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: david
+--
+
+ALTER TABLE ONLY public.active_storage_attachments
+    ADD CONSTRAINT fk_rails_c3b3935057 FOREIGN KEY (blob_id) REFERENCES public.active_storage_blobs(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

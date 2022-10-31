@@ -3,8 +3,7 @@
     .card.p-2.m-2
       .columns
         .column.is-2
-          - if song.image.attached?
-            = image_tag(song.image)
+          img src="https://img.youtube.com/vi/#{song.video_id}/hqdefault.jpg"
         .column
           .columns
             .column
