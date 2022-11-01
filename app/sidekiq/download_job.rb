@@ -4,19 +4,25 @@ require "down"
 
 class DownloadJob
   include Sidekiq::Job
+  sidekiq_options retry: 3
 
   def perform(params)
     params = JSON.parse(params).symbolize_keys
-    dir = Rails.root.join("tmp", "downloads")
-    system("#{Rails.root.join('lib', 'scripts', 'download.sh')} #{dir} #{params[:video_id]}")
-    song = create_song(params)
-    return if song.nil?
+    song = Song.find_by(video_id: params[:video_id])
+    return redownload(song) unless song.nil?
 
-    attach_items(params, song)
+    song = create_song(params)
+    song.download_mp3
+    song.download_image
+
     attach_user(params, song)
   end
 
   private
+
+  def redownload(song)
+    RedownloadJob(song).perform_async
+  end
 
   def attach_user(params, song)
     return if params[:user_id].nil?
@@ -28,50 +34,11 @@ class DownloadJob
     song = Song.find_by(video_id: params[:video_id])
     return song unless song.nil?
 
-    song = Song.create(
+    Song.create(
       title: params[:title],
       artist: params[:channel],
       video_id: params[:video_id],
-      image_url: params[:image_url]
+      updated: :vanilla
     )
-    return song if song.save
-
-    nil
-  end
-
-  def attach_items(params, song)
-    attach_image(song, params[:image_url], params[:video_id])
-    attach_mp3(song, params[:video_id])
-  end
-
-  def attach_image(song, image_url, video_id)
-    return if song.image.attached? || image_url.nil?
-
-    image = Rails.root.join("tmp", "downloads", "#{video_id}.jpg")
-    begin
-      ::Down.download(image_url, destination: image)
-      song.image.attach(io: File.open(image), filename: "#{image_url}.jpg")
-      system("rm #{image}") if song.image.attached?
-    rescue StandardError
-      attach_generic_image(song)
-    end
-  end
-
-  def attach_generic_image(song)
-    song.image.attach(
-      io: File.open(Rails.root.join("app", "assets", "images", "generic_mp3.jpg")),
-      filename: "generic_#{song.video_id}.jpg"
-    )
-  end
-
-  def attach_mp3(song, video_id)
-    file_path = Rails.root.join("tmp", "downloads", "#{video_id}.mp3")
-    if File.exist?(file_path)
-      song.mp3.attach(
-        io: File.open(file_path),
-        filename: "#{video_id}.mp3"
-      )
-    end
-    system("rm #{file_path}") if song.mp3.attached?
   end
 end

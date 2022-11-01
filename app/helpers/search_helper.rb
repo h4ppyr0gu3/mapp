@@ -35,7 +35,7 @@ module SearchHelper
   def generate_url
     api = Invidious.api
     q = CGI.escape(params[:query])
-    url = "#{api}/api/v1/search?type=video&q=#{q}"
+    url = "#{api}/api/v1/search?type=video&q=#{q}+audio"
     url += "&sort=#{CGI.escape(params[:sort_by])}"
     url += "&date=#{CGI.escape(params[:date])}" unless params[:date] == ""
     url

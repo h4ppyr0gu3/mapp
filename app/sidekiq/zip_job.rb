@@ -4,6 +4,7 @@ require "securerandom"
 
 class ZipJob
   include Sidekiq::Job
+  sidekiq_options retry: 2
 
   attr_reader :params, :context
 
@@ -46,8 +47,8 @@ class ZipJob
 
   def create_temp_dir(files)
     temp_folder = File.join(Dir.tmpdir, "mapp_#{current_user.email}")
-    FileUtils.rm_rf(temp_folder) if File.exist?(temp_folder)
-    FileUtils.mkdir_p(temp_folder) unless Dir.exist?(temp_folder)
+    FileUtils.rm_rf(temp_folder)
+    FileUtils.mkdir_p(temp_folder)
 
     files.map do |song|
       filename = song.last.to_s
@@ -62,9 +63,8 @@ class ZipJob
   # rubocop:disable Metrics/MethodLength
   def create_zip_file(filepaths, random_id)
     require "zip"
-    # security vulnerability being able to guess email addresses
     zip_file = Rails.root.join("public", "mapp_#{random_id}.zip")
-    FileUtils.rm(zip_file) if File.exist?(zip_file)
+    FileUtils.rm(zip_file)
     begin
       ::Zip::File.open(zip_file, create: true) do |zipfile|
         filepaths.each do |file|

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   # Playlist
   get 'user_songs', to: 'songs#user_index'
+  get 'update_all_metadata', to: 'songs#update_all_metadata'
   get 'user_updated', to: 'songs#user_updated'
   get 'user_not_updated', to: 'songs#user_not_updated'
   get 'auto_fill', to: 'songs#auto_fill'

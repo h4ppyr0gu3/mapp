@@ -9,6 +9,13 @@ class SongsController < ApplicationController
     @songs = @q.result.page(params[:page])
   end
 
+  def update_all_metadata
+    Song.all.each do |song|
+      UpdateMetadataJob.perform_async(song.id)
+    end
+    redirect_back fallback_location: songs_path, notice: "All songs are being updated now..."
+  end
+
   def user_index
     @q = current_user.songs.ransack(params[:q])
     @songs = @q.result.page(params[:page])

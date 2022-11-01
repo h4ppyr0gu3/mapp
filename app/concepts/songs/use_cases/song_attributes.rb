@@ -37,7 +37,7 @@ module Songs
           response["artists"].map do |artist|
             artists << artist["name"]
           end
-          artists.join(" & ")
+          artists.join(" ; ")
         end
 
         def clean_albums(response)

@@ -14,7 +14,7 @@ module Downloads
 
         ActiveRecord::Base.transaction do
           current_device = current_user.devices.find_or_create_by(user_agent:)
-          repository.update_metadata(song) if song.updated != 2
+          song.update_metadata unless song.written?
           DeviceSong.find_or_create_by(device_id: current_device.id, song_id: song.id)
         end
         song

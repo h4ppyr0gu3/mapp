@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "down"
+
 class Song < ApplicationRecord
   has_one_attached :image
   has_one_attached :mp3
@@ -12,28 +14,73 @@ class Song < ApplicationRecord
 
   enum updated: { vanilla: 0, by_the_user: 1, written: 2 }
 
+  # should be used ASYNC
   def update_metadata
+    clean_download_dir
     create_local_copies
-    system(ffmpeg_command)
-    update_attached
-    clean_on_success
+    if system(ffmpeg_command)
+      update_attached
+      update(updated: :written)
+    else
+      delete
+    end
   end
 
+  # should be used ASYNC
+  def download_mp3
+    clean_download_dir
+    if system("#{download_script} #{download_dir} #{video_id}")
+      mp3.purge if mp3.attached?
+      mp3.attach(
+        io: File.open(song_file_path),
+        filename: "#{video_id}.mp3"
+      )
+    else
+      delete
+    end
+  end
+
+  # should be used ASYNC
+  def download_image
+    clean_download_dir
+    ::Down.download(image_url, destination: image_file_path)
+    image.purge if image.attached?
+    image.attach(
+      io: File.open(image_file_path),
+      filename: "#{video_id}.jpg"
+    )
+  end
+
+  # should be used ASYNC
   def redownload_mp3
-    # rerun Down command
+    download_mp3
+    update(updated: :by_the_user)
   end
 
+  # should be used ASYNC
   def redownload_image
-    # rerun ytdlp
+    download_image
+    update(updated: :by_the_user)
+  end
+
+  def image_url
+    "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg"
   end
 
   private
 
-  def clean_on_success
-    return unless mp3.attached?
+  def clean_download_dir
+    FileUtils.rm_rf(song_file_path)
+    FileUtils.rm_rf(new_song_file_path)
+    FileUtils.rm_rf(image_file_path)
+  end
 
-    system("rm #{new_song_file_path} #{song_file_path} #{image_file_path}")
-    update(updated: :written)
+  def download_script
+    Rails.root.join("lib", "scripts", "download.sh")
+  end
+
+  def download_dir
+    Rails.root.join("tmp", "downloads")
   end
 
   def song_file_path
@@ -73,11 +120,11 @@ class Song < ApplicationRecord
     # metadata << "-metadata album_artist='London Symphony'"
     # metadata << "-metadata track='#{song.track_no}'"
     metadata = []
-    metadata << "-metadata title='#{title}'" unless title.nil?
-    metadata << "-metadata artist='#{artist}'" unless artist.nil?
-    metadata << "-metadata album='#{album}'" unless album.nil?
-    metadata << "-metadata date='#{year}'" unless year.nil?
-    metadata << "-metadata genre='#{genre}'" unless genre.nil?
+    metadata << "-metadata title=\"#{title.gsub("\"", "\\\"")}\"" unless title.nil?
+    metadata << "-metadata artist=\"#{artist.gsub("\"", "\\\"")}\"" unless artist.nil?
+    metadata << "-metadata album=\"#{album.gsub("\"", "\\\"")}\"" unless album.nil?
+    metadata << "-metadata date=\"#{year.gsub("\"", "\\\"")}\"" unless year.nil?
+    metadata << "-metadata genre=\"#{genre.gsub("\"", "\\\"")}\"" unless genre.nil?
     metadata.join(" ")
   end
   # rubocop:enable Metrics:AbcComplexity
