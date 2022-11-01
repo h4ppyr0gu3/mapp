@@ -11,22 +11,25 @@ class ZipJob
   def perform(params)
     params = JSON.parse(params).deep_symbolize_keys
     set_context(params)
-    files = Downloads::UseCases::All.new(params:, context:).call
+    files = Downloads::UseCases::All.new(params: params, context: context).call
     if files.empty?
       notify_no_files
       return
     end
     filepaths = create_temp_dir(files)
-    random_id = SecureRandom.hex(4)
-    create_zip_file(filepaths, random_id)
+    create_zip_file(filepaths, SecureRandom.hex(4))
+    notify_done
+  end
+
+  private
+
+  def notify_done
     Notification.create!(
       user_id: current_user.id,
       text: "Your download is ready, <a href='#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip'>here you go</a>",
       read: false
     )
   end
-
-  private
 
   def notify_no_files
     Notification.create!(
@@ -49,7 +52,10 @@ class ZipJob
     temp_folder = File.join(Dir.tmpdir, "mapp_#{current_user.email}")
     FileUtils.rm_rf(temp_folder)
     FileUtils.mkdir_p(temp_folder)
+    write_to_temp_file(files, temp_folder)
+  end
 
+  def write_to_temp_file(files, temp_folder)
     files.map do |song|
       filename = song.last.to_s
       filepath = File.join temp_folder, filename
@@ -64,7 +70,7 @@ class ZipJob
   def create_zip_file(filepaths, random_id)
     require "zip"
     zip_file = Rails.root.join("public", "mapp_#{random_id}.zip")
-    FileUtils.rm(zip_file)
+    FileUtils.rm_rf(zip_file)
     begin
       ::Zip::File.open(zip_file, create: true) do |zipfile|
         filepaths.each do |file|
@@ -83,7 +89,7 @@ class ZipJob
       filepaths.each do |filepath|
         next if filepath.is_a? Integer
 
-        FileUtils.rm(filepath)
+        FileUtils.rm_rf(filepath)
       end
     end
   end

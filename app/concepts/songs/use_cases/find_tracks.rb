@@ -59,7 +59,6 @@ module Songs
           first_request = repository.musicbrainz_request(resource, query)
           return first_request["recordings"] if first_request["recording-count"] < 100
 
-          all_tracks = []
           Rails.cache.fetch("artists_#{params[:artist_id]}", expires_in: 12.hours) do
             get_all_tracks(params, first_request)
           end
@@ -68,7 +67,7 @@ module Songs
         def get_all_tracks(params, first_request)
           tracks = first_request["recordings"]
           tracks << get_remaining_tracks(first_request["recording-count"], params)
-          all_tracks = tracks.flatten.compact
+          tracks.flatten.compact
         end
 
         def cached_tracks(params)

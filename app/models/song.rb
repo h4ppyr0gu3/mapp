@@ -114,7 +114,7 @@ class Song < ApplicationRecord
     )
   end
 
-  # rubocop:disable Metrics:AbcComplexity
+  # rubocop:disable Metrics/AbcSize, Style/StringLiteralsInInterpolation
   def create_ffmpeg_metadata_string
     # metadata << "-metadata title='#{song.title}'" if song.title != nil
     # metadata << "-metadata album_artist='London Symphony'"
@@ -127,5 +127,5 @@ class Song < ApplicationRecord
     metadata << "-metadata genre=\"#{genre.gsub("\"", "\\\"")}\"" unless genre.nil?
     metadata.join(" ")
   end
-  # rubocop:enable Metrics:AbcComplexity
+  # rubocop:enable Metrics/AbcSize, Style/StringLiteralsInInterpolation
 end

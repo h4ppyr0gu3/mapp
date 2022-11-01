@@ -5,8 +5,8 @@ class NotificationsController < ApplicationController
     return nil unless current_user
 
     uuid = SecureRandom.uuid
-    current_user.update(uuid:)
-    render json: { uuid: }
+    current_user.update(uuid: uuid)
+    render json: { uuid: uuid }
   end
 
   def mark_as_read

@@ -5,7 +5,7 @@ module Downloads
     class All < UseCase::Base
       def call
         available_ids = find_available_ids
-        device = current_user.devices.find_or_create_by(user_agent:)
+        device = current_user.devices.find_or_create_by(user_agent: user_agent)
         undownloaded_songs = current_user.songs.where.not(id: device.songs.ids)
         available_songs = undownloaded_songs.where(id: available_ids)
         device.songs << available_songs
@@ -22,7 +22,7 @@ module Downloads
         available_ids = []
         current_user.songs.each do |song|
           if song.mp3.attached?
-            repository.update_metadata(song) if song.updated != 2
+            repository.update_metadata(song) unless song.written
             available_ids << song.id
           end
         end

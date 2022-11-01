@@ -3,14 +3,14 @@
 class DownloadController < ApplicationController
   include Zipline
   def retry
-    Downloads::UseCases::Retry.new(params:).call
+    Downloads::UseCases::Retry.new(params: params).call
     redirect_back fallback_location: songs_path, notice: "Retrying Download...."
   end
 
   def redownload_all
     Song.all.pluck(:video_id).map do |video_id|
       song_params = {
-        video_id:,
+        video_id: video_id,
         image_url: "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg"
       }.to_json
       RedownloadJob.perform_async(song_params)
@@ -20,11 +20,11 @@ class DownloadController < ApplicationController
 
   # called from js fetch
   def external
-    Downloads::UseCases::External.new(params: download_params, context:).call
+    Downloads::UseCases::External.new(params: download_params, context: context).call
   end
 
   def internal
-    song = Downloads::UseCases::Internal.new(params:, context:).call
+    song = Downloads::UseCases::Internal.new(params: params, context: context).call
     redirect_to url_for(song) unless song.nil?
   end
 
@@ -32,7 +32,7 @@ class DownloadController < ApplicationController
     job_params = {
       user_id: current_user.id,
       user_agent: request.user_agent,
-      context:
+      context: context
     }.to_json
     # files = Downloads::UseCases::All.new(params: request.user_agent, context:).call
     pp job_params
@@ -42,7 +42,7 @@ class DownloadController < ApplicationController
   end
 
   def update
-    song = Downloads::UseCases::Update.new(params:, context:).call
+    song = Downloads::UseCases::Update.new(params: params, context: context).call
     if song.mp3.nil?
       redirect_back fallback_location: songs_path, alert: "Song is not available at the moment"
     else

@@ -18,4 +18,3 @@ class UpdateMetadataJob
     DeviceSong.where(song_id: id).delete_all
   end
 end
-

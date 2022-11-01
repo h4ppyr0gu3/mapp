@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Sidekiq
   class RetryMonitoringMiddleware
     def call(worker, job_params, _queue)
