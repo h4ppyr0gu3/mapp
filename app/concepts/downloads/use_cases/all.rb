@@ -22,7 +22,7 @@ module Downloads
         available_ids = []
         current_user.songs.each do |song|
           if song.mp3.attached?
-            repository.update_metadata(song) unless song.written
+            repository.update_metadata(song) unless song.written?
             available_ids << song.id
           end
         end

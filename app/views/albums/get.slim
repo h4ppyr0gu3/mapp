@@ -1,10 +1,54 @@
 .container
   .is-size-3 Album requests
-  div id="multi-step-form" 
-    form class="p-10"
-      div v-for="(fieldKeys, step) in steps"
-        div 
-          | {{step}
 
-javascript: 
+  .field
+    .label Artist
+    input.input#artist placeholder="Search for the artist of the album you're looking for"
+    p.help We will display a list of Artists which you can choose from
+    button.button#search_artist Search
+  .field
+    #artist-dropdown
+
+javascript:
+  search_artist = document.getElementById("search_artist")
+  search_artist.addEventListener("click", (event) => {
+    event.preventDefault;
+    artist_query = document.getElementById("artist").value;
+      fetch(("#{ENV['API_URL']}/auto_fill?artist=" + 
+      artist_query)).then(response => response.json())
+      .then(data => artistDropdown(data))
+  })
+
+  function artistDropdown(data) {
+    form = document.getElementById("artist-dropdown")
+    form.innerHTML = ""
+    var selectList = "<div class='field has-addons'>" +
+    "<div class='control'><div class='select is-fullwidth'><select id='artist-select'>"
+    for (var i = 0; i < data.artists.length; i++) {
+      var option = document.createElement("option");
+      selectList = selectList + "<option value='" + 
+        data.artists[i].id+ "'>" + 
+        data.artists[i].name + "</option>"
+    }
+    selectList = selectList + "</select></div></div><div class='control'>" + 
+    "<button class='button is-primary' id='artist-submit'>Select Artist" + 
+    "</button></div></div>"
+    form.innerHTML = selectList
+    addListenersForArtist();
+  }
+
+  function addListenersForArtist() {
+    artist_select = document.getElementById("artist-select")
+    artist_submit = document.getElementById("artist-submit")
+    artist_id = artist_select.options[0].value
+    artist_select.addEventListener("change", (e) => {
+      artist_id = e.target.options[e.target.options.selectedIndex].value
+    })
+    artist_submit.addEventListener('click', (e) => {
+      e.preventDefault();
+      fetch(("#{ENV['API_URL']}/album_list?artist_id=" +
+        artist_select.value))
+        .then(data => data.json()).then(data => console.log(data))
+    })
+  }
 

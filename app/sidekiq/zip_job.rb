@@ -8,6 +8,7 @@ class ZipJob
 
   attr_reader :params, :context
 
+  # rubocop:disable Metrics/MethodLength
   def perform(params)
     params = JSON.parse(params).deep_symbolize_keys
     set_context(params)
@@ -17,13 +18,15 @@ class ZipJob
       return
     end
     filepaths = create_temp_dir(files)
-    create_zip_file(filepaths, SecureRandom.hex(4))
-    notify_done
+    random_id = SecureRandom.hex(4)
+    create_zip_file(filepaths, random_id)
+    notify_done(random_id)
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 
-  def notify_done
+  def notify_done(random_id)
     Notification.create!(
       user_id: current_user.id,
       text: "Your download is ready, <a href='#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip'>here you go</a>",

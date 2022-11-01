@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'user_updated', to: 'songs#user_updated'
   get 'user_not_updated', to: 'songs#user_not_updated'
   get 'auto_fill', to: 'songs#auto_fill'
+  get 'album_list', to: 'songs#album_list'
   post 'remove', to: 'playlist#remove'
   post 'add', to: 'playlist#add'
   get 'profile', to: 'profiles#show'
