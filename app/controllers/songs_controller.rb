@@ -42,6 +42,11 @@ class SongsController < ApplicationController
     render json: response.to_json
   end
 
+  # def album_list
+  #   response = ::Songs::UseCases::FindAlbumsSongs.call(params)
+  #   render json: response.to_json
+  # end
+
   def show; end
 
   def new

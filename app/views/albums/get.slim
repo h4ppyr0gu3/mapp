@@ -8,6 +8,7 @@
     button.button#search_artist Search
   .field
     #artist-dropdown
+    #album-dropdown
 
 javascript:
   search_artist = document.getElementById("search_artist")
@@ -48,7 +49,40 @@ javascript:
       e.preventDefault();
       fetch(("#{ENV['API_URL']}/album_list?artist_id=" +
         artist_select.value))
-        .then(data => data.json()).then(data => console.log(data))
+        .then(data => data.json()).then(data => displayArtistsAlbums(data))
+    })
+  }
+
+  function displayArtistsAlbums(data) {
+    form = document.getElementById("album-dropdown")
+    form.innerHTML = ""
+    var selectList = "<div class='field has-addons'>" +
+    "<div class='control'><div class='select is-fullwidth'><select id='album-select'>"
+    for (var i = 0; i < data.albums.length; i++) {
+      var option = document.createElement("option");
+      selectList = selectList + "<option value='" + 
+        data.albums[i].album_id+ "'>" + 
+        data.albums[i].title + "</option>"
+    }
+    selectList = selectList + "</select></div></div><div class='control'>" + 
+    "<button class='button is-primary' id='album-submit'>Select Artist" + 
+    "</button></div></div>"
+    form.innerHTML = selectList;
+    addListenersForAlbums();
+  }
+
+  function addListenersForAlbums() {
+    artist_select = document.getElementById("album-select")
+    artist_submit = document.getElementById("album-submit")
+    artist_id = artist_select.options[0].value
+    artist_select.addEventListener("change", (e) => {
+      artist_id = e.target.options[e.target.options.selectedIndex].value
+    })
+    artist_submit.addEventListener('click', (e) => {
+      e.preventDefault();
+      fetch(("#{ENV['API_URL']}/album_songs?album_id=" +
+        artist_select.value))
+        .then(data => data.json()).then(data => displayArtistsAlbums(data))
     })
   }
 
