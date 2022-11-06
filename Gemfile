@@ -9,9 +9,11 @@ gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
 gem "cssbundling-rails"
 gem "devise"
+gem "devise_token_auth", "~> 1.2"
 gem "down"
 gem "jsbundling-rails"
 gem "kaminari"
+gem "omniauth", "~> 2.1"
 gem "pg", "~> 1.1"
 gem "prometheus_exporter", "~> 2.0"
 gem "puma", "~> 5.0"
@@ -42,6 +44,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener_web", "~> 2.0"
   gem "rubocop"
   gem "web-console"
 end

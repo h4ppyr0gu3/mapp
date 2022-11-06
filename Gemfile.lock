@@ -106,6 +106,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (1.2.1)
+      bcrypt (~> 3.0)
+      devise (> 3.5.2, < 5)
+      rails (>= 4.2.0, < 7.1)
     diff-lcs (1.5.0)
     digest (3.1.0)
     dotenv (2.7.6)
@@ -124,6 +128,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashie (5.0.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -144,6 +149,15 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (2.0.0)
+      actionmailer (>= 5.2)
+      letter_opener (~> 1.7)
+      railties (>= 5.2)
+      rexml
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -171,6 +185,10 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    omniauth (2.1.0)
+      hashie (>= 3.4.6)
+      rack (>= 2.2.3)
+      rack-protection
     orm_adapter (0.5.0)
     parallel (1.22.1)
     parser (3.1.2.0)
@@ -191,6 +209,8 @@ GEM
     rack (2.2.3.1)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
+    rack-protection (3.0.2)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -339,10 +359,13 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  devise_token_auth (~> 1.2)
   dotenv-rails
   down
   jsbundling-rails
   kaminari
+  letter_opener_web (~> 2.0)
+  omniauth (~> 2.1)
   pg (~> 1.1)
   prometheus_exporter (~> 2.0)
   pry

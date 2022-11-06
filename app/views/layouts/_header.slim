@@ -12,9 +12,9 @@ nav.navbar.m-2.p-2 aria-label=("main navigation") role="navigation"
   .navbar-menu#burger
     .navbar-start
       = link_to "All Songs", songs_path, class: "navbar-item has-text-dark"
-      = link_to "Search", search_path, class: "navbar-item has-text-dark"
-      = link_to "Album Request", albums_path, class: "navbar-item has-text-dark"
       - if user_signed_in?
+        = link_to "Search", search_path, class: "navbar-item has-text-dark"
+        = link_to "Album Request", albums_path, class: "navbar-item has-text-dark"
         = link_to "My Songs", user_songs_path, class: "navbar-item has-text-dark"
     .navbar-end
       .navbar-item
