@@ -1,18 +1,24 @@
+# frozen_string_literal: true
+
 module Songs
   module Representers
     class Single
       class << self
+        # rubocop:disable Metrics/MethodLength
         def call(song)
           {
             id: song.id,
-            title: song.title,
+            video_id: song.video_id,
+            updated_integer: song.updated_before_type_cast,
+            updated_value: song.updated,
             artist: song.artist,
+            title: song.title,
             genre: song.genre,
-            year: song.year,
             album: song.album,
-            video_id: song.video_id
+            year: song.year
           }
         end
+        # rubocop:enable Metrics/MethodLength
       end
     end
   end

@@ -19,7 +19,7 @@ class DownloadJob
   end
 
   10.times do |x|
-    puts x 
+    puts x
     puts "some string"
   end
 

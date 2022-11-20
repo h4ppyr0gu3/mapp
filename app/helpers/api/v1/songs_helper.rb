@@ -1,2 +1,8 @@
-module Api::V1::SongsHelper
+# frozen_string_literal: true
+
+module Api
+  module V1
+    module SongsHelper
+    end
+  end
 end

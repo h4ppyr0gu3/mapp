@@ -26,9 +26,24 @@ module UseCase
 
     private
 
+    def preload(*methods)
+      methods.map { |method| send(method) }
+    end
+
     def step(method)
-      send(method)
       return unless errors.empty?
+
+      send(method)
+    end
+
+    def validate_params
+      validator.new.call(params).tap do |result|
+        add_error(result.errors.to_h) unless result.success?
+      end
+    end
+
+    def validator
+      raise NotImplementedError, "#validator method must be implemented"
     end
 
     def add_error(message)

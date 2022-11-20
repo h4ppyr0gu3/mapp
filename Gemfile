@@ -48,3 +48,5 @@ group :development do
   gem "rubocop"
   gem "web-console"
 end
+
+gem "dry-validation", "~> 1.8"

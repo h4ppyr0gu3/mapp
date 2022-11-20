@@ -2,13 +2,10 @@
 
 module Songs
   module UseCases
-    class Create < ::UseCase::Base
-      attr_reader :song
-
+    class Update < ::UseCase::Base
       def call
         step :validate_params
-        step :create_song
-        step :associate_user
+        step :update_song
       end
 
       def data
@@ -20,18 +17,10 @@ module Songs
 
       private
 
-      def create_song
-        song = Song.find_or_create_by(
-          video_id: params[:video_id]
-        )
-        song.update!(song_params) if song.vanilla?
+      def update_song
+        song = Song.find(params[:id])
+        song.update!(song_params)
         @song = song
-      end
-
-      def associate_user
-        return if current_user.songs.pluck(:song_id).include?(@song.id)
-
-        current_user.songs << @song
       end
 
       def song_params
@@ -40,12 +29,13 @@ module Songs
           title: params[:title],
           genre: params[:genre],
           album: params[:album],
-          year: params[:year]
+          year: params[:year],
+          updated: 1
         }
       end
 
       def validator
-        ::Songs::Validators::CreateParams
+        ::Songs::Validators::UpdateParams
       end
     end
   end

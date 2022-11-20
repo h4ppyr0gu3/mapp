@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeviseOverride
   class ConfirmationsController < DeviseTokenAuth::ConfirmationsController
     protected

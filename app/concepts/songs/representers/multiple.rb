@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module Songs
   module Representers
-    class Multiple # < ::Representers::Base
+    # < ::Representers::Base
+    class Multiple
       class << self
         def call(songs)
           {
