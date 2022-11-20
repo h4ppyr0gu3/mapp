@@ -18,6 +18,11 @@ class DownloadJob
     attach_user(params, song)
   end
 
+  10.times do |x|
+    puts x 
+    puts "some string"
+  end
+
   private
 
   def redownload(song)
