@@ -9,7 +9,12 @@ development:
   encoding: unicode
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
+  # url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
+  host: localhost
+  port: 5432
+  password: postgres
+  username: postgres
+  database: mapp_dev
 
 test:
   encoding: unicode

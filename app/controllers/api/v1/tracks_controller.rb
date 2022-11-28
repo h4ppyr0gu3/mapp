@@ -4,7 +4,8 @@ module Api
   module V1
     class TracksController < ::Api::V1::Base
       def index
-        render json: Songs::Representers::Multiple.call(current_user.songs)
+        songs = Songs::UseCases::AllUsersSongs.call(context: context, params: params).data
+        render json: Songs::Representers::Multiple.call(songs)
       end
 
       def update

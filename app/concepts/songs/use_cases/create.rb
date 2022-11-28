@@ -26,6 +26,8 @@ module Songs
         )
         song.update!(song_params) if song.vanilla?
         @song = song
+      rescue ActiveRecord::RecordInvalid => e
+        add_error(e.message)
       end
 
       def associate_user
