@@ -6,14 +6,6 @@ module Songs
     class Multiple
       class << self
         def call(songs)
-          {
-            songs: render_songs(songs)
-          }
-        end
-
-        private
-
-        def render_songs(songs)
           songs.map do |song|
             Songs::Representers::Single.call(song)
           end

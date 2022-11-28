@@ -3,9 +3,11 @@
 module Api
   module V1
     class TracksController < ::Api::V1::Base
+      include ActiveStorage::SetCurrent
+
       def index
-        songs = Songs::UseCases::AllUsersSongs.call(context: context, params: params).data
-        render json: Songs::Representers::Multiple.call(songs)
+        songs, count = Songs::UseCases::AllUsersSongs.call(context: context, params: params).data
+        render json: Songs::Representers::Index.call(songs, count)
       end
 
       def update
