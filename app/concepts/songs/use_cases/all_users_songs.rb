@@ -9,7 +9,7 @@ module Songs
       end
 
       def data
-        [@data || [], current_user.songs.count]
+        [@data || [], @song_count || current_user.songs.count]
       end
 
       private
@@ -18,6 +18,8 @@ module Songs
         return current_user.songs if filter_params.nil?
 
         songs = search_filter(songs, filter_params["queryField"], filter_params["query"])
+        @song_count = songs.count
+        songs
         # sort_filter(songs, filter_params["sortBy"])
       end
 

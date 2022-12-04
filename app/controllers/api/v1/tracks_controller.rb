@@ -32,6 +32,10 @@ module Api
         )
       end
 
+      def destroy
+        UserSong.find_by(user_id: current_user.id, song_id: params[:id]).delete
+      end
+
       private
 
       def json_data(response, representer)
