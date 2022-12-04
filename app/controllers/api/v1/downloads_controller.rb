@@ -12,7 +12,7 @@ module Api
         song.update_metadata unless song.written?
 
         if song.mp3.url.present?
-          render json: { url: song.mp3.url}
+          render json: { url: song.mp3.url }
         else
           render json: { errors: ["Song link doesn't exist, Please try later"] }
         end
