@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for "User", at: "auth"
     namespace "v1" do
       resources :tracks, except: [:index]
+      resources :notifications
       post "tracks_index", to: "tracks#index"
       get "download_redirect/:id", to: "downloads#redirect"
     end

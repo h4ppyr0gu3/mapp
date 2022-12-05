@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Songs
   module UseCases
     class AllUsersSongs < ::UseCase::Base
@@ -58,6 +60,7 @@ module Songs
 
       def paginated(pagination_params, songs)
         return songs.limit(20) if pagination_params.nil?
+
         songs.offset(pagination_params[:offset] || 0)
              .limit(pagination_params[:limit] || 20)
       end
