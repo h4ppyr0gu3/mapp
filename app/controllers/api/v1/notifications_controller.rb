@@ -8,7 +8,11 @@ module Api
         render json: Notifications::Representers::Index.call(notifications)
       end
 
-      def update; end
+      def update
+        Notification.find_by(user_id: current_user.id, id: params[:id]).update(read: true)
+
+        redirect_to action: :index
+      end
     end
   end
 end
