@@ -17,7 +17,7 @@ class RedownloadJob
   private
 
   def clean_broken_relations(id)
-    UserSong.where(song_id: id).delete_all
+    # UserSong.where(song_id: id).delete_all
     # could notify users that this was deleted or download
     # first match from api search
     DeviceSong.where(song_id: id).delete_all

@@ -29,8 +29,9 @@ class ZipJob
   def notify_done(random_id)
     Notification.create!(
       user_id: current_user.id,
-      text: "Your download is ready, <a href='#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip'>here you go</a>",
+      text: "Your download is ready, click here to download",
       read: false
+      link: "#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip"
     )
   end
 
@@ -82,8 +83,9 @@ class ZipJob
           begin
             filename = File.basename file
             zipfile.add(filename, file)
-          rescue ActiveStorage::FileNotFoundError
+          rescue ActiveStorage::FileNotFoundError, Zip::EntryExistsError => e
             Rails.logger.info("Failed to find file: #{file}")
+            Rails.logger.info(e)
           end
         end
       end
