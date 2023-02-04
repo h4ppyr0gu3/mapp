@@ -2,6 +2,10 @@
 
 This is the second iteration of the music app which is using Ruby on Rails trying to follow best practices that I have learnt from my work experience.
 
+## Installation
+
+run `asdf install` and all the related tool versions will be installed
+
 ## Features
 
 - Download all tracks with a single click
@@ -16,6 +20,9 @@ This is the second iteration of the music app which is using Ruby on Rails tryin
 
 ### Upcoming Features
 
+- capistrano for cicd
+- Import and Export CSV files
+- Notifications
 - UX improvements
 - CI/CD pipeline
 - Emailing capabilities
@@ -36,7 +43,7 @@ The current dependencies are:
 ### External Services
 - Postgres
 - Redis
-- [idedit](https://github.com/h4ppyr0gu3/idedit/)(crystal microservice)
+- [idedit](https://github.com/h4ppyr0gu3/idedit/)(crystal microservice) -> replaced with ffmpeg
 - Docker(optional)
 
 ### Internal Services
