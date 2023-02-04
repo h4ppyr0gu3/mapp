@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :notifications
       post "tracks_index", to: "tracks#index"
       get "download_redirect/:id", to: "downloads#redirect"
+      get "whoami", to: "miscellaneous#whoami"
     end
   end
 
