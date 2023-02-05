@@ -1,10 +1,7 @@
 {
   "scripts": {
-    "start": "",
     "dev": "",
     "build:css": "echo noscript",
-    "build": "echo noscript",
-    "serve": "",
-    "ext": ""
+    "build": "echo noscript"
   }
 }

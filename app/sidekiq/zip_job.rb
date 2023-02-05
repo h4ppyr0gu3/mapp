@@ -30,7 +30,7 @@ class ZipJob
     Notification.create!(
       user_id: current_user.id,
       text: "Your download is ready, click here to download",
-      read: false
+      read: false,
       link: "#{ENV.fetch('API_URL', nil)}/mapp_#{random_id}.zip"
     )
   end
@@ -70,7 +70,7 @@ class ZipJob
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def create_zip_file(filepaths, random_id)
     require "zip"
     zip_file = Rails.root.join("public", "mapp_#{random_id}.zip")
@@ -98,5 +98,5 @@ class ZipJob
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 end

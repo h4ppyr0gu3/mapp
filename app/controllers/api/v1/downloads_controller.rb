@@ -5,6 +5,7 @@ module Api
     class DownloadsController < Api::V1::Base
       include ActiveStorage::SetCurrent
 
+      # rubocop:disable Metrics/AbcSize
       def redirect
         song = Song.find(params[:id])
         song.redownload_mp3 unless song.mp3.attached?
@@ -17,6 +18,7 @@ module Api
           render json: { errors: ["Song link doesn't exist, Please try later"] }
         end
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end

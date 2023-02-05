@@ -18,15 +18,15 @@ class DownloadController < ApplicationController
     redirect_back fallback_location: songs_path, notice: "All songs are being redownloaded now..."
   end
 
-  def redownload_all
-    Song.all.pluck(:id).map do |video_id|
-      # song_params = {
-      #   vid: video_id,
-      #   image_url: "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg"
-      # }.to_json
-      RedownloadJob.perform_async(video_id)
-    end
-  end
+  #  def redownload_all
+  #    Song.all.pluck(:id).map do |video_id|
+  #      # song_params = {
+  #      #   vid: video_id,
+  #      #   image_url: "https://img.youtube.com/vi/#{video_id}/hqdefault.jpg"
+  #      # }.to_json
+  #      RedownloadJob.perform_async(video_id)
+  #    end
+  #  end
 
   # called from js fetch
   def external
