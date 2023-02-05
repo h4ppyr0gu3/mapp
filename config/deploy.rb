@@ -9,7 +9,7 @@ set :repo_url, "https://github.com/h4ppyr0gu3/mapp"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/mapp"
-set :rails_env, 'development'
+set :rails_env, 'production'
 set :migration_role, :db
 set :migration_servers, -> { primary(fetch(:migration_role)) }
 set :migration_command, 'db:migrate'
