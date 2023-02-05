@@ -33,6 +33,10 @@ gem "tzinfo-data"
 gem "uglifier"
 gem "zipline"
 
+group :production do
+  gem "unicorn"
+end
+
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "dotenv-rails"
@@ -44,6 +48,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "capistrano", "~> 3.17", require: false
+  gem "capistrano-rails", require: false
   gem "letter_opener_web", "~> 2.0"
   gem "rubocop"
   gem "web-console"
