@@ -1,0 +1,45 @@
+Arguments: 
+  /home/david/.asdf/installs/nodejs/18.11.0/bin/node /home/david/.asdf/installs/nodejs/18.11.0/bin/yarn build:css
+
+PATH: 
+  /home/david/.asdf/plugins/nodejs/shims:/home/david/.asdf/installs/nodejs/18.11.0/bin:/home/david/.asdf/shims:/home/david/.asdf/bin:/home/david/.local/bin:/usr/sbin/:/home/david/.config/scripts:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/var/lib/flatpak/exports/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/david/.oh-my-zsh/custom/plugins/fzf-zsh-plugin/bin:/home/david/.fzf/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.11.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Invariant Violation: Script must exist
+      at invariant (/home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:2318:15)
+      at /home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:61545:11
+      at Generator.next (<anonymous>)
+      at step (/home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:328:14
+      at new Promise (<anonymous>)
+      at new F (/home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:5305:28)
+      at /home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:307:12
+      at realRunCommand (/home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:61630:23)
+      at action.action (/home/david/.asdf/installs/nodejs/18.11.0/lib/node_modules/yarn/lib/cli.js:61691:16)
+
+npm manifest: 
+  {
+    "scripts": {
+      "start": "",
+      "dev": "",
+      "build:css": "",
+      "sign": "",
+      "serve": "",
+      "ext": ""
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
