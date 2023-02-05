@@ -2,7 +2,7 @@
   "scripts": {
     "start": "",
     "dev": "",
-    "build:css": "",
+    "build:css": "echo noscript",
     "sign": "",
     "serve": "",
     "ext": ""
