@@ -3,9 +3,10 @@ production:
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
   # url: <%= ENV.fetch("POSTGRES_PROD_URL") { "postgres://postgres:postgres@localhost:5432/mapp_dev" } %>
-  url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
+  # url: <%= ENV.fetch("POSTGRES_DEV_URL") { "postgres://david:postgres@localhost:5432/mapp_prod" } %>
   username: postgres
   password: postgres
+  database: mapp_prod
 
 development:
   encoding: unicode
