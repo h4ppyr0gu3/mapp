@@ -9,7 +9,6 @@ set :repo_url, "https://github.com/h4ppyr0gu3/mapp"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/mapp"
-set :rails_env, 'production'
 set :migration_role, :db
 set :migration_servers, -> { primary(fetch(:migration_role)) }
 set :migration_command, 'db:migrate'
@@ -69,8 +68,8 @@ end
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-Rake::Task["deploy:assets:precompile"].clear_actions
-Rake::Task["deploy:assets:backup_manifest"].clear_actions
+# Rake::Task["deploy:assets:precompile"].clear_actions
+# Rake::Task["deploy:assets:backup_manifest"].clear_actions
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure

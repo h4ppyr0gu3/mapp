@@ -1,1 +1,10 @@
-{}
+{
+  "scripts": {
+    "start": "",
+    "dev": "",
+    "build:css": "",
+    "sign": "",
+    "serve": "",
+    "ext": ""
+  }
+}
