@@ -49,6 +49,8 @@ end
 
 group :development do
   gem "capistrano", "~> 3.17", require: false
+  gem "capistrano-asdf"
+  gem "capistrano-bundler"
   gem "capistrano-rails", require: false
   gem "letter_opener_web", "~> 2.0"
   gem "rubocop"
