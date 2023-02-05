@@ -3,7 +3,7 @@
     "start": "",
     "dev": "",
     "build:css": "echo noscript",
-    "sign": "",
+    "build": "echo noscript",
     "serve": "",
     "ext": ""
   }
