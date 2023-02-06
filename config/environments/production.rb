@@ -109,13 +109,16 @@ Rails.application.configure do
   config.hosts << "h4pyr0gu3.one"
   config.hosts << "music.h4ppyr0gu3.one"
 
-  Rails.application.routes.default_url_options[:host] = 'domain.example'
+  Rails.application.routes.default_url_options[:host] = 'h4ppyr0gu3.one'
 
+  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.sendgrid.net",
-    :port                 => 465,
-    :user_name             => "apikey",
-    :password             => Rails.application.credentials[:SENDGRID_API_KEY],
-    :enable_starttls_auto => true
+    :port                 => 587,
+    :user_name            => "apikey",
+    :password             => Rails.application.credentials[:SENDGRID_API_KEY]
 }
+    # :enable_starttls_auto => true
 end
