@@ -105,4 +105,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.hosts << "h4pyr0gu3.one"
+  config.hosts << "music.h4ppyr0gu3.one"
 end
