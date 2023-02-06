@@ -13,7 +13,6 @@ gem "devise_token_auth", "~> 1.2"
 gem "down"
 gem "jsbundling-rails"
 gem "kaminari"
-gem "logster"
 gem "omniauth", "~> 2.1"
 gem "pg", "~> 1.1"
 gem "prometheus_exporter", "~> 2.0"
@@ -33,10 +32,7 @@ gem "sprockets-rails"
 gem "tzinfo-data"
 gem "uglifier"
 gem "zipline"
-
-group :production do
-  gem "unicorn"
-end
+gem "dry-validation", "~> 1.8"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
@@ -58,4 +54,4 @@ group :development do
   gem "web-console"
 end
 
-gem "dry-validation", "~> 1.8"
+gem "logster"
