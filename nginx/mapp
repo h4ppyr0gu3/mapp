@@ -1,0 +1,46 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $HOST_NAME;
+
+    location / {
+	    proxy_pass http://127.0.0.1:$PORT;
+	    proxy_set_header Host $host;
+	    proxy_set_header X-Real-IP $remote_addr;
+	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_set_header X-Forwarded-Proto $scheme;
+	    proxy_set_header X-Forwarded-Protocol $scheme;
+	    proxy_set_header X-Forwarded-Host $http_host;
+
+	    proxy_buffering off;
+    }
+}
+
+server {
+	listen [::]:443 ssl;
+	listen 443 ssl;
+	ssl_certificate /etc/letsencrypt/live/$HOST_NAME/fullchain.pem; # managed by Certbot
+	ssl_certificate_key /etc/letsencrypt/live/$HOST_NAME/privkey.pem; # managed by Certbot
+
+	server_name $HOST_NAME;
+
+	client_max_body_size 20M;
+
+	resolver 127.0.0.1 valid=30;
+
+	add_header X-Frame-Options "SAMEORIGIN";
+	add_header X-XSS-Protection "1; mode=block";
+	add_header X-Content-Type-Options "nosniff";
+
+	location / {
+		proxy_pass http://127.0.0.1:$PORT;
+	 	proxy_set_header Host $host;
+	 	proxy_set_header X-Real-IP $remote_addr;
+	 	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	 	proxy_set_header X-Forwarded-Proto $scheme;
+	 	proxy_set_header X-Forwarded-Protocol $scheme;
+	 	proxy_set_header X-Forwarded-Host $http_host;
+
+		proxy_buffering off;
+	}
+}
