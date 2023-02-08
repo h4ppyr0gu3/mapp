@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   # end
 
   namespace "api" do
-    mount_devise_token_auth_for "User", at: "auth"
+    mount_devise_token_auth_for "User", at: "auth", controllers: {
+      confirmations: 'devise_override/confirmations_controller'
+    }
     namespace "v1" do
       resources :tracks, except: [:index]
       resources :notifications
@@ -22,7 +24,7 @@ Rails.application.routes.draw do
   # mount ActionCable.server => '/cable'
   mount Sidekiq::Web => "/sidekiq"
   resources :songs
-  devise_for :users
+  devise_for :users, 
 
   # Static pages
   root to: "static_pages#home"
