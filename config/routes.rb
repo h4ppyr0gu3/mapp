@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # mount ActionCable.server => '/cable'
   mount Sidekiq::Web => "/sidekiq"
   resources :songs
-  devise_for :users, 
+  devise_for :users
 
   # Static pages
   root to: "static_pages#home"
