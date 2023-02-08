@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace "api" do
     mount_devise_token_auth_for "User", at: "auth", controllers: {
-      confirmations: 'devise_override/confirmations_controller'
+      confirmations: 'devise_override/confirmations'
     }
     namespace "v1" do
       resources :tracks, except: [:index]
