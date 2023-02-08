@@ -119,6 +119,5 @@ Rails.application.configure do
     :port                 => 587,
     :user_name            => "apikey",
     :password             => Rails.application.credentials[:SENDGRID_API_KEY]
-}
-    # :enable_starttls_auto => true
+  }
 end
