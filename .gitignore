@@ -40,3 +40,5 @@ tags
 /public/**/*
 
 package-lock.json
+
+/config/credentials/development.key
