@@ -11,7 +11,7 @@ class EmailProcessor
 
     # here's an example of model creation
     Rails.logger.info "EmailProcessor: #{email.inspect}"
-    Logster.logger.info "EmailProcessor: #{email.inspect}"
+    Logster.logger.warn "EmailProcessor: #{email.inspect}"
     # user = User.find_by_email(@email.from[:email])
     # user.posts.create!(
     #   subject: @email.subject,
