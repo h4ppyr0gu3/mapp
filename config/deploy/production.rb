@@ -8,8 +8,6 @@ namespace :deploy do
       ask(:sudo_password)
       execute("echo #{fetch(:sudo_password)} | sudo -S systemctl restart mapp")
       execute("echo #{fetch(:sudo_password)} | sudo -S systemctl restart mapp_sidekiq")
-      # execute("echo #{:sudo_pass} | sudo systemctl restart mapp_sidekiq")
-      # execute("sudo systemctl restart mapp_sidekiq")
     end
   end
 end

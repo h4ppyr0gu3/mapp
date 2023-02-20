@@ -1,4 +1,4 @@
-Rails.application.config.to_prepare do
+Rails.application.config.after_initialize do
   Griddler.configure do |config|
     config.processor_class = ::EmailProcessor 
     config.email_class = Griddler::Email 
