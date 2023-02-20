@@ -10,6 +10,11 @@ module Api
         render json: Songs::Representers::Index.call(songs, count)
       end
 
+      def show
+        song = Song.find(params[:id])
+        render json: Songs::Representers::Single.call(song)
+      end
+
       def update
         song = Songs::UseCases::Update.call(
           params: clean_params,

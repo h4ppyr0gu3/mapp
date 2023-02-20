@@ -16,7 +16,9 @@ module Songs
             genre: song.genre,
             album: song.album,
             year: song.year,
-            link: "#{ENV.fetch('BASE_URL')}/api/v1/download_redirect/#{song.id}"
+            link: "#{ENV.fetch('BASE_URL')}/api/v1/download_redirect/#{song.id}",
+            seconds: song.seconds,
+            image_url: song.image_url,
           }
         end
         # rubocop:enable Metrics/MethodLength

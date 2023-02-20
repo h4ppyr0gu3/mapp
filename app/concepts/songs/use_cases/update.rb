@@ -30,6 +30,7 @@ module Songs
           genre: params[:genre],
           album: params[:album],
           year: params[:year],
+          seconds: params[:seconds],
           updated: 1
         }
       end

@@ -11,6 +11,7 @@ module Songs
         required(:album).value(:string)
         required(:artist).value(:string)
         required(:year).value(:string)
+        optional(:seconds).value(:integer)
       end
     end
   end

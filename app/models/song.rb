@@ -12,7 +12,7 @@ class Song < ApplicationRecord
   validates :title, presence: true
   validates :video_id, presence: true, uniqueness: true
 
-  enum updated: { vanilla: 0, by_the_user: 1, written: 2 }
+  enum updated: { vanilla: 0, by_the_user: 1, written: 2, error: 3 }
 
   # should be used ASYNC
   def update_metadata
@@ -22,7 +22,7 @@ class Song < ApplicationRecord
       update_attached
       update(updated: :written)
     else
-      delete
+      flag_error
     end
   end
 
@@ -36,7 +36,7 @@ class Song < ApplicationRecord
         filename: "#{video_id}.mp3"
       )
     else
-      delete
+      flag_error
     end
   end
 
@@ -61,6 +61,10 @@ class Song < ApplicationRecord
   def redownload_image
     download_image
     update(updated: :by_the_user)
+  end
+
+  def flag_error
+    update(updated: :error)
   end
 
   def image_url
@@ -110,7 +114,7 @@ class Song < ApplicationRecord
     mp3.purge if mp3.attached?
     mp3.attach(
       io: File.open(new_song_file_path),
-      filename: "#{title}.mp3"
+      filename: "#{artist}_#{title}.mp3"
     )
   end
 
