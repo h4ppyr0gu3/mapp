@@ -1,3 +1,5 @@
+require_relative '../../app/concepts/email_processor.rb'
+
 Griddler.configure do |config|
   config.processor_class = EmailProcessor 
   config.email_class = Griddler::Email 
