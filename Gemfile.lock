@@ -174,7 +174,14 @@ GEM
       raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    griddler (1.5.2)
+      htmlentities
+      rails (>= 3.2.0)
+    griddler-sendgrid (1.2.0)
+      griddler (>= 1.5.2)
+      mail (>= 2.7.0)
     hashie (5.0.0)
+    htmlentities (4.3.4)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -420,6 +427,8 @@ DEPENDENCIES
   dotenv-rails
   down
   dry-validation (~> 1.8)
+  griddler
+  griddler-sendgrid
   jsbundling-rails
   kaminari
   letter_opener_web (~> 2.0)

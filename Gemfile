@@ -33,6 +33,8 @@ gem "tzinfo-data"
 gem "uglifier"
 gem "zipline"
 gem "dry-validation", "~> 1.8"
+gem "griddler"
+gem "griddler-sendgrid"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
